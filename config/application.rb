@@ -22,5 +22,21 @@ module JibJob
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Set SQL schema dump format
+    config.active_record.schema_format :sql
+
+    # Set ActiveJob queue delimiter
+    config.active_job.queue_name_delimiter = '.'
+
+    # Set cache store
+    config.cache_store = :mem_cache_store
+
+    # Set ReactJS options
+    config.react.jsx_transform_options = {
+      harmony: true,
+      strip_types: true
+    }
+    config.react.addons = true
   end
 end
