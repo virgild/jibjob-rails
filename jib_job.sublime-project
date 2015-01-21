@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+    { "path": "app" },
+    { "path": "config" },
+    { "path": "db" },
+    { "path": "lib" },
+    { "path": "test" },
+    { "path": "public" },
+    { "file": "Gemfile" }
+	],
+  "settings":
+  {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true
+  }
+}
