@@ -40,6 +40,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.active_job.queue_name_prefix = :test
+  config.active_job.queue_name_prefix = 'jj.test'
   config.cache_store = :memory_store
 end

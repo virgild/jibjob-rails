@@ -40,5 +40,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Set dev prefix for ActiveJob queues
-  config.active_job.queue_name_prefix = :dev
+  config.active_job.queue_name_prefix = 'jj.dev'
 end
