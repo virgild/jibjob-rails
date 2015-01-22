@@ -3,7 +3,20 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sk"
 
-  resources :users
+  resources :users do
+    resources :resumes
+  end
+  resources :sessions do
+    collection do
+      get 'logout'
+    end
+  end
+
+  # Static pages
+  get "features" => "front#features"
+  get "pricing" => "front#pricing"
+  get "terms_of_service" => "front#terms_of_service"
+  get "privacy_policy" => "front#privacy_policy"
 
   root "front#index"
 

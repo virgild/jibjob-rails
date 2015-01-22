@@ -10,8 +10,11 @@
     = include_gon
     = csrf_meta_tags
   %body
-    .container-fluid
+    .wrap
+      = render partial: "layouts/navbar"
+      = render partial: "layouts/notification"
       = yield
+    = render partial: "layouts/footer"
 
     = javascript_include_tag 'application'
     = yield :body_javascript

@@ -1,0 +1,10 @@
+- keys_to_show = flash.keys.select { |key| %q(success info warning danger).include?(key) }
+- unless keys_to_show.empty?
+  .notification-container
+    .notification.container-fluid
+      - flash.each do |name, msg|
+        - if keys_to_show.include?(name)
+          %div{role: "alert", class: "alert alert-dismissible alert-#{name}"}
+            %button.close{type: "button", "data-dismiss": "alert", "aria-label": "Close"}
+              %span{"aria-hidden": true} &times;
+            = msg

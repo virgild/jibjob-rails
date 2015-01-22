@@ -1,7 +1,59 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700);
 
+$footer-height: 100px;
+
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background: #000;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
+}
+
+.wrap {
+  min-height: 100%;
+  height: auto !important;
+  margin: 0px;
+  margin-bottom: -$footer-height;
   background: #fff;
 }
 
+.topnav {
+  border: none;
+  background: #000;
+  @include rounded(0px);
+  margin: 0px;
+}
+
+.navlogo {
+  @include rounded(4px);
+  color: #fff;
+  text-decoration: none !important;
+  background-color: #14a405;
+  padding: 4px 10px;
+  font-weight: bold;
+  box-shadow: inset 0 1px #2abb1a, 0 4px #208b15;
+}
+
+.navlogo:hover {
+  text-shadow: #fff 0px 0px 2px;
+  color: #fff;
+}
+
+.navlogo:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+  height: $footer-height;
+  padding-top: 20px;
+  text-align: center;
+  color: #aaa;
+}

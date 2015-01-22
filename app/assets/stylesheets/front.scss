@@ -1,0 +1,15 @@
+.splash {
+  color: #fff;
+  background: #d22b5e;
+  background: -moz-linear-gradient(top,  #d22b5e 0%, #c4091f 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d22b5e), color-stop(100%,#c4091f));
+  background: -webkit-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
+  background: -o-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
+  background: -ms-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
+  background: linear-gradient(to bottom,  #d22b5e 0%,#c4091f 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d22b5e', endColorstr='#c4091f',GradientType=0 );
+
+  .center {
+    text-align: center;
+  }
+}
