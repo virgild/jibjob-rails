@@ -1,2 +1,2 @@
-app: exec rails s
-#sidekiq: bundle exec sidekiq -q dev.rss_fetch_queue
+app: bin/rails s
+#sidekiq: bin/bundle exec sidekiq -q <queuename>

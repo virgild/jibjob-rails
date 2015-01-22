@@ -41,6 +41,7 @@ gem 'bootstrap-sass', '~> 3.3.2'
 gem 'autoprefixer-rails'
 
 gem 'resumetools'
+gem 'paperclip'
 
 gem 'newrelic_rpm'
 

@@ -5,5 +5,7 @@
       = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "small"
 
 .container-fluid
-  %pre
-    = @resume.content
+  :erb
+    <pre>
+    <%= @resume.content %>
+    </pre>

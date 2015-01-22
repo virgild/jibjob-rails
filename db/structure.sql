@@ -42,7 +42,11 @@ CREATE TABLE resumes (
     guid character varying NOT NULL,
     status integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    pdf_file_name character varying,
+    pdf_content_type character varying,
+    pdf_file_size integer,
+    pdf_updated_at timestamp without time zone
 );
 
 
@@ -153,4 +157,6 @@ SET search_path TO "$user",public;
 INSERT INTO schema_migrations (version) VALUES ('20150121185400');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122004049');
+
+INSERT INTO schema_migrations (version) VALUES ('20150122142945');
 

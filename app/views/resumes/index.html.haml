@@ -1,7 +1,9 @@
 .page-header
   .container-fluid
-    %h1 My Resumes
-    = link_to "New", new_user_resume_url
+    %h1
+      My Resumes
+      %span.small
+        = link_to "New", new_user_resume_url
 
 .container-fluid
   - if @resumes.empty?
@@ -12,3 +14,5 @@
         %li
           .resume
             = link_to resume.name, user_resume_url(current_user, resume)
+            |
+            = link_to "PDF", resume.pdf.url
