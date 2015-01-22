@@ -13,9 +13,13 @@
       %ul
         - @resumes.each do |resume|
           %li
-            .resume
+            .resume-entry
               = link_to resume.name, user_resume_url(current_user, resume)
               |
               = link_to "PDF", resume.pdf.url
               |
               = link_to "Plain Text", user_resume_url(current_user, resume, format: "txt")
+              |
+              = link_to "HTML", user_resume_url(current_user, resume, format: "html")
+              |
+              = link_to "JSON", user_resume_url(current_user, resume, format: "json")

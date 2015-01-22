@@ -35,6 +35,7 @@ class Resume < ActiveRecord::Base
   before_validation :fill_guid
   before_validation :set_new_status
 
+  before_save :convert_content_linefeeds
   before_save :update_pdf_attachment
 
   def fill_guid
@@ -45,14 +46,20 @@ class Resume < ActiveRecord::Base
     self.status ||= 1
   end
 
+  def resume_data
+    ResumeTools::Resume.from_text(content)
+  end
+
   def generate_pdf_data
-    resume_data = ResumeTools::Resume.from_text(content)
     resume_data.render_pdf
   end
 
   def generate_plain_text
-    resume_data = ResumeTools::Resume.from_text(content)
     resume_data.render_plain_text
+  end
+
+  def generate_json_text
+    resume_data.render_json
   end
 
   def update_pdf_attachment
@@ -63,5 +70,9 @@ class Resume < ActiveRecord::Base
     end
 
     self.pdf = file_data
+  end
+
+  def convert_content_linefeeds
+    content.gsub!(/\r\n/, "\n")
   end
 end

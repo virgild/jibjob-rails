@@ -40,9 +40,12 @@ gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 gem 'bootstrap-sass', '~> 3.3.2'
 gem 'autoprefixer-rails'
 
+gem 'active_model_serializers'
 gem 'resumetools'
 gem 'paperclip'
+gem 'sanitize'
 
+gem 'rack-protection'
 gem 'newrelic_rpm'
 
 group :development, :test do
