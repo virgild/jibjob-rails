@@ -50,6 +50,11 @@ class Resume < ActiveRecord::Base
     resume_data.render_pdf
   end
 
+  def generate_plain_text
+    resume_data = ResumeTools::Resume.from_text(content)
+    resume_data.render_plain_text
+  end
+
   def update_pdf_attachment
     file_data = StringIO.new(generate_pdf_data)
     resume = self

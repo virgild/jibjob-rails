@@ -22,7 +22,10 @@ class ResumesController < ApplicationController
   end
 
   def show
-
+    respond_to do |format|
+      format.html
+      format.text { render plain: @resume.generate_plain_text }
+    end
   end
 
   def edit

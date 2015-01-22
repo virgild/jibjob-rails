@@ -17,3 +17,5 @@
               = link_to resume.name, user_resume_url(current_user, resume)
               |
               = link_to "PDF", resume.pdf.url
+              |
+              = link_to "Plain Text", user_resume_url(current_user, resume, format: "txt")
