@@ -4,9 +4,11 @@
     = link_to "New", new_user_resume_url
 
 .container-fluid
-  My resumes are here.
-
-  %div
-    - @resumes.each do |resume|
-      .resume
-        = resume.name
+  - if @resumes.empty?
+    %p You have no resumes.
+  - else
+    %ul
+      - @resumes.each do |resume|
+        %li
+          .resume
+            = link_to resume.name, user_resume_url(current_user, resume)

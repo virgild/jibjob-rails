@@ -6,19 +6,26 @@ class ResumesController < ApplicationController
   end
 
   def new
-
+    @resume = resumes.build
   end
 
   def create
+    @resume = resumes.build(resume_params)
 
+    if @resume.valid? && @resume.save
+      redirect_to user_resume_url(current_user, @resume)
+    else
+      flash.now[:danger] = "There are errors in your form entry."
+      render action: :new
+    end
   end
 
   def show
-
+    @resume = resumes.find(params[:id])
   end
 
   def edit
-
+    @resume = resumes.find(params[:id])
   end
 
   def update
@@ -33,5 +40,9 @@ class ResumesController < ApplicationController
 
   def resumes
     current_user.resumes
+  end
+
+  def resume_params
+    params.require(:resume).permit(:name, :slug, :content)
   end
 end
