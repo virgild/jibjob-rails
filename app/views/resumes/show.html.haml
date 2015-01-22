@@ -1,11 +1,12 @@
-.page-header
-  .container-fluid
-    %h1
-      = @resume.name
-      = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "small"
+.page
+  .page-header
+    .container-fluid
+      %h1
+        = @resume.name
+        = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "small"
 
-.container-fluid
-  :erb
-    <pre>
-    <%= @resume.content %>
-    </pre>
+  .container-fluid
+    :erb
+      <pre>
+      <%= @resume.content %>
+      </pre>

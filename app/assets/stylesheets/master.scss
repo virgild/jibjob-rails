@@ -1,9 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700);
 
-$footer-height: 100px;
-
 html, body {
-  height: 100%;
   margin: 0px;
   padding: 0px;
   background: #000;
@@ -11,14 +8,11 @@ html, body {
 
 body {
   font-family: 'Open Sans', sans-serif;
+  background: #fff;
 }
 
-.wrap {
-  min-height: 100%;
-  height: auto !important;
-  margin: 0px;
-  margin-bottom: -$footer-height;
-  background: #fff;
+.page {
+  min-height: 500px;
 }
 
 .topnav {
@@ -50,10 +44,10 @@ body {
 }
 
 footer {
-  background-color: #000;
-  color: #fff;
-  height: $footer-height;
   padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
-  color: #aaa;
+  color: #fff;
+  background: #000;
+  margin-top: 50px;
 }

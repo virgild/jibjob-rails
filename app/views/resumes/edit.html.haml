@@ -1,18 +1,19 @@
-.page-header
+.page
+  .page-header
+    .container-fluid
+      %h1
+        = @resume.name
+
   .container-fluid
-    %h1
-      = @resume.name
+    = form_for [current_user, @resume] do |resume_form|
+      .form-group
+        = resume_form.label :name
+        = resume_form.text_field :name, class: "form-control"
+      .form-group
+        = resume_form.label :slug
+        = resume_form.text_field :slug, class: "form-control"
+      .form-group
+        = resume_form.label :content
+        = resume_form.text_area :content, class: "form-control", size: "25x10"
 
-.container-fluid
-  = form_for [current_user, @resume] do |resume_form|
-    .form-group
-      = resume_form.label :name
-      = resume_form.text_field :name, class: "form-control"
-    .form-group
-      = resume_form.label :slug
-      = resume_form.text_field :slug, class: "form-control"
-    .form-group
-      = resume_form.label :content
-      = resume_form.text_area :content, class: "form-control", size: "25x10"
-
-    = resume_form.submit "Update"
+      = resume_form.submit "Update"
