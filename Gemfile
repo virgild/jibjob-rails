@@ -66,4 +66,6 @@ group :development, :test do
   gem 'timecop'
   gem 'rack-mini-profiler', require: false
   gem 'thin'
+
+  gem 'rspec-rails', '~> 3.0'
 end
