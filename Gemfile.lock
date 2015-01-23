@@ -98,6 +98,8 @@ GEM
     columnize (0.9.0)
     connection_pool (2.1.1)
     crass (1.0.1)
+    d3-rails (3.5.2)
+      railties (>= 3.1)
     daemons (1.1.9)
     dalli (2.7.2)
     debug_inspector (0.0.2)
@@ -302,6 +304,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-sidekiq
+  d3-rails
   dalli
   gon
   haml-rails

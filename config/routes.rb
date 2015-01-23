@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   resources :users do
     resources :resumes
   end
+
   resources :sessions do
     collection do
       get 'logout'
     end
   end
+
+  resources :publications
 
   # Static pages
   get "features" => "front#features"

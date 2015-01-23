@@ -34,9 +34,10 @@ gem 'sinatra', require: false
 gem 'will_paginate'
 gem 'whenever', require: false
 gem 'gon'
-gem 'momentjs-rails'
 
+gem 'momentjs-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'd3-rails'
 gem 'bootstrap-sass', '~> 3.3.2'
 gem 'autoprefixer-rails'
 
