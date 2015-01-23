@@ -25,11 +25,13 @@ class Resume < ActiveRecord::Base
   validates :status, presence: true, numericality: true
 
   validates_uniqueness_of :name, scope: :user
-  validates_uniqueness_of :slug, scope: :user
+  validates_uniqueness_of :slug
 
   belongs_to :user
 
-  has_attached_file :pdf
+  has_attached_file :pdf, styles: {
+    thumb: ["100x100#", :png]
+  }
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
   before_validation :fill_guid

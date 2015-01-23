@@ -1,4 +1,4 @@
-.page
+.page.resumes
   .page-header
     .container-fluid
       %h1
@@ -10,16 +10,19 @@
     - if @resumes.empty?
       %p You have no resumes.
     - else
-      %ul
+      .row
         - @resumes.each do |resume|
-          %li
+          .col-sm-3
             .resume-entry
-              = link_to resume.name, user_resume_url(current_user, resume)
-              |
-              = link_to "PDF", resume.pdf.url
-              |
-              = link_to "Plain Text", user_resume_url(current_user, resume, format: "txt")
-              |
-              = link_to "HTML", user_resume_url(current_user, resume, format: "html")
-              |
-              = link_to "JSON", user_resume_url(current_user, resume, format: "json")
+              .thumb
+                = image_tag resume.pdf.url(:thumb)
+              .links
+                .name= link_to resume.name, user_resume_url(current_user, resume)
+                .small
+                  = link_to "PDF", resume.pdf.url
+                  |
+                  = link_to "Plain Text", user_resume_url(current_user, resume, format: "txt")
+                  |
+                  = link_to "HTML", user_resume_url(current_user, resume, format: "html")
+                  |
+                  = link_to "JSON", user_resume_url(current_user, resume, format: "json")

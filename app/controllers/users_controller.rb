@@ -2,6 +2,10 @@ class UsersController < ApplicationController
   before_filter :require_current_user, except: [:new, :create]
 
   def new
+    if current_user
+      redirect_to user_url(current_user)
+    end
+
     @user = User.new
   end
 
