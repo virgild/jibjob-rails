@@ -86,11 +86,18 @@ GEM
       capistrano
       sidekiq
     capistrano-stats (1.1.1)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    cliver (0.3.2)
     cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
@@ -102,6 +109,7 @@ GEM
       railties (>= 3.1)
     daemons (1.1.9)
     dalli (2.7.2)
+    database_cleaner (1.3.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
@@ -167,6 +175,11 @@ GEM
       mime-types
     pdf-core (0.4.0)
     pg (0.18.1)
+    poltergeist (1.5.1)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      multi_json (~> 1.0)
+      websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     prawn (1.3.0)
       pdf-core (~> 0.4.0)
@@ -302,9 +315,14 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket-driver (0.5.1)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.1)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     will_paginate (3.0.7)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -321,8 +339,10 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-sidekiq
+  capybara
   d3-rails
   dalli
+  database_cleaner (~> 1.3.0)
   gon
   haml-rails
   hiredis
@@ -333,6 +353,7 @@ DEPENDENCIES
   oj
   paperclip
   pg
+  poltergeist
   pry-rails
   rack-mini-profiler
   rack-protection

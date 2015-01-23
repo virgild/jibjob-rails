@@ -7,7 +7,7 @@
     { "path": "lib" },
     { "path": "test" },
     { "path": "public" },
-    { "file": "Gemfile" }
+    { "path": "spec" }
 	],
   "settings":
   {

@@ -49,6 +49,13 @@ gem 'sanitize'
 gem 'rack-protection'
 gem 'newrelic_rpm'
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'annotate'
+  gem 'pry-rails'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -59,13 +66,14 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'annotate'
-  gem 'pry-rails'
   gem 'timecop'
   gem 'rack-mini-profiler', require: false
   gem 'thin'
+end
 
+group :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
 end

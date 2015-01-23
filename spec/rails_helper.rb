@@ -3,7 +3,12 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+require 'capybara/poltergeist'
+require 'capybara/rails'
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -47,4 +52,33 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  #
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation, { except: ['schema_migrations'] }
+    DatabaseCleaner.clean_with(:truncation, { except: ['schema_migrations'] })
+  end
+
+  config.around(:each) do |test_example|
+    DatabaseCleaner.cleaning do
+      test_example.run
+    end
+  end
+end
+
+# Capybara
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+    debug: false,
+    inspector: true,
+    timeout: 60,
+    js_errors: true,
+    window_size: [1024, 900],
+    phantomjs_options: ['--ignore-ssl-errors=yes'],
+    port: 5000
+  })
+end
+
+Capybara.configure do |config|
+  config.javascript_driver = :poltergeist
 end

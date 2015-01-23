@@ -38,10 +38,5 @@ module JibJob
       strip_types: true
     }
     config.react.addons = true
-
-    #
-    config.action_dispatch.default_headers = {
-      'X-Wallabies': 'They are happy'
-    }
   end
 end
