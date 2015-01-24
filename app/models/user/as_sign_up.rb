@@ -8,6 +8,7 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  timezone        :string
 #
 
 class User::AsSignUp < ActiveType::Record[User]

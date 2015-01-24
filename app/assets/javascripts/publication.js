@@ -4,5 +4,6 @@
 //= require moment
 //= require react
 //= require react_ujs
+//= require jstz
 //= require_tree ./components/publication
 //= require_self

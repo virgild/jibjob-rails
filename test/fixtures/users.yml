@@ -8,6 +8,8 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  timezone        :string
+#
 
 appleseed:
   id: 1

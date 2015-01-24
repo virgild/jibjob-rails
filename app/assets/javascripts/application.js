@@ -16,6 +16,7 @@
 //= require moment
 //= require react
 //= require react_ujs
-//= require components
 //= require d3
+//= require jstz
+//= require components
 //= require_self

@@ -123,7 +123,8 @@ CREATE TABLE users (
     email character varying NOT NULL,
     password_digest character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    timezone character varying
 );
 
 
@@ -218,4 +219,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150122004049');
 INSERT INTO schema_migrations (version) VALUES ('20150122142945');
 
 INSERT INTO schema_migrations (version) VALUES ('20150124170752');
+
+INSERT INTO schema_migrations (version) VALUES ('20150124225405');
 
