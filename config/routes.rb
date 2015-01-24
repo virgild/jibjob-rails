@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :publications
+  resources :publications do
+    collection do
+      get 'not_found'
+    end
+  end
 
   # Static pages
   get "features" => "front#features"
