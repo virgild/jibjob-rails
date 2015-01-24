@@ -12,6 +12,7 @@
 !/log/.keep
 /tmp
 
+.capistrano
 vendor/bundle
 public/system
 public/assets
