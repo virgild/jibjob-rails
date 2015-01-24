@@ -25,7 +25,7 @@ class Publication < ActiveRecord::Base
   belongs_to :user
   belongs_to :resume
 
-  def to_params
-    self.slug
+  def to_param
+    slug
   end
 end

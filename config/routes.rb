@@ -15,11 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :publications do
-    collection do
-      get 'not_found'
-    end
-  end
+  # resources :publications, param: :slug do
+  #   collection do
+  #     get 'not_found'
+  #   end
+  # end
+  resources :publications, param: :slug
 
   resources :support do
   end

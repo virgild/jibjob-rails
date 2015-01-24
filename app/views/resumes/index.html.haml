@@ -28,7 +28,7 @@
                   = link_to "JSON", user_resume_url(current_user, resume, format: "json")
               .publications
                 - if resume.publications.present?
-                  Published
+                  = link_to "Published", user_resume_publications_url(current_user, resume)
                 - else
                   Unpublished
                   |

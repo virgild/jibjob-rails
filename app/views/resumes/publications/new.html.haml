@@ -2,4 +2,18 @@
   .page-header
     .container-fluid
       %h1
-        Publish resume
+        Publish #{@resume.name}
+
+  .container-fluid
+    - if @publication.errors.any?
+      %ul
+        - @publication.errors.full_messages.each do |msg|
+          %li= msg
+    = form_for [current_user, @resume, @publication] do |pub_form|
+      .form-group
+        = pub_form.label :slug
+        = pub_form.text_field :slug, class: "form-control"
+      .form-group
+        = pub_form.label :publish_date
+        = pub_form.datetime_select :publish_date
+      = pub_form.submit

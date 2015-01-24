@@ -1,0 +1,14 @@
+.page
+  .page-header
+    .container-fluid
+      %h1
+        #{@resume.name} publications
+
+  .container-fluid
+    .row
+      - @publications.each do |publication|
+        .col-md-12
+          .publication.well.well-sm
+            %h4= link_to publication.resume.name, user_resume_url(current_user, publication.resume)
+            %h5= link_to publication_url(publication), publication_url(publication)
+            %h5= publication.publish_date
