@@ -41,6 +41,7 @@ gem 'd3-rails'
 gem 'bootstrap-sass', '~> 3.3.2'
 gem 'autoprefixer-rails'
 
+gem 'active_type'
 gem 'active_model_serializers'
 gem 'resumetools'
 gem 'paperclip'
@@ -54,26 +55,21 @@ group :development do
   gem 'binding_of_caller'
   gem 'annotate'
   gem 'pry-rails'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  gem 'rack-mini-profiler', require: false
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-
   gem 'timecop'
-  gem 'rack-mini-profiler', require: false
   gem 'thin'
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
+  gem 'minitest-documentation'
 end
