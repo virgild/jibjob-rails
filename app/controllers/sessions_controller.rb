@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       return render action: :new
     end
 
-    user = User.find_by_username(params[:username])
+    user = User::AsSignUp.find_by_username(params[:username])
     if user.nil?
       flash.now['warning'] = "Invalid account details"
       return render action: :new

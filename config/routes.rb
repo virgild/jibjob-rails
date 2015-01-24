@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :support do
+  end
+
   # Static pages
   get "features" => "front#features"
   get "pricing" => "front#pricing"
