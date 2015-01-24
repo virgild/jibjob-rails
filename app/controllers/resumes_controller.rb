@@ -59,7 +59,8 @@ class ResumesController < ApplicationController
   end
 
   def load_resumes
-    @resumes ||= resume_scope.order(:created_at).all
+    # TODO: Slow when things grow
+    @resumes ||= resume_scope.includes(:publications).order(:created_at).all
   end
 
   def load_resume
@@ -73,6 +74,6 @@ class ResumesController < ApplicationController
 
   def resume_params
     resume_params = params[:resume]
-    resume_params ? resume_params.permit(:name, :slug, :content) : {}
+    resume_params ? resume_params.permit(:name, :content) : {}
   end
 end

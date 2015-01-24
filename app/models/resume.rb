@@ -20,12 +20,10 @@
 class Resume < ActiveRecord::Base
   validates :user, presence: true
   validates :name, presence: true
-  validates :slug, presence: true
   validates :guid, presence: true, uniqueness: true
   validates :status, presence: true, numericality: true
 
   validates_uniqueness_of :name, scope: :user
-  validates_uniqueness_of :slug
 
   belongs_to :user
   has_many :publications
@@ -69,7 +67,7 @@ class Resume < ActiveRecord::Base
     file_data = StringIO.new(generate_pdf_data)
     resume = self
     file_data.define_singleton_method :original_filename do
-      "#{resume.slug}.pdf"
+      "#{resume.id}.pdf"
     end
 
     self.pdf = file_data

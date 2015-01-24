@@ -26,3 +26,10 @@
                   = link_to "HTML", user_resume_url(current_user, resume, format: "html")
                   |
                   = link_to "JSON", user_resume_url(current_user, resume, format: "json")
+              .publications
+                - if resume.publications.present?
+                  Published
+                - else
+                  Unpublished
+                  |
+                  = link_to "Publish now", new_user_resume_publication_url(current_user, resume)

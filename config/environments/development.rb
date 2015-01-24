@@ -41,4 +41,7 @@ Rails.application.configure do
 
   # Set dev prefix for ActiveJob queues
   config.active_job.queue_name_prefix = 'jj.dev'
+
+  # Quiet assets logging
+  config.quiet_assets = true
 end

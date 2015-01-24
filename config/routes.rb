@@ -3,8 +3,10 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sk"
 
-  resources :users do
-    resources :resumes
+  resources :users, param: :username do
+    resources :resumes do
+      resources :publications, module: 'resumes'
+    end
   end
 
   resources :sessions do
