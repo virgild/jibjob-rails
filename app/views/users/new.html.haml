@@ -17,4 +17,7 @@
             .form-group
               = f.label :password_confirmation, "Confirm password"
               = f.password_field :password_confirmation, class: "form-control"
+            .form-group
+              = f.check_box :terms
+              = f.label :terms, "I accept the terms and conditions.", class: "small"
             = f.submit "Submit"

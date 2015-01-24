@@ -9,5 +9,7 @@ class SignUpTest < ActionDispatch::IntegrationTest
   test "load sign up page" do
     Capybara.current_driver = Capybara.javascript_driver
     visit "/users/new"
+
+    click_button "Submit"
   end
 end

@@ -6,11 +6,11 @@ class UsersController < ApplicationController
       redirect_to user_url(current_user)
     end
 
-    @user = User.new
+    @user = User::AsSignUp.new
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User::AsSignUp.new(user_params)
 
     if @user.valid? && @user.save
       redirect_to user_url(@user), notice: "Thank you for signing up."
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :terms)
   end
 
 end

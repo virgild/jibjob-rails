@@ -1,4 +1,7 @@
 class PublicationsController < ApplicationController
+
+  layout 'publication'
+
   def index
 
   end

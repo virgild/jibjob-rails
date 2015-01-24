@@ -7,7 +7,6 @@
     { "path": "lib" },
     { "path": "test" },
     { "path": "public" },
-    { "path": "spec" }
 	],
   "settings":
   {
