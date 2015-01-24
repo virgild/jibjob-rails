@@ -30,6 +30,41 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: publications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE publications (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    resume_id bigint NOT NULL,
+    status integer DEFAULT 0 NOT NULL,
+    slug character varying NOT NULL,
+    publish_date timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: publications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE publications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: publications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE publications_id_seq OWNED BY publications.id;
+
+
+--
 -- Name: resumes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -37,7 +72,6 @@ CREATE TABLE resumes (
     id bigint NOT NULL,
     user_id bigint NOT NULL,
     name character varying NOT NULL,
-    slug character varying NOT NULL,
     content text NOT NULL,
     guid character varying NOT NULL,
     status integer DEFAULT 0 NOT NULL,
@@ -46,7 +80,8 @@ CREATE TABLE resumes (
     pdf_file_name character varying,
     pdf_content_type character varying,
     pdf_file_size integer,
-    pdf_updated_at timestamp without time zone
+    pdf_updated_at timestamp without time zone,
+    edition integer DEFAULT 1
 );
 
 
@@ -115,6 +150,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY publications ALTER COLUMN id SET DEFAULT nextval('publications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY resumes ALTER COLUMN id SET DEFAULT nextval('resumes_id_seq'::regclass);
 
 
@@ -123,6 +165,14 @@ ALTER TABLE ONLY resumes ALTER COLUMN id SET DEFAULT nextval('resumes_id_seq'::r
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: publications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY publications
+    ADD CONSTRAINT publications_pkey PRIMARY KEY (id);
 
 
 --
@@ -139,6 +189,13 @@ ALTER TABLE ONLY resumes
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_publications_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_publications_on_slug ON publications USING btree (slug);
 
 
 --
@@ -159,4 +216,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150121185400');
 INSERT INTO schema_migrations (version) VALUES ('20150122004049');
 
 INSERT INTO schema_migrations (version) VALUES ('20150122142945');
+
+INSERT INTO schema_migrations (version) VALUES ('20150124170752');
 

@@ -5,7 +5,6 @@
 #  id               :integer          not null, primary key
 #  user_id          :integer          not null
 #  name             :string           not null
-#  slug             :string           not null
 #  content          :text             not null
 #  guid             :string           not null
 #  status           :integer          default("0"), not null
@@ -15,6 +14,7 @@
 #  pdf_content_type :string
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
+#  edition          :integer          default("1")
 #
 
 class Resume < ActiveRecord::Base
@@ -28,6 +28,7 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :slug
 
   belongs_to :user
+  has_many :publications
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
