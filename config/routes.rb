@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :sessions do
+  resources :sessions, only: [:new, :create] do
     collection do
       get 'logout'
     end
@@ -20,19 +20,21 @@ Rails.application.routes.draw do
   #     get 'not_found'
   #   end
   # end
-  resources :publications, param: :slug
+  resources :publications, param: :slug, only: [:show]
 
-  resources :support do
-  end
+  resources :support, only: [:index]
 
   # Static pages
   get "features" => "front#features"
   get "pricing" => "front#pricing"
   get "terms_of_service" => "front#terms_of_service"
   get "privacy_policy" => "front#privacy_policy"
+  get "wallaby" => "front#wallaby"
 
   namespace :admin do
+    resources :dashboards, only: [:index]
     resources :users
+    root to: "dashboards#index"
   end
 
   root "front#index"

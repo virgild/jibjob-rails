@@ -2,7 +2,7 @@
   .container-fluid
     .navbar-header
       .navbar-brand
-        = link_to "jibjob admin", root_path, class: "navlogo"
+        = link_to "jibjob admin", admin_root_url, class: "navlogo"
     %ul.nav.navbar-nav
       %li= link_to "Users", admin_users_url
     - if current_user

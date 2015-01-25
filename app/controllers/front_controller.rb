@@ -5,7 +5,7 @@ class FrontController < ApplicationController
   end
 
   def features
-
+    set_wallaby_pass
   end
 
   def about
@@ -26,6 +26,10 @@ class FrontController < ApplicationController
 
   def pricing
 
+  end
+
+  def wallaby
+    render layout: false
   end
 
 end

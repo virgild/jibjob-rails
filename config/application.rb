@@ -38,5 +38,7 @@ module JibJob
       strip_types: true
     }
     config.react.addons = true
+
+    config.force_ssl = false
   end
 end

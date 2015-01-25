@@ -14,4 +14,12 @@ module AuthenticatedUser
       redirect_to new_session_url
     end
   end
+
+  def require_admin_role
+    if current_user && current_user.default_role != 'admin'
+      redirect_to user_url(current_user)
+    elsif current_user.nil?
+      redirect_to new_session_url
+    end
+  end
 end
