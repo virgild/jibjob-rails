@@ -31,6 +31,10 @@ Rails.application.routes.draw do
   get "terms_of_service" => "front#terms_of_service"
   get "privacy_policy" => "front#privacy_policy"
 
+  namespace :admin do
+    resources :users
+  end
+
   root "front#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

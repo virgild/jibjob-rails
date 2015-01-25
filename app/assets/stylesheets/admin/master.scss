@@ -1,0 +1,9 @@
+.navlogo {
+  @include rounded(4px);
+  color: #fff;
+  text-decoration: none !important;
+  background-color: #ea2960;
+  padding: 4px 10px;
+  font-weight: bold;
+  box-shadow: inset 0 1px #f7356c, 0 4px #c52452;
+}
