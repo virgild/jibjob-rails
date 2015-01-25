@@ -114,6 +114,19 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: signups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE signups (
+    user_id bigint NOT NULL,
+    ip_address inet,
+    user_agent character varying,
+    extras json,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -124,7 +137,8 @@ CREATE TABLE users (
     password_digest character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    timezone character varying
+    timezone character varying,
+    default_role character varying
 );
 
 
@@ -185,6 +199,14 @@ ALTER TABLE ONLY resumes
 
 
 --
+-- Name: signups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY signups
+    ADD CONSTRAINT signups_pkey PRIMARY KEY (user_id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -221,4 +243,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150122142945');
 INSERT INTO schema_migrations (version) VALUES ('20150124170752');
 
 INSERT INTO schema_migrations (version) VALUES ('20150124225405');
+
+INSERT INTO schema_migrations (version) VALUES ('20150125010553');
+
+INSERT INTO schema_migrations (version) VALUES ('20150125042850');
 

@@ -12,8 +12,16 @@ class UsersController < ApplicationController
   def create
     @user = User::AsSignUp.new(user_params)
 
-    if @user.valid? && @user.save
-      redirect_to user_url(@user), notice: "Thank you for signing up."
+    @user.signup_data.merge!({
+      :ip_address => request.remote_ip,
+      :user_agent => request.env["HTTP_USER_AGENT"],
+      :extras => { env: Rails.env },
+      :created_at => Time.now
+    })
+
+    if @user.save
+      session['auth.default.user'] = @user.id
+      redirect_to user_resumes_url(@user), notice: "Thank you for signing up."
     else
       flash.now[:danger] = "There are issues with the sign up form entries."
       render action: :new

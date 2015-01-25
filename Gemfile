@@ -53,8 +53,8 @@ gem 'rack-protection'
 gem 'newrelic_rpm'
 
 group :development do
-  gem 'better_errors'
-  gem 'binding_of_caller'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
   gem 'annotate'
   gem 'pry-rails'
   # Access an IRB console on exception pages or by using <%= console %> in views

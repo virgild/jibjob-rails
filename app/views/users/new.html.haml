@@ -2,6 +2,12 @@
   .signup.container-fluid
     .row
       .col-md-12
+        - if @user.errors.any?
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+    .row
+      .col-md-12
         .form-container.center-block
           %h1 Sign up
           = form_for @user do |f|

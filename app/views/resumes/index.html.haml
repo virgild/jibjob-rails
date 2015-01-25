@@ -12,7 +12,7 @@
     - else
       .row
         - @resumes.each do |resume|
-          .col-sm-3
+          .col-sm-3.col-lg-2.col-md-3
             .resume-entry
               .thumb
                 = image_tag resume.pdf.url(:thumb)

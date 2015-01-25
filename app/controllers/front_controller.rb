@@ -8,6 +8,14 @@ class FrontController < ApplicationController
 
   end
 
+  def about
+
+  end
+
+  def team
+
+  end
+
   def terms_of_service
 
   end
