@@ -37,7 +37,7 @@ class Resume < ActiveRecord::Base
   before_validation :set_new_status
 
   before_save :convert_content_linefeeds
-  before_save :update_pdf_attachment
+  after_save :update_pdf_attachment
 
   def fill_guid
     self.guid ||= SecureRandom.hex(16)
@@ -67,10 +67,11 @@ class Resume < ActiveRecord::Base
     file_data = StringIO.new(generate_pdf_data)
     resume = self
     file_data.define_singleton_method :original_filename do
-      "#{resume.id}.pdf"
+      "#{resume.guid}.pdf"
     end
 
     self.pdf = file_data
+    save
   end
 
   def convert_content_linefeeds

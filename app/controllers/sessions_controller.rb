@@ -21,7 +21,12 @@ class SessionsController < ApplicationController
     if user.authenticate(params[:password])
       session['auth.default.user'] = user.id
       flash.now['info'] = "You have successfully logged in."
-      redirect_to user_resumes_url(user)
+
+      if user.default_role == 'admin'
+        redirect_to admin_root_url
+      else
+        redirect_to user_resumes_url(user)
+      end
     else
       flash.now['warning'] = "Invalid account details"
       render action: :new

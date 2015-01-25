@@ -1,11 +1,15 @@
+.nav {
+  font-size: 14px;
+  font-family: "Helvetica Neue";
+}
+
 .navlogo {
   @include rounded(4px);
   color: #fff;
   text-decoration: none !important;
   background-color: #ea2960;
   padding: 6px 10px;
-  padding-top: 8px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 12px;
   box-shadow: inset 0 1px #f7356c, 0 4px #c52452;
 }

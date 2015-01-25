@@ -1,3 +1,14 @@
-.page-header
-  .container-fluid
-    %h4 User Management
+.container-fluid
+  %table.table.table-striped.table-hover.table-condensed.table-responsive
+    %caption Recent users
+    %tr
+      %th ID
+      %th Username
+      %th E-mail
+      %th Created
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= link_to user.username, admin_user_url(user)
+        %td= user.email
+        %td= user.created_at

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboards, only: [:index]
-    resources :users
+    resources :users, param: :username
     root to: "dashboards#index"
   end
 
