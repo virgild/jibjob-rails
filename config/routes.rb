@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   resources :users, param: :username do
     resources :resumes do
+      member do
+        get 'delete'
+      end
       resources :publications, module: 'resumes'
     end
   end
@@ -15,12 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :publications, param: :slug do
-  #   collection do
-  #     get 'not_found'
-  #   end
-  # end
-  resources :publications, param: :slug, only: [:show]
+  resources :publications, param: :slug, only: [:show] do
+    get 'not_found'
+  end
 
   resources :support, only: [:index]
 

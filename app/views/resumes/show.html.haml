@@ -3,7 +3,9 @@
     .container-fluid
       %h1
         = @resume.name
-        = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "small"
+        %span.small
+          = link_to "Edit", edit_user_resume_url(current_user, @resume)
+          = link_to "Delete", delete_user_resume_url(current_user, @resume)
 
   .container-fluid
     .resume

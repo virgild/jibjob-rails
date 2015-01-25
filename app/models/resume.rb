@@ -37,7 +37,7 @@ class Resume < ActiveRecord::Base
   before_validation :set_new_status
 
   before_save :convert_content_linefeeds
-  after_save :update_pdf_attachment
+  before_save :update_pdf_attachment
 
   def fill_guid
     self.guid ||= SecureRandom.hex(16)
@@ -71,7 +71,6 @@ class Resume < ActiveRecord::Base
     end
 
     self.pdf = file_data
-    save
   end
 
   def convert_content_linefeeds

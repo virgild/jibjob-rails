@@ -47,6 +47,10 @@ class ResumesController < ApplicationController
     end
   end
 
+  def delete
+    load_resume
+  end
+
   def destroy
     @resume.destroy
     redirect_to user_resumes_url(current_user)
