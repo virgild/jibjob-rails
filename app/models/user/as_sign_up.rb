@@ -13,8 +13,6 @@
 #
 
 class User::AsSignUp < ActiveType::Record[User]
-  has_secure_password
-
   attribute :terms, :string
   attribute :signup_data, :hash, default: proc { Hash.new }
 
@@ -22,13 +20,21 @@ class User::AsSignUp < ActiveType::Record[User]
   validates :terms, presence: true, acceptance: true
 
   after_create :save_signup_data
+  after_create :create_signup_confirmation
 
   private
 
   def save_signup_data
-    signup_data[:created_at] = signup_data[:created_at].to_i if signup_data[:created_at]
-    signup_data[:user_id] = self.id
+    unless signup_data.empty?
+      signup_data[:created_at] = signup_data[:created_at].to_i if signup_data[:created_at]
+      signup_data[:user_id] = self.id
 
-    RecordSignupJob.perform_later(signup_data)
+      RecordSignupJob.perform_later(signup_data)
+    end
+  end
+
+  def create_signup_confirmation
+    confirmation = self.build_signup_confirmation
+    confirmation.save
   end
 end

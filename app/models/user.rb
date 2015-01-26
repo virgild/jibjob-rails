@@ -13,9 +13,13 @@
 #
 
 class User < ActiveRecord::Base
-  has_many :resumes
-  has_many :publications
-  has_one :signup
+  include User::Param
+
+  has_secure_password
+  has_many :resumes, dependent: :destroy
+  has_many :publications, dependent: :destroy
+  has_one :signup, dependent: :destroy
+  has_one :signup_confirmation, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
@@ -23,8 +27,10 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role
 
-  def to_param
-    self.username
+  def signup_confirmed?
+    signup_confirmation &&
+      signup_confirmation.confirmed_at &&
+      signup_confirmation.confirmed_at <= DateTime.now
   end
 
   private

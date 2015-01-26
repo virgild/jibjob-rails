@@ -114,6 +114,17 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: signup_confirmations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE signup_confirmations (
+    user_id bigint NOT NULL,
+    token character varying NOT NULL,
+    confirmed_at timestamp without time zone
+);
+
+
+--
 -- Name: signups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -199,6 +210,14 @@ ALTER TABLE ONLY resumes
 
 
 --
+-- Name: signup_confirmations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY signup_confirmations
+    ADD CONSTRAINT signup_confirmations_pkey PRIMARY KEY (user_id);
+
+
+--
 -- Name: signups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -247,4 +266,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150124225405');
 INSERT INTO schema_migrations (version) VALUES ('20150125010553');
 
 INSERT INTO schema_migrations (version) VALUES ('20150125042850');
+
+INSERT INTO schema_migrations (version) VALUES ('20150125224433');
 
