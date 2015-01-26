@@ -11,6 +11,7 @@
         .form-container.center-block
           %h1 Sign up
           = form_for @user do |f|
+            = f.hidden_field :timezone
             .form-group
               = f.label :username
               = f.text_field :username, class: "form-control", spellcheck: false

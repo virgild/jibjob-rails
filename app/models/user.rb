@@ -8,8 +8,8 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  timezone        :string
 #  default_role    :string
+#  timezone        :decimal(, )
 #
 
 class User < ActiveRecord::Base

@@ -148,8 +148,8 @@ CREATE TABLE users (
     password_digest character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    timezone character varying,
-    default_role character varying
+    default_role character varying,
+    timezone character varying
 );
 
 

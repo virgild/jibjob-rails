@@ -19,4 +19,5 @@
 //= require d3
 //= require jstz
 //= require components
-//= require_self
+//= require rails-timezone
+//= require signup

@@ -3,7 +3,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sk"
 
-  resources :users, param: :username do
+  resources :users, param: :username, except: [:index, :destroy] do
     resources :resumes do
       member do
         get 'delete'

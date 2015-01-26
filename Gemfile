@@ -36,6 +36,7 @@ gem 'will_paginate'
 gem 'whenever', require: false
 gem 'gon'
 gem 'geokit-rails'
+gem 'tzinfo-data'
 
 gem 'momentjs-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'

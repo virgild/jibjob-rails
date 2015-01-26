@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username(params[:id])
+    load_user
 
     respond_to do |format|
       format.html
@@ -42,13 +42,39 @@ class UsersController < ApplicationController
   end
 
   def update
+    load_user
+    build_user
 
+    if @user.save
+      respond_to do |format|
+        format.html {
+          flash['success'] = "Updated."
+          redirect_to user_url(@user)
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          flash.now['warning'] = "There are errors in the form."
+          render action: :show
+        }
+      end
+    end
   end
 
   private
 
+  def load_user
+    @user ||= User.find_by_username(params[:username])
+  end
+
+  def build_user
+    @user.attributes = user_params
+  end
+
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :terms)
+    user_params = params[:user]
+    user_params ? user_params.permit(:username, :email, :password, :password_confirmation, :timezone, :terms) : {}
   end
 
 end

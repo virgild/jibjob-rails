@@ -8,8 +8,8 @@
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  timezone        :string
 #  default_role    :string
+#  timezone        :decimal(, )
 #
 
 class User::AsSignUp < ActiveType::Record[User]
@@ -37,4 +37,5 @@ class User::AsSignUp < ActiveType::Record[User]
     confirmation = self.build_signup_confirmation
     confirmation.save
   end
+
 end

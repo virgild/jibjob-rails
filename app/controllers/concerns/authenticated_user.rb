@@ -3,7 +3,7 @@ module AuthenticatedUser
 
   def current_user
     if session["auth.default.user"]
-      @current_user ||= User.find(session["auth.default.user"])
+      @current_user ||= User.find_by_id(session["auth.default.user"])
     else
       @current_user = nil
     end
