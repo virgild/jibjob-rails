@@ -30,6 +30,8 @@ class Resume < ActiveRecord::Base
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
+  }, convert_options: {
+    thumb: "-density 300"
   }
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
@@ -64,13 +66,15 @@ class Resume < ActiveRecord::Base
   end
 
   def update_pdf_attachment
-    file_data = StringIO.new(generate_pdf_data)
-    resume = self
-    file_data.define_singleton_method :original_filename do
-      "#{resume.guid}.pdf"
-    end
+    if content.changed?
+      file_data = StringIO.new(generate_pdf_data)
+      resume = self
+      file_data.define_singleton_method :original_filename do
+        "#{resume.guid}.pdf"
+      end
 
-    self.pdf = file_data
+      self.pdf = file_data
+    end
   end
 
   def convert_content_linefeeds

@@ -10,7 +10,7 @@
     - if current_user
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "My Resumes", user_resumes_url(current_user)
-        %li= link_to "Logged in as #{current_user.username}", user_url(current_user)
+        %li= link_to "My Account", user_url(current_user)
         %li= link_to "Log out", logout_sessions_url
     - else
       %ul.nav.navbar-nav.navbar-right
