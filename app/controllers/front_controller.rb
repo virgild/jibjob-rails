@@ -5,7 +5,7 @@ class FrontController < ApplicationController
   end
 
   def features
-    set_wallaby_pass
+
   end
 
   def about

@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'HelveticaNeue-Light', sans-serif;
   background: #fff;
 }
 
@@ -15,6 +15,8 @@ body {
   min-height: 500px;
 }
 
+
+/* Navbar Overrides */
 .topnav {
   border: none;
   background: #000;
@@ -22,14 +24,43 @@ body {
   margin: 0px;
 }
 
+.navbar {
+  min-height: 10px;
+}
+
+.navbar-inverse .navbar-nav li a {
+  color: #fff;
+}
+
+.navbar .navbar-nav li a {
+  font-size: 12px;
+  font-family: 'Open Sans';
+  text-transform: uppercase;
+  padding: 6px 12px;
+
+  &:hover {
+    background: #fff;
+    color: #000;
+  }
+}
+
+.navbar-brand {
+  min-height: 10px;
+  padding: 0px;
+  height: 20px;
+}
+
 .navlogo {
-  @include rounded(4px);
+  @include rounded(6px);
   color: #fff;
   text-decoration: none !important;
   background-color: #14a405;
   padding: 4px 10px;
   font-weight: bold;
   box-shadow: inset 0 1px #2abb1a, 0 4px #208b15;
+  font-size: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .navlogo:hover {
@@ -43,6 +74,15 @@ body {
   top: 3px;
 }
 
+
+/* General Page Elements */
+.page-header {
+  margin: 0px;
+  padding: 10px 0px;
+}
+
+
+/* Footer */
 footer {
   padding-top: 20px;
   padding-bottom: 20px;
