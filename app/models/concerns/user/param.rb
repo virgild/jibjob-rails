@@ -1,4 +1,4 @@
-module User::Param
+module UserParam
   extend ActiveSupport::Concern
 
   def to_param

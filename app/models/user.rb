@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-  include User::Param
+  include UserParam
 
   has_secure_password
   has_many :resumes, dependent: :destroy
