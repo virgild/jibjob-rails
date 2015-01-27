@@ -23,7 +23,7 @@ class Publication < ActiveRecord::Base
   validates :slug, presence: true, uniqueness: true
 
   belongs_to :user
-  belongs_to :resume
+  belongs_to :resume, touch: true
 
   def to_param
     slug
