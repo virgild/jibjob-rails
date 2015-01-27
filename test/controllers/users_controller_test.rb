@@ -3,7 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 
   test "user signup and its effects" do
-    get :new
+    get :new, { :_wallaby => 1}
     assert_response :success
 
     post :create, user: {
