@@ -14,10 +14,10 @@
             = f.hidden_field :timezone
             .form-group
               = f.label :username
-              = f.text_field :username, class: "form-control", spellcheck: false
+              = f.text_field :username, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'off'
             .form-group
               = f.label :email
-              = f.text_field :email, class: "form-control", spellcheck: false
+              = f.email_field :email, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'off'
             .form-group
               = f.label :password
               = f.password_field :password, class: "form-control"

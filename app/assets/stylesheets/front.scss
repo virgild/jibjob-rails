@@ -27,3 +27,27 @@
     margin-top: 10px;
   }
 }
+
+.front-features {
+  background-color: #70b7ff;
+  min-height: 100px;
+  padding: 20px;
+
+  .feature {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: solid 3px darken(#70b7ff, 8%);
+
+    .title {
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+}
+
+.front-details {
+  background-color: #000;
+  padding: 20px;
+  color: #fff;
+  min-height: 200px;
+}
