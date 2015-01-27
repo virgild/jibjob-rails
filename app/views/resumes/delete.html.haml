@@ -1,7 +1,14 @@
-.container-fluid
-  %h2= @resume.name
-  %h3
-    Are you sure you want to delete this resume?
+.page
+  .container-fluid
+    %ol.breadcrumb
+      %li= link_to "My Resumes", user_resumes_url(current_user)
+      %li= link_to @resume.name, user_resume_url(current_user, @resume)
 
-    = form_tag(user_resume_url(current_user, @resume), method: "DELETE") do
-      = submit_tag "Yes"
+  .page-header
+    .container-fluid
+      %h2= @resume.name
+      %h3
+        Are you sure you want to delete this resume?
+
+        = form_tag(user_resume_url(current_user, @resume), method: "DELETE") do
+          = submit_tag "Yes"

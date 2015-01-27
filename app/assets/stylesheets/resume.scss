@@ -9,30 +9,33 @@
   }
 }
 
-.resumes {
-  .thumb {
-    text-align: center;
-    margin-bottom: 20px;
+.resume-index-item {
+  padding: 20px;
 
-    img {
-      padding: 10px;
-      background: #fff;
-      border: solid 1px #ccc;
-      -webkit-box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
-      -moz-box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
-      box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
+  &:hover {
+    background-color: #fafafa;
+  }
+
+  .title {
+    font-family: 'Open Sans';
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    a {
+      color: #72b644;
+      text-decoration: none;
     }
   }
 
-  .resume-entry {
-    padding: 20px;
-  }
-
-  .links {
+  .thumb {
     text-align: center;
-  }
+    margin: 10px;
 
-  .publications {
-    text-align: center;
+    img {
+      background-color: #fff;
+      border: solid 1px lighten(#000, 95%);
+      padding-top: 10px;
+    }
   }
 }

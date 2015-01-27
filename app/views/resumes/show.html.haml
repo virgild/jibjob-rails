@@ -1,11 +1,11 @@
 .page
   .page-header
     .container-fluid
-      %h1
+      %h4
         = @resume.name
-        %span.small
-          = link_to "Edit", edit_user_resume_url(current_user, @resume)
-          = link_to "Delete", delete_user_resume_url(current_user, @resume)
+        .pull-right
+          = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "btn btn-sm btn-default"
+          = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-sm btn-default"
 
   .container-fluid
     - cache @resume do

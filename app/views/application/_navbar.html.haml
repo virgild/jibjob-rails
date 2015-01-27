@@ -1,18 +1,23 @@
 .topnav.nav.navbar.navbar-inverse
   .container-fluid
     .navbar-header
+      .button.navbar-toggle.collapsed{'data-toggle': 'collapse', 'data-target': '.navbar-collapse'}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
       .navbar-brand
         = link_to "jibjob", root_path, class: "navlogo"
-    %ul.nav.navbar-nav
+
+    %ul.nav.navbar-nav.navbar-collapse.collapse
       %li= link_to "Features", features_url
       %li= link_to "Pricing", pricing_url
       %li= link_to "Support", support_index_url
-    - if current_user
-      %ul.nav.navbar-nav.navbar-right
+
+    %ul.nav.navbar-nav.navbar-collapse.collapse.navbar-right
+      - if current_user
         %li= link_to "My Resumes", user_resumes_url(current_user)
         %li= link_to "My Account", user_url(current_user)
         %li= link_to "Log out", logout_sessions_url
-    - else
-      %ul.nav.navbar-nav.navbar-right
+      - else
         %li= link_to "Sign up", new_user_url
         %li= link_to "Sign in", new_session_url

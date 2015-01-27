@@ -1,6 +1,16 @@
 .page
-  .jumbotron.splash
+  .jumbotron.front-splash
     .container-fluid
-      %h2.center Welcome to JibJob
-      %p.center
-        Old-style resumes for the modern world.
+      .row
+        .col-md-6.col-sm-6
+          .subtitle1
+            Welcome to jibjob.
+          .clearfix
+          .subtitle2
+            Old-style resumes for the modern world.
+          .clearfix
+          = link_to "Sign up now", new_user_url, class: "btn btn-success signup-button"
+
+  .jumbotron.front-features
+    .container-fluid
+      %h5 This is cool.

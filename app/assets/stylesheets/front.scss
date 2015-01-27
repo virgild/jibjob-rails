@@ -1,15 +1,29 @@
-.splash {
+.front-splash {
   color: #fff;
-  background: #d22b5e;
-  background: -moz-linear-gradient(top,  #d22b5e 0%, #c4091f 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d22b5e), color-stop(100%,#c4091f));
-  background: -webkit-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
-  background: -o-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
-  background: -ms-linear-gradient(top,  #d22b5e 0%,#c4091f 100%);
-  background: linear-gradient(to bottom,  #d22b5e 0%,#c4091f 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d22b5e', endColorstr='#c4091f',GradientType=0 );
+  background-image: image-url("photos/writing1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 
-  .center {
-    text-align: center;
+  .subtitle1 {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #000;
+    padding: 5px 10px;
+  }
+
+  .subtitle2 {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: normal;
+    color: #fff;
+    background-color: #000;
+    padding: 5px 10px;
+  }
+
+  .signup-button {
+    margin-top: 10px;
   }
 }
