@@ -66,7 +66,7 @@ class Resume < ActiveRecord::Base
   end
 
   def update_pdf_attachment
-    if content.changed?
+    if content_changed?
       file_data = StringIO.new(generate_pdf_data)
       resume = self
       file_data.define_singleton_method :original_filename do

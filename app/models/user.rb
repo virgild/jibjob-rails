@@ -13,8 +13,6 @@
 #
 
 class User < ActiveRecord::Base
-  include UserParam
-
   has_secure_password
   has_many :resumes, dependent: :destroy
   has_many :publications, dependent: :destroy
@@ -31,6 +29,10 @@ class User < ActiveRecord::Base
     signup_confirmation &&
       signup_confirmation.confirmed_at &&
       signup_confirmation.confirmed_at <= DateTime.now
+  end
+
+  def to_param
+    self.username
   end
 
   private
