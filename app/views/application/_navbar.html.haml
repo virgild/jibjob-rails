@@ -9,15 +9,22 @@
         = link_to "jibjob", root_path, class: "navlogo"
 
     %ul.nav.navbar-nav.navbar-collapse.collapse
-      %li= link_to "Features", features_url
+      -#%li= link_to "Features", features_url
+      %li= link_to "Get Started", features_url
       %li= link_to "Pricing", pricing_url
       %li= link_to "Support", support_index_url
+      - unless current_user
+        %li= link_to "Sign up", new_user_url
 
     %ul.nav.navbar-nav.navbar-collapse.collapse.navbar-right
       - if current_user
-        %li= link_to "My Resumes", user_resumes_url(current_user)
-        %li= link_to "My Account", user_url(current_user)
-        %li= link_to "Log out", logout_sessions_url
+        %li
+          = link_to user_resumes_url(current_user) do
+            .span.glyphicon.glyphicon-file
+            My Resumes
+        %li
+          = link_to user_url(current_user) do
+            .span.glyphicon.glyphicon-user
+            My Account
       - else
-        %li= link_to "Sign up", new_user_url
         %li= link_to "Sign in", new_session_url

@@ -1,11 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "bootstrap-strapons";
+@import "strapons/bootstrap-strapons";
 @import "mixins";
 @import "master";
-@import "front";
-@import "signup";
-@import "notification";
-@import "signin";
-@import "resume";
-@import "users";
+
+/* General parts */
+@import "parts/topnav";
+@import "parts/notification";
+
+/* Areas */
+@import "areas/front";
+@import "areas/signup";
+@import "areas/signin";
+@import "areas/resume";
+@import "areas/users";

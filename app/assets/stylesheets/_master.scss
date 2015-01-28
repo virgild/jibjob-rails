@@ -1,0 +1,32 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700);
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+  background: #000;
+}
+
+body {
+  font-family: 'HelveticaNeue-Light', sans-serif;
+  background: #fff;
+}
+
+.page {
+  min-height: 500px;
+}
+
+/* General Page Elements */
+.page-header {
+  margin: 0px;
+  padding: 10px 0px;
+}
+
+
+/* Footer */
+footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  background: #000;
+}

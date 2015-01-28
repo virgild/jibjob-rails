@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # Static pages
   get "features" => "front#features"
+  get "get_started" => "front#get_started"
   get "pricing" => "front#pricing"
   get "terms_of_service" => "front#terms_of_service"
   get "privacy_policy" => "front#privacy_policy"
