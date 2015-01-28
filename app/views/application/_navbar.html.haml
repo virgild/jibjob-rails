@@ -14,7 +14,10 @@
       %li= link_to "Pricing", pricing_url
       %li= link_to "Support", support_index_url
       - unless current_user
-        %li= link_to "Sign up", new_user_url
+        %li.topnav-signup-link
+          = link_to new_user_url do
+            .span.glyphicon.glyphicon-user
+            Sign up
 
     %ul.nav.navbar-nav.navbar-collapse.collapse.navbar-right
       - if current_user

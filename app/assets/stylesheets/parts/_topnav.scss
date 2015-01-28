@@ -1,4 +1,5 @@
-/* Navbar Overrides */
+$topnav-signup-link-bg-color: #ec148e;
+
 .topnav {
   border: none;
   background: #000;
@@ -6,19 +7,23 @@
   margin: 0px;
 }
 
-.navbar {
+.topnav.navbar {
   min-height: 10px;
 }
 
-.navbar-inverse .navbar-nav li a {
+.topnav.navbar-inverse .navbar-nav li a {
   color: #fff;
 }
 
-.navbar .navbar-nav li a {
+.topnav.navbar .navbar-nav li a {
   font-size: 12px;
   font-family: 'Open Sans';
   text-transform: uppercase;
   padding: 6px 12px;
+
+  @media (max-width: $screen-sm-min) {
+    font-size: 18px;
+  }
 
   &:hover {
     background: #fff;
@@ -26,7 +31,7 @@
   }
 }
 
-.navbar-brand {
+.topnav .navbar-brand {
   min-height: 10px;
   padding: 0px;
   height: 20px;
@@ -40,23 +45,33 @@
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   color: #fff;
+  padding: 10px 10px 10px 10px;
   text-decoration: none !important;
   background-color: #14a405;
-  padding: 4px 10px;
   font-weight: bold;
   box-shadow: inset 0 1px #2abb1a, 0 4px #208b15;
   font-size: 18px;
   margin-left: 10px;
   margin-right: 15px;
+  display: block;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 2px 10px 5px 10px;
+  }
+
+  &:hover {
+    text-shadow: #fff 0px 0px 2px;
+    color: #fff;
+  }
+
+  &:active {
+    box-shadow: none;
+    padding-top: 0px;
+  }
 }
 
-.navlogo:hover {
-  text-shadow: #fff 0px 0px 2px;
-  color: #fff;
-}
-
-.navlogo:active {
-  box-shadow: none;
-  position: relative;
-  top: 3px;
+.topnav-signup-link {
+  background-color: $topnav-signup-link-bg-color;
+  font-weight: 600;
+  box-shadow: inset 0px -3px 0px 0px darken($topnav-signup-link-bg-color, 10%);
 }
