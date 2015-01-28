@@ -1,12 +1,11 @@
 .topnav.nav.navbar.navbar-inverse
   .container-fluid
     .navbar-header
-      %a.button.navbar-toggle.collapsed{'data-toggle': 'collapse', 'data-target': '.navbar-collapse', href: '#'}
+      %button.btn.btn-sm.navbar-toggle.collapsed{'data-toggle': 'collapse', 'data-target': '.navbar-collapse'}
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      .navbar-brand
-        = link_to "jibjob", root_path, class: "navlogo"
+      = link_to "jibjob", root_url, class: "navbar-brand navlogo"
 
     %ul.nav.navbar-nav.navbar-collapse.collapse
       %li= link_to "Get Started", get_started_url

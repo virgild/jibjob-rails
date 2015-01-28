@@ -14,9 +14,10 @@ $front-title-font: "Open Sans";
     font-size: 24px;
     font-weight: bold;
     color: #fff;
-    background-color: #000;
+    background-color: rgba(#000, 0.5);
     padding: 5px 10px;
     font-family: $front-title-font;
+    margin-bottom: 1px;
   }
 
   .subtitle2 {
@@ -24,7 +25,7 @@ $front-title-font: "Open Sans";
     font-size: 20px;
     font-weight: normal;
     color: #fff;
-    background-color: #000;
+    background-color: rgba(#000, 0.4);
     padding: 5px 10px;
     font-family: $front-title-font;
   }
@@ -37,7 +38,8 @@ $front-title-font: "Open Sans";
 .front-features {
   background-color: $front-features-bg-color;
   min-height: 100px;
-  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 
   .feature {
     padding: 20px;
