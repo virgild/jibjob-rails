@@ -78,6 +78,12 @@ class ResumesController < ApplicationController
 
   def resume_params
     resume_params = params[:resume]
+
+    # Normalize 'content' text
+    if resume_params && resume_params[:content]
+      resume_params[:content].gsub!(/\r\n/, "\n")
+    end
+
     resume_params ? resume_params.permit(:name, :content) : {}
   end
 end

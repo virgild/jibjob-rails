@@ -22,6 +22,7 @@ class Resume < ActiveRecord::Base
   validates :name, presence: true
   validates :guid, presence: true, uniqueness: true
   validates :status, presence: true, numericality: true
+  validates :edition, presence: true, numericality: true
 
   validates_uniqueness_of :name, scope: :user
 
@@ -38,8 +39,8 @@ class Resume < ActiveRecord::Base
   before_validation :fill_guid
   before_validation :set_new_status
 
-  before_save :convert_content_linefeeds
-  before_save :update_pdf_attachment
+  before_save :update_pdf_attachment, if: :content_changed?
+  before_save :increment_edition, if: :content_changed?
 
   def fill_guid
     self.guid ||= SecureRandom.hex(16)
@@ -65,19 +66,19 @@ class Resume < ActiveRecord::Base
     resume_data.render_json
   end
 
-  def update_pdf_attachment
-    if content_changed?
-      file_data = StringIO.new(generate_pdf_data)
-      resume = self
-      file_data.define_singleton_method :original_filename do
-        "#{resume.guid}.pdf"
-      end
+  private
 
-      self.pdf = file_data
+  def update_pdf_attachment
+    file_data = StringIO.new(generate_pdf_data)
+    resume = self
+    file_data.define_singleton_method :original_filename do
+      "#{resume.guid}.pdf"
     end
+
+    self.pdf = file_data
   end
 
-  def convert_content_linefeeds
-    content.gsub!(/\r\n/, "\n")
+  def increment_edition
+    self.edition += 1
   end
 end
