@@ -3,7 +3,7 @@
   .resume {
     border: solid 1px #ccc;
     padding: 0px 50px;
-    margin: 10px 0 10px 0;
+    margin: 10px 0 10px 0px;
     font-size: 12px;
 
     .resume-header {
@@ -17,8 +17,7 @@
 
   .details-panel {
     margin-top: 10px;
-    padding: 10px;
-    border: solid 1px #ccc;
+    font-size: 10px;
   }
 }
 
