@@ -9,8 +9,7 @@
         = link_to "jibjob", root_path, class: "navlogo"
 
     %ul.nav.navbar-nav.navbar-collapse.collapse
-      -#%li= link_to "Features", features_url
-      %li= link_to "Get Started", features_url
+      %li= link_to "Get Started", get_started_url
       %li= link_to "Pricing", pricing_url
       %li= link_to "Support", support_index_url
       - unless current_user

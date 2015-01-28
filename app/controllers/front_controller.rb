@@ -8,6 +8,10 @@ class FrontController < ApplicationController
 
   end
 
+  def get_started
+
+  end
+
   def about
 
   end
