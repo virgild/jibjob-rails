@@ -1,18 +1,32 @@
-.resume {
-  padding: 0px 50px;
-  .resume-header {
-    text-align: center;
+.user-resume-page {
+
+  .resume {
+    border: solid 1px #ccc;
+    padding: 0px 50px;
+    margin: 10px 0 10px 0;
+    font-size: 12px;
+
+    .resume-header {
+      text-align: center;
+    }
+
+    .resume-section {
+      margin-top: 20px;
+    }
   }
 
-  .resume-section {
-    margin-top: 20px;
+  .details-panel {
+    margin-top: 10px;
+    padding: 10px;
+    border: solid 1px #ccc;
   }
 }
 
 .resume-index-item {
-  padding: 20px;
+  padding: 10px;
   background-color: darken(#fff, 4%);
   box-shadow: inset 0px -1px 0px 0px #e6e6e6, inset -1px 0px 0px 0px #e6e6e6;
+  height: 300px;
 
   @media (max-width: $screen-xs-min) {
     box-shadow: inset 0px -1px 0px 0px #e6e6e6, inset -1px 0px 0px 0px #e6e6e6;

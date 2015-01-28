@@ -1,4 +1,4 @@
-.page
+.page.user-resume-page
   %ol.breadcrumb.visible-xs.hidden-sm
     %li= link_to "My Resumes", user_resumes_url(current_user)
 
@@ -11,42 +11,59 @@
           = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-sm btn-default"
 
   .container-fluid
-    - cache @resume do
-      .resume
-        .resume-header
-          %h3
-            = @resume_data.full_name
-          - if @resume_data.address1.present?
-            .address= @resume_data.address1
-          - if @resume_data.address2.present?
-            .address= @resume_data.address2
-          - if @resume_data.telephone.present?
-            .telephone= @resume_data.telephone
-          - if @resume_data.email.present?
-            .email= @resume_data.email
-          - if @resume_data.url.present?
-            .url= @resume_data.url
+    .row
+      .col-md-3
+        - cache @resume do
+          .details-panel
+            .status
+              Status: #{@resume.status}
+            .guid
+              GUID: #{@resume.guid}
+            .created_at
+              Created: #{@resume.created_at}
+            .updated_at
+              Updated: #{@resume.updated_at}
+            .edition
+              Edition: #{@resume.edition}
+            .pdf_size
+              PDF file size: #{number_to_human_size(@resume.pdf_file_size, precision: 3)}
+      .col-md-9
+        - cache @resume do
+          .resume
+            .resume-header
+              %h3
+                = @resume_data.full_name
+              - if @resume_data.address1.present?
+                .address= @resume_data.address1
+              - if @resume_data.address2.present?
+                .address= @resume_data.address2
+              - if @resume_data.telephone.present?
+                .telephone= @resume_data.telephone
+              - if @resume_data.email.present?
+                .email= @resume_data.email
+              - if @resume_data.url.present?
+                .url= @resume_data.url
 
-        - @resume_data.sections.each do |section|
-          .resume-section
-            %h4= section.title
-            - if section.has_para?
-              %p= section.para
-            - if section.has_items?
-              %ul
-                - section.items.each do |item|
-                  %li= item.text
-            - if section.has_periods?
-              - section.periods.each do |period|
-                .section-period
-                  .title= period.title
-                  .org= period.organization
-                  .location= period.location
-                  - if period.dtend.present? && period.dtstart.present?
-                    .date #{period.dtstart} - #{period.dtend}
-                  - elsif period.dtend.present?
-                    .date #{period.dtend}
-                - if period.has_items?
+            - @resume_data.sections.each do |section|
+              .resume-section
+                %h4= section.title
+                - if section.has_para?
+                  %p= section.para
+                - if section.has_items?
                   %ul
-                    - period.items.each do |period_item|
-                      %li= period_item.text
+                    - section.items.each do |item|
+                      %li= item.text
+                - if section.has_periods?
+                  - section.periods.each do |period|
+                    .section-period
+                      .title= period.title
+                      .org= period.organization
+                      .location= period.location
+                      - if period.dtend.present? && period.dtstart.present?
+                        .date #{period.dtstart} - #{period.dtend}
+                      - elsif period.dtend.present?
+                        .date #{period.dtend}
+                    - if period.has_items?
+                      %ul
+                        - period.items.each do |period_item|
+                          %li= period_item.text

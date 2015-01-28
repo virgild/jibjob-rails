@@ -1,14 +1,19 @@
 .page
+  %ol.breadcrumb
+    %li= link_to "My Resumes", user_resumes_url(current_user)
+    %li= link_to @resume.name, user_resume_url(current_user, @resume)
+
   .page-header
     .container-fluid
-      %h1
+      %h3
         #{@resume.name} publications
 
   .container-fluid
     .row
       - @publications.each do |publication|
         .col-md-12
-          .publication.well.well-sm
+          .publication
             %h4= link_to publication.resume.name, user_resume_url(current_user, publication.resume)
             %h5= link_to publication_url(publication), publication_url(publication)
-            %h5= publication.publish_date
+            %h5
+              Published #{distance_of_time_in_words_to_now publication.publish_date} ago
