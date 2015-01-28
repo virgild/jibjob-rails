@@ -1,19 +1,21 @@
 .page
   .page-header
     .container-fluid
-      %h1 New Resume
+      %h4 New Resume
 
   .container-fluid
-    - if @resume.errors.any?
-      %ul
-        - @resume.errors.full_messages.each do |msg|
-          %li= msg
+    .row
+      .col-md-12
+        - if @resume.errors.any?
+          %ul
+            - @resume.errors.full_messages.each do |msg|
+              %li= msg
 
-    = form_for [current_user, @resume] do |f|
-      .form-group
-        = f.label :name
-        = f.text_field :name, class: "form-control"
-      .form-group
-        = f.label :content
-        = f.text_area :content, class: "form-control", size: "25x10"
-      = f.submit "Submit"
+        = form_for [current_user, @resume] do |f|
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: "form-control"
+          .form-group
+            = f.label :content
+            = f.text_area :content, class: "form-control console", size: "25x40"
+          = f.button "Submit", class: "btn btn-success"

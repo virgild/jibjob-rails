@@ -1,15 +1,18 @@
 .page.resumes
   .page-header
     .container-fluid
-      %h3
+      .h3
         My Resumes
         .pull-right
-          = link_to "Create New", new_user_resume_url, class: "btn btn-success btn-sm"
+          = link_to "Create New", new_user_resume_url, class: "btn btn-success"
 
   .container-fluid
     - cache @resumes do
       - if @resumes.empty?
-        %p You have no resumes.
+        .row
+          .col-md-12
+            .alert.alert-info
+              You have no resumes.
       - else
         .row
           - @resumes.each do |resume|

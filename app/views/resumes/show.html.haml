@@ -1,4 +1,7 @@
 .page
+  %ol.breadcrumb.visible-xs.hidden-sm
+    %li= link_to "My Resumes", user_resumes_url(current_user)
+
   .page-header
     .container-fluid
       %h4
