@@ -2,3 +2,7 @@
   -webkit-border-radius: $radius;
   border-radius: $radius;
 }
+
+@mixin unrounded {
+  @include rounded(0px);
+}

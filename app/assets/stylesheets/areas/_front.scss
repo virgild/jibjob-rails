@@ -32,6 +32,7 @@ $front-title-font: "Open Sans";
 
   .signup-button {
     margin-top: 10px;
+    @include unrounded;
   }
 }
 
@@ -43,8 +44,10 @@ $front-title-font: "Open Sans";
 
   .feature {
     padding: 20px;
-    background-color: #fff;
-    border-bottom: solid 3px darken($front-features-bg-color, 5%);
+    background-color: #f6f6f6;
+    @include rounded(5px);
+    margin-bottom: 5px;
+    box-shadow: inset 0px -3px 0px 0px #e6e6e6, 0px -3px 0px 0px #fff;
 
     .title {
       font-weight: 800;

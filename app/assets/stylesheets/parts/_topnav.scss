@@ -2,9 +2,9 @@ $topnav-signup-link-bg-color: #ec148e;
 $topnav-logo-bg-color: #14a405;
 
 .topnav {
+  @include unrounded;
   border: none;
   background: #000;
-  @include rounded(0px);
   margin: 0px;
 }
 
