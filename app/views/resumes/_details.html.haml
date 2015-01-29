@@ -13,10 +13,3 @@
       Edition: #{resume.edition}
     .pdf_size
       PDF file size: #{number_to_human_size(resume.pdf_file_size, precision: 3)}
-  .outline.hidden-sm.hidden-xs
-    %div{"data-spy":"affix", "data-offset-top":"100"}
-      %h4 Outline
-      %ul.list-group.small
-        - resume_data.sections.each_with_index do |section, index|
-          %li.list-group-item
-            = link_to section.title, "#section-#{index}"

@@ -40,7 +40,7 @@ class Resume < ActiveRecord::Base
   before_validation :set_new_status
 
   before_save :update_pdf_attachment, if: :content_changed?
-  before_save :increment_edition, if: :content_changed?
+  before_save :increment_edition, if: Proc.new { |resume| !resume.new_record? && resume.content_changed? }
 
   def resume_data
     ResumeTools::Resume.from_text(content)

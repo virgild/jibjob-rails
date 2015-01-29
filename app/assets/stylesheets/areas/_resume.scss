@@ -32,6 +32,23 @@
       font-family: "Open Sans";
       font-size: 18px;
     }
+
+    .unpublished {
+      color: #aaa;
+    }
+
+    .published {
+      margin-right: 10px;
+      color: #aaa;
+    }
+  }
+
+  .button-set {
+    float: right;
+
+    @media (max-width: $screen-phone) {
+      float: none;
+    }
   }
 }
 

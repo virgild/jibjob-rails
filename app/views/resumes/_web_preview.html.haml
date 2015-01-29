@@ -1,13 +1,20 @@
 - cache [:preview, resume] do
-  .title-header
-    %span.title #{resume.name} - Web Preview
-    .pull-right
-      - if resume.is_published?
-        = link_to "Publication Details", user_resume_publications_url(current_user, resume), class: "btn btn-default btn-sm"
-      - else
-        = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
-        = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
-  .resume
+  .row
+    .title-header.col-md-12
+      %span.title
+        #{resume.name} - Web Preview
+        - if resume.is_published?
+          %span.published.small Published
+        - else
+          %span.unpublished.small Unpublished
+      .button-set
+        - if resume.is_published?
+          = link_to "Publication Details", user_resume_publications_url(current_user, resume), class: "btn btn-default btn-sm"
+        - else
+          = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
+          = link_to "Publish", user_resume_publications_url(current_user, resume), class: "btn btn-success btn-sm"
+          = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
+  .resume.row
     .resume-header#header
       - if resume_data.full_name.present?
         %h3#full-name

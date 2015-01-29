@@ -1,7 +1,8 @@
+@import "strapons/variables";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "mixins";
-@import "strapons/bootstrap-strapons";
+@import "strapons/overrides";
 @import "master";
 
 /* General parts */
