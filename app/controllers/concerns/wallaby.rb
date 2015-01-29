@@ -12,7 +12,7 @@ module Wallaby
     if params[:_wallaby]
       cookies.signed[:wallaby] ||= {
         value: 'pass',
-        expires: 1.day.from_now
+        expires: 1.year.from_now
       }
     end
   end
