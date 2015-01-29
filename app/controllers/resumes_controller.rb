@@ -64,7 +64,7 @@ class ResumesController < ApplicationController
 
   def load_resumes
     # TODO: Slow when things grow
-    @resumes ||= resume_scope.includes(:publications).order(:created_at).all
+    @resumes ||= resume_scope.order(:created_at).all
   end
 
   def load_resume

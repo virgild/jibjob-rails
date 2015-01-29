@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       member do
         get 'delete'
       end
-      resources :publications, module: 'resumes'
     end
   end
 
@@ -18,9 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :publications, param: :slug, only: [:show] do
-    get 'not_found'
-  end
+  resources :publications, param: :slug, only: [:show]
 
   resources :support, only: [:index]
 

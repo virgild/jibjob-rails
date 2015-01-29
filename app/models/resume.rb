@@ -27,7 +27,6 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :user
 
   belongs_to :user
-  has_many :publications
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
@@ -59,7 +58,7 @@ class Resume < ActiveRecord::Base
   end
 
   def is_published?
-    publications.last && (publications.last.status != 0)
+    false
   end
 
   private

@@ -9,13 +9,12 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  default_role    :string
-#  timezone        :decimal(, )
+#  timezone        :string
 #
 
 class User < ActiveRecord::Base
   has_secure_password
   has_many :resumes, dependent: :destroy
-  has_many :publications, dependent: :destroy
   has_one :signup, dependent: :destroy
   has_one :signup_confirmation, dependent: :destroy
 

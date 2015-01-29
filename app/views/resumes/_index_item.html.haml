@@ -7,11 +7,6 @@
   %ul.preview-links.small
     %li= link_to "Preview PDF", resume.pdf.url
     %li= link_to "Preview Plain Text", user_resume_url(current_user, resume, format: "txt")
-  .publications
-    - if resume.publications.present?
-      = link_to "Published", user_resume_publications_url(current_user, resume)
-    - else
-      = link_to "Publish", new_user_resume_publication_url(current_user, resume), class: "btn btn-default btn-xs"
   .stats
     Views: 0
     Activity: 0%

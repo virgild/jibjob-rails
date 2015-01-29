@@ -9,7 +9,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  default_role    :string
-#  timezone        :decimal(, )
+#  timezone        :string
 #
 
 appleseed:
