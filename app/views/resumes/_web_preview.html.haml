@@ -1,5 +1,12 @@
 - cache [:preview, resume] do
-  %h4 Web Preview
+  .title-header
+    %span.title #{resume.name} - Web Preview
+    .pull-right
+      - if resume.is_published?
+        = link_to "Publication Details", user_resume_publications_url(current_user, resume), class: "btn btn-default btn-sm"
+      - else
+        = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
+        = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
   .resume
     .resume-header#header
       - if resume_data.full_name.present?

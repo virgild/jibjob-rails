@@ -1,3 +1,4 @@
+/* User views own resume page */
 .user-resume-page {
 
   .resume {
@@ -23,8 +24,18 @@
   .affix {
     width: 220px;
   }
+
+  .title-header {
+    padding-top: 20px;
+
+    .title {
+      font-family: "Open Sans";
+      font-size: 18px;
+    }
+  }
 }
 
+/* Resume list item when users sees own resume list */
 .resume-index-item {
   padding: 10px;
   background-color: darken(#fff, 4%);
@@ -87,6 +98,7 @@
   }
 }
 
+// TODO: Reorganize this style
 textarea.console {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   font-size: 10px;

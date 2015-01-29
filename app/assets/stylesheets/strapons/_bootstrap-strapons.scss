@@ -1,17 +1,17 @@
-/* Bootstrap overrides */
+/* These are bootstrap overrides */
 
+/* Remove extra spaces around all jumbotrons */
 .jumbotron {
   margin: 0px;
 }
 
+.breadcrumb {
+  /* Remove extra space outside the bottom of all breadcrumbs */
+  margin-bottom: 0px;
 
-.row.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-}
+  /* Disable rounder corners */
+  @include unrounded;
 
-.row.no-gutters > [class^="col-"],
-.row.no-gutters > [class*=" col-"] {
-  padding-right: 0;
-  padding-left: 0;
+  /* Add bottom border */
+  border-bottom: solid 1px #ccc;
 }

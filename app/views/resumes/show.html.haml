@@ -2,16 +2,11 @@
   %ol.breadcrumb.visible-xs.hidden-sm
     %li= link_to "My Resumes", user_resumes_url(current_user)
 
-  .page-header
+  -#.page-header
     .container-fluid
       %h3
         = @resume.name
-        .pull-right
-          - if @resume.is_published?
-            = link_to "Publication Details", user_resume_publications_url(current_user, @resume), class: "btn btn-default"
-          - else
-            = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "btn btn-primary"
-            = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-danger"
+
 
   .container-fluid
     .row
