@@ -14,7 +14,7 @@
         = form_for [current_user, @resume] do |f|
           .form-group
             = f.label :name
-            = f.text_field :name, maxlength: 50, class: "form-control"
+            = f.text_field :name, maxlength: 50, class: "form-control", placeholder: ""
           .form-group
             = f.label :content
             = f.text_area :content, class: "form-control console", size: "25x40"

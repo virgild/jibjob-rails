@@ -42,14 +42,6 @@ class Resume < ActiveRecord::Base
   before_save :update_pdf_attachment, if: :content_changed?
   before_save :increment_edition, if: :content_changed?
 
-  def fill_guid
-    self.guid ||= SecureRandom.hex(16)
-  end
-
-  def set_new_status
-    self.status ||= 1
-  end
-
   def resume_data
     ResumeTools::Resume.from_text(content)
   end
@@ -66,7 +58,19 @@ class Resume < ActiveRecord::Base
     resume_data.render_json
   end
 
+  def is_published?
+    publications.last && (publications.last.status != 0)
+  end
+
   private
+
+  def fill_guid
+    self.guid ||= SecureRandom.hex(16)
+  end
+
+  def set_new_status
+    self.status ||= 1
+  end
 
   def update_pdf_attachment
     file_data = StringIO.new(generate_pdf_data)

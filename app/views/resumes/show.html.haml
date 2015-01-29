@@ -4,35 +4,18 @@
 
   .page-header
     .container-fluid
-      %h4
+      %h3
         = @resume.name
         .pull-right
-          = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "btn btn-sm btn-primary"
-          = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-sm btn-danger"
+          - if @resume.is_published?
+            = link_to "Publication Details", user_resume_publications_url(current_user, @resume), class: "btn btn-default"
+          - else
+            = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "btn btn-primary"
+            = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-danger"
 
   .container-fluid
     .row
       .col-md-9.col-md-push-3
         = render partial: "web_preview", locals: { resume: @resume, resume_data: @resume_data }
       .col-md-3.col-md-pull-9
-        - cache [:details, @resume] do
-          .details-panel
-            %h4 Details
-            .status
-              Status: #{@resume.status}
-            .guid
-              GUID: #{@resume.guid}
-            .created_at
-              Created: #{@resume.created_at}
-            .updated_at
-              Updated: #{@resume.updated_at}
-            .edition
-              Edition: #{@resume.edition}
-            .pdf_size
-              PDF file size: #{number_to_human_size(@resume.pdf_file_size, precision: 3)}
-          .outline.hidden-sm.hidden-xs
-            %h4 Outline
-            %ul
-              - @resume_data.sections.each_with_index do |section, index|
-                %li
-                  = link_to section.title, "#section-#{index}"
+        = render partial: "details", locals: { resume: @resume, resume_data: @resume_data }
