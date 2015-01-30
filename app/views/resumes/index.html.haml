@@ -3,18 +3,13 @@
     .container-fluid
       .h3
         My Resumes
-        .pull-right
-          = link_to "Create New", new_user_resume_url, class: "btn btn-success"
 
   .container-fluid
     - cache @resumes do
-      - if @resumes.empty?
-        .row
-          .col-md-12
-            .alert.alert-info
-              You have no resumes.
-      - else
-        .row
-          - @resumes.each do |resume|
-            - cache resume do
-              = render partial: "index_item", locals: { resume: resume }
+      .row
+        - (0..@item_limit - 1).each do |index|
+          - resume = @resumes[index]
+          - if resume
+            = render partial: "index_item", locals: { resume: @resumes[index] }
+          - else
+            = render partial: "index_item_placeholder"

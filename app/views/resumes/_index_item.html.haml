@@ -1,9 +1,13 @@
 .resume-index-item.col-sm-12
-  %h4
-    = link_to resume.name, user_resume_url(current_user, resume)
+  .header
+    = link_to resume.name, user_resume_url(current_user, resume), class: 'header-title'
     - if resume.is_published?
-      %span.small Published
+      %span.publish-status Published
     - else
-      %span.small Unpublished
+      %span.publish-status Unpublished
 
-  %h5= resume.descriptor
+  .descriptor= resume.descriptor
+
+  %div
+    = link_to "Edit", edit_user_resume_url(current_user, resume)
+    = link_to "Delete", delete_user_resume_url(current_user, resume)

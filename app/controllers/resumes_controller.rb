@@ -3,6 +3,7 @@ class ResumesController < ApplicationController
   before_filter :load_resume, only: [:show, :edit, :update, :destroy]
 
   def index
+    @item_limit = 5
     load_resumes
   end
 
@@ -64,7 +65,7 @@ class ResumesController < ApplicationController
 
   def load_resumes
     # TODO: Slow when things grow
-    @resumes ||= resume_scope.order(:created_at).all
+    @resumes ||= resume_scope.order(:updated_at).reverse_order.limit(@item_limit)
   end
 
   def load_resume
