@@ -49,6 +49,7 @@ gem 'active_model_serializers'
 gem 'resumetools'
 gem 'paperclip'
 gem 'sanitize'
+gem 'pragmatic_segmenter'
 
 gem 'rack-protection'
 gem 'newrelic_rpm'

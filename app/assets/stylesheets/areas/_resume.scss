@@ -54,65 +54,7 @@
 
 /* Resume list item when users sees own resume list */
 .resume-index-item {
-  padding: 10px;
-  background-color: darken(#fff, 4%);
-  box-shadow: inset 0px -1px 0px 0px #e6e6e6, inset -1px 0px 0px 0px #e6e6e6;
-  height: 300px;
-
-  @media (max-width: $screen-xs-min) {
-    box-shadow: inset 0px -1px 0px 0px #e6e6e6, inset -1px 0px 0px 0px #e6e6e6;
-  }
-
-  &:hover {
-    background-color: #fafafa;
-  }
-
-  .title {
-    font-family: 'Open Sans';
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 10px;
-
-    a {
-      color: #72b644;
-      text-decoration: none;
-    }
-  }
-
-  .thumb {
-    text-align: center;
-    margin: 10px;
-
-    img {
-      background-color: #fff;
-      border: solid 1px lighten(#000, 95%);
-      padding-top: 10px;
-      padding-bottom: 5px;
-      box-shadow: 0px 1px 1px 1px darken(#fff, 15%);
-    }
-  }
-
-  ul.preview-links {
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    li {
-      padding: 0;
-      margin: 0;
-      list-style-type: none;
-    }
-  }
-
-  .publications {
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  .stats {
-    padding-top: 20px;
-    text-align: center;
-    font-size: 10px;
-  }
+  border-bottom: solid 1px darken(#fff, 3%);
 }
 
 // TODO: Reorganize this style

@@ -1,12 +1,9 @@
-.resume-index-item.col-sm-3.col-lg-2.col-md-3.col-xs-6
-  .title
+.resume-index-item.col-sm-12
+  %h4
     = link_to resume.name, user_resume_url(current_user, resume)
-  .thumb
-    = link_to user_resume_url(current_user, resume) do
-      = image_tag resume.pdf.url(:thumb)
-  %ul.preview-links.small
-    %li= link_to "Preview PDF", resume.pdf.url
-    %li= link_to "Preview Plain Text", user_resume_url(current_user, resume, format: "txt")
-  .stats
-    Views: 0
-    Activity: 0%
+    - if resume.is_published?
+      %span.small Published
+    - else
+      %span.small Unpublished
+
+  %h5= resume.descriptor

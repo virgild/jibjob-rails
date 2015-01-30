@@ -9,7 +9,7 @@
 
     %ul.nav.navbar-nav.navbar-collapse.collapse
       %li= link_to "Get Started", get_started_url
-      %li= link_to "Pricing", pricing_url
+      %li= link_to "Deploy your own", "/"
       %li= link_to "Support", support_index_url
       - unless current_user
         %li.topnav-signup-link
@@ -17,7 +17,7 @@
             .span.glyphicon.glyphicon-user
             Sign up
 
-    %ul.nav.navbar-nav.navbar-collapse.collapse.navbar-right
+    %ul.nav.navbar-nav.navbar-right.navbar-collapse.collapse
       - if current_user
         %li
           = link_to user_resumes_url(current_user) do

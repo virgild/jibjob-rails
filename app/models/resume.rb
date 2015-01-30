@@ -41,9 +41,14 @@ class Resume < ActiveRecord::Base
   before_save :update_pdf_attachment, if: :content_changed?
   before_save :increment_edition, if: Proc.new { |resume| !resume.new_record? && resume.content_changed? }
 
-  def resume_data
-    ResumeTools::Resume.from_text(content)
+  def resume_data(reload = false)
+    if reload
+      @resume_data = ResumeTools::Resume.from_text(content)
+    else
+      @resume_data ||= ResumeTools::Resume.from_text(content)
+    end
   end
+  alias :data :resume_data
 
   def generate_pdf_data
     resume_data.render_pdf
@@ -59,6 +64,32 @@ class Resume < ActiveRecord::Base
 
   def is_published?
     false
+  end
+
+  def descriptor
+    selector = lambda { |sections|
+      fragments = []
+      sections.each do |section|
+        if section.has_title?
+          fragments << section.title
+        end
+
+        if section.has_para?
+          segmenter = PragmaticSegmenter::Segmenter.new(text: section.para)
+          fragments << segmenter.segment.first
+          return fragments
+        elsif section.has_items?
+          segmenter = PragmaticSegmenter::Segmenter.new(text: section.items[0].text)
+          fragments << segmenter.segment.first
+          return fragments
+        elsif section.has_periods?
+          fragments << section.periods[0].title
+        end
+      end
+    }
+
+    text = selector.call(data.sections).join(' - ')
+    text.blank? ? 'No content' : text
   end
 
   private
