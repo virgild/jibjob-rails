@@ -1,11 +1,4 @@
 - cache [:preview, resume] do
-  .row
-    .title-header.col-md-12
-      %span.title
-        #{resume.name} - Web Preview
-      .button-set
-        = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
-        = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
   .resume.row
     .resume-header#header
       - if resume_data.full_name.present?

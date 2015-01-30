@@ -1,10 +1,10 @@
 .page.resumes
   .page-header
-    .container-fluid
+    .container
       .h3
         My Resumes
 
-  .container-fluid
+  .container
     - cache @resumes do
       .row
         - (0..@item_limit - 1).each do |index|

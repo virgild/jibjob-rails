@@ -72,6 +72,16 @@
     color: lighten(#000, 70%);
     font-size: 10px;
   }
+
+  .action-links {
+    padding-top: 10px;
+  }
+
+  .file-links {
+    @media (max-width: $screen-sm) {
+      padding-top: 10px;
+    }
+  }
 }
 
 .resume-index-item-placeholder {

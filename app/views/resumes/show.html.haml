@@ -5,6 +5,13 @@
   .container-fluid
     .row
       .col-md-9.col-md-push-3
+        .row
+          .title-header.col-md-12
+            %span.title
+              #{@resume.name} - Web Preview
+            .button-set
+              = link_to "Edit", edit_user_resume_url(current_user, @resume), class: "btn btn-primary btn-sm"
+              = link_to "Delete", delete_user_resume_url(current_user, @resume), class: "btn btn-danger btn-sm"
         = render partial: "web_preview", locals: { resume: @resume, resume_data: @resume_data }
       .col-md-3.col-md-pull-9
         = render partial: "details", locals: { resume: @resume, resume_data: @resume_data }

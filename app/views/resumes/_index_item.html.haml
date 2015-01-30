@@ -1,13 +1,25 @@
 .resume-index-item.col-sm-12
-  .header
-    = link_to resume.name, user_resume_url(current_user, resume), class: 'header-title'
-    - if resume.is_published?
-      %span.publish-status Published
-    - else
-      %span.publish-status Unpublished
+  .row
+    .col-sm-9
+      .header
+        = link_to resume.name, user_resume_url(current_user, resume), class: 'header-title'
+        - if resume.is_published?
+          %span.publish-status Published
+        - else
+          %span.publish-status Unpublished
 
-  .descriptor= resume.descriptor
+      .descriptor= resume.descriptor
 
-  %div
-    = link_to "Edit", edit_user_resume_url(current_user, resume)
-    = link_to "Delete", delete_user_resume_url(current_user, resume)
+      .action-links
+        = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
+        = link_to "Publish", "", class: "btn btn-info btn-sm"
+        = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
+
+    .col-sm-3
+      .file-links
+        = link_to resume.pdf.url, class: "btn btn-default btn-sm" do
+          .glyphicon.glyphicon-file
+          PDF
+        = link_to user_resume_url(current_user, resume, format: "txt"), class: "btn btn-default btn-sm" do
+          .glyphicon.glyphicon-font
+          Plain Text
