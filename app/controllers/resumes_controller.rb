@@ -65,12 +65,14 @@ class ResumesController < ApplicationController
 
     if @resume.save
       @result = "ok"
+      @status = :ok
     else
       @result = "error"
+      @status = :conflict
     end
 
     respond_to do |format|
-      format.json { render json: { result: @result } }
+      format.json { render json: { result: @result, resume: { slug: @resume.slug, errors: @resume.errors } }, status: @status }
     end
   end
 
@@ -84,7 +86,7 @@ class ResumesController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: { result: @result } }
+      format.json { render json: { result: @result, resume: { slug: @resume.slug } } }
     end
   end
 

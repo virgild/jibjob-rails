@@ -1,9 +1,25 @@
 (function(window, $) {
   window.ResumePublisher = React.createClass({
+    views: {
+      PUBLISH_BUTTON: 0,
+      PUBLISH_FORM: 1,
+      PUBLICATION_DETAILS: 2
+    },
+
     getInitialState: function() {
+      var initial_view = this.views.PUBLISH_BUTTON;
+      var resume = this.getResume();
+
+      if (resume.is_published) {
+        initial_view = this.views.PUBLICATION_DETAILS;
+      } else {
+        initial_View = this.views.PUBLISH_BUTTON;
+      }
+
       return {
-        showing_publish_form: false,
-        resume_is_published: this.props.resume.is_published
+        current_view: initial_view,
+        slug: this.props.resume.slug,
+        errors: []
       };
     },
 
@@ -18,12 +34,16 @@
     render: function() {
       var resume = this.getResume();
 
-      if (this.state.showing_publish_form) {
-        return <PublishForm publisher={this} />
-      } else if (this.state.resume_is_published) {
-        return <PublicationDetails publisher={this} />
-      } else {
-        return <PublishButton publisher={this} />
+      switch (this.state.current_view) {
+        case this.views.PUBLISH_BUTTON:
+          return <PublishButton publisher={this} />
+          break;
+        case this.views.PUBLISH_FORM:
+          return <PublishForm publisher={this} />
+          break;
+        case this.views.PUBLICATION_DETAILS:
+          return <PublicationDetails publisher={this} />
+          break;
       }
     }
   });
@@ -33,14 +53,16 @@
       return {};
     },
 
-    handleClick: function(e) {
+    publishClicked: function(e) {
       e.preventDefault();
-      this.props.publisher.setState({ showing_publish_form: true });
+
+      var publisher = this.props.publisher;
+      publisher.setState({ current_view: publisher.views.PUBLISH_FORM });
     },
 
     render: function() {
       return (
-        <a href="#publish" onClick={this.handleClick} className="btn btn-info btn-sm">Publish</a>
+        <a href="#publish" onClick={this.publishClicked} className="btn btn-info btn-sm">Publish</a>
       );
     }
   });
@@ -49,7 +71,7 @@
   var PublishForm = React.createClass({
     getInitialState: function() {
       return {
-        slug: this.props.publisher.getResume().slug
+        slug: this.props.publisher.state.slug
       };
     },
 
@@ -57,7 +79,7 @@
       e.preventDefault();
 
       var publisher = this.props.publisher;
-      publisher.setState({ showing_publish_form: false });
+      publisher.setState({ current_view: publisher.views.PUBLISH_BUTTON });
     },
 
     formAccept: function(e) {
@@ -66,8 +88,12 @@
       var slug = this.state.slug;
       var form_data = $(this.refs.pubform.getDOMNode()).serialize();
       var publisher = this.props.publisher;
+
       $.post(publisher.getPublishURL(), form_data, function(data, status) {
-        publisher.setState({ resume_is_published: true, showing_publish_form: false });
+        var new_slug = data.resume.slug;
+        publisher.setState({ current_view: publisher.views.PUBLICATION_DETAILS, slug: data.resume.slug });
+      }).fail(function() {
+
       });
     },
 
@@ -96,7 +122,9 @@
   /* */
   var PublicationDetails = React.createClass({
     getInitialState: function() {
-      return {};
+      var publisher = this.props.publisher;
+
+      return { slug: publisher.state.slug };
     },
 
     unpublishClicked: function(e) {
@@ -105,14 +133,16 @@
       var unpublish_url = publisher.getResume().unpublish_url;
 
       $.post(unpublish_url, {}, function(data, status) {
-        publisher.setState({ showing_publish_form: false, resume_is_published: false });
+        publisher.setState({ current_view: publisher.views.PUBLISH_BUTTON });
       });
     },
 
     render: function() {
+      var slug = this.state.slug;
+
       return (
         <span>
-          <span>Published at [slug]</span>
+          <span>Published at {slug}</span>
           <button onClick={this.unpublishClicked}>Unpublish</button>
         </span>
       );

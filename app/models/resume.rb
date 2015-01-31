@@ -31,6 +31,7 @@ class Resume < ActiveRecord::Base
   validates :edition, presence: true, numericality: true
 
   validates_uniqueness_of :name, scope: :user
+  validates_uniqueness_of :slug
 
   belongs_to :user
 
