@@ -1,6 +1,8 @@
 class ResumesController < ApplicationController
-  before_filter :require_current_user
-  before_filter :load_resume, only: [:show, :edit, :update, :destroy, :ready_publish, :publish, :unpublish]
+  protect_from_forgery except: [:publish, :unpublish]
+  before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
+
+  include HasUserResume
 
   def index
     @item_limit = 5
@@ -49,7 +51,7 @@ class ResumesController < ApplicationController
   end
 
   def delete
-    load_resume
+
   end
 
   def destroy
@@ -57,55 +59,39 @@ class ResumesController < ApplicationController
     redirect_to user_resumes_url(current_user)
   end
 
-  def ready_publish
-
-  end
-
   def publish
+    @resume.slug = params[:resume][:slug]
+    @resume.is_published = true
 
+    if @resume.save
+      @result = "ok"
+    else
+      @result = "error"
+    end
+
+    respond_to do |format|
+      format.json { render json: { result: @result } }
+    end
   end
 
   def unpublish
-    load_resume
     @resume.is_published = false
 
     if @resume.save
-      flash.now['info'] = "#{@resume.name} is now unpublished."
+      @result = "ok"
     else
-      flash.now['danger'] = "There is an error unpublishing #{@resume.name}."
+      @result = "error"
     end
 
-    redirect_to user_resumes_url(current_user)
+    respond_to do |format|
+      format.json { render json: { result: @result } }
+    end
   end
 
   private
 
-  def resume_scope
-    current_user.resumes
-  end
-
   def load_resumes
     # TODO: Slow when things grow
     @resumes ||= resume_scope.order(:updated_at).reverse_order.limit(@item_limit)
-  end
-
-  def load_resume
-    @resume ||= resume_scope.find(params[:id])
-  end
-
-  def build_resume
-    @resume ||= resume_scope.build
-    @resume.attributes = resume_params
-  end
-
-  def resume_params
-    resume_params = params[:resume]
-
-    # Normalize 'content' text
-    if resume_params && resume_params[:content]
-      resume_params[:content].gsub!(/\r\n/, "\n")
-    end
-
-    resume_params ? resume_params.permit(:name, :content) : {}
   end
 end

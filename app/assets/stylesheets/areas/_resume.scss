@@ -97,25 +97,6 @@
   }
 }
 
-/* Animations */
-.animator-enter {
-  opacity: 0.01;
-  transition: all 0.5s ease-in;
-}
-
-.animator-enter.animator-enter-active {
-  opacity: 1.0;
-}
-
-.animator-leave {
-  opacity: 1.0;
-  transition: all 0.5s ease-in;
-}
-
-.animator-leave.animator-leave-active {
-  opacity: 0.01;
-}
-
 // TODO: Reorganize this style
 textarea.console {
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
