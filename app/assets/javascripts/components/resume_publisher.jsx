@@ -1,4 +1,6 @@
 (function(window, $) {
+  var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
+
   window.ResumePublisher = React.createClass({
     views: {
       PUBLISH_BUTTON: 0,
@@ -33,18 +35,25 @@
 
     render: function() {
       var resume = this.getResume();
+      var element = null;
 
       switch (this.state.current_view) {
         case this.views.PUBLISH_BUTTON:
-          return <PublishButton publisher={this} />
+          element = <PublishButton publisher={this} key="publisher-button" />
           break;
         case this.views.PUBLISH_FORM:
-          return <PublishForm publisher={this} />
+          element = <PublishForm publisher={this} key="publisher-form" />
           break;
         case this.views.PUBLICATION_DETAILS:
-          return <PublicationDetails publisher={this} />
+          element = <PublicationDetails publisher={this} key="publisher-details" />
           break;
       }
+
+      return (
+        <ReactCSSTransitionGroup transitionName="publisher-element" component="span">
+          {element}
+        </ReactCSSTransitionGroup>
+      );
     }
   });
 
@@ -106,7 +115,7 @@
 
       return (
         <span>
-          <form className="form-inline" style={{display:"inline"}} onSubmit={this.formAccept} ref="pubform">
+          <form className="form-inline publish-form" onSubmit={this.formAccept} ref="pubform">
             <input type="hidden" name="utf8" value="✓" />
             <input type="hidden" name="authenticity_token" value={publisher.getResume().form_token} />
             <input type="hidden" name="resume[is_published]" value="true" />

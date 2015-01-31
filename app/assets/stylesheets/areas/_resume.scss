@@ -82,6 +82,28 @@
       padding-top: 10px;
     }
   }
+
+  .publish-form {
+    display: inline-block;
+  }
+
+  .publisher-element-enter {
+    opacity: 0.1;
+    transition: opacity 0.5s ease-in;
+  }
+
+  .publisher-element-enter.publisher-element-enter-active {
+    opacity: 1.0;
+  }
+
+  .publisher-element-leave {
+    opacity: 1.0;
+    transition: opacity 0.05s;
+  }
+
+  .publisher-element-leave.publisher-element-leave-active {
+    opacity: 0.1;
+  }
 }
 
 .resume-index-item-placeholder {
