@@ -15,6 +15,12 @@
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
 #  edition          :integer          default("1")
+#  slug             :string           not null
+#  is_published     :boolean          default("false"), not null
+#
+# Indexes
+#
+#  index_resumes_on_slug  (slug) UNIQUE
 #
 
 class Resume < ActiveRecord::Base
@@ -36,6 +42,7 @@ class Resume < ActiveRecord::Base
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
   before_validation :fill_guid
+  before_validation :set_default_slug
   before_validation :set_new_status
 
   before_save :update_pdf_attachment, if: :content_changed?
@@ -60,10 +67,6 @@ class Resume < ActiveRecord::Base
 
   def generate_json_text
     resume_data.render_json
-  end
-
-  def is_published?
-    false
   end
 
   def descriptor
@@ -100,6 +103,10 @@ class Resume < ActiveRecord::Base
 
   def set_new_status
     self.status ||= 1
+  end
+
+  def set_default_slug
+    self.slug ||= fill_guid
   end
 
   def update_pdf_attachment

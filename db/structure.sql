@@ -46,7 +46,9 @@ CREATE TABLE resumes (
     pdf_content_type character varying,
     pdf_file_size integer,
     pdf_updated_at timestamp without time zone,
-    edition integer DEFAULT 1
+    edition integer DEFAULT 1,
+    slug character varying NOT NULL,
+    is_published boolean DEFAULT false NOT NULL
 );
 
 
@@ -184,6 +186,13 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: index_resumes_on_slug; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_resumes_on_slug ON resumes USING btree (slug);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -213,4 +222,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150125042850');
 INSERT INTO schema_migrations (version) VALUES ('20150125224433');
 
 INSERT INTO schema_migrations (version) VALUES ('20150129191035');
+
+INSERT INTO schema_migrations (version) VALUES ('20150130172627');
 

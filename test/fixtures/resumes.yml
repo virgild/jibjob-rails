@@ -16,4 +16,10 @@
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
 #  edition          :integer          default("1")
+#  slug             :string           not null
+#  is_published     :boolean          default("false"), not null
+#
+# Indexes
+#
+#  index_resumes_on_slug  (slug) UNIQUE
 #

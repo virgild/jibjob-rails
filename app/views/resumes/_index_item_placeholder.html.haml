@@ -1,4 +1,4 @@
 .resume-index-item-placeholder.col-sm-12
-  %button.btn.btn-success.create-new-button
+  = link_to new_user_resume_url(current_user), class: "btn btn-success create-new-button" do
     .span.glyphicon.glyphicon-plus
-    = link_to "Create New", new_user_resume_url(current_user)
+    Create New

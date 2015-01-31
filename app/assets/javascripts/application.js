@@ -15,9 +15,9 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require react
+//= require components
 //= require react_ujs
 //= require d3
 //= require jstz
-//= require components
 //= require rails-timezone
 //= require signup

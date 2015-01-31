@@ -1,6 +1,6 @@
 class ResumesController < ApplicationController
   before_filter :require_current_user
-  before_filter :load_resume, only: [:show, :edit, :update, :destroy]
+  before_filter :load_resume, only: [:show, :edit, :update, :destroy, :ready_publish, :publish, :unpublish]
 
   def index
     @item_limit = 5
@@ -54,6 +54,27 @@ class ResumesController < ApplicationController
 
   def destroy
     @resume.destroy
+    redirect_to user_resumes_url(current_user)
+  end
+
+  def ready_publish
+
+  end
+
+  def publish
+
+  end
+
+  def unpublish
+    load_resume
+    @resume.is_published = false
+
+    if @resume.save
+      flash.now['info'] = "#{@resume.name} is now unpublished."
+    else
+      flash.now['danger'] = "There is an error unpublishing #{@resume.name}."
+    end
+
     redirect_to user_resumes_url(current_user)
   end
 

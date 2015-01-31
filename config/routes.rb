@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :resumes do
       member do
         get 'delete'
+        get 'ready_publish'
+        post 'publish'
+        post 'unpublish'
       end
     end
   end

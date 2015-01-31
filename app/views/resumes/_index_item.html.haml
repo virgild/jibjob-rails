@@ -12,8 +12,12 @@
 
       .action-links
         = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
-        = link_to "Publish", "", class: "btn btn-info btn-sm"
         = link_to "Delete", delete_user_resume_url(current_user, resume), class: "btn btn-danger btn-sm"
+
+        - if resume.is_published
+          = link_to "Unpublish", "", class: "btn btn-info btn-sm"
+        - else
+          = react_component("Publisher", { slug: resume.slug, form_url: publish_user_resume_url(current_user, resume), resume_id: resume.id }, :span)
 
     .col-sm-3
       .file-links
