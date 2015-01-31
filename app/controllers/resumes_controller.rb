@@ -60,7 +60,6 @@ class ResumesController < ApplicationController
   end
 
   def publish
-    @resume.slug = params[:resume][:slug]
     @resume.is_published = true
 
     if @resume.save

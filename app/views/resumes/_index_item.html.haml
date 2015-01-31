@@ -3,10 +3,6 @@
     .col-sm-9
       .header
         = link_to resume.name, user_resume_url(current_user, resume), class: 'header-title'
-        - if resume.is_published?
-          %span.publish-status Published
-        - else
-          %span.publish-status Unpublished
 
       .descriptor= resume.descriptor
 
