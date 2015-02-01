@@ -1,3 +1,5 @@
+"use strict";
+
 (function(window, $) {
   var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
