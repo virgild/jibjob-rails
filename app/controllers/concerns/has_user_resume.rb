@@ -26,6 +26,6 @@ module HasUserResume
       resume_params[:content].gsub!(/\r\n/, "\n")
     end
 
-    resume_params ? resume_params.permit(:name, :content) : {}
+    resume_params ? resume_params.permit(:name, :content, :slug) : {}
   end
 end

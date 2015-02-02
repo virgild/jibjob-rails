@@ -12,12 +12,17 @@
 //
 //= require test
 //= require jquery
-//= require bootstrap-sprockets
-//= require moment
-//= require react
-//= require components
-//= require react_ujs
 //= require d3
 //= require jstz
 //= require rails-timezone
+//= require bootstrap-sprockets
+//= require moment
+//= require react
+//= require_self
+//= require components
+//= require react_ujs
 //= require signup
+
+var JibJob = {
+  Version: "1.0"
+};
