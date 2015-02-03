@@ -29,6 +29,8 @@ class Resume < ActiveRecord::Base
   validates :guid, presence: true, uniqueness: true
   validates :status, presence: true, numericality: true
   validates :edition, presence: true, numericality: true
+  validates :is_published, inclusion: [true, false]
+  validates :slug, presence: true
 
   validates_uniqueness_of :name, scope: :user
   validates_uniqueness_of :slug
@@ -42,9 +44,9 @@ class Resume < ActiveRecord::Base
   }
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
-  before_validation :fill_guid
-  before_validation :set_default_slug
-  before_validation :set_new_status
+  before_validation :fill_guid, on: :create
+  before_validation :set_new_status, on: :create
+  before_validation :set_publication, on: :create
 
   before_save :update_pdf_attachment, if: :content_changed?
   before_save :increment_edition, if: Proc.new { |resume| !resume.new_record? && resume.content_changed? }
@@ -106,8 +108,9 @@ class Resume < ActiveRecord::Base
     self.status ||= 1
   end
 
-  def set_default_slug
-    self.slug ||= fill_guid
+  def set_publication
+    self.is_published = false
+    always_pass_this_filter = true
   end
 
   def update_pdf_attachment

@@ -1,1 +1,1 @@
-= react_component("JibJob.ResumeForm", @component_params)
+= react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resumes_url(current_user), saveMethod: 'POST' })

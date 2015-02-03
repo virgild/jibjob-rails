@@ -16,6 +16,7 @@ module HasUserResume
   def build_resume
     @resume ||= resume_scope.build
     @resume.attributes = resume_params
+    @resume_data = serialize_model(@resume)
   end
 
   def resume_params
@@ -26,6 +27,6 @@ module HasUserResume
       resume_params[:content].gsub!(/\r\n/, "\n")
     end
 
-    resume_params ? resume_params.permit(:name, :content, :slug) : {}
+    resume_params ? resume_params.permit(:name, :content, :slug, :is_published) : {}
   end
 end

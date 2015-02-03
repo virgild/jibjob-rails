@@ -11,37 +11,20 @@ class ResumesController < ApplicationController
 
   def new
     build_resume
-
-    @component_params = {
-      saveURL: user_resumes_url(current_user, format: :json),
-      sampleResume: view_context.asset_url("sample-resume.txt"),
-      resume: @resume.attributes.slice(*%W(id user_id name slug content guid)),
-    }
   end
 
   def create
     build_resume
 
     if @resume.save
-      @success = true
       code = :ok
+      @meta = { redirect: user_resume_url(current_user, @resume) }
     else
-      @success = false
       code = :conflict
     end
 
-    result = {
-      resume: @resume.attributes.slice('id', 'name', 'slug', 'guid', 'edition'),
-      errors: @resume.errors,
-      success: @success,
-    }
-
-    if @success
-      result[:redirect] = user_resume_url(current_user, @resume)
-    end
-
     respond_to do |format|
-      format.json { render json: result, status: code }
+      format.json { render json: @resume, status: code, meta: @meta, root: 'resume' }
     end
   end
 
@@ -63,11 +46,14 @@ class ResumesController < ApplicationController
     build_resume
 
     if @resume.save
-      flash.now[:success] = "Resume \"#{@resume.name}\" updated."
-      redirect_to user_resume_url(current_user, @resume)
+      code = :ok
+      @meta = { redirect: user_resume_url(current_user, @resume) }
     else
-      flash.now[:warning] = "There are errors in the form."
-      render action: :edit
+      code = :conflict
+    end
+
+    respond_to do |format|
+      format.json { render json: @resume, status: code, meta: @meta, root: 'resume' }
     end
   end
 

@@ -24,5 +24,6 @@
 //= require signup
 
 var JibJob = {
-  Version: "1.0"
+  Version: "1.0",
+  CurrentPage: null,
 };

@@ -3,22 +3,19 @@
 (function(App, window, $) {
   App.ResumeForm = React.createClass({
     propTypes: {
-      saveURL: React.PropTypes.string.isRequired,
-      sampleResume: React.PropTypes.string.isRequired,
       resume: React.PropTypes.object.isRequired,
+      saveMethod: React.PropTypes.oneOf(['POST', 'PUT']).isRequired,
+      saveURL: React.PropTypes.string.isRequired,
     },
 
     getInitialState: function() {
       return {
-        nameValue: "",
-        slugValue: "",
-        contentValue: "",
         isLoading: false
       };
     },
 
     componentDidMount: function() {
-
+      App.CurrentPage = this;
     },
 
     submitForm: function(e) {
@@ -26,22 +23,22 @@
       this.setState({isLoading: true});
 
       var self = this;
-      var formData = {
-        resume: {
-          name: this.state.nameValue,
-          slug: this.state.slugValue,
-          content: this.state.contentValue
-        }
-      };
+      var resume = this.props.resume;
 
-      $.post(this.props.saveURL, formData).done(function(data) {
-        if (data.success) {
-          var nextPage = data.redirect;
-          window.location = nextPage;
-        }
+      $.ajax({
+        url: this.props.saveURL,
+        data: {resume: resume},
+        method: this.props.saveMethod,
+      }).done(function(data) {
+        var nextPage = data.meta.redirect;
+        window.location = nextPage;
       }).fail(function(xhr, status) {
-        window.alert("There are errors in your resume form entries.");
-      }).always(function() {
+        self.setProps({
+          resume: React.addons.update(self.props.resume, {
+            $merge: xhr.responseJSON.resume
+          })
+        })
+      }).always(function(xhr) {
         self.setState({isLoading: false});
       });
     },
@@ -50,27 +47,49 @@
       var newName = e.target.value;
       var newSlug = newName.replace(/['/]/g, '').replace(/[ .,:-]/g, '-').toLocaleLowerCase();
 
-      this.setState({ nameValue: newName, slugValue: newSlug });
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          $merge: {name: newName, slug: newSlug}
+        })
+      });
     },
 
     slugFieldChange: function(e) {
-      this.setState({slugValue: e.target.value});
+      var newSlug = e.target.value;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          slug: {$set: newSlug}
+        })
+      });
     },
 
     contentFieldChange: function(e) {
-      this.setState({contentValue: e.target.value});
+      var newContent = e.target.value;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          content: {$set: newContent}
+        })
+      });
     },
 
     loadExampleContent: function(e) {
       e.preventDefault();
       var self = this;
+      var url = "<%= asset_path("sample-resume.txt") %>";
 
-      $.get(this.props.sampleResume).done(function(data) {
-        self.setState({contentValue: data});
+      $.get(url).done(function(data) {
+        self.setProps({
+          resume: React.addons.update(self.props.resume, {
+            content: {$set: data}
+          })
+        })
       });
     },
 
     render: function() {
+      var resume = this.props.resume;
       return (
         <div className="page">
           <div className="page-header">
@@ -79,24 +98,25 @@
             </div>
           </div>
           <div className="container resume-form">
+            <App.ErrorDisplay model={resume} />
             <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
               <div className="form-group">
                 <label>Name</label>
-                <input type="text" name="resume[name]" value={this.state.nameValue} onChange={this.nameFieldChange}
+                <input type="text" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
                   className="form-control" autoComplete="off" spellCheck="false" placeholder="A private name for this resume" autoFocus="true" />
               </div>
               <div className="form-group">
                 <label>Slug</label>
-                <input type="text" name="resume[slug]" value={this.state.slugValue} onChange={this.slugFieldChange}
+                <input type="text" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
                   className="form-control" autoComplete="off" spellCheck="false" placeholder="A public identifier value like http://jibjob.co/resumes/[slug]" />
               </div>
               <div className="form-group">
                 <label>Content</label>
                 <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
-                <textarea value={this.state.contentValue} placeholder="Resume content" onChange={this.contentFieldChange} className="form-control console" rows="25" />
+                <textarea value={resume.content} placeholder="Resume content" onChange={this.contentFieldChange} className="form-control console" rows="25" />
               </div>
               <App.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
-                <span>Create Resume</span>
+                <span>Save Resume</span>
               </App.GlyphedButton>
             </form>
           </div>

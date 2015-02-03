@@ -40,5 +40,7 @@ module JibJob
     config.react.addons = true
 
     config.force_ssl = false
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end
