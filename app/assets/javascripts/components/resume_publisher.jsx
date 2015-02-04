@@ -1,9 +1,10 @@
 "use strict";
 
-(function(App, window, $) {
+(function(global) {
+  global.JibJob = global.JibJob || {};
   var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
-  JibJob.ResumePublisher = React.createClass({
+  global.JibJob.ResumePublisher = React.createClass({
     ViewStates: {
       UNPUBLISHED: 1,
       PUBLISHING: 2,
@@ -118,4 +119,4 @@
       );
     }
   });
-}(JibJob, window, $));
+}(window));

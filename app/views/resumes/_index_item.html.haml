@@ -8,7 +8,7 @@
 
       .action-links
         = link_to "Edit", edit_user_resume_url(current_user, resume), class: "btn btn-primary btn-sm"
-        = react_component("JibJob.ResumePublisher", { resume: { id: resume.id, slug: resume.slug, is_published: resume.is_published, publish_url: publish_user_resume_url(current_user, resume, format: :json), unpublish_url: unpublish_user_resume_url(current_user, resume, format: :json), form_token: form_authenticity_token } }, :span)
+        = react_component("JibJob.ResumePublisher", { resume: { id: resume.id, slug: resume.slug, is_published: resume.is_published, publish_url: publish_user_resume_url(current_user, resume, format: :json), unpublish_url: unpublish_user_resume_url(current_user, resume, format: :json), form_token: form_authenticity_token } }, {tag: :span, prerender: true})
 
     .col-sm-3
       .file-links

@@ -1,7 +1,9 @@
 "use strict";
 
-(function(App, window, $){
-  JibJob.ErrorDisplay = React.createClass({
+(function(global) {
+  global.JibJob = global.JibJob || {};
+
+  global.JibJob.ErrorDisplay = React.createClass({
     propTypes: {
       model: React.PropTypes.object.isRequired
     },
@@ -14,7 +16,7 @@
         return <ErrorItem data={error} key={key} />;
       });
 
-      if (!$.isEmptyObject(model.errors)) {
+      if (Object.getOwnPropertyNames(model.errors).length > 1) {
         return (
           <div className="error-display">
             <h4>There are errors in the form</h4>
@@ -42,4 +44,4 @@
       );
     }
   });
-}(JibJob, window, $));
+}(window));

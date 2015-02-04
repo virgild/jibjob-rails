@@ -1,9 +1,10 @@
 "use strict";
 
-(function(App, window, $, React) {
+(function(global) {
+  global.JibJob = global.JibJob || {};
   var cx = React.addons.classSet;
 
-  App.GlyphedButton = React.createClass({
+  global.JibJob.GlyphedButton = React.createClass({
     propTypes: {
       glyph: React.PropTypes.string.isRequired,
       clickHandler: React.PropTypes.func,
@@ -60,4 +61,4 @@
       );
     }
   });
-}(JibJob, window, $, React));
+}(window));

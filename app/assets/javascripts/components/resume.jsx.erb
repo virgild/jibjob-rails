@@ -1,7 +1,9 @@
 "use strict";
 
-(function(App, window, $) {
-  App.ResumeForm = React.createClass({
+(function(global) {
+  global.JibJob = global.JibJob || {};
+
+  global.JibJob.ResumeForm = React.createClass({
     propTypes: {
       resume: React.PropTypes.object.isRequired,
       saveMethod: React.PropTypes.oneOf(['POST', 'PUT']).isRequired,
@@ -15,7 +17,7 @@
     },
 
     componentDidMount: function() {
-      App.CurrentPage = this;
+
     },
 
     submitForm: function(e) {
@@ -98,7 +100,7 @@
             </div>
           </div>
           <div className="container resume-form">
-            <App.ErrorDisplay model={resume} />
+            <JibJob.ErrorDisplay model={resume} />
             <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
               <div className="form-group">
                 <label>Name</label>
@@ -115,13 +117,13 @@
                 <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
                 <textarea value={resume.content} placeholder="Resume content" onChange={this.contentFieldChange} className="form-control console" rows="25" />
               </div>
-              <App.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
+              <JibJob.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
                 <span>Save Resume</span>
-              </App.GlyphedButton>
+              </JibJob.GlyphedButton>
             </form>
           </div>
         </div>
       );
     }
   });
-}(JibJob, window, $));
+}(window));
