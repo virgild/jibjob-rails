@@ -16,3 +16,5 @@
 vendor/bundle
 public/system
 public/assets
+node_modules
+.module-cache

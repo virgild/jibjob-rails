@@ -44,4 +44,7 @@ Rails.application.configure do
 
   # Quiet assets logging
   config.quiet_assets = true
+
+  # Development React
+  config.react.variant = :development
 end

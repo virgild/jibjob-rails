@@ -79,7 +79,7 @@
     loadExampleContent: function(e) {
       e.preventDefault();
       var self = this;
-      var url = "<%= asset_path("sample-resume.txt") %>";
+      var url = "https://s3.amazonaws.com/jibjob/examples/sample.resume";
 
       $.get(url).done(function(data) {
         self.setProps({
