@@ -12,6 +12,10 @@
       UNPUBLISHING: 4
     },
 
+    propTypes: {
+      resume: React.PropTypes.object.isRequired,
+    },
+
     getInitialState: function() {
       var resume = this.getResume();
 
@@ -21,16 +25,12 @@
       };
     },
 
+    componentDidMount: function() {
+
+    },
+
     getResume: function() {
       return this.props.resume;
-    },
-
-    getPublishURL: function() {
-      return this.getResume().publish_url;
-    },
-
-    getUnpublishURL: function() {
-      return this.getResume().unpublish_url;
     },
 
     publishClicked: function(e) {
@@ -48,7 +48,11 @@
     },
 
     publishSubmit: function() {
-      return $.post(this.getPublishURL());
+      return $.ajax({
+        url: this.getResume().show_page,
+        data: {resume: {is_published: true}},
+        method: "PUT",
+      });
     },
 
     unpublishClicked: function(e) {
@@ -66,7 +70,11 @@
     },
 
     unpublishSubmit: function() {
-      return $.post(this.getUnpublishURL());
+      return $.ajax({
+        url: this.getResume().show_page,
+        data: {resume: {is_published: false}},
+        method: "PUT",
+      });
     },
 
     render: function() {

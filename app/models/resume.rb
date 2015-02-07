@@ -53,9 +53,9 @@ class Resume < ActiveRecord::Base
 
   def resume_data(reload = false)
     if reload
-      @resume_data = ResumeTools::Resume.from_text(content)
+      @resume_data = ResumeTools::Resume.from_text(content || '')
     else
-      @resume_data ||= ResumeTools::Resume.from_text(content)
+      @resume_data ||= ResumeTools::Resume.from_text(content || '')
     end
   end
   alias :data :resume_data

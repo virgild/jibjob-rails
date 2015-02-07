@@ -1,16 +1,19 @@
 class ResumesController < ApplicationController
   protect_from_forgery except: [:publish, :unpublish, :create, :update]
+
+  before_filter :require_current_user
   before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
 
   include HasUserResume
 
   def index
-    @item_limit = 5
     load_resumes
+    @resumes_data = ActiveModel::ArraySerializer.new(@resumes)
   end
 
   def new
     build_resume
+    @resume_data = ResumeSerializer.new(@resume)
   end
 
   def create
@@ -40,6 +43,7 @@ class ResumesController < ApplicationController
 
   def edit
     build_resume
+    @resume_data = ResumeSerializer.new(@resume)
   end
 
   def update
@@ -66,40 +70,34 @@ class ResumesController < ApplicationController
     redirect_to user_resumes_url(current_user)
   end
 
-  def publish
-    @resume.is_published = true
-
-    if @resume.save
-      @result = "ok"
-      @status = :ok
-    else
-      @result = "error"
-      @status = :conflict
-    end
-
-    respond_to do |format|
-      format.json { render json: { result: @result, resume: { slug: @resume.slug, errors: @resume.errors } }, status: @status }
-    end
-  end
-
-  def unpublish
-    @resume.is_published = false
-
-    if @resume.save
-      @result = "ok"
-    else
-      @result = "error"
-    end
-
-    respond_to do |format|
-      format.json { render json: { result: @result, resume: { slug: @resume.slug } } }
-    end
-  end
-
   private
 
   def load_resumes
     # TODO: Slow when things grow
     @resumes ||= resume_scope.order(:updated_at).reverse_order.limit(@item_limit)
+  end
+
+  def resume_scope
+    current_user.resumes
+  end
+
+  def load_resume
+    @resume ||= resume_scope.find(params[:id])
+  end
+
+  def build_resume
+    @resume ||= resume_scope.build
+    @resume.attributes = resume_params
+  end
+
+  def resume_params
+    resume_params = params[:resume]
+
+    # Normalize 'content' text
+    if resume_params && resume_params[:content]
+      resume_params[:content].gsub!(/\r\n/, "\n")
+    end
+
+    resume_params ? resume_params.permit(:name, :content, :slug, :is_published) : {}
   end
 end

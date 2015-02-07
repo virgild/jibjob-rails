@@ -6,5 +6,4 @@ class ApplicationController < ActionController::Base
   include Wallaby
   include AuthenticatedUser
   include GeokitOverrides
-  include ModelSerialization
 end
