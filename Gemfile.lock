@@ -1,8 +1,9 @@
 GIT
   remote: git://github.com/reactjs/react-rails.git
-  revision: 97ae83f089acef19518980c2619feff47f2a0e46
+  revision: 80f67226691280495a9d6f95901c8c0de00ed563
   specs:
     react-rails (1.0.0.pre)
+      coffee-script-source (= 1.8.0)
       connection_pool
       execjs
       rails (>= 3.1)
@@ -54,7 +55,7 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (6.0.0)
-    autoprefixer-rails (5.1.3)
+    autoprefixer-rails (5.1.5)
       execjs
       json
     bcrypt (3.1.10)
@@ -76,7 +77,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-passenger (0.0.1)
+    capistrano-passenger (0.0.2)
       capistrano (~> 3.0)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
@@ -100,6 +101,7 @@ GEM
     cocaine (0.5.5)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
+    coffee-script-source (1.8.0)
     colorize (0.7.5)
     columnize (0.9.0)
     connection_pool (2.1.1)
@@ -117,7 +119,7 @@ GEM
     geokit-rails (2.0.1)
       geokit (~> 1.5)
       rails (>= 3.0)
-    globalid (0.3.0)
+    globalid (0.3.2)
       activesupport (>= 4.1.0)
     gon (5.2.3)
       actionpack (>= 2.3.0)
@@ -133,7 +135,7 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hike (1.2.3)
-    hiredis (0.5.2)
+    hiredis (0.6.0)
     hitimes (1.2.2)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
@@ -166,7 +168,6 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
-    newrelic_rpm (3.9.9.275)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     nokogumbo (1.2.0)
@@ -179,13 +180,13 @@ GEM
       mime-types
     pdf-core (0.4.0)
     pg (0.18.1)
-    poltergeist (1.5.1)
+    poltergeist (1.6.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
-    pragmatic_segmenter (0.2.0)
+    pragmatic_segmenter (0.3.0)
     prawn (1.3.0)
       pdf-core (~> 0.4.0)
       ttfunk (~> 1.4.0)
@@ -194,7 +195,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.2)
+    pry-rails (0.3.3)
       pry (>= 0.9.10)
     puma (2.11.0)
       rack (>= 1.1, < 2.0)
@@ -246,7 +247,7 @@ GEM
       treetop (~> 1.5.3)
     ruby_parser (3.6.4)
       sexp_processor (~> 4.1)
-    sanitize (3.1.0)
+    sanitize (3.1.1)
       crass (~> 1.0.1)
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.2.0)
@@ -261,7 +262,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.4.5)
-    sidekiq (3.3.1)
+    sidekiq (3.3.2)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.1.1)
       json
@@ -344,7 +345,6 @@ DEPENDENCIES
   jquery-rails
   minitest-documentation
   momentjs-rails
-  newrelic_rpm
   oj
   paperclip
   pg

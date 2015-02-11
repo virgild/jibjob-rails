@@ -47,9 +47,13 @@ class Resume < ActiveRecord::Base
   before_validation :fill_guid, on: :create
   before_validation :set_new_status, on: :create
   before_validation :set_publication, on: :create
+  before_validation :ensure_newline_at_end
 
   before_save :update_pdf_attachment, if: :content_changed?
   before_save :increment_edition, if: Proc.new { |resume| !resume.new_record? && resume.content_changed? }
+
+  after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
+  after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
 
   def resume_data(reload = false)
     if reload
@@ -123,7 +127,21 @@ class Resume < ActiveRecord::Base
     self.pdf = file_data
   end
 
+  def ensure_newline_at_end
+    if content.last != "\n"
+      content.last << "\n"
+    end
+  end
+
   def increment_edition
     self.edition += 1
+  end
+
+  def did_publish
+    Rails.logger.debug "DID PUBLISH"
+  end
+
+  def did_unpublish
+    Rails.logger.debug "DID UNPUBLISH"
   end
 end

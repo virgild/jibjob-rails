@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => "/sk"
+  mount Sidekiq::Web => "/__kickside"
 
   resources :users, param: :username, except: [:index, :destroy] do
     resources :resumes do

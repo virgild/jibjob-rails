@@ -52,7 +52,7 @@ gem 'sanitize'
 gem 'pragmatic_segmenter'
 
 gem 'rack-protection'
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 
 group :development do
   # gem 'better_errors'
