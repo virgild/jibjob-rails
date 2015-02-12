@@ -38,6 +38,8 @@ class Resume < ActiveRecord::Base
   belongs_to :user
   has_many :publication_views
 
+  scope :published, -> { where(is_published: true) }
+
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
   }, convert_options: {

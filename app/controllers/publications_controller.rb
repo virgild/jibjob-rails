@@ -2,8 +2,9 @@ class PublicationsController < ApplicationController
 
   layout 'publication'
 
+  before_filter :load_resume, only: [:show]
+
   def show
-    @resume = Resume.where(slug: params[:slug], is_published: true).first
     @resume_data = PublicationSerializer.new(@resume)
 
     # Log page view
@@ -23,6 +24,14 @@ class PublicationsController < ApplicationController
   end
 
   private
+
+  def load_resume
+    @resume = Resume.published.where(slug: params[:slug]).last
+
+    if @resume.nil?
+      render action: :not_found, status: :not_found
+    end
+  end
 
   def record_pageview
     PageViewRecorderJob.perform_later(@resume.id,

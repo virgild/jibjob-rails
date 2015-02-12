@@ -1,8 +1,10 @@
 @import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic);
+@import url(//fonts.googleapis.com/css?family=Fugaz+One);
 
 $page-background-color: lighten(#000, 15%);
 $resume-background-color: #fff;
 $resume-font: "Source Sans Pro";
+$logo-font: "Fugaz One";
 
 html, body {
   background: $page-background-color;
@@ -91,5 +93,13 @@ html, body {
     text-align: center;
     font-size: 10px;
     opacity: 0.5;
+
+    a {
+      font-family: $logo-font;
+      font-size: 16px;
+      color: #fff;
+      display: block;
+      text-decoration: none;
+    }
   }
 }

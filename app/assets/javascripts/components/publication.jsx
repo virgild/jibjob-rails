@@ -189,7 +189,7 @@
       return (
         <div className="footer hidden-print">
           <div className="powered">
-            Powered by <a href="http://jibjob.co">jibjob.co</a>.
+            Published by <a href="http://jibjob.co">jibjob</a>
           </div>
         </div>
       );

@@ -1,5 +1,7 @@
 $topnav-signup-link-bg-color: #ec148e;
-$topnav-logo-bg-color: #14a405;
+$logo-bg-color: #14a405;
+$topnav-logo-bg-color: $logo-bg-color;
+$topnav-logo-font: "Fugaz One";
 
 .topnav {
   @include unrounded;
@@ -41,10 +43,11 @@ $topnav-logo-bg-color: #14a405;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   text-decoration: none !important;
-  background-color: $topnav-logo-bg-color;
+  background-color: $topnav-logo-bg-color !important;
   font-weight: bold;
   box-shadow: inset 0 1px #2abb1a, 0 4px #208b15;
-  font-size: 18px;
+  font-size: 14px;
+  font-family: $topnav-logo-font;
   margin-left: 10px !important;
   color: #fff !important;
 
@@ -57,7 +60,7 @@ $topnav-logo-bg-color: #14a405;
   }
 
   &:hover {
-    background-color: $topnav-logo-bg-color !important;
+    background-color: darken($topnav-logo-bg-color, 2%) !important;
   }
 }
 
