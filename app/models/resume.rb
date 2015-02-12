@@ -36,6 +36,7 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :slug
 
   belongs_to :user
+  has_many :publication_views
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
@@ -74,6 +75,10 @@ class Resume < ActiveRecord::Base
 
   def generate_json_text
     resume_data.render_json
+  end
+
+  def structure
+    JSON.parse(generate_json_text)
   end
 
   def descriptor

@@ -1,8 +1,9 @@
 //= require test
 //= require jquery
+//= require jstz
+//= require rails-timezone
 //= require bootstrap-sprockets
 //= require moment
 //= require react
+//= require components/publication
 //= require react_ujs
-//= require jstz
-//= require_self

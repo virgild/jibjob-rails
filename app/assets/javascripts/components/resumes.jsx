@@ -59,12 +59,17 @@
     render: function() {
       var resume = this.props.resume;
 
+      var pubURL = "/pub/" + resume.slug;
+
       return (
         <div className="resume-index-item col-sm-12">
           <div className="row">
             <div className="col-sm-9">
               <div className="header">
                 <a href={resume.show_page} className="header-title">{resume.name}</a>
+                <div className="slug">
+                  <a href={pubURL}>http://jibjob.co/pub/{resume.slug}</a>
+                </div>
               </div>
               <div className="descriptor">{resume.descriptor}</div>
               <div className="action-links">

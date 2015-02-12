@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :publications, param: :slug, only: [:show]
+  get "/pub/:slug" => "publications#show", as: "publication"
 
   resources :support, only: [:index]
 

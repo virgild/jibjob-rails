@@ -7,6 +7,7 @@ class ResumeSerializer < BaseSerializer
 
   attributes :show_page, :edit_page, :delete_page, :destroy_page
   attributes :user_pdf_file, :user_plaintext_file, :user_json_file
+  attributes :structure
 
   # has_one :user
 

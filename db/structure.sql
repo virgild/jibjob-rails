@@ -30,6 +30,40 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: publication_views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE publication_views (
+    id bigint NOT NULL,
+    resume_id bigint NOT NULL,
+    ip_addr inet NOT NULL,
+    url character varying NOT NULL,
+    referrer character varying,
+    user_agent character varying,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: publication_views_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE publication_views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: publication_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE publication_views_id_seq OWNED BY publication_views.id;
+
+
+--
 -- Name: resumes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -143,6 +177,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY publication_views ALTER COLUMN id SET DEFAULT nextval('publication_views_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY resumes ALTER COLUMN id SET DEFAULT nextval('resumes_id_seq'::regclass);
 
 
@@ -151,6 +192,14 @@ ALTER TABLE ONLY resumes ALTER COLUMN id SET DEFAULT nextval('resumes_id_seq'::r
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: publication_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY publication_views
+    ADD CONSTRAINT publication_views_pkey PRIMARY KEY (id);
 
 
 --
@@ -183,6 +232,13 @@ ALTER TABLE ONLY signups
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_publication_views_on_resume_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_publication_views_on_resume_id ON publication_views USING btree (resume_id);
 
 
 --
@@ -224,4 +280,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150125224433');
 INSERT INTO schema_migrations (version) VALUES ('20150129191035');
 
 INSERT INTO schema_migrations (version) VALUES ('20150130172627');
+
+INSERT INTO schema_migrations (version) VALUES ('20150212022309');
 
