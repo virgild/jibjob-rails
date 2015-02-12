@@ -8,6 +8,14 @@ class PublicationsController < ApplicationController
 
     # Log page view
     record_pageview
+
+    respond_to do |format|
+      format.html { }
+      format.json { render json: @resume.generate_json_text }
+      format.text { render text: @resume.generate_plain_text }
+      format.pdf { redirect_to @resume.pdf.url }
+      format.zip { }
+    end
   end
 
   def not_found

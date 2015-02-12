@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   resources :users, param: :username, except: [:index, :destroy] do
     resources :resumes do
       member do
-        get 'delete'
+        get "delete"
+        get "stats" => "resume_stats#index"
       end
     end
   end
 
   resources :sessions, only: [:new, :create] do
     collection do
-      get 'logout'
+      get "logout"
     end
   end
 

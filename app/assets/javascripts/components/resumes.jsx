@@ -72,6 +72,10 @@
                 </div>
               </div>
               <div className="descriptor">{resume.descriptor}</div>
+              <div>
+                <div>Page views: {resume.pageview_count}</div>
+                <a href={resume.stats_page} className="stats-link">Stats</a>
+              </div>
               <div className="action-links">
                 <a href={resume.edit_page} className="btn btn-primary btn-sm">Edit</a>
                 <JibJob.ResumePublisher resume={resume} />

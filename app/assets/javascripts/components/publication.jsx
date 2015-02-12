@@ -9,10 +9,37 @@
     },
 
     componentDidMount: function() {
+      global.JibJob.CurrentPage = this;
+    },
+
+    mouseEnter: function(e) {
+      $(this.refs.panel.getDOMNode()).removeClass('inactive');
+    },
+
+    mouseLeave: function(e) {
+      $(this.refs.panel.getDOMNode()).addClass('inactive');
     },
 
     render: function() {
-      var resume = this.props.resume;
+      return (
+        <div className="page">
+          <div className="container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
+            <Panel ref="panel" data={this.props.resume} />
+            <Resume data={this.props.resume} />
+            <Footer />
+          </div>
+        </div>
+      );
+    }
+  });
+
+  var Resume = React.createClass({
+    propTypes: {
+      data: React.PropTypes.object.isRequired,
+    },
+
+    render: function() {
+      var resume = this.props.data;
       var struct = resume.structure;
 
       var sections = struct.sections.map(function(section, index) {
@@ -21,14 +48,16 @@
       });
 
       return (
-        <div className="page">
-          <div className="resume">
+        <div className="resume">
+          <div className="resume-header">
             <div className="fullname">{struct.full_name}</div>
-            <div className="">{struct.address1}</div>
-            <div className="">{struct.address2}</div>
-            <div className="">{struct.telephone}</div>
-            <div className="">{struct.email}</div>
-            <div className="">{struct.url}</div>
+            <div className="address1">{struct.address1}</div>
+            <div className="address2">{struct.address2}</div>
+            <div className="telephone">{struct.telephone}</div>
+            <div className="email">{struct.email}</div>
+            <div className="url">{struct.url}</div>
+          </div>
+          <div className="sections">
             {sections}
           </div>
         </div>
@@ -79,7 +108,7 @@
 
       return (
         <div className="section">
-          <h3>{section.title}</h3>
+          <div className="section-title">{section.title}</div>
           {para}
           {items}
           {periods}
@@ -116,11 +145,52 @@
 
       return (
         <div className="period">
-          <h4>{period.title}</h4>
-          <div className="organization">{period.organization}</div>
-          <div className="location">{period.location}</div>
+          <div className="period-title">{period.title}</div>
+          <div className="organization">{period.organization} - {period.location}</div>
           <div className="date">{period.dtstart} - {period.dtend}</div>
           {items}
+        </div>
+      );
+    }
+  });
+
+  var Panel = React.createClass({
+    propTypes: {
+      data: React.PropTypes.object.isRequired,
+    },
+
+    componentDidMount: function() {
+
+    },
+
+    render: function() {
+      return (
+        <div className="control-panel inactive">
+          <span className="desc">Other formats:</span>
+          <a href={this.props.data.pdf_file_url} className="btn btn-xs">
+            <span className="glyphicon glyphicon-file" />
+            PDF
+          </a>
+          <a href={this.props.data.plaintext_file_url} className="btn btn-xs">
+            <span className="glyphicon glyphicon-file" />
+            Plain Text
+          </a>
+          <a href={this.props.data.package_url} className="btn btn-xs">
+            <span className="glyphicon glyphicon-file" />
+            Zip
+          </a>
+        </div>
+      );
+    }
+  });
+
+  var Footer = React.createClass({
+    render: function() {
+      return (
+        <div className="footer">
+          <div className="powered">
+            Powered by <a href="http://jibjob.co">jibjob.co</a>.
+          </div>
         </div>
       );
     }

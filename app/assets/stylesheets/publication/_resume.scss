@@ -1,7 +1,31 @@
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic);
+
+$page-background-color: lighten(#000, 15%);
+$resume-background-color: #fff;
+$resume-font: "Source Sans Pro";
+
+html, body {
+  background: $page-background-color;
+}
+
+.page {
+  padding: 50px;
+  background-color: $page-background-color;
+}
+
 .resume {
-  padding: 0px 50px;
+  padding: 40px 50px;
+  background: $resume-background-color;
+  font-family: $resume-font;
+  font-weight: 300;
+
   .resume-header {
     text-align: center;
+  }
+
+  .fullname {
+    font-weight: 600;
+    font-size: 18px;
   }
 
   .resume-section {
@@ -9,26 +33,45 @@
   }
 }
 
-.resumes {
-  .thumb {
-    text-align: center;
-    margin-bottom: 20px;
+.section {
+  margin-top: 10px;
+  margin-bottom: 20px;
 
-    img {
-      padding: 10px;
-      background: #fff;
-      border: solid 1px #ccc;
-      -webkit-box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
-      -moz-box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
-      box-shadow: 0px 1px 8px 1px rgba(0,0,0,0.63);
-    }
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
   }
 
-  .resume-entry {
-    padding: 20px;
+  .period-title {
+    font-size: 16px;
+    font-weight: 400;
   }
+}
 
-  .links {
+.control-panel {
+  @include rounded(1px);
+  margin-bottom: 10px;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+  font-size: 10px;
+  color: #fff;
+  text-align: right;
+}
+
+.control-panel.inactive {
+  opacity: 0.0;
+  transition: opacity 0.5s ease;
+}
+
+.footer {
+  margin: 20px;
+  padding: 10px;
+  color: #fff;
+
+  .powered {
     text-align: center;
+    font-size: 10px;
+    opacity: 0.5;
   }
 }
