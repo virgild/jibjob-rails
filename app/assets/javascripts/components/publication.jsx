@@ -165,7 +165,7 @@
 
     render: function() {
       return (
-        <div className="control-panel inactive">
+        <div className="control-panel inactive hidden-print">
           <span className="desc">Other formats:</span>
           <a href={this.props.data.pdf_file_url} className="btn btn-xs">
             <span className="glyphicon glyphicon-file" />
@@ -187,7 +187,7 @@
   var Footer = React.createClass({
     render: function() {
       return (
-        <div className="footer">
+        <div className="footer hidden-print">
           <div className="powered">
             Powered by <a href="http://jibjob.co">jibjob.co</a>.
           </div>
