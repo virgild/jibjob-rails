@@ -9,8 +9,12 @@ html, body {
 }
 
 .page {
-  padding: 50px;
+  padding: 10px;
   background-color: $page-background-color;
+
+  @media (max-width: $screen-phone) {
+    padding: 0px;
+  }
 }
 
 .resume {
@@ -18,6 +22,11 @@ html, body {
   background: $resume-background-color;
   font-family: $resume-font;
   font-weight: 300;
+
+  @media (max-width: $screen-phone) {
+    padding: 20px;
+    font-size: 10px;
+  }
 
   .resume-header {
     text-align: center;
@@ -57,11 +66,20 @@ html, body {
   font-size: 10px;
   color: #fff;
   text-align: right;
+
+  @media (max-width: $screen-phone) {
+    text-align: center;
+    font-size: 8px;
+  }
 }
 
 .control-panel.inactive {
   opacity: 0.0;
   transition: opacity 0.5s ease;
+
+  @media (max-width: $screen-phone) {
+    opacity: 1.0;
+  }
 }
 
 .footer {
