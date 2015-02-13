@@ -26,7 +26,7 @@
     },
 
     componentDidMount: function() {
-
+      console.log(this.props);
     },
 
     getResume: function() {
@@ -120,10 +120,12 @@
       }
 
       return (
-        <a href="#publish" key={key} onClick={clickHandler} className={cx(classes)}>
-          {glyph}
-          {labelText}
-        </a>
+        <div>
+          <input type="checkbox"  />
+          <a href="#publish" key={key} onClick={clickHandler}>
+            {labelText}
+          </a>
+        </div>
       );
     }
   });

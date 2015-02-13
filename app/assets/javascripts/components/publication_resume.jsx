@@ -3,44 +3,14 @@
 (function(global) {
   global.JibJob = global.JibJob || {};
 
-  global.JibJob.PublicationPage = React.createClass({
-    propTypes: {
-      resume: React.PropTypes.object.isRequired,
-    },
-
-    componentDidMount: function() {
-      global.JibJob.CurrentPage = this;
-    },
-
-    mouseEnter: function(e) {
-      $(this.refs.panel.getDOMNode()).removeClass('inactive');
-    },
-
-    mouseLeave: function(e) {
-      $(this.refs.panel.getDOMNode()).addClass('inactive');
-    },
-
-    render: function() {
-      return (
-        <div className="page">
-          <div className="container" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-            <Panel ref="panel" data={this.props.resume} />
-            <Resume data={this.props.resume} />
-            <Footer />
-          </div>
-        </div>
-      );
-    }
-  });
-
-  var Resume = React.createClass({
+  global.JibJob.Resume = React.createClass({
     propTypes: {
       data: React.PropTypes.object.isRequired,
     },
 
     render: function() {
       var resume = this.props.data;
-      var struct = resume.structure;
+      var struct = resume;
 
       var sections = struct.sections.map(function(section, index) {
         var key = "section-" + index;
@@ -153,47 +123,4 @@
       );
     }
   });
-
-  var Panel = React.createClass({
-    propTypes: {
-      data: React.PropTypes.object.isRequired,
-    },
-
-    componentDidMount: function() {
-
-    },
-
-    render: function() {
-      return (
-        <div className="control-panel inactive hidden-print">
-          <span className="desc">Other formats:</span>
-          <a href={this.props.data.pdf_file_url} className="btn btn-xs">
-            <span className="glyphicon glyphicon-file" />
-            PDF
-          </a>
-          <a href={this.props.data.plaintext_file_url} className="btn btn-xs">
-            <span className="glyphicon glyphicon-file" />
-            Plain Text
-          </a>
-          <a href={this.props.data.package_url} className="btn btn-xs">
-            <span className="glyphicon glyphicon-file" />
-            Zip
-          </a>
-        </div>
-      );
-    }
-  });
-
-  var Footer = React.createClass({
-    render: function() {
-      return (
-        <div className="footer hidden-print">
-          <div className="powered">
-            Published by <a href="http://jibjob.co">jibjob</a>
-          </div>
-        </div>
-      );
-    }
-  });
-
 }(window));

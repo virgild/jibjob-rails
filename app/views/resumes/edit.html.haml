@@ -1,4 +1,10 @@
 - content_for :body_javascript do
   = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"
 
-= react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT' }, {prerender: true})
+.page
+  %ol.breadcrumb
+    %li= link_to "My Resumes", user_resumes_url(current_user)
+    %li= link_to @resume.name, user_resume_url(current_user, @resume)
+    %li Edit
+
+  = react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT' }, {prerender: true})

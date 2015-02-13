@@ -53,7 +53,8 @@
     },
 
     componentDidMount: function() {
-
+      var updatedAt = $(this.refs.updated_at.getDOMNode()).text();
+      $(this.refs.updated_at.getDOMNode()).html(moment(Date.parse(updatedAt)).fromNow());
     },
 
     render: function() {
@@ -64,33 +65,13 @@
       return (
         <div className="resume-index-item col-sm-12">
           <div className="row">
-            <div className="col-sm-9">
+            <div className="col-sm-12">
               <div className="header">
                 <a href={resume.show_page} className="header-title">{resume.name}</a>
-                <div className="slug">
-                  <a href={pubURL}>http://jibjob.co/pub/{resume.slug}</a>
-                </div>
-              </div>
-              <div className="descriptor">{resume.descriptor}</div>
-              <div>
-                <div>Page views: {resume.pageview_count}</div>
-                <a href={resume.stats_page} className="stats-link">Stats</a>
-              </div>
-              <div className="action-links">
-                <a href={resume.edit_page} className="btn btn-primary btn-sm">Edit</a>
-                <JibJob.ResumePublisher resume={resume} />
-              </div>
-            </div>
-            <div className="col-sm-3">
-              <div className="file-links">
-                <a href={resume.user_pdf_file} className="btn btn-default btn-sm">
-                  <span className="glyphicon glyphicon-file"></span>
-                  PDF
-                </a>
-                <a href={resume.user_plaintext_file} className="btn btn-default btn-sm">
-                  <span className="glyphicon glyphicon-font"></span>
-                  Plain Text
-                </a>
+                <span className="descriptor">{resume.descriptor}</span>
+                <span className="updated_at bg-info">
+                  Last updated: <span ref="updated_at">{resume.updated_at}</span>
+                </span>
               </div>
             </div>
           </div>

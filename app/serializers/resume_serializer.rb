@@ -7,7 +7,7 @@ class ResumeSerializer < BaseSerializer
 
   attributes :show_page, :edit_page, :delete_page, :destroy_page, :stats_page
   attributes :user_pdf_file, :user_plaintext_file, :user_json_file
-  attributes :structure, :pageview_count
+  attributes :structure, :pageview_count, :new_record
 
   # has_one :user
 
@@ -59,10 +59,19 @@ class ResumeSerializer < BaseSerializer
   end
 
   def stats_page
+    return nil if object.new_record?
     stats_user_resume_path(object.user, object)
   end
 
   def pageview_count
     object.publication_views.count
+  end
+
+  def publish_url
+    publication_path(object)
+  end
+
+  def new_record
+    object.new_record?
   end
 end

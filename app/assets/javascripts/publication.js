@@ -5,5 +5,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require react
-//= require components/publication
+//= require components/publication_resume
+//= require components/publication_page
+//= require components/publication_package_panel
 //= require react_ujs

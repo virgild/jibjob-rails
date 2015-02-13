@@ -80,6 +80,16 @@
       });
     },
 
+    isPublishedChange: function(e) {
+      var newValue = e.target.checked;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          is_published: {$set: newValue}
+        })
+      });
+    },
+
     loadExampleContent: function(e) {
       e.preventDefault();
       var self = this;
@@ -98,6 +108,16 @@
 
     render: function() {
       var resume = this.props.resume;
+
+      if (resume.new_record == false) {
+        var isPublishedGroup = (
+          <div className="form-group">
+            <label>Published</label>
+            <input type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
+          </div>
+        );
+      }
+
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay model={resume} />
@@ -112,6 +132,7 @@
               <input type="text" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="A public identifier value like http://jibjob.co/resumes/[slug]" />
             </div>
+            {isPublishedGroup}
             <div className="form-group">
               <label>Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
