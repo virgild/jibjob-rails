@@ -59,8 +59,17 @@
 
     render: function() {
       var resume = this.props.resume;
-
       var pubURL = "/pub/" + resume.slug;
+
+      if (resume.is_published) {
+        var published = (
+          <div>
+            <span className="published">
+              Published at <a href={resume.publish_url}>{resume.publish_url}</a>
+            </span>
+          </div>
+        );
+      }
 
       return (
         <div className="resume-index-item col-sm-12">
@@ -72,6 +81,7 @@
                 <span className="updated_at bg-info">
                   Last updated: <span ref="updated_at">{resume.updated_at}</span>
                 </span>
+                {published}
               </div>
             </div>
           </div>

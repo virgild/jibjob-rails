@@ -110,6 +110,15 @@
     margin-left: 10px;
     padding: 2px 4px;
   }
+
+  .published {
+    font-size: 12px;
+    font-family: "Open Sans";
+    font-weight: 300;
+    background: lighten(rgba(10, 200, 10, 1.0), 55%);
+    padding: 2px 5px;
+    display: inline-block;
+  }
 }
 
 .resume-index-item-placeholder {

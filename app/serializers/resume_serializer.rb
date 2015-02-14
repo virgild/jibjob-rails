@@ -7,7 +7,7 @@ class ResumeSerializer < BaseSerializer
 
   attributes :show_page, :edit_page, :delete_page, :destroy_page, :stats_page
   attributes :user_pdf_file, :user_plaintext_file, :user_json_file
-  attributes :structure, :pageview_count, :new_record
+  attributes :structure, :pageview_count, :new_record, :publish_url
 
   # has_one :user
 
@@ -68,7 +68,7 @@ class ResumeSerializer < BaseSerializer
   end
 
   def publish_url
-    publication_path(object)
+    publication_path(object.slug)
   end
 
   def new_record
