@@ -45,7 +45,6 @@ $front-title-font: "Open Sans";
   .feature {
     padding: 20px;
     background-color: #f6f6f6;
-    @include rounded(5px);
     margin-bottom: 5px;
     box-shadow: inset 0px -3px 0px 0px #e6e6e6, 0px -3px 0px 0px #fff;
 

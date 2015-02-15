@@ -30,7 +30,8 @@ class User::AsSignUp < ActiveType::Record[User]
       signup_data[:created_at] = signup_data[:created_at].to_i if signup_data[:created_at]
       signup_data[:user_id] = self.id
 
-      RecordSignupJob.perform_later(signup_data)
+      signup = self.build_signup(signup_data)
+      signup.save
     end
   end
 

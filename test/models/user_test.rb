@@ -24,18 +24,26 @@ class UserTest < ActiveSupport::TestCase
     DatabaseCleaner.clean
   end
 
-  test "create signup_confirmation on create" do
-    user = User::AsSignUp.new(
+  def new_signup_user
+    User::AsSignUp.new(
       username: 'test_user1',
       email: 'test_user1@example.com',
       password: 'testpass',
+      password_confirmation: 'testpass',
       terms: '1'
     )
+  end
+
+  test "create signup_confirmation on create" do
+    user = new_signup_user
 
     assert user.save
     assert_not_nil user.signup_confirmation, "No signup confirmation"
     assert_nil user.signup_confirmation.confirmed_at
     assert_not user.signup_confirmation.token.blank?
+  end
+
+  test "default role is user" do
   end
 
 end
