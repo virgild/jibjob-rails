@@ -35,6 +35,9 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :user
   validates_uniqueness_of :slug
 
+  validates_format_of :slug, with: /\A[A-Za-z0-9-]+\Z/
+  validates_exclusion_of :slug, in: ['app', 'pages', 'admin', 'tmp', 'public', 'support', 'help', 'rails', 'api']
+
   belongs_to :user
   has_many :publication_views
 
