@@ -6,6 +6,10 @@
 #  token        :string           not null
 #  confirmed_at :datetime
 #
+# Indexes
+#
+#  index_signup_confirmations_on_token  (token) UNIQUE
+#
 
 require 'test_helper'
 

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/app/confirm' => "signup_confirmations#update"
+
   resources :sessions, only: [:new, :create] do
     collection do
       get "logout"

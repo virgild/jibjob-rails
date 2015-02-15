@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/reactjs/react-rails.git
-  revision: d0d62c5dd35108e258b8e50d749499269997186d
+  revision: a05c5af050311843846dc29c4e3ef6bc34bb89fe
   specs:
     react-rails (1.0.0.pre)
       coffee-script-source (= 1.8.0)
@@ -251,7 +251,7 @@ GEM
       crass (~> 1.0.1)
       nokogiri (>= 1.4.4)
       nokogumbo (= 1.2.0)
-    sass (3.4.11)
+    sass (3.4.12)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)

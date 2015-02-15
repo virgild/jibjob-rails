@@ -1,0 +1,6 @@
+%h1 Signup Confirmation
+
+- if @confirmation && @confirmation.valid?
+  %h3 Your account is now confirmed.
+- else
+  %h3 Not found.

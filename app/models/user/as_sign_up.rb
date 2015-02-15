@@ -19,8 +19,9 @@ class User::AsSignUp < ActiveType::Record[User]
   validates :password, presence: true, confirmation: true
   validates :terms, presence: true, acceptance: true
 
-  after_create :save_signup_data
-  after_create :create_signup_confirmation
+  after_commit :save_signup_data, on: :create
+  after_commit :create_signup_confirmation, on: :create
+  after_commit :send_signup_confirmation_email, on: :create
 
   private
 
@@ -36,6 +37,10 @@ class User::AsSignUp < ActiveType::Record[User]
   def create_signup_confirmation
     confirmation = self.build_signup_confirmation
     confirmation.save
+  end
+
+  def send_signup_confirmation_email
+    AccountsMailer.signup_confirmation(self).deliver_later
   end
 
 end

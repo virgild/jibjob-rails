@@ -249,6 +249,13 @@ CREATE UNIQUE INDEX index_resumes_on_slug ON resumes USING btree (slug);
 
 
 --
+-- Name: index_signup_confirmations_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_signup_confirmations_on_token ON signup_confirmations USING btree (token);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -282,4 +289,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150129191035');
 INSERT INTO schema_migrations (version) VALUES ('20150130172627');
 
 INSERT INTO schema_migrations (version) VALUES ('20150212022309');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214164426');
 

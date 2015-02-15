@@ -6,6 +6,10 @@
 #  token        :string           not null
 #  confirmed_at :datetime
 #
+# Indexes
+#
+#  index_signup_confirmations_on_token  (token) UNIQUE
+#
 
 class SignupConfirmation < ActiveRecord::Base
   belongs_to :user
