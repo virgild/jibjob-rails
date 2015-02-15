@@ -32,6 +32,8 @@
       editor.getSession().on('change', function(e) {
         self.props.resume.content = editor.getValue();
       });
+
+      console.log(this.props);
     },
 
     submitForm: function(e) {
@@ -39,11 +41,16 @@
       this.setState({isLoading: true});
 
       var self = this;
-      var resume = this.props.resume;
+      var resume_data = {
+        name: this.props.resume.name,
+        slug: this.props.resume.slug,
+        is_published: this.props.resume.is_published,
+        content: this.props.resume.content
+      };
 
       $.ajax({
         url: this.props.saveURL,
-        data: {resume: resume},
+        data: {resume: resume_data},
         method: this.props.saveMethod,
       }).done(function(data) {
         var nextPage = data.meta.redirect;
