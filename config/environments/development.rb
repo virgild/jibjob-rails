@@ -47,7 +47,4 @@ Rails.application.configure do
 
   # Development React
   config.react.variant = :development
-
-  #
-  config.action_mailer.default_url_options = { host: 'jibjob.dev' }
 end

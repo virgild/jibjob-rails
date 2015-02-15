@@ -3,6 +3,6 @@
     <h1>Thank you for signing up to JibJob.</h1>
 
     <p>Confirm your account by following the link below:</p>
-    <a href="<%= app_confirm_url(@user.signup_confirmation.token) %>">Confirm My Account</a>
+    <a href="<%= app_confirm_url(t: @user.signup_confirmation.token) %>">Confirm My Account</a>
   </body>
 </html>

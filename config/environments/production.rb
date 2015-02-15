@@ -82,7 +82,4 @@ Rails.application.configure do
 
   # Production React
   config.react.variant = :production
-
-  #
-  config.action_mailer.default_url_options = { host: 'jibjob.co' }
 end
