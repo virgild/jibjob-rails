@@ -35,7 +35,7 @@ set :default_env, { path: "/opt/ruby/2.2.0/bin:$PATH" }
 # set :keep_releases, 5
 
 set :sidekiq_role, :worker
-set :sidekiq_queue, ['default', 'mailer', 'logging']
+set :sidekiq_queue, ['default', 'mailers', 'logging']
 
 namespace :deploy do
 
