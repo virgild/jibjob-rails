@@ -37,9 +37,9 @@ Rails.application.routes.draw do
     get "pricing" => "front#pricing"
     get "terms_of_service" => "front#terms_of_service"
     get "privacy_policy" => "front#privacy_policy"
-    get "wallaby" => "front#wallaby"
   end
 
+  get "wallaby" => "front#wallaby"
 
   get "/:slug" => "publications#show", as: "publication"
 
