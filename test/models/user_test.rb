@@ -16,6 +16,14 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
+  setup do
+    DatabaseCleaner.start
+  end
+
+  teardown do
+    DatabaseCleaner.clean
+  end
+
   test "create signup_confirmation on create" do
     user = User::AsSignUp.new(
       username: 'test_user1',

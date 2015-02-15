@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  setup do
+    DatabaseCleaner.start
+  end
+
+  teardown do
+    DatabaseCleaner.clean
+  end
 
   test "user signup and its effects" do
     get :new, { :_wallaby => 1}

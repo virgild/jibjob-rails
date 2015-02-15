@@ -35,3 +35,5 @@ end
 Capybara.configure do |config|
   config.javascript_driver = :poltergeist
 end
+
+DatabaseCleaner.strategy = :truncation, {except: ['schema_migrations']}

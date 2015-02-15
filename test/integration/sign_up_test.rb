@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class SignUpTest < ActionDispatch::IntegrationTest
+  setup do
+    DatabaseCleaner.start
+  end
+
+  teardown do
+    DatabaseCleaner.clean
+  end
 
   test "show sign up page" do
     get "/app/users/new?_wallaby=1"
