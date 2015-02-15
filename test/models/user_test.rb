@@ -25,7 +25,7 @@ class UserTest < ActiveSupport::TestCase
     )
 
     assert user.save
-    assert_not_nil user.signup_confirmation
+    assert_not_nil user.signup_confirmation, "No signup confirmation"
     assert_nil user.signup_confirmation.confirmed_at
     assert_not user.signup_confirmation.token.blank?
   end

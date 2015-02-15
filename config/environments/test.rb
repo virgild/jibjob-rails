@@ -42,7 +42,4 @@ Rails.application.configure do
 
   config.active_job.queue_name_prefix = 'jj.test'
   config.cache_store = :memory_store
-
-  #
-  config.action_mailer.default_url_options = { host: 'jibjob.dev' }
 end

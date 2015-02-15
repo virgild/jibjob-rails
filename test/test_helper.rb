@@ -13,6 +13,8 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
+ActiveSupport::TestCase.use_transactional_fixtures = false
+
 class ActionDispatch::IntegrationTest
   include Capybara::DSL
 end
