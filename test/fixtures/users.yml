@@ -16,4 +16,4 @@ appleseed:
   id: 1
   username: appleseed
   email: appleseed@example.com
-  password_digest: "1234567890"
+  password_digest: "$2a$10$Ahi.8ls5Sc6LoMVUt6JJZOib86US2zeBuEd.X9KZPGZJojyvMn1mC"
