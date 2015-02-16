@@ -75,6 +75,14 @@
 
       a {
         font-size: 10px;
+
+        &:hover {
+          color: rgba(200, 56, 56, 1.0);
+        }
+
+        .glyphicon {
+          margin-right: 2px;
+        }
       }
     }
   }

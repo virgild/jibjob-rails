@@ -45,12 +45,14 @@ RSpec.describe User, type: :model do
     context "valid usernames" do
       example "turtleman" do
         user.username = 'turtleman'
-        expect(user).to be_valid
+        user.valid?
+        expect(user.errors[:username]).to be_empty
       end
 
       example "moon_dogg_23" do
         user.username = 'moon_dogg_23'
-        expect(user).to be_valid
+        user.valid?
+        expect(user.errors[:username]).to be_empty
       end
     end
 
@@ -63,62 +65,86 @@ RSpec.describe User, type: :model do
 
       example "test" do
         user.username = 'test'
-        expect(user).to_not be_valid
+        user.valid?
         expect(user.errors[:username]).to_not be_empty
       end
 
       example "_myusername" do
         user.username = '_myusername'
-        expect(user).to_not be_valid
+        user.valid?
         expect(user.errors[:username]).to_not be_empty
       end
 
       example "my.username" do
         user.username = 'my.username'
-        expect(user).to_not be_valid
+        user.valid?
         expect(user.errors[:username]).to_not be_empty
       end
 
       example "my username" do
         user.username = 'my username'
-        expect(user).to_not be_valid
+        user.valid?
         expect(user.errors[:username]).to_not be_empty
       end
 
       example "my@username" do
         user.username = 'my@username'
-        expect(user).to_not be_valid
+        user.valid?
+        expect(user.errors[:username]).to_not be_empty
+      end
+
+      example "5username" do
+        user.username = '5username'
+        user.valid?
+        expect(user.errors[:username]).to_not be_empty
+      end
+
+      example "abc" do
+        user.username = 'abc'
+        user.valid?
+        expect(user.errors[:username]).to_not be_empty
+      end
+
+      example "my-username" do
+        user.username = 'my-username'
+        user.valid?
         expect(user.errors[:username]).to_not be_empty
       end
     end
   end
+end
 
+RSpec.describe User::AsSignUp, type: :model do
   context "after creation" do
-    before(:each) do
-      @user = User::AsSignUp.new(
+    let(:user) {
+      User::AsSignUp.new(
         username: 'test_user1',
         email: 'test_user1@example.com',
         password: 'testpass',
         password_confirmation: 'testpass',
         terms: '1'
       )
-    end
+    }
 
     it "creates a signup confirmation" do
-      expect(@user.save).to be true
-      expect(@user.signup_confirmation).not_to be_nil
-      expect(@user.signup_confirmation.id).not_to be_nil
-      expect(@user.signup).to be_nil
+      expect(user.save).to be true
+      expect(user.signup_confirmation).not_to be_nil
+      expect(user.signup_confirmation.id).not_to be_nil
+      expect(user.signup).to be_nil
     end
 
     it "creates a signup record when provided" do
-      @user.signup_data = {
+      user.signup_data = {
         ip_address: '127.0.0.1',
         user_agent: 'test browser 1.0'
       }
 
-      expect(@user.save).to eq(true)
-      expect(@user.signup).not_to be_nil
+      expect(user.save).to eq(true)
+      expect(user.signup).not_to be_nil
+    end
+
+    it "automatically sets default_role to 'user'" do
+      expect(user.default_role).to eq 'user'
     end
   end
 end

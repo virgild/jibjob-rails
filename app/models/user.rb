@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
   validates :default_role, presence: true
 
   validates_exclusion_of :username, in: ['admin', 'test']
-  validates_format_of :username, with: /\A[A-Za-z][A-Za-z0-9_]+\Z/
+  validates_format_of :username, with: /\A[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]+\Z/
+  validates_inclusion_of :default_role, in: ['user', 'admin']
 
   after_initialize :set_default_role
 
