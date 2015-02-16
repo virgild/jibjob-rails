@@ -56,11 +56,15 @@
         var nextPage = data.meta.redirect;
         window.location = nextPage;
       }).fail(function(xhr, status) {
-        self.setProps({
-          resume: React.addons.update(self.props.resume, {
-            $merge: xhr.responseJSON.resume
-          })
-        })
+        try {
+          self.setProps({
+            resume: React.addons.update(self.props.resume, {
+              $merge: xhr.responseJSON.resume
+            })
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }).always(function(xhr) {
         self.setState({isLoading: false});
       });

@@ -140,7 +140,7 @@ class Resume < ActiveRecord::Base
 
   def ensure_newline_at_end
     if content.last != "\n"
-      content.last << "\n"
+      content << "\n"
     end
   end
 
