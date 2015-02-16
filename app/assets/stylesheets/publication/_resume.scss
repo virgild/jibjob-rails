@@ -73,6 +73,16 @@ html, body {
     text-align: center;
     font-size: 8px;
   }
+
+  a {
+    &:hover {
+      color: rgba(200, 56, 56, 1.0);
+    }
+
+    .glyphicon {
+      margin-right: 2px;
+    }
+  }
 }
 
 .control-panel.inactive {

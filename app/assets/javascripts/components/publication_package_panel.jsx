@@ -26,7 +26,7 @@
       if (this.props.plaintext_url) {
         var plaintext_link = (
           <a href={this.props.plaintext_url} className="btn btn-xs">
-            <span className="glyphicon glyphicon-file" />
+            <span className="glyphicon glyphicon-align-left" />
             Plain Text
           </a>
         );
