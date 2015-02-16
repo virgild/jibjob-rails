@@ -70,11 +70,12 @@ group :development, :test do
   gem 'byebug'
   gem 'timecop'
   gem 'puma'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
-  gem 'minitest-documentation'
+  #gem 'minitest-documentation'
 end
