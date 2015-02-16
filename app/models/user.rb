@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   validates :default_role, presence: true
 
+  validates_exclusion_of :username, in: ['admin', 'test']
+  validates_format_of :username, with: /\A[A-Za-z][A-Za-z0-9_]+\Z/
+
   after_initialize :set_default_role
 
   def signup_confirmed?
