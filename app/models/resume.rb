@@ -40,7 +40,7 @@ class Resume < ActiveRecord::Base
   validates_format_of :name, with: /\A[A-Za-z0-9][A-Za-z0-9 ]+\Z/
 
   belongs_to :user
-  has_many :publication_views
+  has_many :publication_views, -> { order('created_at') }, dependent: :destroy
 
   scope :published, -> { where(is_published: true) }
 

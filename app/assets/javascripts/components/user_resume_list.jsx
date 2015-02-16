@@ -82,6 +82,9 @@
                   Last updated: <span ref="updated_at">{resume.updated_at}</span>
                 </span>
                 {published}
+                <div className="statslink">
+                  <a href={resume.stats_page}>Stats Page</a>
+                </div>
               </div>
             </div>
           </div>

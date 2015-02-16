@@ -4,6 +4,4 @@ module HasUserResume
   included do
     before_filter :require_current_user
   end
-
-
 end

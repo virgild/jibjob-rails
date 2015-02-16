@@ -21,4 +21,9 @@ class PublicationView < ActiveRecord::Base
   validates :url, presence: true
 
   belongs_to :resume
+  has_one :user, through: :resume
+
+  def timezone
+    user.timezone
+  end
 end
