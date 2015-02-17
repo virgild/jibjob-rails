@@ -8,7 +8,11 @@ class ResumesController < ApplicationController
 
   def index
     load_resumes
-    @resumes_data = ActiveModel::ArraySerializer.new(@resumes)
+    cache_key = "user-#{current_user.id}-resumes-list-#{@resumes.first.updated_at.to_i}"
+    Rails.logger.debug cache_key
+    @resumes_data = Rails.cache.fetch(cache_key) do
+      ActiveModel::ArraySerializer.new(@resumes).to_json
+    end
   end
 
   def new
@@ -75,7 +79,7 @@ class ResumesController < ApplicationController
 
   def load_resumes
     # TODO: Slow when things grow
-    @resumes ||= resume_scope.order(:updated_at).reverse_order.limit(@item_limit)
+    @resumes ||= resume_scope
   end
 
   def resume_scope

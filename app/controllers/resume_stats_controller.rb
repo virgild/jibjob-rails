@@ -4,7 +4,11 @@ class ResumeStatsController < ApplicationController
   before_filter :load_resume
 
   def index
-    @resume_data = ResumeStatsSerializer.new(@resume)
+    lastview = @resume.publication_views.first
+    cache_key = "user-#{current_user.id}-resume-#{@resume.id}-stats-#{lastview.created_at}"
+    @resume_data = Rails.cache.fetch(cache_key) do
+      ResumeStatsSerializer.new(@resume).to_json
+    end
   end
 
   private

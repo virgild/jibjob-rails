@@ -28,9 +28,11 @@
             </div>
           </div>
           <div className="container">
-            <div className="">
-              <PublicationViewList resume={resume} />
+            <div className="summary">
+              <h4>Summary</h4>
+              <div>Total Views: {resume.total_page_views}</div>
             </div>
+            <PublicationViewList resume={resume} />
           </div>
         </div>
       );
@@ -53,21 +55,9 @@
       });
 
       return (
-        <div className="table-responsive">
-          <table className="table table-bordered table-condendsed">
-            <tr>
-              <th>Date</th>
-              <th>IP Address</th>
-              <th>Location</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Country</th>
-              <th>URL</th>
-              <th>Referrer</th>
-              <th>User Agent</th>
-            </tr>
-            {items}
-          </table>
+        <div>
+          <h4>Page Views</h4>
+          {items}
         </div>
       );
     }
@@ -79,22 +69,28 @@
     },
 
     componentDidMount: function() {
-
     },
 
     render: function() {
+      var data = this.props.viewData;
+
+      var location = (function(city, state, country) {
+        return (
+          <div className="col-sm-9">
+            <span className="field-label">Location:</span> <span className="field-value">{city}, {state}, {country}</span>
+          </div>
+        );
+      }(data.city, data.state, data.country));
+
       return (
-        <tr>
-          <td>{this.props.viewData.created_at}</td>
-          <td>{this.props.viewData.ip_addr}</td>
-          <td>{this.props.viewData.lat}, {this.props.viewData.lng}</td>
-          <td>{this.props.viewData.city}</td>
-          <td>{this.props.viewData.state}</td>
-          <td>{this.props.viewData.country}</td>
-          <td>{this.props.viewData.url}</td>
-          <td>{this.props.viewData.referrer}</td>
-          <td>{this.props.viewData.user_agent}</td>
-        </tr>
+        <div className="pubview row">
+          <div className="col-sm-6"><span className="field-label">Date:</span> <span className="field-value">{data.created_at}</span></div>
+          <div className="col-sm-6 ipaddr"><span className="field-label">IP:</span> <span className="field-value">{this.props.viewData.ip_addr}</span></div>
+          {location}
+          <div className="col-sm-12"><span className="field-label">URL:</span> <span className="field-value">{this.props.viewData.url}</span></div>
+          <div className="col-sm-12"><span className="field-label">Referrer:</span> <span className="field-value">{this.props.viewData.referrer}</span></div>
+          <div className="col-sm-12"><span className="field-label">User Agent:</span> <span className="field-value">{this.props.viewData.user_agent}</span></div>
+        </div>
       );
     }
   });

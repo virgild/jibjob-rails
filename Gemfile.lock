@@ -350,6 +350,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-sidekiq
   capybara
+  connection_pool
   d3-rails
   dalli
   database_cleaner (~> 1.3.0)

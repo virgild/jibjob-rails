@@ -1,0 +1,22 @@
+.pubview {
+  border-bottom: solid 1px lighten(#ccc, 10%);
+  padding: 10px 0px;
+
+  .ipaddr {
+    text-align: right;
+
+    @media (max-width: $screen-sm) {
+      text-align: inherit;
+    }
+  }
+
+  .field-label {
+    font-weight: 600;
+  }
+
+  .field-value {
+    font-weight: 300;
+    font-size: 10px;
+    font-family: Monaco, "Courier New", monospace;
+  }
+}

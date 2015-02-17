@@ -20,3 +20,4 @@ node_modules
 .module-cache
 
 config/mailer.yml
+config/redis.yml

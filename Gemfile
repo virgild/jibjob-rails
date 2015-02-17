@@ -29,6 +29,7 @@ gem 'sass'
 gem 'dalli'
 gem 'hiredis'
 gem 'redis', require: ['redis', 'redis/connection/hiredis']
+gem 'connection_pool'
 gem 'oj'
 gem 'sidekiq'
 gem 'sinatra', require: false

@@ -113,6 +113,10 @@ class Resume < ActiveRecord::Base
     text.blank? ? 'No content' : text
   end
 
+  def total_page_views
+    publication_views.count
+  end
+
   private
 
   def fill_guid
