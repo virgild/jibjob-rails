@@ -1,15 +1,13 @@
-.page
-  .signup.container-fluid
-    .row
-      .col-md-12
-        - if @user.errors.any?
-          %ul
-            - @user.errors.full_messages.each do |msg|
-              %li= msg
+.signup-page.page
+  .container
     .row
       .col-md-12
         .form-container.center-block
-          %h1 Sign up
+          .form-title Sign up
+          - if @user.errors.any?
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
           = form_for @user do |f|
             = f.hidden_field :timezone
             .form-group
@@ -27,4 +25,4 @@
             .form-group
               = f.check_box :terms
               = f.label :terms, "I accept the terms and conditions.", class: "small"
-            = f.submit "Submit"
+            = f.submit "Submit", class: "btn btn-success"

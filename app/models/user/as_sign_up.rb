@@ -16,8 +16,7 @@ class User::AsSignUp < ActiveType::Record[User]
   attribute :terms, :string
   attribute :signup_data, :hash, default: proc { Hash.new }
 
-  validates :password, presence: true, confirmation: true
-  validates :terms, presence: true, acceptance: true
+  validates_acceptance_of :terms
 
   after_commit :save_signup_data, on: :create
   after_commit :create_signup_confirmation, on: :create

@@ -1,7 +1,17 @@
-.signup {
+.signup-page {
 
   .form-container {
-    margin-top: 60px;
-    max-width: 400px;
+    margin-top: 40px;
+    max-width: 500px;
+  }
+
+  .form-title {
+    text-transform: uppercase;
+    background: #ec148e;
+    color: #fff;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 }

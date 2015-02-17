@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_current_user, except: [:new, :create]
 
+  force_ssl only: :new, if: -> { Rails.env == 'production' }
+
   def new
     if current_user
       redirect_to user_url(current_user)

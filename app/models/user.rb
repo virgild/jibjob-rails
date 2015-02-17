@@ -14,6 +14,7 @@
 
 class User < ActiveRecord::Base
   has_secure_password
+
   has_many :resumes, -> { order("updated_at desc") }, dependent: :destroy
   has_one :signup, dependent: :destroy
   has_one :signup_confirmation, dependent: :destroy

@@ -26,3 +26,11 @@ body {
 button .glyphicon {
   margin-right: 5px;
 }
+
+.field_with_errors {
+  label {
+    background-color: darken(red, 10%);
+    color: #fff;
+    padding: 2px 5px;
+  }
+}
