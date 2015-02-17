@@ -8,8 +8,7 @@ class ResumesController < ApplicationController
 
   def index
     load_resumes
-    cache_key = "user-#{current_user.id}-resumes-list-#{@resumes.first.updated_at.to_i}"
-    Rails.logger.debug cache_key
+    cache_key = "user-#{current_user.id}-resumes-list-#{@resumes.first.nil? ? 0 : @resumes.first.updated_at.to_i}"
     @resumes_data = Rails.cache.fetch(cache_key) do
       ActiveModel::ArraySerializer.new(@resumes).to_json
     end

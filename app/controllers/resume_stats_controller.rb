@@ -5,7 +5,7 @@ class ResumeStatsController < ApplicationController
 
   def index
     lastview = @resume.publication_views.first
-    cache_key = "user-#{current_user.id}-resume-#{@resume.id}-stats-#{lastview.created_at}"
+    cache_key = "user-#{current_user.id}-resume-#{@resume.id}-stats-#{lastview.nil? ? 0 : lastview.created_at}"
     @resume_data = Rails.cache.fetch(cache_key) do
       ResumeStatsSerializer.new(@resume).to_json
     end
