@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: signup_confirmations
+#
+#  user_id      :integer          not null, primary key
+#  token        :string           not null
+#  confirmed_at :datetime
+#
+# Indexes
+#
+#  index_signup_confirmations_on_token  (token) UNIQUE
+#
+
 require 'rails_helper'
 
 RSpec.describe SignupConfirmation, type: :model do

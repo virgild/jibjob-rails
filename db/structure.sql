@@ -40,7 +40,12 @@ CREATE TABLE publication_views (
     url character varying NOT NULL,
     referrer character varying,
     user_agent character varying,
-    created_at timestamp without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    lat numeric(9,6),
+    lng numeric(9,6),
+    city character varying,
+    state character varying,
+    country character varying
 );
 
 
@@ -291,4 +296,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150130172627');
 INSERT INTO schema_migrations (version) VALUES ('20150212022309');
 
 INSERT INTO schema_migrations (version) VALUES ('20150214164426');
+
+INSERT INTO schema_migrations (version) VALUES ('20150216222945');
+
+INSERT INTO schema_migrations (version) VALUES ('20150217003722');
 

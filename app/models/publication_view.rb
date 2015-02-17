@@ -9,6 +9,11 @@
 #  referrer   :string
 #  user_agent :string
 #  created_at :datetime         not null
+#  lat        :decimal(9, 6)
+#  lng        :decimal(9, 6)
+#  city       :string
+#  state      :string
+#  country    :string
 #
 # Indexes
 #
@@ -23,7 +28,22 @@ class PublicationView < ActiveRecord::Base
   belongs_to :resume
   has_one :user, through: :resume
 
+  before_save :geocode_ip, on: :create
+
   def timezone
     user.timezone
+  end
+
+  private
+
+  def geocode_ip
+    loc = Geokit::Geocoders::MultiGeocoder.geocode(ip_addr.to_s)
+    if loc.success?
+      self.city = loc.city
+      self.country = loc.country_code
+      self.state = loc.state
+      self.lat = loc.lat
+      self.lng = loc.lng
+    end
   end
 end

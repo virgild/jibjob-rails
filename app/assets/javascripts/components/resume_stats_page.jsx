@@ -58,6 +58,10 @@
             <tr>
               <th>Date</th>
               <th>IP Address</th>
+              <th>Location</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Country</th>
               <th>URL</th>
               <th>Referrer</th>
               <th>User Agent</th>
@@ -83,6 +87,10 @@
         <tr>
           <td>{this.props.viewData.created_at}</td>
           <td>{this.props.viewData.ip_addr}</td>
+          <td>{this.props.viewData.lat}, {this.props.viewData.lng}</td>
+          <td>{this.props.viewData.city}</td>
+          <td>{this.props.viewData.state}</td>
+          <td>{this.props.viewData.country}</td>
           <td>{this.props.viewData.url}</td>
           <td>{this.props.viewData.referrer}</td>
           <td>{this.props.viewData.user_agent}</td>
