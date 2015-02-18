@@ -25,7 +25,6 @@ class UsersController < ApplicationController
       session['auth.default.user'] = @user.id
       redirect_to user_resumes_url(@user), notice: "Thank you for signing up."
     else
-      flash.now[:danger] = "There are issues with the sign up form entries."
       render action: :new
     end
   end

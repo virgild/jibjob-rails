@@ -82,4 +82,16 @@ Rails.application.configure do
 
   # Production React
   config.react.variant = :production
+
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_HOSTNAME'] }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication: 'plain',
+    :enable_starttls_auto: true,
+    :address: ENV['MAILER_SMTP_HOST'],
+    :port: ENV['MAILER_SMTP_PORT'],
+    :domain: ENV['MAILER_SMTP_DOMAIN'],
+    :user_name: ENV['MAILER_SMTP_USERNAME'],
+    :password: ENV['MAILER_SMTP_PASSWORD']
+  }
 end

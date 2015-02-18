@@ -12,6 +12,8 @@
 !/log/.keep
 /tmp
 
+.powenv
+.env
 .capistrano
 vendor/bundle
 public/system
