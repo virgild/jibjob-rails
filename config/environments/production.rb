@@ -94,4 +94,7 @@ Rails.application.configure do
     user_name: ENV['MAILER_SMTP_USERNAME'],
     password: ENV['MAILER_SMTP_PASSWORD']
   }
+  config.action_mailer.default_options = {
+    from: ENV['MAILER_DEFAULT_FROM']
+  }
 end

@@ -46,7 +46,7 @@
       return (
         <div className="footer hidden-print">
           <div className="powered">
-            Published by <a href="http://jibjob.co">jibjob</a>
+            Published by <a href="/">jibjob</a>
           </div>
         </div>
       );
