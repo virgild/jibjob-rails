@@ -52,6 +52,7 @@ gem 'paperclip'
 gem 'sanitize'
 gem 'pragmatic_segmenter'
 
+gem 'dotenv-rails'
 gem 'rack-protection'
 #gem 'newrelic_rpm'
 
