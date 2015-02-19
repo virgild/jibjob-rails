@@ -107,7 +107,8 @@ class ResumesController < ApplicationController
   end
 
   def set_editor_mode
-    if is_mobile_device?
+    browser = Browser.new(ua: request.user_agent)
+    if browser.mobile?
       @use_plain_editor = true
     end
   end
