@@ -8,8 +8,8 @@
     - if current_user
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Logged in as #{current_user.username}", user_url(current_user)
-        %li= link_to "Log out", logout_sessions_url
+        %li= link_to "Log out", logout_url
     - else
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "Sign up", new_user_url
-        %li= link_to "Sign in", new_session_url
+        %li= link_to "Sign in", login_url

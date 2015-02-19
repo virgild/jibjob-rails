@@ -2,11 +2,12 @@
   .container-fluid
     .center-block.form-container
       .form-title Sign in
-      = form_tag sessions_url, method: "POST" do
+      = form_tag login_url, method: "POST" do
         .form-group
           %label Username
-          %input.form-control{type: "text", spellcheck: false, name: "username", autocorrect: 'off', autocapitalize: 'off', autofocus: true}
+          %input.form-control{type: "text", spellcheck: false, name: "username", autocorrect: 'off', autocapitalize: 'off', autofocus: true, autocomplete: 'off'}
         .form-group
           %label Password
           %input.form-control{type: "password", name: "password"}
-        %button.button{type: "submit"} Submit
+        %button.button{type: "submit", class: "btn btn-success"} Submit
+        .pull-right.small= link_to "Forgot password?", reset_password_url

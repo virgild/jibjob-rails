@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   describe "after user signup" do
     before(:each) do
-      get :new, { :_wallaby => 1}
+      get :new
       assert_response :success
 
       post :create, user: {

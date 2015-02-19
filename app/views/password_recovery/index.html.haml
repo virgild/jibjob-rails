@@ -1,0 +1,12 @@
+.password-recovery-page.page
+  .container
+    %h3 Password Reset
+    %p
+      Instructions for resetting your password will be sent to your e-mail.
+    - if @warning
+      .text-danger= @warning
+    = form_tag reset_password_url, action: "POST", class: "form" do
+      .form-group
+        %label Username or E-mail
+        %input{type: "text", name: "username_or_email", class: "form-control"}
+      %button{type: "submit", class: "btn btn-success"} Submit

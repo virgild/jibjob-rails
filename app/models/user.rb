@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :resumes, -> { order("updated_at desc") }, dependent: :destroy
   has_one :signup, dependent: :destroy
   has_one :signup_confirmation, dependent: :destroy
+  has_one :password_recovery, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true

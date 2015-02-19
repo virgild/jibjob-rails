@@ -32,6 +32,7 @@ gem 'redis', require: ['redis', 'redis/connection/hiredis']
 gem 'connection_pool'
 gem 'oj'
 gem 'sidekiq'
+gem 'sidekiq-failures'
 gem 'sinatra', require: false
 gem 'will_paginate'
 gem 'whenever', require: false

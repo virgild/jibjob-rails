@@ -13,13 +13,16 @@ Rails.application.routes.draw do
       end
     end
 
-    get '/app/confirm' => "signup_confirmations#update"
+    get '/confirm' => "signup_confirmations#update"
 
-    resources :sessions, only: [:new, :create] do
-      collection do
-        get "logout"
-      end
-    end
+    get '/reset_password' => 'password_recovery#index'
+    post '/reset_password' => 'password_recovery#create'
+    get '/new_password' => 'password_recovery#edit'
+    post '/new_password' => 'password_recovery#update'
+
+    get '/login' => 'sessions#new'
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#logout'
 
     namespace :admin do
       resources :dashboards, only: [:index]

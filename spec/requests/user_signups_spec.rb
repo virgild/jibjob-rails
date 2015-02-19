@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "UserSignups", type: :request do
   describe "loading signup page" do
     it "loads the signup page" do
-      get "/app/users/new?_wallaby=1"
+      get "/app/users/new"
       expect(response).to have_http_status(200)
     end
   end
 
   describe "after submitting the signup page", js: true do
     before :each do
-      visit "/app/users/new?_wallaby=1"
+      visit "/app/users/new"
       fill_in "Username", with: "testuser"
       fill_in "Email", with: "testuser@example.com"
       fill_in "Password", with: "testpass"

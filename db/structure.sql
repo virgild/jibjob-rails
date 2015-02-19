@@ -30,6 +30,17 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: password_recoveries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE password_recoveries (
+    user_id bigint NOT NULL,
+    token character varying NOT NULL,
+    created_at timestamp without time zone
+);
+
+
+--
 -- Name: publication_views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -200,6 +211,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
+-- Name: password_recoveries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY password_recoveries
+    ADD CONSTRAINT password_recoveries_pkey PRIMARY KEY (user_id);
+
+
+--
 -- Name: publication_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -300,4 +319,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150214164426');
 INSERT INTO schema_migrations (version) VALUES ('20150216222945');
 
 INSERT INTO schema_migrations (version) VALUES ('20150217003722');
+
+INSERT INTO schema_migrations (version) VALUES ('20150218182355');
 
