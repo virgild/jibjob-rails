@@ -39,6 +39,7 @@ gem 'whenever', require: false
 gem 'gon'
 gem 'geokit-rails'
 gem 'tzinfo-data'
+gem 'mobile-fu'
 
 gem 'momentjs-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'

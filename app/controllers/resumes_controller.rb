@@ -3,6 +3,7 @@ class ResumesController < ApplicationController
 
   before_filter :require_current_user
   before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
+  before_filter :set_editor_mode, only: [:new, :edit, :create, :update]
 
   include HasUserResume
 
@@ -103,5 +104,11 @@ class ResumesController < ApplicationController
     end
 
     resume_params ? resume_params.permit(:name, :content, :slug, :is_published) : {}
+  end
+
+  def set_editor_mode
+    if is_mobile_device?
+      @use_plain_editor = true
+    end
   end
 end

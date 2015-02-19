@@ -8,6 +8,7 @@
       resume: React.PropTypes.object.isRequired,
       saveMethod: React.PropTypes.oneOf(['POST', 'PUT']).isRequired,
       saveURL: React.PropTypes.string.isRequired,
+      usePlainEditor: React.PropTypes.bool,
     },
 
     getInitialState: function() {
@@ -17,23 +18,23 @@
     },
 
     componentDidMount: function() {
-      var editor = ace.edit(this.refs.editor.getDOMNode());
-      $(this.refs.editor.getDOMNode()).height(500);
-      editor.setTheme("ace/theme/chrome");
-      editor.getSession().setMode("ace/mode/text");
-      editor.setValue(this.props.resume.content);
+      if (this.props.usePlainEditor != true) {
+        var editor = ace.edit(this.refs.editor.getDOMNode());
+        $(this.refs.editor.getDOMNode()).height(1000);
+        editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/text");
+        editor.setValue(this.props.resume.content);
 
-      editor.scrollToLine(0);
-      editor.gotoLine(1);
-      editor.clearSelection();
+        editor.scrollToLine(0);
+        editor.gotoLine(1);
+        editor.clearSelection();
 
-      var self = this;
+        var self = this;
 
-      editor.getSession().on('change', function(e) {
-        self.props.resume.content = editor.getValue();
-      });
-
-      console.log(this.props);
+        editor.getSession().on('change', function(e) {
+          self.props.resume.content = editor.getValue();
+        });
+      }
     },
 
     submitForm: function(e) {
@@ -101,6 +102,16 @@
       });
     },
 
+    contentChange: function(e) {
+      var newContent = e.target.value;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          content: {$set: newContent}
+        })
+      });
+    },
+
     loadExampleContent: function(e) {
       e.preventDefault();
       var self = this;
@@ -129,6 +140,19 @@
         );
       }
 
+      if (this.props.usePlainEditor) {
+        var editor = (
+          <div>
+            <textarea name="resume[content]" value={resume.content} onChange={this.contentChange} className="form-control" rows="40" />
+          </div>
+        );
+      } else {
+        var editor = (
+          <div className="editor" id="resume-editor" ref="editor">
+          </div>
+        );
+      }
+
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay model={resume} />
@@ -147,8 +171,7 @@
             <div className="form-group">
               <label>Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
-              <div className="editor" id="resume-editor" ref="editor">
-              </div>
+              {editor}
             </div>
             <JibJob.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
               <span>Save Resume</span>

@@ -7,4 +7,4 @@
     %li= link_to @resume.name, user_resume_url(current_user, @resume)
     %li Edit
 
-  = react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT' }, {prerender: true})
+  = react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT', usePlainEditor: @use_plain_editor }, {prerender: false})

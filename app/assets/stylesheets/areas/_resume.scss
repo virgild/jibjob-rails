@@ -88,6 +88,13 @@
   }
 }
 
+.resume-form {
+  textarea {
+    font-family: "Monaco", "Courier New", monospace;
+    font-size: 10px;
+  }
+}
+
 /* Resume list item when users sees own resume list */
 .resume-index-item {
   border-bottom: solid 1px darken(#fff, 5%);
