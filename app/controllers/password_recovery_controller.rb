@@ -46,6 +46,7 @@ class PasswordRecoveryController < ApplicationController
     user = password_recovery.user
 
     user.update!(password: password, password_confirmation: password_confirmation)
+    password_recovery.destroy
 
     flash['info'] = "Your password has been reset."
     redirect_to login_url
