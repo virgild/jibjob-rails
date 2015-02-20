@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => "/__kickside"
+  mount Sidekiq::Web => ENV['SIDEKIQ_WEB_MOUNT']
 
   scope '/app' do
     resources :users, param: :username, except: [:index, :destroy] do
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get "privacy_policy" => "front#privacy_policy"
   end
 
-  get "wallaby" => "front#wallaby"
+  get "/wallaby" => "front#wallaby"
 
   get "/:slug" => "publications#show", as: "publication"
 

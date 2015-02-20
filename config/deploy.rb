@@ -8,7 +8,7 @@ set :repo_url, 'git@bitbucket.org:virgil/jibjob.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/apps/jibjob'
+set :deploy_to, ENV['DEPLOY_DIRECTORY']
 
 # Default value for :scm is :git
 set :scm, :git
@@ -29,7 +29,11 @@ set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-set :default_env, { path: "/opt/ruby/2.2.0/bin:$PATH" }
+if ENV['DEPLOY_ENV_PATH']
+  set :default_env, { path: ENV['DEPLOY_ENV_PATH'] }
+else
+  set :default_env, {}
+end
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
