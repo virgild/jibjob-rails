@@ -1,6 +1,6 @@
 default: &defaults
-  host: <%= ENV['JIBJOB_REDIS_HOST'] %>
-  port: <%= ENV['JIBJOB_REDIS_PORT'] %>
+  :host: <%= ENV['JIBJOB_REDIS_HOST'] %>
+  :port: <%= ENV['JIBJOB_REDIS_PORT'] %>
 
 development:
   <<: *defaults

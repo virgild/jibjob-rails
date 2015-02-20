@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :output, "/apps/jibjob/shared/log/cron.log"
+set :output, ENV['JIBJOB_CRON_LOGFILE']
 
 # every 15.minutes do
 #   rake "someting"
