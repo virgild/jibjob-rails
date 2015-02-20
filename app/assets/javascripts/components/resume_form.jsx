@@ -18,6 +18,8 @@
     },
 
     componentDidMount: function() {
+      global.JibJob.CurrentPage = this;
+
       if (this.props.usePlainEditor != true) {
         var editor = ace.edit(this.refs.editor.getDOMNode());
         $(this.refs.editor.getDOMNode()).height(1000);
@@ -118,13 +120,21 @@
       var url = "https://s3.amazonaws.com/jibjob/examples/sample.resume";
 
       $.get(url).done(function(data) {
-        self.props.resume.content = data;
+        var newContent = data;
 
-        var editor = ace.edit("resume-editor");
-        editor.setValue(data);
-        editor.scrollToLine(0);
-        editor.gotoLine(1);
-        editor.clearSelection();
+        self.setProps({
+          resume: React.addons.update(self.props.resume, {
+            content: {$set: newContent}
+          })
+        });
+
+        if (self.props.usePlainEditor == false) {
+          var editor = ace.edit("resume-editor");
+          editor.setValue(data);
+          editor.scrollToLine(0);
+          editor.gotoLine(1);
+          editor.clearSelection();
+        }
       });
     },
 
@@ -142,9 +152,7 @@
 
       if (this.props.usePlainEditor) {
         var editor = (
-          <div>
-            <textarea name="resume[content]" value={resume.content} onChange={this.contentChange} className="form-control" rows="40" />
-          </div>
+          <textarea name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="form-control" rows="40" />
         );
       } else {
         var editor = (
