@@ -238,4 +238,37 @@ RSpec.describe Resume, type: :model do
       expect(File.exists?(resume.pdf.path)).to eq true
     end
   end
+
+  context "exporting to other formats and other attributes" do
+    let(:resume) { user.resumes.first }
+
+    example "generate_pdf_data" do
+      expect(resume.generate_pdf_data).to_not be_blank
+    end
+
+    example "generate_plain_text" do
+      expect(resume.generate_plain_text).to_not be_blank
+    end
+
+    example "generate_json_text" do
+      expect(resume.generate_json_text).to_not be_blank
+    end
+
+    example "structure" do
+      expect(resume.structure).to_not be_blank
+    end
+
+    example "descriptor" do
+      expect(resume.descriptor).to_not be_blank
+    end
+
+    example "total_page_views" do
+      expect(resume.total_page_views).to eq 0
+    end
+  end
+
+  example "ensure the content has a newline at the end" do
+    resume = user.resumes.create(name: "New Test Resume", slug: "new-test-resume", content: "")
+    expect(resume.content.last).to eq "\n"
+  end
 end
