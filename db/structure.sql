@@ -34,10 +34,30 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE password_recoveries (
-    user_id bigint NOT NULL,
+    id bigint NOT NULL,
+    user_id bigint,
     token character varying NOT NULL,
     created_at timestamp without time zone
 );
+
+
+--
+-- Name: password_recoveries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE password_recoveries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: password_recoveries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE password_recoveries_id_seq OWNED BY password_recoveries.id;
 
 
 --
@@ -135,10 +155,30 @@ CREATE TABLE schema_migrations (
 --
 
 CREATE TABLE signup_confirmations (
-    user_id bigint NOT NULL,
+    id bigint NOT NULL,
+    user_id bigint,
     token character varying NOT NULL,
     confirmed_at timestamp without time zone
 );
+
+
+--
+-- Name: signup_confirmations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE signup_confirmations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: signup_confirmations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE signup_confirmations_id_seq OWNED BY signup_confirmations.id;
 
 
 --
@@ -146,12 +186,32 @@ CREATE TABLE signup_confirmations (
 --
 
 CREATE TABLE signups (
-    user_id bigint NOT NULL,
+    id bigint NOT NULL,
+    user_id bigint,
     ip_address inet,
     user_agent character varying,
     extras json,
     created_at timestamp without time zone NOT NULL
 );
+
+
+--
+-- Name: signups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE signups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: signups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE signups_id_seq OWNED BY signups.id;
 
 
 --
@@ -193,6 +253,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY password_recoveries ALTER COLUMN id SET DEFAULT nextval('password_recoveries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY publication_views ALTER COLUMN id SET DEFAULT nextval('publication_views_id_seq'::regclass);
 
 
@@ -207,6 +274,20 @@ ALTER TABLE ONLY resumes ALTER COLUMN id SET DEFAULT nextval('resumes_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY signup_confirmations ALTER COLUMN id SET DEFAULT nextval('signup_confirmations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY signups ALTER COLUMN id SET DEFAULT nextval('signups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -215,7 +296,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY password_recoveries
-    ADD CONSTRAINT password_recoveries_pkey PRIMARY KEY (user_id);
+    ADD CONSTRAINT password_recoveries_pkey PRIMARY KEY (id);
 
 
 --
@@ -239,7 +320,7 @@ ALTER TABLE ONLY resumes
 --
 
 ALTER TABLE ONLY signup_confirmations
-    ADD CONSTRAINT signup_confirmations_pkey PRIMARY KEY (user_id);
+    ADD CONSTRAINT signup_confirmations_pkey PRIMARY KEY (id);
 
 
 --
@@ -247,7 +328,7 @@ ALTER TABLE ONLY signup_confirmations
 --
 
 ALTER TABLE ONLY signups
-    ADD CONSTRAINT signups_pkey PRIMARY KEY (user_id);
+    ADD CONSTRAINT signups_pkey PRIMARY KEY (id);
 
 
 --
@@ -270,13 +351,6 @@ CREATE INDEX index_publication_views_on_resume_id ON publication_views USING btr
 --
 
 CREATE UNIQUE INDEX index_resumes_on_slug ON resumes USING btree (slug);
-
-
---
--- Name: index_signup_confirmations_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_signup_confirmations_on_token ON signup_confirmations USING btree (token);
 
 
 --
@@ -321,4 +395,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150216222945');
 INSERT INTO schema_migrations (version) VALUES ('20150217003722');
 
 INSERT INTO schema_migrations (version) VALUES ('20150218182355');
+
+INSERT INTO schema_migrations (version) VALUES ('20150221024933');
 

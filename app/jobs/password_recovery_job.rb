@@ -6,11 +6,7 @@ class PasswordRecoveryJob < ActiveJob::Base
     user = User.find_by_username(identifier) || User.find_by_email(identifier)
 
     if user
-      if user.password_recovery.nil?
-        rec = user.build_password_recovery
-        rec.save
-      end
-
+      user.password_recovery ||= user.create_password_recovery
       AccountsMailer.password_reset(user).deliver_later
     end
   end

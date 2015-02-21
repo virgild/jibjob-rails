@@ -2,13 +2,10 @@
 #
 # Table name: signup_confirmations
 #
-#  user_id      :integer          not null, primary key
+#  id           :integer          not null, primary key
+#  user_id      :integer
 #  token        :string           not null
 #  confirmed_at :datetime
-#
-# Indexes
-#
-#  index_signup_confirmations_on_token  (token) UNIQUE
 #
 
 class SignupConfirmation < ActiveRecord::Base

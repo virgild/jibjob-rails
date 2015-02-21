@@ -2,7 +2,8 @@
 #
 # Table name: signups
 #
-#  user_id    :integer          not null, primary key
+#  id         :integer          not null, primary key
+#  user_id    :integer
 #  ip_address :inet
 #  user_agent :string
 #  extras     :json

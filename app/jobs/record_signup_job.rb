@@ -9,8 +9,7 @@ class RecordSignupJob < ActiveJob::Base
     signup_params['created_at'] = Time.at(signup_params['created_at'])
 
     if user
-      signup = user.build_signup(signup_params)
-      signup.save
+      user.create_signup(signup_params)
     end
   end
 end
