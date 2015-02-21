@@ -128,9 +128,9 @@
           })
         });
 
-        if (self.props.usePlainEditor == false) {
+        if (self.props.usePlainEditor != true) {
           var editor = ace.edit("resume-editor");
-          editor.setValue(data);
+          editor.setValue(newContent);
           editor.scrollToLine(0);
           editor.gotoLine(1);
           editor.clearSelection();
