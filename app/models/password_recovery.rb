@@ -8,7 +8,7 @@
 #
 
 class PasswordRecovery < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, inverse_of: :password_recovery
 
   validates_presence_of :token
   validates_uniqueness_of :token
@@ -19,5 +19,6 @@ class PasswordRecovery < ActiveRecord::Base
 
   def ensure_present_token
     self.token ||= SecureRandom.hex(16)
+    true
   end
 end
