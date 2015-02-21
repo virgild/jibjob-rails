@@ -17,3 +17,13 @@ appleseed:
   username: appleseed
   email: appleseed@example.com
   password_digest: "$2a$10$Ahi.8ls5Sc6LoMVUt6JJZOib86US2zeBuEd.X9KZPGZJojyvMn1mC"
+  timezone: "Eastern Time (US & Canada)"
+  default_role: user
+
+gourdough:
+  id: 2
+  username: gourdough
+  email: gourdough@example.com
+  password_digest: "$2a$10$Ahi.8ls5Sc6LoMVUt6JJZOib86US2zeBuEd.X9KZPGZJojyvMn1mC"
+  timezone: "Eastern Time (US & Canada)"
+  default_role: user
