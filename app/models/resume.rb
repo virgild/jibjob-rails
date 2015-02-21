@@ -48,6 +48,12 @@ class Resume < ActiveRecord::Base
     thumb: ["100x100#", :png]
   }, convert_options: {
     thumb: "-density 300"
+  }, path: Proc.new {
+    if Rails.env == 'test'
+      ':rails_root/public/test/:class/:attachment/:id_partition/:style/:filename'
+    else
+      ':rails_root/public/system/:class/:attachment/:id_partition/:style/:filename'
+    end
   }
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
