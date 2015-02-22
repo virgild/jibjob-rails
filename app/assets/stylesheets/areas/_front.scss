@@ -8,28 +8,31 @@ $front-title-font: "Open Sans";
 
   .splash-header {
     text-align: center;
+    color: #fff;
 
     .logo {
       font-family: "Fugaz One";
       font-size: 32px;
       text-shadow: #111 0px 2px 1px;
-      color: #fff;
       padding: 5px 20px;
+      margin-top: 20px;
     }
 
     .subtitle {
-      display: inline-block;
       font-size: 20px;
       font-weight: normal;
-      color: #fff;
       padding: 5px 10px;
+      font-family: $front-title-font;
+    }
+
+    .subtitle2 {
       font-family: $front-title-font;
     }
   }
 }
 
 .front-splash {
-  padding: 20px;
+
 }
 
 .front-splash .container {
@@ -39,7 +42,7 @@ $front-title-font: "Open Sans";
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom center;
-  height: 400px;
+  height: 500px;
 
   @media (max-width: $screen-xs-min) {
     height: 300px;
