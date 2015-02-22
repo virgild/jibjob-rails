@@ -1,38 +1,52 @@
-$front-splash-bg-image: "photos/front-splash-1.jpg";
+// $front-splash-bg-image: "photos/front-splash-1.jpg";
+$front-splash-bg-image: "show-front.png";
 $front-features-bg-color: #44485F;
 $front-title-font: "Open Sans";
 
+.front-page {
+  background-color: $front-features-bg-color;
+
+  .splash-header {
+    text-align: center;
+
+    .logo {
+      font-family: "Fugaz One";
+      font-size: 32px;
+      text-shadow: #111 0px 2px 1px;
+      color: #fff;
+      padding: 5px 20px;
+    }
+
+    .subtitle {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: normal;
+      color: #fff;
+      padding: 5px 10px;
+      font-family: $front-title-font;
+    }
+  }
+}
+
 .front-splash {
+  padding: 20px;
+}
+
+.front-splash .container {
   color: #fff;
   background-image: image-url($front-splash-bg-image);
-  background-size: cover;
+  background-color: $front-features-bg-color;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: bottom center;
+  height: 400px;
 
-  .subtitle1 {
-    display: inline-block;
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    background-color: rgba(#000, 0.5);
-    padding: 5px 10px;
-    font-family: $front-title-font;
-    margin-bottom: 1px;
+  @media (max-width: $screen-xs-min) {
+    height: 300px;
   }
 
-  .subtitle2 {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: normal;
-    color: #fff;
-    background-color: rgba(#000, 0.4);
-    padding: 5px 10px;
-    font-family: $front-title-font;
-  }
-
-  .signup-button {
-    margin-top: 10px;
-    @include unrounded;
+  @media (max-width: $screen-xs-min) {
+    height: 200px;
   }
 }
 
