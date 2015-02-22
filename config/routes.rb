@@ -7,13 +7,13 @@ Rails.application.routes.draw do
     resources :users, param: :username, except: [:index, :destroy] do
       resources :resumes do
         member do
-          get "delete"
-          get "stats" => "resume_stats#index"
+          get 'delete'
+          get 'stats' => 'resume_stats#index'
         end
       end
     end
 
-    get '/confirm' => "signup_confirmations#update"
+    get '/confirm' => 'signup_confirmations#update'
 
     get '/reset_password' => 'password_recovery#index'
     post '/reset_password' => 'password_recovery#create'
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     get '/login' => 'sessions#new'
     post '/login' => 'sessions#create'
     get '/logout' => 'sessions#logout'
+    get '/signup' => 'users#new'
+    post '/signup' => 'users#create'
 
     namespace :admin do
       resources :dashboards, only: [:index]
@@ -35,16 +37,14 @@ Rails.application.routes.draw do
     resources :support, only: [:index]
 
     # Static pages
-    get "features" => "front#features"
-    get "get_started" => "front#get_started"
-    get "pricing" => "front#pricing"
-    get "terms_of_service" => "front#terms_of_service"
-    get "privacy_policy" => "front#privacy_policy"
+    get 'get_started' => 'front#get_started'
+    get 'terms_of_service' => 'front#terms_of_service'
+    get 'privacy_policy' => 'front#privacy_policy'
   end
 
   get "/wallaby" => "front#wallaby"
 
-  get "/:slug" => "publications#show", as: "publication"
+  get '/:slug' => 'publications#show', as: 'publication'
 
-  root "front#index"
+  root 'front#index'
 end

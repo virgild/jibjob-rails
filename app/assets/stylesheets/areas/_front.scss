@@ -29,57 +29,88 @@ $front-title-font: "Open Sans";
       font-family: $front-title-font;
     }
   }
-}
 
-.front-splash {
+  .front-splash {
 
-}
-
-.front-splash .container {
-  color: #fff;
-  background-image: image-url($front-splash-bg-image);
-  background-color: $front-features-bg-color;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom center;
-  height: 500px;
-
-  @media (max-width: $screen-xs-min) {
-    height: 300px;
   }
 
-  @media (max-width: $screen-xs-min) {
-    height: 200px;
+  .front-splash .container {
+    color: #fff;
+    background-image: image-url($front-splash-bg-image);
+    background-color: $front-features-bg-color;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    height: 500px;
+
+    @media (max-width: $screen-xs-min) {
+      height: 300px;
+    }
   }
-}
 
-.front-features {
-  background-color: $front-features-bg-color;
-  min-height: 100px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  .front-features {
+    background-color: $front-features-bg-color;
+    min-height: 100px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
-  .feature {
+    .feature {
+      padding: 20px;
+      background-color: #f6f6f6;
+      margin-bottom: 5px;
+      box-shadow: inset 0px -3px 0px 0px #e6e6e6, 0px -3px 0px 0px #fff;
+
+      .title {
+        font-weight: 800;
+        font-size: 18px;
+        font-family: $front-title-font;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .front-details {
+    background-color: #000;
     padding: 20px;
-    background-color: #f6f6f6;
-    margin-bottom: 5px;
-    box-shadow: inset 0px -3px 0px 0px #e6e6e6, 0px -3px 0px 0px #fff;
+    color: #fff;
+    min-height: 200px;
+  }
 
-    .title {
-      font-weight: 800;
-      font-size: 18px;
-      font-family: $front-title-font;
-    }
+  .signup-area {
+    text-align: center;
+    color: #fff;
+  }
 
-    p {
-      font-size: 12px;
+  .signup-area {
+    margin-top: 30px;
+    padding-bottom: 20px;
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      background-color: #ec148e;
+      padding: 5px 20px;
+      font-size: 24px;
+      font-weight: 600;
+      @include rounded(3px);
+      font-family: 'Open Sans';
+      box-shadow: inset 0 1px lighten(#ec148e, 10%), 0 4px darken(#ec148e, 10%);
+
+      &:hover {
+        top: -3px;
+        position: relative;
+        box-shadow: inset 0 1px lighten(#ec148e, 10%), 0 4px darken(#ec148e, 10%);
+        box-shadow: 0px 3px 2px rgba(#000, 0.5);
+      }
+
+      &:active {
+        top: inherit;
+        position: inherit;
+        box-shadow: inset 0 1px lighten(#ec148e, 10%), 0 4px darken(#ec148e, 10%);
+      }
     }
   }
-}
-
-.front-details {
-  background-color: #000;
-  padding: 20px;
-  color: #fff;
-  min-height: 200px;
 }
