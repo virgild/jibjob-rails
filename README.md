@@ -1,5 +1,7 @@
-JibJob - Easy resume editing and publishing
+JibJob
 ======
+
+Easy resume editing and publishing
 
 [![Build Status](https://travis-ci.org/virgild/jibjob-rails.svg?branch=master)](https://travis-ci.org/virgild/jibjob-rails)
 [![Code Climate](https://codeclimate.com/github/virgild/jibjob-rails/badges/gpa.svg)](https://codeclimate.com/github/virgild/jibjob-rails)
@@ -12,4 +14,21 @@ DESCRIPTION:
 JibJob is a Rails application that lets you compose resumes using plain
 text, and publish them through web, mobile, and print (PDF export).
 
+REQUIREMENTS:
+-------------
 
+* Ruby 2.2
+* Rails 4.2
+* Postgresql 9.4
+* Redis
+* Memcache
+
+DEPLOY ENVIRONMENTS:
+--------------------
+
+[TODO: Describe how to set up development and production environments]
+
+ENVIRONMENT VARIABLES:
+----------------------
+
+[TODO: List environment variables needed to configure the app]
