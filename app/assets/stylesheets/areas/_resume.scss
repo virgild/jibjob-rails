@@ -95,15 +95,15 @@
   }
 }
 
+.resume-list {
+  padding-top: 20px;
+}
+
 /* Resume list item when users sees own resume list */
 .resume-index-item {
   border-bottom: solid 1px darken(#fff, 5%);
   padding-top: 10px;
   padding-bottom: 10px;
-
-  .header {
-
-  }
 
   a.header-title {
     font-size: 22px;
@@ -114,7 +114,6 @@
   }
 
   .descriptor {
-    margin-left: 10px;
     font-weight: 300;
     font-family: "Open Sans";
   }
@@ -122,16 +121,19 @@
   .updated_at {
     font-weight: 300;
     font-size: 10px;
-    margin-left: 10px;
-    padding: 2px 4px;
   }
 
   .published {
     font-size: 12px;
     font-family: "Open Sans";
     font-weight: 300;
-    background: lighten(rgba(10, 200, 10, 1.0), 55%);
-    padding: 2px 5px;
+    display: inline-block;
+  }
+
+  .unpublished {
+    font-size: 12px;
+    font-family: "Open Sans";
+    font-weight: 300;
     display: inline-block;
   }
 }
@@ -141,6 +143,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: solid 1px darken(#fff, 5%);
+  text-align: center;
 
   .create-new-button {
     a {

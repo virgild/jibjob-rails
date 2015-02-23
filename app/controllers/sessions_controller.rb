@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
 
     if user.authenticate(params[:password])
       session['auth.default.user'] = user.id
-      flash.now['info'] = "You have successfully logged in."
 
       if user.default_role == 'admin'
         redirect_to admin_root_url
@@ -40,7 +39,6 @@ class SessionsController < ApplicationController
   def logout
     if current_user
       destroy
-      flash['info'] = "You have successfully logged out."
     end
 
     redirect_to login_url

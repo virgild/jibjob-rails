@@ -27,15 +27,15 @@
 
       return (
         <div className="container">
-          <div className="row">
+          <ul className="list-group resume-list">
             {resumes}
-            <div className="resume-index-item-placeholder col-sm-12">
+            <li className="resume-index-item-placeholder list-group-item">
               <a href={this.props.createPage} className="btn btn-success create-new-button">
                 <span className="glyphicon glyphicon-plus"></span>
                 Create New
               </a>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       );
     }
@@ -53,8 +53,10 @@
     },
 
     componentDidMount: function() {
+      /*
       var updatedAt = $(this.refs.updated_at.getDOMNode()).text();
       $(this.refs.updated_at.getDOMNode()).html(moment(Date.parse(updatedAt)).fromNow());
+      */
     },
 
     render: function() {
@@ -69,26 +71,25 @@
             </span>
           </div>
         );
+      } else {
+        var published = (
+          <div>
+            <span className="unpublished">
+              Unpublished
+            </span>
+          </div>
+        );
       }
 
       return (
-        <div className="resume-index-item col-sm-12">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="header">
-                <a href={resume.show_page} className="header-title">{resume.name}</a>
-                <span className="descriptor">{resume.descriptor}</span>
-                <span className="updated_at bg-info">
-                  Last updated: <span ref="updated_at">{resume.updated_at}</span>
-                </span>
-                {published}
-                <div className="statslink">
-                  <a href={resume.stats_page}>Stats Page</a>
-                </div>
-              </div>
-            </div>
+        <li className="resume-index-item list-group-item">
+          <a href={resume.show_page} className="header-title">{resume.name}</a>
+          <div className="descriptor">{resume.descriptor}</div>
+          {published}
+          <div className="statslink">
+            <a href={resume.stats_page} className="label label-warning">Stats Page</a>
           </div>
-        </div>
+        </li>
       );
     }
   })
