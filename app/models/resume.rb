@@ -24,6 +24,10 @@
 #
 
 class Resume < ActiveRecord::Base
+  HUMANIZED_ATTRIBUTES = {
+    slug: "Link name"
+  }
+
   validates :user, presence: true
   validates :name, presence: true
   validates :guid, presence: true, uniqueness: true
@@ -35,9 +39,9 @@ class Resume < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :user
   validates_uniqueness_of :slug
 
-  validates_format_of :slug, with: /\A[A-Za-z0-9][A-Za-z0-9-]+\Z/
-  validates_exclusion_of :slug, in: ['app', 'pages', 'admin', 'tmp', 'public', 'support', 'help', 'rails', 'api']
-  validates_format_of :name, with: /\A[A-Za-z0-9][A-Za-z0-9 ]+\Z/
+  validates_format_of :slug, with: /\A[A-Za-z0-9][A-Za-z0-9-]+\Z/, message: "should contain only text and dashes (eg. \"my-resume\")", unless: "slug.blank?"
+  validates_exclusion_of :slug, in: ['app', 'pages', 'admin', 'tmp', 'public', 'support', 'help', 'rails', 'api'], message: "has already been taken", unless: "slug.blank?"
+  validates_format_of :name, with: /\A[A-Za-z0-9][A-Za-z0-9 ]+\Z/, unless: "name.blank?"
 
   belongs_to :user
   has_many :publication_views, -> { order('created_at desc') }, dependent: :destroy
@@ -67,6 +71,10 @@ class Resume < ActiveRecord::Base
 
   after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
   after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
+
+  def self.human_attribute_name(attr, options = {})
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  end
 
   def resume_data(reload = false)
     if reload

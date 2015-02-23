@@ -41,9 +41,5 @@ module JibJob
 
     # Asset paths
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
-
-    # Default host
-    config.default_host = ENV['DEFAULT_HOSTNAME']
-    config.action_controller.default_url_options = { host: ENV['DEFAULT_HOSTNAME'] }
   end
 end

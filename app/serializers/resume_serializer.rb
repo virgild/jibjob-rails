@@ -71,7 +71,7 @@ class ResumeSerializer < BaseSerializer
 
   def publish_url
     return nil if object.new_record?
-    publication_url(object.slug, host: Rails.configuration.default_host)
+    publication_path(object.slug)
   end
 
   def new_record

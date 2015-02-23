@@ -24,6 +24,8 @@
         var editor = ace.edit(this.refs.editor.getDOMNode());
         $(this.refs.editor.getDOMNode()).height(1000);
         editor.setTheme("ace/theme/chrome");
+        editor.renderer.setShowGutter(false);
+        editor.renderer.setPrintMarginColumn(false);
         editor.getSession().setMode("ace/mode/text");
         editor.setValue(this.props.resume.content);
 
@@ -168,17 +170,24 @@
             <div className="form-group">
               <label>Name</label>
               <input type="text" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="A private name for this resume" autoFocus="true" />
+                className="form-control" autoComplete="off" spellCheck="false" placeholder="Name" autoFocus="true" />
+              <p className="help-block">Your private name for this resume</p>
             </div>
             <div className="form-group">
-              <label>Slug</label>
+              <label>Link Name</label>
               <input type="text" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="A public identifier value like http://jibjob.co/resumes/[slug]" />
+                className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name" />
+              <p className="help-block">
+                A public name that identifies your resume. (i.e. http://jibjob.co/my-resume)
+              </p>
             </div>
             {isPublishedGroup}
             <div className="form-group">
               <label>Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
+              <p className="help-block">
+                See this page for an overview.
+              </p>
               {editor}
             </div>
             <JibJob.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
