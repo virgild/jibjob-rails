@@ -2,7 +2,7 @@
 lock '3.3.5'
 
 set :application, 'jibjob'
-set :repo_url, 'git@bitbucket.org:virgil/jibjob.git'
+set :repo_url, 'git@github.com:virgild/jibjob-rails.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
