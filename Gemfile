@@ -81,5 +81,5 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
-  #gem 'minitest-documentation'
+  gem 'codeclimate-test-reporter', require: false
 end

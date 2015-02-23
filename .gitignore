@@ -19,6 +19,7 @@ vendor/bundle
 public/system
 public/assets
 node_modules
+coverage
 .module-cache
 
 config/mailer.yml
