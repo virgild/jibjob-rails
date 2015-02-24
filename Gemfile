@@ -40,6 +40,7 @@ gem 'gon'
 gem 'geokit-rails'
 gem 'tzinfo-data'
 gem 'browser'
+gem 'google-analytics-rails'
 
 gem 'momentjs-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'

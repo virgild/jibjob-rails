@@ -10,6 +10,7 @@
     = include_gon
     = csrf_meta_tags
     %link{ rel: "apple-touch-icon", sizes: "120x120", href: image_url("apple-touch-icon.png") }
+    = analytics_init if Rails.env.production?
   %body
     = yield
 
