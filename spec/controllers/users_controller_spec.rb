@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  fixtures :all
+
   describe "after user signup" do
     before(:each) do
       get :new
