@@ -39,12 +39,15 @@ RSpec.describe PublicationsController, type: :controller do
       post :post_access_code, slug: resume.slug, access_code: 'INCORRECT'
       expect(response).to be_success
       expect(response).to render_template("access_code")
+      expect(session[:resume_access_codes]).to be_blank
     end
 
     example "Submitting correct access code" do
       post :post_access_code, slug: resume.slug, access_code: 'ABCDEF'
       expect(response).to be_redirect
       expect(response).to redirect_to(controller: :publications, action: :show, slug: resume.slug)
+      expect(session[:resume_access_codes]).to_not be_blank
+      expect(session[:resume_access_codes][resume.slug]).to eq 'ABCDEF'
     end
   end
 end

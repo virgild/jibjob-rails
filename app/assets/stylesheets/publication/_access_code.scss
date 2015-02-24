@@ -1,3 +1,11 @@
 .publication-access-code-page {
   background-color: #fff;
+  padding: 20px;
+  margin: 50px 50px 0 50px;
+  @include rounded(10px);
+
+  .msg {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
 }

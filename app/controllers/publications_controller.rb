@@ -27,9 +27,10 @@ class PublicationsController < ApplicationController
   def post_access_code
     if @resume.access_code == params[:access_code]
       session[:resume_access_codes] ||= {}
-      session[:resume_access_codes][@resume.slug] = true
+      session[:resume_access_codes][@resume.slug] = @resume.access_code
       redirect_to publication_url(slug: @resume.slug)
     else
+      @msg = "Incorrect access code"
       render action: :access_code
     end
   end
@@ -56,6 +57,6 @@ class PublicationsController < ApplicationController
   end
 
   def request_has_resume_access_code_for(resume)
-    session[:resume_access_codes] && session[:resume_access_codes][resume.slug]
+    session[:resume_access_codes] && (session[:resume_access_codes][resume.slug] == resume.access_code)
   end
 end
