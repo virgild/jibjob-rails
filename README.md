@@ -7,6 +7,8 @@ Easy resume editing and publishing
 [![Code Climate](https://codeclimate.com/github/virgild/jibjob-rails/badges/gpa.svg)](https://codeclimate.com/github/virgild/jibjob-rails)
 [![Test Coverage](https://codeclimate.com/github/virgild/jibjob-rails/badges/coverage.svg)](https://codeclimate.com/github/virgild/jibjob-rails)
 [![security](https://hakiri.io/github/virgild/jibjob-rails/master.svg)](https://hakiri.io/github/virgild/jibjob-rails/master)
+[![Dependency Status](https://gemnasium.com/virgild/jibjob-rails.svg)](https://gemnasium.com/virgild/jibjob-rails)
+[![Inline docs](https://inch-ci.org/github/virgild/jibjob-rails.svg?branch=master)](https://inch-ci.org/github/virgild/jibjob-rails)
 
 DESCRIPTION:
 ------------
