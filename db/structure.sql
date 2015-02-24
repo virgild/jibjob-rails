@@ -118,7 +118,8 @@ CREATE TABLE resumes (
     pdf_updated_at timestamp without time zone,
     edition integer DEFAULT 1,
     slug character varying NOT NULL,
-    is_published boolean DEFAULT false NOT NULL
+    is_published boolean DEFAULT false NOT NULL,
+    access_code character varying
 );
 
 
@@ -397,4 +398,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150217003722');
 INSERT INTO schema_migrations (version) VALUES ('20150218182355');
 
 INSERT INTO schema_migrations (version) VALUES ('20150221024933');
+
+INSERT INTO schema_migrations (version) VALUES ('20150224030817');
 

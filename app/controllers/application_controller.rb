@@ -5,4 +5,8 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedUser
   include GeokitOverrides
+
+  def error404
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

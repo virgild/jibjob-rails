@@ -45,6 +45,8 @@ Rails.application.routes.draw do
   get "/wallaby" => "front#wallaby"
 
   get '/:slug' => 'publications#show', as: 'publication'
+  get '/:slug/access_code' => 'publications#access_code', as: 'publication_access_code'
+  post '/:slug/access_code' => 'publications#post_access_code', as: 'publication_post_access_code'
 
   root 'front#index'
 end

@@ -81,11 +81,20 @@
         );
       }
 
+      if (resume.access_code) {
+        var accessCode = (
+          <div className="access-code">
+            Access code: {resume.access_code}
+          </div>
+        );
+      }
+
       return (
         <li className="resume-index-item list-group-item">
           <a href={resume.show_page} className="header-title">{resume.name}</a>
           <div className="descriptor">{resume.descriptor}</div>
           {published}
+          {accessCode}
           <div className="statslink">
             <a href={resume.stats_page} className="label label-warning">Stats Page</a>
           </div>

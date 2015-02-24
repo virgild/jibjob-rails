@@ -1,8 +1,10 @@
 class PublicationsController < ApplicationController
-
   layout 'publication'
 
-  before_filter :load_resume, only: [:show]
+  force_ssl if: -> { Rails.env == 'production' }
+
+  before_filter :load_resume
+  before_filter :check_access_code, only: [:show]
 
   def show
     @resume_data = PublicationSerializer.new(@resume)
@@ -19,17 +21,28 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def not_found
+  def access_code
+  end
 
+  def post_access_code
+    if @resume.access_code == params[:access_code]
+      session[:resume_access_codes] ||= {}
+      session[:resume_access_codes][@resume.slug] = true
+      redirect_to publication_url(slug: @resume.slug)
+    else
+      render action: :access_code
+    end
   end
 
   private
 
   def load_resume
-    @resume = Resume.published.where(slug: params[:slug]).last
+    @resume = Resume.published.where(slug: params[:slug]).last or error404
+  end
 
-    if @resume.nil?
-      render action: :not_found, status: :not_found
+  def check_access_code
+    if @resume.requires_access_code? && !request_has_resume_access_code_for(@resume)
+      redirect_to action: :access_code
     end
   end
 
@@ -40,5 +53,9 @@ class PublicationsController < ApplicationController
       request.referrer,
       request.user_agent
     )
+  end
+
+  def request_has_resume_access_code_for(resume)
+    session[:resume_access_codes] && session[:resume_access_codes][resume.slug]
   end
 end

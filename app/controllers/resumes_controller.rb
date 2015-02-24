@@ -103,7 +103,7 @@ class ResumesController < ApplicationController
       resume_params[:content].gsub!(/\r\n/, "\n")
     end
 
-    resume_params ? resume_params.permit(:name, :content, :slug, :is_published) : {}
+    resume_params ? resume_params.permit(:name, :content, :slug, :is_published, :access_code) : {}
   end
 
   def set_editor_mode

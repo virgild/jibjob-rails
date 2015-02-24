@@ -17,6 +17,7 @@
 #  edition          :integer          default("1")
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
+#  access_code      :string
 #
 # Indexes
 #
@@ -129,6 +130,10 @@ class Resume < ActiveRecord::Base
 
   def total_page_views
     publication_views.count
+  end
+
+  def requires_access_code?
+    access_code.present?
   end
 
   private

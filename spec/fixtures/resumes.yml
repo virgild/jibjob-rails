@@ -17,6 +17,7 @@
 #  edition          :integer          default("1")
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
+#  access_code      :string
 #
 # Indexes
 #
@@ -32,6 +33,7 @@ appleseed_resume:
   edition: 1
   status: 0
   guid: "258e532590dd62d5371cc21a15f97663"
+  access_code: ~
   content: |
     #N Thomas B. Seeker
     #A 1234 Northern Star Circle

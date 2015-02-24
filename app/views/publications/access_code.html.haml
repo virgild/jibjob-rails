@@ -1,0 +1,8 @@
+.page.publication-access-code-page
+  .container
+    %h1 Enter Access Code
+    = form_for publication_post_access_code_path do
+      .form-group
+        %label Access code
+        %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", spellcheck: "false", class: "form-control"}
+      %button{type: "submit", class: "btn btn-success"} Submit

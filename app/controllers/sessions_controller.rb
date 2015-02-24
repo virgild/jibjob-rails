@@ -34,13 +34,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.clear
+    reset_session
   end
 
   def logout
-    if current_user
-      destroy
-    end
+    destroy
 
     redirect_to login_url
   end

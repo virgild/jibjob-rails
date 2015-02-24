@@ -17,6 +17,7 @@
 #  edition          :integer          default("1")
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
+#  access_code      :string
 #
 # Indexes
 #
@@ -73,6 +74,14 @@ RSpec.describe Resume, type: :model do
     example "publication_views" do
       expect(resume.publication_views).to_not be_nil
       expect(resume.publication_views.length).to eq 0
+    end
+
+    example "access_code" do
+      expect(resume.access_code).to be_blank
+    end
+
+    example "requires_access_code?" do
+      expect(resume.requires_access_code?).to eq false
     end
   end
 
@@ -270,5 +279,14 @@ RSpec.describe Resume, type: :model do
   example "ensure the content has a newline at the end" do
     resume = user.resumes.create(name: "New Test Resume", slug: "new-test-resume", content: "")
     expect(resume.content.last).to eq "\n"
+  end
+
+  example "presence of access_code makes requires_access_code? true" do
+    resume = user.resumes.first
+    expect(resume.access_code).to be_blank
+    expect(resume.requires_access_code?).to eq false
+
+    expect(resume.update(access_code: "ABCDEF")).to eq true
+    expect(resume.requires_access_code?).to eq true
   end
 end

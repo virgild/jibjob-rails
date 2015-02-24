@@ -50,6 +50,7 @@
         name: this.props.resume.name,
         slug: this.props.resume.slug,
         is_published: this.props.resume.is_published,
+        access_code: this.props.resume.access_code,
         content: this.props.resume.content
       };
 
@@ -102,6 +103,16 @@
       this.setProps({
         resume: React.addons.update(this.props.resume, {
           is_published: {$set: newValue}
+        })
+      });
+    },
+
+    accessCodeChange: function(e) {
+      var newValue = e.target.value;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          access_code: {$set: newValue}
         })
       });
     },
@@ -182,6 +193,12 @@
               </p>
             </div>
             {isPublishedGroup}
+            <div className="form-group">
+              <label>Access Code</label>
+              <input type="text" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
+                className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="false" />
+                <p className="help-block">The viewer will be required to enter this access code when specified</p>
+            </div>
             <div className="form-group">
               <label>Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
