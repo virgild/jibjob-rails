@@ -66,6 +66,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
     FileUtils.rm_rf(Dir["#{Rails.root}/public/test"])
+    REDIS_POOL.flushdb
   end
 end
 

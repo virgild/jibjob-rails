@@ -4,11 +4,10 @@ class ResumeStatsController < ApplicationController
   before_filter :load_resume
 
   def index
-    lastview = @resume.publication_views.first
-    cache_key = "user-#{current_user.id}-resume-#{@resume.id}-stats-#{lastview.nil? ? 0 : lastview.created_at}"
-    @resume_data = Rails.cache.fetch(cache_key) do
-      ResumeStatsSerializer.new(@resume).to_json
-    end
+    @resume_data = ResumeSerializer.new(@resume).to_json
+    @views = @resume.publication_views.in_range(Time.now, 2.months.ago).paginate(per_page: 10, page: 1)
+    @views_data = ActiveModel::ArraySerializer.new(@views).to_json
+    @resume_stats = @resume.hourly_stats_for(5.days.ago.in_time_zone(@resume.user.timezone).at_beginning_of_day, Time.now.in_time_zone(@resume.user.timezone).at_end_of_day).to_json
   end
 
   private
@@ -18,7 +17,7 @@ class ResumeStatsController < ApplicationController
   end
 
   def load_resume
-    @resume ||= resume_scope.find(params[:id])
+    @resume ||= resume_scope.find(params[:id]) || error404
   end
 
 end

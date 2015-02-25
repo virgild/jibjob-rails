@@ -1,1 +1,1 @@
-= react_component("JibJob.ResumeStatsPage", {resume: JSON.parse(@resume_data)}, {prerender: true})
+= react_component("JibJob.ResumeStatsPage", {resume: JSON.parse(@resume_data), pageViews: JSON.parse(@views_data), resumeStats: JSON.parse(@resume_stats), resumesPage: user_resumes_url(current_user)}, {prerender: false})

@@ -25,7 +25,7 @@
 #
 
 class Resume < ActiveRecord::Base
-  HUMANIZED_ATTRIBUTES = {
+  HUMANIZED_ATTRIBUTES ||= {
     slug: "Link name"
   }
 
@@ -134,6 +134,13 @@ class Resume < ActiveRecord::Base
 
   def requires_access_code?
     access_code.present?
+  end
+
+  def hourly_stats_for(start_date, end_date)
+    stat_keys = ResumeStats.hourly_stats_keys_for(start_date, end_date)
+    stat_values = REDIS_POOL.hmget("resume-#{id}-stats", *stat_keys)
+    date_values = stat_keys.map { |key| DateTime.strptime(key, "day-%Y-%j-%H").in_time_zone(user.timezone) }
+    date_values.zip(stat_values.map { |count| count.to_i || 0 }).group_by { |stat| stat[0].to_date }.inject([]) { |list, group| list << group; list }
   end
 
   private

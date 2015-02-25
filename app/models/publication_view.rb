@@ -28,10 +28,19 @@ class PublicationView < ActiveRecord::Base
   belongs_to :resume
   has_one :user, through: :resume
 
+  scope :in_range, -> (time_start, time_end) { where('created_at < ? and created_at > ?', time_start, time_end) }
+
   before_save :geocode_ip, on: :create
+  after_save :increment_hour_stat, on: :create
+  after_save :increment_week_stat, on: :create
 
   def timezone
     user.timezone
+  end
+
+  def refresh_stat
+    increment_hour_stat
+    increment_week_stat
   end
 
   private
@@ -45,5 +54,25 @@ class PublicationView < ActiveRecord::Base
       self.lat = loc.lat
       self.lng = loc.lng
     end
+  end
+
+  def stats_key
+    "resume-#{resume.id}-stats"
+  end
+
+  def stat_key_for_hour
+    created_at.strftime("day-%Y-%j-%H")
+  end
+
+  def stat_key_for_week
+    "week-#{created_at.year}-#{created_at.to_date.cweek}"
+  end
+
+  def increment_hour_stat
+    REDIS_POOL.hincrby(stats_key, stat_key_for_hour, 1)
+  end
+
+  def increment_week_stat
+    REDIS_POOL.hincrby(stats_key, stat_key_for_week, 1)
   end
 end

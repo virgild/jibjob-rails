@@ -76,6 +76,7 @@ group :development, :test do
   gem 'timecop'
   gem 'puma'
   gem 'rspec-rails', '~> 3.0'
+  gem 'faker'
 end
 
 group :test do

@@ -6,19 +6,40 @@
   global.JibJob.ResumeStatsPage = React.createClass({
     propTypes: {
       resume: React.PropTypes.object.isRequired,
+      pageViews: React.PropTypes.array.isRequired,
+      resumeStats: React.PropTypes.array,
     },
 
     componentDidMount: function() {
       console.log(this.props);
+      global.JibJob.CurrentPage = this;
+
+      this.buildChart();
+    },
+
+    buildChart: function() {
+      var chart = d3.select(".chart");
+
+      var dayBar = chart.selectAll("div.chart")
+        .data(this.props.resumeStats)
+        .enter().append("div").attr("class", "day");
+
+      dayBar.append("div")
+        .text(function(d) { return d[0]; });
+
+      var timesBar = dayBar.selectAll("div.times")
+        .data(function(d) { return d[1]; })
+        .enter().append("span").attr("class", "times")
+        .text(function(d) { return d[1]; });
     },
 
     render: function() {
       var resume = this.props.resume;
 
       return (
-        <div className="page">
+        <div className="page resume-stats-page">
           <ol className="breadcrumb">
-            <li><a href="">My Resumes</a></li>
+            <li><a href={this.props.resumesPage}>My Resumes</a></li>
             <li><a href={resume.show_page}>{resume.name}</a></li>
             <li>Stats</li>
           </ol>
@@ -32,7 +53,10 @@
               <h4>Summary</h4>
               <div>Total Views: {resume.total_page_views}</div>
             </div>
-            <PublicationViewList resume={resume} />
+            <h4>Graph</h4>
+            <div className="chart">
+            </div>
+            <PublicationViewList resume={resume} pageViews={this.props.pageViews} />
           </div>
         </div>
       );
@@ -42,6 +66,7 @@
   var PublicationViewList = React.createClass({
     propTypes: {
       resume: React.PropTypes.object.isRequired,
+      pageViews: React.PropTypes.array.isRequired,
     },
 
     componentDidMount: function() {
@@ -49,7 +74,7 @@
     },
 
     render: function() {
-      var items = this.props.resume.publication_views.map(function(view, index) {
+      var items = this.props.pageViews.map(function(view, index) {
         var key = "pubview-" + index;
         return <PublicationViewListItem viewData={view} key={key} />;
       });
