@@ -21,8 +21,8 @@
       var width = 700;
       var height = 200;
       var blockSize = Math.floor(width / 28);
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
       var times = ["12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
-      // var colors = ["#fff", "#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026"];
       var colors = ['rgb(255,255,204)','rgb(255,237,160)','rgb(254,217,118)','rgb(254,178,76)','rgb(253,141,60)','rgb(252,78,42)','rgb(227,26,28)','rgb(189,0,38)','rgb(128,0,38)'];
       var colorScale = d3.scale.quantile()
         .domain([0, d3.max(this.props.resumeStats, function(d) { return d[4] })])
@@ -31,10 +31,11 @@
         return { year: d[0], month: d[1], day: d[2], hour: d[3], count: d[4] }
       });
 
-      var days = d3.set(
-        data.map(function(d) { return d.day; })
-          .filter(function(d) { return (typeof d != undefined) ? d !== null : false})
-      ).values();
+      var days = d3.set(this.props.resumeStats.map(function(d) {
+        return [d[1], d[2]]; })
+      ).values().map(function(str) {
+        return str.split(",");
+      });
 
       var svg = d3.select(".chart").append("svg")
         .attr("width", width)
@@ -44,10 +45,12 @@
       var dayLabels = svg.selectAll(".day")
         .data(days)
         .enter().append("text")
-        .text(function(d) { return d; })
+        .text(function(d) { return months[d[0] - 1] + ". " + d[1]; })
         .attr("x", 48)
         .attr("y", function(d, i) { return 36 + (i * blockSize); })
+        .attr("dy", "2")
         .style("text-anchor", "end")
+        .style("font-size", "10px")
         .attr("transform", "translate(0, " + blockSize / 1.5 + ")")
         .attr("fill", "#000")
         .attr("class", "day");
@@ -62,15 +65,27 @@
         .style("text-anchor", "middle")
         .attr("class", "time")
 
-      var hourBlocks = svg.selectAll(".hour")
+      var hourGroups = svg.selectAll(".hour")
         .data(data)
-        .enter().append("rect")
+        .enter().append("g");
+
+      var hourBlocks = hourGroups.append("rect")
         .attr("class", "hour")
         .attr("x", function(d) { return 60 + (d.hour * blockSize); })
-        .attr("y", function(d, i) { return 40 + ((d.day - d3.min(days)) * blockSize); })
+        .attr("y", function(d, i) { return 40 + ((d.day - 21) * blockSize); })
         .attr("width", blockSize - 1)
         .attr("height", blockSize - 1)
         .style("fill", function(d) { return colorScale(d.count); });
+
+      var countLabels = hourGroups.append("text")
+        .attr("class", "count")
+        .style("fill", "#000")
+        .style("font-size", "8px")
+        .attr("x", function(d) { return 66 + (d.hour * blockSize); })
+        .attr("y", function(d, i) { return 55 + ((d.day - 21) * blockSize); })
+        .attr("text-anchor", "middle")
+        .attr("dx", 5)
+        .text(function(d) { return d.count; });
     },
 
     render: function() {
@@ -93,7 +108,7 @@
               <h4>Summary</h4>
               <div>Total Views: {resume.total_page_views}</div>
             </div>
-            <h4>Graph</h4>
+            <h4>Resume views per hour in the last 5 days</h4>
             <div className="chart">
             </div>
             <PublicationViewList resume={resume} pageViews={this.props.pageViews} />
@@ -121,7 +136,7 @@
 
       return (
         <div>
-          <h4>Page Views</h4>
+          <h4>Most recent page views</h4>
           {items}
         </div>
       );
