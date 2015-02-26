@@ -18,29 +18,59 @@
     },
 
     buildChart: function() {
-      var chart = d3.select(".chart");
-      var hours = ["Date", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+      var width = 700;
+      var height = 200;
+      var blockSize = Math.floor(width / 28);
+      var times = ["12AM", "1AM", "2AM", "3AM", "4AM", "5AM", "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM"];
+      // var colors = ["#fff", "#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026"];
+      var colors = ['rgb(255,255,204)','rgb(255,237,160)','rgb(254,217,118)','rgb(254,178,76)','rgb(253,141,60)','rgb(252,78,42)','rgb(227,26,28)','rgb(189,0,38)','rgb(128,0,38)'];
+      var colorScale = d3.scale.quantile()
+        .domain([0, d3.max(this.props.resumeStats, function(d) { return d[4] })])
+        .range(colors);
+      var data = this.props.resumeStats.map(function(d) {
+        return { year: d[0], month: d[1], day: d[2], hour: d[3], count: d[4] }
+      });
 
-      var header = chart.append("tr");
-      header.selectAll("th").data(hours).enter()
-        .append("th").text(function(d) { return d; });
+      var days = d3.set(
+        data.map(function(d) { return d.day; })
+          .filter(function(d) { return (typeof d != undefined) ? d !== null : false})
+      ).values();
 
-      var days = chart.selectAll("tbody")
-        .data(this.props.resumeStats)
-        .enter().append("tr");
+      var svg = d3.select(".chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g");
 
-      days.append("td")
-        .text(function(d) {
-          return d[0];
-        });
+      var dayLabels = svg.selectAll(".day")
+        .data(days)
+        .enter().append("text")
+        .text(function(d) { return d; })
+        .attr("x", 48)
+        .attr("y", function(d, i) { return 36 + (i * blockSize); })
+        .style("text-anchor", "end")
+        .attr("transform", "translate(0, " + blockSize / 1.5 + ")")
+        .attr("fill", "#000")
+        .attr("class", "day");
 
-      days.selectAll("td")
-        .data(function(d) { return [d[0]].concat(d[1]); })
-        .enter().append("td")
-        .text(function(d) {
-          return d[1];
-        });
+      var timeLabels = svg.selectAll(".time")
+        .data(times)
+        .enter().append("text")
+        .text(function(d) { return d; })
+        .attr("x", function(d, i) { return 70 + (i * blockSize); })
+        .attr("y", 30)
+        .style("font-size", "8px")
+        .style("text-anchor", "middle")
+        .attr("class", "time")
 
+      var hourBlocks = svg.selectAll(".hour")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "hour")
+        .attr("x", function(d) { return 60 + (d.hour * blockSize); })
+        .attr("y", function(d, i) { return 40 + ((d.day - d3.min(days)) * blockSize); })
+        .attr("width", blockSize - 1)
+        .attr("height", blockSize - 1)
+        .style("fill", function(d) { return colorScale(d.count); });
     },
 
     render: function() {
@@ -64,8 +94,8 @@
               <div>Total Views: {resume.total_page_views}</div>
             </div>
             <h4>Graph</h4>
-            <table className="chart table">
-            </table>
+            <div className="chart">
+            </div>
             <PublicationViewList resume={resume} pageViews={this.props.pageViews} />
           </div>
         </div>
