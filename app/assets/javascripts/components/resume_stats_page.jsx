@@ -38,8 +38,7 @@
       });
 
       var svg = d3.select(".chart").append("svg")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("viewBox", "0 0 " + width + " " + height)
         .append("g");
 
       var dayLabels = svg.selectAll(".day")
