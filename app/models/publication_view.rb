@@ -21,6 +21,8 @@
 #
 
 class PublicationView < ActiveRecord::Base
+  attr_accessor :skip_geocode
+
   validates :resume_id, presence: true
   validates :ip_addr, presence: true
   validates :url, presence: true
@@ -30,7 +32,7 @@ class PublicationView < ActiveRecord::Base
 
   scope :in_range, -> (time_start, time_end) { where('created_at < ? and created_at > ?', time_start, time_end) }
 
-  before_save :geocode_ip, on: :create
+  before_save :geocode_ip, on: :create, unless: :skip_geocode
   after_save :increment_hour_stat, on: :create
   after_save :increment_week_stat, on: :create
 

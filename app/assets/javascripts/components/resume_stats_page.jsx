@@ -19,18 +19,28 @@
 
     buildChart: function() {
       var chart = d3.select(".chart");
+      var hours = ["Date", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
 
-      var dayBar = chart.selectAll("div.chart")
+      var header = chart.append("tr");
+      header.selectAll("th").data(hours).enter()
+        .append("th").text(function(d) { return d; });
+
+      var days = chart.selectAll("tbody")
         .data(this.props.resumeStats)
-        .enter().append("div").attr("class", "day");
+        .enter().append("tr");
 
-      dayBar.append("div")
-        .text(function(d) { return d[0]; });
+      days.append("td")
+        .text(function(d) {
+          return d[0];
+        });
 
-      var timesBar = dayBar.selectAll("div.times")
-        .data(function(d) { return d[1]; })
-        .enter().append("span").attr("class", "times")
-        .text(function(d) { return d[1]; });
+      days.selectAll("td")
+        .data(function(d) { return [d[0]].concat(d[1]); })
+        .enter().append("td")
+        .text(function(d) {
+          return d[1];
+        });
+
     },
 
     render: function() {
@@ -54,8 +64,8 @@
               <div>Total Views: {resume.total_page_views}</div>
             </div>
             <h4>Graph</h4>
-            <div className="chart">
-            </div>
+            <table className="chart table">
+            </table>
             <PublicationViewList resume={resume} pageViews={this.props.pageViews} />
           </div>
         </div>
