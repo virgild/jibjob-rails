@@ -77,4 +77,12 @@ class ResumeSerializer < BaseSerializer
   def new_record
     object.new_record?
   end
+
+  def created_at
+    object.created_at.in_time_zone(object.user.timezone).strftime("%b. %d, %Y %l:%M %p")
+  end
+
+  def updated_at
+    object.updated_at.in_time_zone(object.user.timezone).strftime("%b. %d, %Y %l:%M %p")
+  end
 end

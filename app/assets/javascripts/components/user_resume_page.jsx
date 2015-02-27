@@ -31,16 +31,15 @@
                   Published: {resume.is_published ? "Yes" : "No"}
                 </div>
                 <div>
-                  Publish URL: {resume.slug}
+                  Link name: /{resume.slug}
                 </div>
               </div>
             </div>
             <div className="col-md-9">
               <div className="actions">
-                <div className="btn-group">
-                  <a href={resume.edit_page} className="btn btn-default">Edit</a>
-                  <a href={resume.delete_page} className="btn btn-danger">Delete</a>
-                </div>
+                <a href={resume.edit_page} className="btn btn-default">Edit</a>
+                <a href={resume.stats_page} className="btn btn-primary stats-button">Stats</a>
+                <a href={resume.delete_page} className="btn btn-danger delete-button">Delete</a>
               </div>
             </div>
             <div className="col-md-9">

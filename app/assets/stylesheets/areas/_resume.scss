@@ -10,6 +10,14 @@
     @media (max-width: $screen-md-min) {
       text-align: inherit;
     }
+
+    .delete-button {
+      margin-left: 20px;
+    }
+
+    .stats-button {
+      margin-left: 10px;
+    }
   }
 
   .preview {
