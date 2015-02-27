@@ -113,11 +113,30 @@
         }
       }(period.items));
 
+      var dates = (function(start, end) {
+        if (start && end) {
+          return (<div className="date">{period.dtstart} - {period.dtend}</div>);
+        } else if (start && !end) {
+          return (<div className="date">{period.dtstart}</div>);
+        } else if (end && !start) {
+          return (<div className="date">{period.dtend}</div>);
+        }
+      }(period.dtstart, period.dtend));
+
+      var location = (function(location) {
+        if (location) {
+          return (<span className="location"> - {period.location}</span>);
+        }
+      }(period.location));
+
       return (
         <div className="period">
           <div className="period-title">{period.title}</div>
-          <div className="organization">{period.organization} - {period.location}</div>
-          <div className="date">{period.dtstart} - {period.dtend}</div>
+          <div className="organization">
+            {period.organization}
+            {location}
+          </div>
+          {dates}
           {items}
         </div>
       );

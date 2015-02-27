@@ -60,6 +60,10 @@ html, body {
   }
 }
 
+.period {
+  margin-top: 10px;
+}
+
 .control-panel {
   @include rounded(1px);
   margin-bottom: 10px;
