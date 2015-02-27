@@ -15,6 +15,16 @@
     render: function() {
       var resume = this.props.resume;
 
+      var accessCode = (function(access_code) {
+        if (access_code) {
+          return (
+            <div>
+              Access code: {resume.access_code}
+            </div>
+          );
+        }
+      }(resume.access_code));
+
       return (
         <div className="container">
           <div className="row">
@@ -33,6 +43,7 @@
                 <div>
                   Link name: /{resume.slug}
                 </div>
+                {accessCode}
               </div>
             </div>
             <div className="col-md-9">
