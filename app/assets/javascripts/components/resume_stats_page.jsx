@@ -11,13 +11,13 @@
     },
 
     componentDidMount: function() {
-      console.log(this.props);
       global.JibJob.CurrentPage = this;
 
       this.buildChart();
     },
 
     buildChart: function() {
+      var component = this;
       var width = 700;
       var height = 200;
       var blockSize = Math.floor(width / 28);
@@ -74,6 +74,9 @@
         .attr("y", function(d, i) { return 40 + ((d.day - 21) * blockSize); })
         .attr("width", blockSize - 1)
         .attr("height", blockSize - 1)
+        .style("fill", "#fff");
+
+      hourBlocks.transition().duration(1000)
         .style("fill", function(d) { return colorScale(d.count); });
 
       var countLabels = hourGroups.append("text")
@@ -84,7 +87,34 @@
         .attr("y", function(d, i) { return 55 + ((d.day - 21) * blockSize); })
         .attr("text-anchor", "middle")
         .attr("dx", 5)
-        .text(function(d) { return d.count; });
+        .attr("dy", 3)
+        .text(function(d) { return d.count; })
+        .style("cursor", "pointer")
+        .on("click", function(e) {
+          var data = d3.event.toElement.__data__;
+          component.loadPageViews(data.year, data.month, data.day, data.hour);
+        })
+        .on("mouseover", function(e) {
+          d3.select(this).style("fill", "#fff");
+        })
+        .on("mouseout", function(e) {
+          d3.select(this).style("fill", "#000");
+        });
+
+      countLabels.transition().duration(500)
+        .attr("dy", 0);
+    },
+
+    loadPageViews: function(year, month, day, hour) {
+      var url = this.props.resume.stats_page + "/" + year + "/" + month + "/" + day + "/" + hour + ".json";
+      var component = this;
+      $.get(url).done(function(data) {
+        component.setProps({
+          pageViews: React.addons.update(component.props.pageViews, {
+            $set: data
+          })
+        });
+      });
     },
 
     render: function() {

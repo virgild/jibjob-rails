@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         member do
           get 'delete'
           get 'stats' => 'resume_stats#index'
+          get 'stats/:year/:month/:day/:hour' => 'resume_stats#hour_views', as: 'hour_views'
         end
       end
     end
