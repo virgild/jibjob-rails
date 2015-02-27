@@ -71,7 +71,7 @@
       var hourBlocks = hourGroups.append("rect")
         .attr("class", "hour")
         .attr("x", function(d) { return 60 + (d.hour * blockSize); })
-        .attr("y", function(d, i) { return 40 + ((d.day - 21) * blockSize); })
+        .attr("y", function(d, i) { return 10 + ((d.day - 21) * blockSize); })
         .attr("width", blockSize - 1)
         .attr("height", blockSize - 1)
         .style("fill", "#fff");
@@ -84,7 +84,7 @@
         .style("fill", "#000")
         .style("font-size", "8px")
         .attr("x", function(d) { return 66 + (d.hour * blockSize); })
-        .attr("y", function(d, i) { return 55 + ((d.day - 21) * blockSize); })
+        .attr("y", function(d, i) { return 25 + ((d.day - 21) * blockSize); })
         .attr("text-anchor", "middle")
         .attr("dx", 5)
         .attr("dy", 3)
