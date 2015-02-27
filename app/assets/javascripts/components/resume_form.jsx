@@ -209,7 +209,7 @@
               <label>Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
               <p className="help-block">
-                See this page for an overview.
+                Read <a href="">'Get Started'</a> for an overview of composing resumes.
               </p>
               {editor}
             </div>

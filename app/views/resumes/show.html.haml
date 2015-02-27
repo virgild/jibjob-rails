@@ -3,4 +3,4 @@
     %li= link_to "My Resumes", user_resumes_url(current_user)
     %li= @resume.name
 
-  = react_component("JibJob.UserResumePage", {resume: @user_resume}, {prerender: true})
+  = react_component("JibJob.UserResumePage", {resume: @user_resume}, {prerender: false})

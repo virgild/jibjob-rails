@@ -9,17 +9,19 @@
     },
 
     componentDidMount: function() {
-
+      global.JibJob.CurrentPage = this;
     },
 
     render: function() {
       var resume = this.props.resume;
+      var origin = window.location.origin;
+      var pub_url = origin + resume.publish_url;
 
       var accessCode = (function(access_code) {
         if (access_code) {
           return (
             <div>
-              Access code: {resume.access_code}
+              <b>Access code:</b> {resume.access_code}
             </div>
           );
         }
@@ -32,16 +34,16 @@
               <div className="details">
                 <h3>{resume.name} Details </h3>
                 <div>
-                  Created: {resume.created_at}
+                  <b>Created:</b> {resume.created_at}
                 </div>
                 <div>
-                  Updated: {resume.updated_at}
+                  <b>Updated:</b> {resume.updated_at}
                 </div>
                 <div>
-                  Published: {resume.is_published ? "Yes" : "No"}
+                  <b>Published:</b> {resume.is_published ? "Yes" : "No"}
                 </div>
                 <div>
-                  Link name: /{resume.slug}
+                  <b>Publish URL:</b> <a href={pub_url}>{pub_url}</a>
                 </div>
                 {accessCode}
               </div>
