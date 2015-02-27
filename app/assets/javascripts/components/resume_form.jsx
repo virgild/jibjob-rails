@@ -153,12 +153,18 @@
 
     render: function() {
       var resume = this.props.resume;
+      var origin = window.location.origin;
+      var pub_url = origin + "/" + resume.slug;
 
       if (resume.new_record == false) {
         var isPublishedGroup = (
           <div className="form-group">
-            <label>Published</label>
-            <input type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
+            <label>Publish now</label>
+            <br/>
+            <label>
+              <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
+              <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
+            </label>
           </div>
         );
       }
@@ -189,7 +195,7 @@
               <input type="text" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name" />
               <p className="help-block">
-                A public name that identifies your resume. (i.e. http://jibjob.co/my-resume)
+                A public name that identifies your resume. (i.e. {origin}/my-resume)
               </p>
             </div>
             {isPublishedGroup}
