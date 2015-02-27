@@ -74,7 +74,12 @@
         .attr("y", function(d, i) { return 10 + ((d.day - 21) * blockSize); })
         .attr("width", blockSize - 1)
         .attr("height", blockSize - 1)
-        .style("fill", "#fff");
+        .style("fill", "#fff")
+        .style("cursor", "pointer")
+        .on("click", function(e) {
+          var data = d3.event.toElement.__data__;
+          component.loadPageViews(data.year, data.month, data.day, data.hour);
+        });
 
       hourBlocks.transition().duration(1000)
         .style("fill", function(d) { return colorScale(d.count); });
@@ -83,23 +88,23 @@
         .attr("class", "count")
         .style("fill", "#000")
         .style("font-size", "8px")
+        .style("cursor", "pointer")
         .attr("x", function(d) { return 66 + (d.hour * blockSize); })
         .attr("y", function(d, i) { return 25 + ((d.day - 21) * blockSize); })
         .attr("text-anchor", "middle")
         .attr("dx", 5)
         .attr("dy", 3)
         .text(function(d) { return d.count; })
-        .style("cursor", "pointer")
-        .on("click", function(e) {
-          var data = d3.event.toElement.__data__;
-          component.loadPageViews(data.year, data.month, data.day, data.hour);
-        })
         .on("mouseover", function(e) {
           d3.select(this).style("fill", "#fff");
         })
         .on("mouseout", function(e) {
           d3.select(this).style("fill", "#000");
-        });
+        })
+        .on("click", function(e) {
+          var data = d3.event.toElement.__data__;
+          component.loadPageViews(data.year, data.month, data.day, data.hour);
+        });;
 
       countLabels.transition().duration(500)
         .attr("dy", 0);
@@ -165,7 +170,7 @@
 
       return (
         <div>
-          <h4>Most recent page views</h4>
+          <h4>Page views</h4>
           {items}
         </div>
       );
