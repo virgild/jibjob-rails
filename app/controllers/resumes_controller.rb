@@ -111,5 +111,7 @@ class ResumesController < ApplicationController
     if browser.mobile?
       @use_plain_editor = true
     end
+
+    @use_plain_editor = always_use_plain_editor_for_now = true
   end
 end

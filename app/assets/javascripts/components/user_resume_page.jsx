@@ -50,8 +50,8 @@
             </div>
             <div className="col-md-9">
               <div className="actions">
-                <a href={resume.edit_page} className="btn btn-default">Edit</a>
-                <a href={resume.stats_page} className="btn btn-primary stats-button">Stats</a>
+                <a href={resume.edit_page} className="btn btn-primary">Edit</a>
+                <a href={resume.stats_page} className="btn btn-default stats-button">Stats</a>
                 <a href={resume.delete_page} className="btn btn-danger delete-button">Delete</a>
               </div>
             </div>
