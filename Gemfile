@@ -42,12 +42,6 @@ gem 'tzinfo-data'
 gem 'browser'
 gem 'google-analytics-rails'
 
-gem 'momentjs-rails'
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
-gem 'd3-rails'
-gem 'bootstrap-sass', '~> 3.3.2'
-gem 'autoprefixer-rails'
-
 gem 'active_type'
 gem 'active_model_serializers'
 gem 'resumetools'
@@ -60,8 +54,6 @@ gem 'rack-protection'
 #gem 'newrelic_rpm'
 
 group :development do
-  # gem 'better_errors'
-  # gem 'binding_of_caller'
   gem 'annotate'
   gem 'pry-rails'
   # Access an IRB console on exception pages or by using <%= console %> in views

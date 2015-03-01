@@ -1,47 +1,43 @@
-"use strict";
+var React = require('react/addons');
 
-(function(global) {
-  global.JibJob = global.JibJob || {};
+module.exports = React.createClass({
+  propTypes: {
+    model: React.PropTypes.object.isRequired
+  },
 
-  global.JibJob.ErrorDisplay = React.createClass({
-    propTypes: {
-      model: React.PropTypes.object.isRequired
-    },
+  render: function() {
+    var model = this.props.model;
 
-    render: function() {
-      var model = this.props.model;
+    var items = model.errors.map(function(error, index) {
+      var key = "error-" + index;
+      return <ErrorItem data={error} key={key} />;
+    });
 
-      var items = model.errors.map(function(error, index) {
-        var key = "error-" + index;
-        return <ErrorItem data={error} key={key} />;
-      });
-
-      if (Object.getOwnPropertyNames(model.errors).length > 1) {
-        return (
-          <div className="error-display">
-            <h4>There are errors in the form</h4>
-            <ul>
-              {items}
-            </ul>
-          </div>
-        );
-      } else {
-        return null;
-      }
-    }
-  });
-
-  var ErrorItem = React.createClass({
-    propTypes: {
-      data: React.PropTypes.any.isRequired
-    },
-
-    render: function() {
-      var errorMessage = this.props.data;
-
+    if (Object.getOwnPropertyNames(model.errors).length > 1) {
       return (
-        <li>{errorMessage}</li>
+        <div className="error-display">
+          <h4>There are errors in the form</h4>
+          <ul>
+            {items}
+          </ul>
+        </div>
       );
+    } else {
+      return null;
     }
-  });
-}(window));
+  }
+});
+
+var ErrorItem = React.createClass({
+  propTypes: {
+    data: React.PropTypes.any.isRequired
+  },
+
+  render: function() {
+    var errorMessage = this.props.data;
+
+    return (
+      <li>{errorMessage}</li>
+    );
+  }
+});

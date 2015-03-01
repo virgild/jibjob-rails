@@ -31,15 +31,5 @@ module JibJob
 
     # Set cache store
     config.cache_store = :mem_cache_store
-
-    # Set ReactJS options
-    config.react.jsx_transform_options = {
-      harmony: true,
-      strip_types: true
-    }
-    config.react.addons = true
-
-    # Asset paths
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
   end
 end

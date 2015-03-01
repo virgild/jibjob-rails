@@ -17,7 +17,7 @@ class ResumesController < ApplicationController
 
   def new
     build_resume
-    @resume_data = ResumeSerializer.new(@resume)
+    @resume_data = ResumeSerializer.new(@resume).to_json
   end
 
   def create
@@ -38,8 +38,7 @@ class ResumesController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @user_resume = ResumeSerializer.new(@resume)
-        @resume_data = PublicationSerializer.new(@resume)
+        @user_resume = ResumeSerializer.new(@resume).to_json
       end
       format.text { render plain: @resume.generate_plain_text }
       format.json { render json: @resume.generate_json_text }
@@ -48,7 +47,7 @@ class ResumesController < ApplicationController
 
   def edit
     build_resume
-    @resume_data = ResumeSerializer.new(@resume)
+    @resume_data = ResumeSerializer.new(@resume).to_json
   end
 
   def update

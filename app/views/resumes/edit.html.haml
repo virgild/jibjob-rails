@@ -7,4 +7,10 @@
     %li= link_to @resume.name, user_resume_url(current_user, @resume)
     %li Edit
 
-  = react_component("JibJob.ResumeForm", { resume: @resume_data, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT', usePlainEditor: @use_plain_editor }, {prerender: false})
+  #resume_form
+
+  - content_for :body_javascript do
+    :javascript
+      var React = require("react/addons");
+      var ResumeForm = require("resume_form");
+      React.render(React.createElement(ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resume_url(current_user, @resume)}", saveMethod: 'PUT', usePlainEditor: #{@use_plain_editor} }), document.getElementById("resume_form"));

@@ -3,4 +3,12 @@
     %li= link_to "My Resumes", user_resumes_url(current_user)
     %li= @resume.name
 
-  = react_component("JibJob.UserResumePage", {resume: @user_resume}, {prerender: false})
+  #resume
+
+- content_for :body_javascript do
+  :javascript
+    $(function(){
+      var React = require("react/addons");
+      var ResumePage = require("user_resume_page");
+      React.render(React.createElement(ResumePage, { resume: #{@user_resume} }), document.getElementById("resume"));
+    });

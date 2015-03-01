@@ -7,7 +7,7 @@ class PublicationsController < ApplicationController
   before_filter :check_access_code, only: [:show]
 
   def show
-    @resume_data = PublicationSerializer.new(@resume)
+    @resume_data = PublicationSerializer.new(@resume).to_json
 
     # Log page view
     record_pageview
