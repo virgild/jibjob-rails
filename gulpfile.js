@@ -24,8 +24,13 @@ var watchify = require('watchify');
 var buffer = require('vinyl-buffer');
 
 var config = {
-  bowerDir: './bower_components'
+  bowerDir: './bower_components',
+  railsEnv: process.env.RAILS_ENV || 'development'
 };
+
+gulp.task('default', function() {
+  console.log("RAILS_ENV: " + config.railsEnv);
+});
 
 /* Clean */
 gulp.task('clean', function() {
