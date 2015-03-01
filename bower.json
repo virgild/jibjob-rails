@@ -1,0 +1,27 @@
+{
+  "name": "jibjob",
+  "version": "1.0.0",
+  "homepage": "http://jibjob.co",
+  "authors": [
+    "Virgil Dimaguila <virgild@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.3",
+    "d3": "~3.5.5",
+    "jstz": "*",
+    "moment": "~2.9.0",
+    "react": "~0.12.2"
+  }
+}

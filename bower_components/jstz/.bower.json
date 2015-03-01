@@ -1,0 +1,14 @@
+{
+  "name": "jstz",
+  "homepage": "https://github.com/entraigas/jstz",
+  "_release": "31376ad30c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "31376ad30cf87572a62de074f739820174498f48"
+  },
+  "_source": "git://github.com/entraigas/jstz.git",
+  "_target": "*",
+  "_originalSource": "jstz",
+  "_direct": true
+}
