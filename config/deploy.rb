@@ -26,7 +26,7 @@ set :format, :pretty
 set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml', 'config/redis.yml')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'node_modules')
 
 # Default value for default_env is {}
 if ENV['DEPLOY_ENV_PATH']
@@ -42,7 +42,6 @@ set :sidekiq_role, :worker
 set :sidekiq_queue, ['default', 'mailers', 'logging']
 
 namespace :deploy do
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
@@ -51,5 +50,10 @@ namespace :deploy do
       # end
     end
   end
+end
 
+namespace :assets do
+  task :precompile do
+    execute ""
+  end
 end

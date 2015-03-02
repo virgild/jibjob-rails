@@ -31,5 +31,10 @@ module JibJob
 
     # Set cache store
     config.cache_store = :mem_cache_store
+
+    # Disable asset generator
+    config.generators do |g|
+      g.assets false
+    end
   end
 end

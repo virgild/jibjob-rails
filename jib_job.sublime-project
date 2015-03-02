@@ -8,6 +8,7 @@
     { "path": "test" },
     { "path": "spec" },
     { "path": "public" },
+    { "path": "scripts" },
     { "path": ".build_config", "name": "Build Config" }
 	],
   "settings":
