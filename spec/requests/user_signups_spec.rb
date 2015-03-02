@@ -25,7 +25,7 @@ RSpec.describe "UserSignups", type: :request, js: true do
       expect(user).to_not be_nil
     end
 
-    it "creates a user with a timezone" do
+    it "creates a user with a timezone", no_travis: true do
       expect(user.timezone).to_not be_blank
     end
   end
