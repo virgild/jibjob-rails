@@ -20,7 +20,7 @@
   "dependencies": {
     "bootstrap-sass-official": "~3.3.3",
     "d3": "~3.5.5",
-    "jstz": "*",
-    "moment": "~2.9.0"
+    "moment": "~2.9.0",
+    "jstz-detect": "~1.0.5"
   }
 }

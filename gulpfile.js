@@ -58,7 +58,7 @@ gulp.task('javascript-lib', function() {
     config.bowerDir + '/jquery/dist/jquery.js',
     config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
     config.bowerDir + '/d3/d3.js',
-    config.bowerDir + '/jstz/jstz.js',
+    config.bowerDir + '/jstz-detect/jstz.js',
     config.bowerDir + '/moment/moment.js'
   ])
     .pipe(concat('library.js'))
