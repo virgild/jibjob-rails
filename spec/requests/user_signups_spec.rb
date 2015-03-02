@@ -14,18 +14,18 @@ RSpec.describe "UserSignups", type: :request, js: true do
     click_button "Submit"
   end
 
-  example "goes to resumes page" do
-    expect(page).to have_content "Resumes"
-  end
-
-  context "it created the user" do
+  context "after submitting the form" do
     let(:user) { User.where(username: 'testuser').first }
 
-    example "the user exists" do
+    it "goes to resumes page" do
+      expect(page).to have_content "Resumes"
+    end
+
+    it "creates the user" do
       expect(user).to_not be_nil
     end
 
-    example "the user has a timezone" do
+    it "creates a user with a timezone" do
       expect(user.timezone).to_not be_blank
     end
   end

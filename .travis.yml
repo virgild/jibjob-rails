@@ -11,6 +11,5 @@ before_script:
   - psql -c 'create database jib_job_travis;' -U postgres
   - npm install -g gulp
   - npm install
-  - gulp compress
-  - gulp install
-  - gulp manifest
+  - gulp clean
+  - gulp dev:install
