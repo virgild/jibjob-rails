@@ -24,6 +24,7 @@ var watchify = require('watchify');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
+var minifycss = require('gulp-minify-css');
 
 var config = {
   bowerDir: './bower_components',
@@ -60,7 +61,7 @@ gulp.task('javascript-lib', function() {
     config.bowerDir + '/moment/moment.js'
   ])
     .pipe(concat('library.js'))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build/full/js'));
 });
 
 /* Javascript - App */
@@ -69,7 +70,7 @@ gulp.task('javascript-app', function() {
     .require('./app/assets/javascripts/signup.js', { expose: 'signup' })
     .bundle()
     .pipe(source('app.js'))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build/full/js'));
 });
 
 /* SASS */
@@ -88,7 +89,7 @@ gulp.task('sass', function() {
       ]
     }))
     .pipe(autoprefixer())
-    .pipe(gulp.dest('build/css'));
+    .pipe(gulp.dest('build/full/css'));
 });
 
 /* Fonts */
@@ -96,7 +97,7 @@ gulp.task('fonts', function() {
   return gulp.src([
     config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/*'
   ])
-    .pipe(gulp.dest('build/fonts/bootstrap'));
+    .pipe(gulp.dest('build/full/fonts/bootstrap'));
 });
 
 /* Images */
@@ -104,7 +105,7 @@ gulp.task('images', function() {
   return gulp.src([
     './app/assets/images/*'
   ])
-    .pipe(gulp.dest('build/images'));
+    .pipe(gulp.dest('build/full/images'));
 });
 
 /* Data */
@@ -112,7 +113,7 @@ gulp.task('data', function() {
   return gulp.src([
     './app/assets/text/*'
   ])
-    .pipe(gulp.dest('build/text'));
+    .pipe(gulp.dest('build/full/text'));
 });
 
 /*********************************
@@ -128,7 +129,7 @@ gulp.task('components-js', function() {
     .require('./app/assets/javascripts/components/resume_stats_page.jsx', { expose: 'resume_stats_page' })
     .bundle()
     .pipe(source('components.js'))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build/full/js'));
 });
 
 gulp.task('publication-js', function() {
@@ -140,25 +141,44 @@ gulp.task('publication-js', function() {
     .require('./app/assets/javascripts/components/publication_page.jsx', { expose: 'publication_page' })
     .bundle()
     .pipe(source('publication.js'))
-    .pipe(gulp.dest('build/js'));
+    .pipe(gulp.dest('build/full/js'));
+});
+
+/* Compress */
+gulp.task('compress', ['build'], function() {
+  merge(
+    gulp.src('build/full/css/*.css')
+      .pipe(minifycss({ processImport: false, advanced: false, rebase: false }))
+      .pipe(gulp.dest('build/compressed/css')),
+    gulp.src('build/full/js/*.js')
+      .pipe(uglify())
+      .pipe(gulp.dest('build/compressed/js')),
+    gulp.src('build/full/images/**/*')
+      .pipe(gulp.dest('build/compressed/images')),
+    gulp.src('build/full/fonts/**/*')
+      .pipe(gulp.dest('build/compressed/fonts')),
+    gulp.src('build/full/text/**/*')
+      .pipe(gulp.dest('build/compressed/text'))
+  );
+});
+
+/* Install */
+gulp.task('install', function() {
+  return gulp.src('build/compressed/**/*')
+    .pipe(gulp.dest('public/assets'));
 });
 
 /* Manifest */
-gulp.task('manifest', ['install'], function() {
+gulp.task('manifest', function() {
   return gulp.src([
-    'build/css/*.css',
-    'build/js/*.js',
-    'build/images/**/*',
-    'build/fonts/**/*'
-  ], { base: 'build' })
+    'build/compressed/css/*.css',
+    'build/compressed/js/*.js',
+    'build/compressed/images/**/*',
+    'build/compressed/fonts/**/*'
+  ], { base: 'build/compressed' })
     .pipe(gulp.dest('public/assets'))
     .pipe(revAll())
     .pipe(gulp.dest('public/assets'))
     .pipe(revAll.manifest({ fileName: 'manifest.json' }))
     .pipe(gulp.dest('.'));
-});
-
-gulp.task('install', ['build'], function() {
-  return gulp.src('build/**/*')
-    .pipe(gulp.dest('public/assets'));
 });
