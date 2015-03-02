@@ -8,7 +8,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var revAll = require('gulp-rev-all');
 var gzip = require('gulp-gzip');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 var concat = require('gulp-concat');
 var wrapper = require('gulp-wrapper');
 var sourcemaps = require('gulp-sourcemaps');
@@ -34,8 +34,7 @@ gulp.task('default', function() {
 
 /* Clean */
 gulp.task('clean', function() {
-  return gulp.src(['./public/assets'])
-    .pipe(rimraf());
+  del(['./public/assets']);
 });
 
 /* Build */
