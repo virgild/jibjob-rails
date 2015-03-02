@@ -21,7 +21,6 @@
     "bootstrap-sass-official": "~3.3.3",
     "d3": "~3.5.5",
     "jstz": "*",
-    "moment": "~2.9.0",
-    "react": "~0.12.2"
+    "moment": "~2.9.0"
   }
 }
