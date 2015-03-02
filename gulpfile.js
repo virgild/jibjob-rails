@@ -25,6 +25,8 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var watch = require('gulp-watch');
 var minifycss = require('gulp-minify-css');
+var plumber = require('gulp-plumber');
+var batch = require('gulp-batch');
 
 var config = {
   bowerDir: './bower_components',
@@ -82,44 +84,54 @@ gulp.task('javascript-app', function() {
 
 /* SASS */
 gulp.task('sass', function() {
-  return gulp.src([
+  var sassFiles = [
     "app/assets/stylesheets/application.scss",
     "app/assets/stylesheets/publication.scss",
     "app/assets/stylesheets/admin.scss"
-  ])
-    .pipe(sass({
-      outputStyle: 'nested',
-      sourceComments: true,
-      sourceMap: false,
-      includePaths: [
-        config.bowerDir + '/bootstrap-sass-official/assets/stylesheets'
-      ]
-    }))
+  ];
+
+  var sassConfig = {
+    outputStyle: 'nested',
+    sourceComments: true,
+    sourceMap: false,
+    includePaths: [
+      config.bowerDir + '/bootstrap-sass-official/assets/stylesheets'
+    ]
+  };
+
+  return gulp.src(sassFiles)
+    .pipe(sass(sassConfig))
     .pipe(autoprefixer())
     .pipe(gulp.dest('build/full/css'));
 });
 
 /* Fonts */
 gulp.task('fonts', function() {
-  return gulp.src([
+  var fonts = [
     config.bowerDir + '/bootstrap-sass-official/assets/fonts/bootstrap/*'
-  ])
+  ];
+
+  return gulp.src(fonts)
     .pipe(gulp.dest('build/full/fonts/bootstrap'));
 });
 
 /* Images */
 gulp.task('images', function() {
-  return gulp.src([
+  var images = [
     './app/assets/images/*'
-  ])
+  ];
+
+  return gulp.src(images)
     .pipe(gulp.dest('build/full/images'));
 });
 
 /* Data */
 gulp.task('data', function() {
-  return gulp.src([
+  var dataFiles = [
     './app/assets/text/*'
-  ])
+  ];
+
+  return gulp.src(dataFiles)
     .pipe(gulp.dest('build/full/text'));
 });
 
@@ -137,6 +149,95 @@ gulp.task('components-js', function() {
     .bundle()
     .pipe(source('components.js'))
     .pipe(gulp.dest('build/full/js'));
+});
+
+/*******************
+ *      WATCH      *
+ *******************/
+gulp.task('watch', function() {
+  /* components.js */
+  var components_js_bundler = browserify({
+    transform: [reactify],
+    cache: {},
+    packageCache: {},
+    fullPaths: false
+  })
+    .require('react/addons', { expose: 'react/addons' })
+    .require('./app/assets/javascripts/components/user_resume_list.jsx', { expose: 'user_resume_list' })
+    .require('./app/assets/javascripts/components/resume_form.jsx', { expose: 'resume_form' })
+    .require('./app/assets/javascripts/components/user_resume_page.jsx', { expose: 'user_resume_page' })
+    .require('./app/assets/javascripts/components/resume_stats_page.jsx', { expose: 'resume_stats_page' });
+
+  var components_js_watcher = watchify(components_js_bundler);
+
+  components_js_watcher.on('update', function() {
+    gutil.log(gutil.colors.green("Updated ") + gutil.colors.yellow("components.js"));
+    components_js_watcher.bundle()
+      .pipe(source('components.js'))
+      .pipe(gulp.dest('public/assets/js'));
+  })
+    .bundle()
+    .pipe(source('components.js'))
+    .pipe(gulp.dest('public/assets/js'));
+
+  /* app.js */
+  var app_js_bundler = browserify({ cache: {}, packageCache: {}, fullPaths: false })
+    .require('./app/assets/javascripts/signup.js', { expose: 'signup' });
+
+  var app_js_watcher = watchify(app_js_bundler);
+
+  app_js_watcher.on('update', function() {
+    gutil.log(gutil.colors.green("Updated ") + gutil.colors.yellow("app.js"));
+    app_js_watcher.bundle()
+      .pipe(source('app.js'))
+      .pipe(gulp.dest('public/assets/js'));
+  })
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest('public/assets/js'));
+
+  /* publication.js */
+  var pub_js_bundler = browserify({
+    transform: [reactify],
+    cache: {},
+    packageCache: {},
+    fullPaths: false
+  })
+    .require('react/addons', { expose: 'react/addons' })
+    .require('./app/assets/javascripts/components/publication_page.jsx', { expose: 'publication_page' });
+
+  var pub_js_watcher = watchify(pub_js_bundler);
+
+  pub_js_watcher.on('update', function() {
+    gutil.log(gutil.colors.green("Updated ") + gutil.colors.yellow("publication.js"));
+    pub_js_watcher.bundle()
+      .pipe(source('publication.js'))
+      .pipe(gulp.dest('public/assets/js'));
+  })
+    .bundle()
+    .pipe(source('publication.js'))
+    .pipe(gulp.dest('public/assets/js'));
+
+  /* Sass files */
+  gulp.src([
+    "app/assets/stylesheets/application.scss",
+    "app/assets/stylesheets/publication.scss",
+    "app/assets/stylesheets/admin.scss"
+  ])
+    .pipe(watch('app/assets/stylesheets/**/*.scss', function(file) {
+      gutil.log(gutil.colors.green("Updated ") + gutil.colors.yellow(file.path.replace(file.base, '')));
+    }))
+    .pipe(plumber())
+    .pipe(sass({
+      outputStyle: 'nested',
+      sourceComments: true,
+      sourceMap: false,
+      includePaths: [
+        config.bowerDir + '/bootstrap-sass-official/assets/stylesheets'
+      ]
+    }))
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('public/assets/css'));
 });
 
 gulp.task('publication-js', function() {
@@ -172,6 +273,11 @@ gulp.task('compress', ['build'], function() {
 /* Install */
 gulp.task('install', function() {
   return gulp.src('build/compressed/**/*')
+    .pipe(gulp.dest('public/assets'));
+});
+
+gulp.task('dev:install', ['build'], function() {
+  return gulp.src('build/full/**/*')
     .pipe(gulp.dest('public/assets'));
 });
 
