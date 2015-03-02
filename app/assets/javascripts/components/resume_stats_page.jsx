@@ -66,7 +66,7 @@ module.exports = React.createClass({
     var hourBlocks = hourGroups.append("rect")
       .attr("class", "hour")
       .attr("x", function(d) { return 60 + (d.hour * blockSize); })
-      .attr("y", function(d, i) { return 10 + ((d.day - 21) * blockSize); })
+      .attr("y", function(d, i) { return 40 + (~~(i / 24) * blockSize); })
       .attr("width", blockSize - 1)
       .attr("height", blockSize - 1)
       .style("fill", "#fff")
@@ -86,9 +86,10 @@ module.exports = React.createClass({
       .style("cursor", "pointer")
       .style("opacity", 0)
       .attr("x", function(d) { return 66 + (d.hour * blockSize); })
-      .attr("y", function(d, i) { return 25 + ((d.day - 21) * blockSize); })
+      .attr("y", function(d, i) { return 40 + (~~(i / 24) * blockSize); })
       .attr("text-anchor", "middle")
-      .attr("dx", 5)
+      .attr("dx", 6)
+      .attr("dy", 15)
       .text(function(d) { return d.count; })
       .on("mouseover", function(e) {
         d3.select(this).style("fill", "#fff");
@@ -134,7 +135,7 @@ module.exports = React.createClass({
         </div>
         <div className="container">
           <div className="summary">
-            <h4>Summary</h4>
+            <h4>Page View Summary</h4>
             <div>Total Views: {resume.total_page_views}</div>
           </div>
           <h4>Resume views per hour in the last 5 days</h4>
