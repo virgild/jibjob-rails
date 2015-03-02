@@ -54,6 +54,8 @@ end
 
 namespace :assets do
   task :precompile do
-    execute ""
+    execute "scripts/precompile-assets.sh"
   end
 end
+
+after "deploy:updated", "assets:precompile"

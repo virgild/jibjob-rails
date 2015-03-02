@@ -59,7 +59,7 @@ gulp.task('javascript', function() {
     ])
   )
     .pipe(concat('library.js'))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('public/assets/js'));
 });
 
@@ -71,7 +71,7 @@ gulp.task('sass', function() {
     "app/assets/stylesheets/admin.scss"
   ])
     .pipe(sass({
-      outputStyle: 'nested',
+      outputStyle: 'compressed',
       sourceComments: false,
       sourceMap: true,
       includePaths: [
@@ -119,8 +119,8 @@ gulp.task('components-js', function() {
     .require('./app/assets/javascripts/components/resume_stats_page.jsx', { expose: 'resume_stats_page' })
     .bundle()
     .pipe(source('components.js'))
-    //.pipe(buffer())
-    //.pipe(uglify())
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest('public/assets/js'));
 });
 
@@ -133,5 +133,7 @@ gulp.task('publication-js', function() {
     .require('./app/assets/javascripts/components/publication_page.jsx', { expose: 'publication_page' })
     .bundle()
     .pipe(source('publication.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest('public/assets/js'));
 });
