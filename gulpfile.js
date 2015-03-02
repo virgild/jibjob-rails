@@ -57,16 +57,13 @@ gulp.task('build', [
 /* Javascript - Third-party Javascript libraries */
 gulp.task('javascript-lib', function() {
   var libFiles = [
+    './app/assets/javascripts/polyfills/prototype_bind.js',
     config.bowerDir + '/jquery/dist/jquery.js',
     config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
     config.bowerDir + '/d3/d3.js',
     config.bowerDir + '/jstz-detect/jstz.js',
     config.bowerDir + '/moment/moment.js'
   ];
-
-  if (config.railsEnv == 'test') {
-    libFiles.unshift('./app/assets/javascripts/polyfills/prototype_bind.js');
-  }
 
   return gulp.src(libFiles)
     .pipe(concat('library.js'))
