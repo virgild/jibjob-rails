@@ -1,3 +1,4 @@
 #! /bin/bash
 
-gulp build
+npm install
+gulp manifest

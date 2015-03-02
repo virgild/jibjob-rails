@@ -1,9 +1,8 @@
-(function(win) {
-  $(function() {
-    if ($("form#new_user").length) {
-      var timezone = jstz.determine();
-      var rails_tz = win.RailsTimeZone.to(timezone.name());
-      $("form#new_user input[name='user[timezone]']").val(rails_tz);
-    }
-  });
-}(this));
+var RailsTimeZone = require('rails-timezone');
+
+module.exports.SetupTimeZone = function() {
+  console.log(jstz());
+  var rails_tz = RailsTimeZone.to(jstz().timezone_name);
+  window.rtz = RailsTimeZone;
+  $("form#new_user input[name='user[timezone]']").val(rails_tz);
+};

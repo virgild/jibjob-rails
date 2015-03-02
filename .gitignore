@@ -21,6 +21,8 @@ public/assets
 node_modules
 coverage
 .module-cache
+build
+manifest.json
 
 config/mailer.yml
 config/redis.yml

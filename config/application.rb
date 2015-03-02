@@ -36,5 +36,7 @@ module JibJob
     config.generators do |g|
       g.assets false
     end
+    config.assets.enabled = false
+    config.assets.compile = false
   end
 end

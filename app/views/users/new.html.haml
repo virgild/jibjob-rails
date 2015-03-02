@@ -26,3 +26,10 @@
               = f.check_box :terms
               = f.label :terms, "I accept the terms and conditions.", class: "small"
             = f.submit "Submit", class: "btn btn-success"
+
+- content_for :body_javascript do
+  :javascript
+    $(function() {
+      var setuptz = require('signup').SetupTimeZone;
+      setuptz();
+    });
