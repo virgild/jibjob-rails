@@ -3,7 +3,9 @@
     .row
       .col-md-12
         .form-container.center-block
-          .form-title Sign up
+          .form-title
+            %span.glyphicon.glyphicon-user
+            Sign up
           - if @user.errors.any?
             %ul
               - @user.errors.full_messages.each do |msg|

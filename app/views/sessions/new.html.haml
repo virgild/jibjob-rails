@@ -1,7 +1,9 @@
 .signin-page.page
-  .container-fluid
+  .container
     .center-block.form-container
-      .form-title Sign in
+      .form-title
+        %span.glyphicon.glyphicon-paperclip
+        Sign in
       = form_tag login_url, method: "POST" do
         .form-group
           %label Username

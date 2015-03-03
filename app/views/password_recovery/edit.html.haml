@@ -1,7 +1,9 @@
 .password-recovery-page.page
   .container
     .form-container
-      %h3.title Reset Password
+      %h3.title
+        %span.glyphicon.glyphicon-repeat
+        Reset Password
       - if @warning
         .text-danger= @warning
 
