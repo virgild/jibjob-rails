@@ -57,7 +57,7 @@ module.exports = React.createClass({
       method: this.props.saveMethod,
     }).done(function(data) {
       var nextPage = data.meta.redirect;
-      window.location = nextPage;
+      window.location.href = nextPage;
     }).fail(function(xhr, status) {
       try {
         self.setProps({
@@ -156,7 +156,7 @@ module.exports = React.createClass({
     if (resume.new_record == false) {
       var isPublishedGroup = (
         <div className="form-group">
-          <label>Publish now</label>
+          <label htmlFor="resume_is_published">Publish now</label>
           <br/>
           <label>
             <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
@@ -168,7 +168,7 @@ module.exports = React.createClass({
 
     if (this.props.usePlainEditor) {
       var editor = (
-        <textarea name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="form-control" rows="40" />
+        <textarea id="resume_content" name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="form-control" rows="40" />
       );
     } else {
       var editor = (
@@ -182,14 +182,14 @@ module.exports = React.createClass({
         <ErrorDisplay model={resume} />
         <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
           <div className="form-group">
-            <label>Name</label>
-            <input type="text" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
+            <label htmlFor="resume_name">Name</label>
+            <input type="text" id="resume_name" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
               className="form-control" autoComplete="off" spellCheck="false" placeholder="Name" autoFocus="true" />
             <p className="help-block">Your private name for this resume</p>
           </div>
           <div className="form-group">
-            <label>Link Name</label>
-            <input type="text" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
+            <label htmlFor="resume_slug">Link Name</label>
+            <input type="text" id="resume_slug" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
               className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name" />
             <p className="help-block">
               A public name that identifies your resume. (i.e. {origin}/my-resume)
@@ -197,13 +197,13 @@ module.exports = React.createClass({
           </div>
           {isPublishedGroup}
           <div className="form-group">
-            <label>Access Code</label>
-            <input type="text" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
+            <label htmlFor="resume_access_code">Access Code</label>
+            <input type="text" id="resume_access_code" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
               className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="false" />
               <p className="help-block">The viewer will be required to enter this access code when specified</p>
           </div>
           <div className="form-group">
-            <label>Content</label>
+            <label htmlFor="resume_content">Content</label>
             <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
             <p className="help-block">
               Read <a href="">'Get Started'</a> for an overview of composing resumes.

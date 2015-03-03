@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     if current_user
-      redirect_to user_url(current_user)
+      redirect_to user_path(current_user)
     end
   end
 
@@ -23,9 +23,9 @@ class SessionsController < ApplicationController
       session['auth.default.user'] = user.id
 
       if user.default_role == 'admin'
-        redirect_to admin_root_url
+        redirect_to admin_root_path
       else
-        redirect_to user_resumes_url(user)
+        redirect_to user_resumes_path(user)
       end
     else
       flash.now['warning'] = "Invalid account details"
@@ -40,6 +40,6 @@ class SessionsController < ApplicationController
   def logout
     destroy
 
-    redirect_to login_url
+    redirect_to login_path
   end
 end
