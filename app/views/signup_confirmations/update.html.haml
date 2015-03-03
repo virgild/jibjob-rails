@@ -1,6 +1,13 @@
-%h1 Signup Confirmation
+.signup-confirmation-page.page
+  .container
+    .box
+      .title Signup Confirmation
 
-- if @confirmation && @confirmation.valid?
-  %h3 Your account is now confirmed.
-- else
-  %h3 Not found.
+      - if @confirmation && @confirmation.valid?
+        .msg Your account is now confirmed.
+      - else
+        .msg Not found.
+
+      - if !current_user
+        .tell-login
+          = link_to "Sign in", login_url
