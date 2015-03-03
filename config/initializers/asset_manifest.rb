@@ -11,30 +11,30 @@ class AssetManifest
   end
 
   def self.stylesheet_path(url)
+    if url.starts_with?('/')
+      return url
+    end
+
     if AssetManifest.manifest
       url = "#{url}.css" unless url.ends_with?('.css')
       url = "/css/#{url}" unless url.starts_with?('/css')
       "#{assets_root}#{AssetManifest.manifest[url]}" || url
     else
-      if url.starts_with?('/')
-        url
-      else
-        "#{assets_root}/css/#{url}"
-      end
+      "#{assets_root}/css/#{url}"
     end
   end
 
   def self.javascript_path(url)
+    if url.starts_with?('/')
+      return url
+    end
+
     if AssetManifest.manifest
       url = "#{url}.js" unless url.ends_with?('.js')
       url = "/js/#{url}" unless url.starts_with?('/js')
       "#{assets_root}#{AssetManifest.manifest[url]}" || url
     else
-      if url.starts_with?('/')
-        url
-      else
-        "#{assets_root}/js/#{url}"
-      end
+      "#{assets_root}/js/#{url}"
     end
   end
 
@@ -42,11 +42,7 @@ class AssetManifest
     if AssetManifest.manifest
       "#{assets_root}#{AssetManifest.manifest[url]}" || url
     else
-      if url.starts_with?('/')
-        url
-      else
-        "#{assets_root}/images/#{url}"
-      end
+      "#{assets_root}#{url}"
     end
   end
 end
