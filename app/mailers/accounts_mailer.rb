@@ -6,6 +6,7 @@ class AccountsMailer < ApplicationMailer
 
   def password_reset(user)
     @user = user
+    @secure_mail = SecureMail.new(@user)
     mail to: @user.email, subject: "JibJob - Password Reset"
   end
 end

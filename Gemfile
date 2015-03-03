@@ -48,6 +48,7 @@ gem 'resumetools'
 gem 'paperclip'
 gem 'sanitize'
 gem 'pragmatic_segmenter'
+gem 'encrypted_strings'
 
 gem 'dotenv-rails'
 gem 'rack-protection'

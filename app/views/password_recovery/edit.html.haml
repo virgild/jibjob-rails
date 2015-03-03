@@ -1,11 +1,14 @@
-.container
-  %h3 Reset Password
+.page.password-reset-edit
+  .container
+    %h3 Reset Password
+    - if @warning
+      .text-danger= @warning
 
-  = form_tag(new_password_url(t: params[:t])) do
-    .form-group
-      %label Password
-      = password_field_tag(:password, '', class: "form-control")
-    .form-group
-      %label Confirm password
-      = password_field_tag(:password_confirmation, '', class: "form-control")
-    %button.btn.btn-success{type: "submit"} Submit
+    = form_tag(new_password_url(t: params[:t])) do
+      .form-group
+        %label Password
+        = password_field_tag(:password, '', class: "form-control")
+      .form-group
+        %label Confirm password
+        = password_field_tag(:password_confirmation, '', class: "form-control")
+      %button.btn.btn-success{type: "submit"} Submit
