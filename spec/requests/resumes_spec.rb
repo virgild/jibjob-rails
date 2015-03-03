@@ -69,4 +69,9 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_link "/test-resume"
     expect(page).to have_text "Thomas B. Seeker"
   end
+
+  example "stats" do
+    click_link "Stats Page"
+    save_screen
+  end
 end
