@@ -53,4 +53,20 @@ RSpec.describe "Resumes", type: :request, js: true do
       expect(page).to have_text("test-resume-2")
     end
   end
+
+  example "delete" do
+    click_link "Test Resume"
+    click_link "Delete"
+    expect(page).to have_text("delete this resume")
+    click_button "Yes - Delete it"
+
+    within(".resume-list") do
+      expect(page).to_not have_content("Test Resume")
+    end
+  end
+
+  example "published" do
+    click_link "/test-resume"
+    expect(page).to have_text "Thomas B. Seeker"
+  end
 end
