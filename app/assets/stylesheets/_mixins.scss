@@ -6,3 +6,14 @@
 @mixin unrounded {
   @include rounded(0px);
 }
+
+@mixin theme-background {
+  background: rgb(123,170,181);
+  background: -moz-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%, rgba(22,126,158,1) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(123,170,181,1)), color-stop(100%,rgba(22,126,158,1)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
+  background: radial-gradient(ellipse at center, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7baab5', endColorstr='#167e9e',GradientType=1 );
+}

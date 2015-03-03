@@ -1,8 +1,13 @@
 .signup-page {
+  @include theme-background;
 
   .form-container {
-    margin-top: 40px;
     max-width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    margin: 50px auto;
+    box-shadow: rgba(#000, 0.2) 0px 2px 4px;
+    @include rounded(2px);
   }
 
   .form-title {

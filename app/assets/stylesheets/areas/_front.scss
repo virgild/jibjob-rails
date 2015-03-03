@@ -3,14 +3,7 @@ $front-features-bg-color: #44485F;
 $front-title-font: "Open Sans";
 
 .front-page {
-  background: rgb(123,170,181);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%, rgba(22,126,158,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(123,170,181,1)), color-stop(100%,rgba(22,126,158,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7baab5', endColorstr='#167e9e',GradientType=1 );
+  @include theme-background;
 
   .splash-header {
     text-align: center;
@@ -36,10 +29,6 @@ $front-title-font: "Open Sans";
       font-family: $front-title-font;
       text-shadow: rgba(#111, 0.5) 0px 1px 1px;
     }
-  }
-
-  .front-splash {
-
   }
 
   .front-splash .container {
