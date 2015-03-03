@@ -37,6 +37,6 @@ module AssetManifestHelpers
       url = "/images/#{url}"
     end
     url = AssetManifest.asset_path(url)
-    super((ActionController::Base.asset_host || "") + url, options)
+    super(url, options)
   end
 end

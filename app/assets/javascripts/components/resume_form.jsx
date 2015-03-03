@@ -127,7 +127,7 @@ module.exports = React.createClass({
   loadExampleContent: function(e) {
     e.preventDefault();
     var self = this;
-    var url = "https://s3.amazonaws.com/jibjob/examples/sample.resume";
+    var url = this.props.sampleURL;
 
     $.get(url).done(function(data) {
       var newContent = data;
