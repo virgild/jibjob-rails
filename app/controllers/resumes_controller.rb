@@ -9,8 +9,8 @@ class ResumesController < ApplicationController
 
   def index
     load_resumes
-    cache_key = "user-#{current_user.id}-resumes-list-#{@resumes.first.nil? ? 0 : @resumes.first.updated_at.to_i}"
-    @resumes_data = Rails.cache.fetch(cache_key) do
+
+    @resumes_data = Rails.cache.fetch(list_cache_key) do
       ActiveModel::ArraySerializer.new(@resumes).to_json
     end
   end
@@ -26,6 +26,7 @@ class ResumesController < ApplicationController
     if @resume.save
       code = :ok
       @meta = { redirect: user_resume_url(current_user, @resume) }
+      clear_list_cache
     else
       code = :conflict
     end
@@ -56,6 +57,7 @@ class ResumesController < ApplicationController
     if @resume.save
       code = :ok
       @meta = { redirect: user_resume_url(current_user, @resume) }
+      clear_list_cache
     else
       code = :conflict
     end
@@ -71,6 +73,7 @@ class ResumesController < ApplicationController
 
   def destroy
     @resume.destroy
+    clear_list_cache
     redirect_to user_resumes_url(current_user)
   end
 
@@ -112,5 +115,14 @@ class ResumesController < ApplicationController
     end
 
     @use_plain_editor = always_use_plain_editor_for_now = true
+  end
+
+  def list_cache_key
+    "user-#{current_user.id}-resumes-list"
+  end
+
+  def clear_list_cache
+    # TODO: Automate cache bust
+    Rails.cache.delete(list_cache_key)
   end
 end
