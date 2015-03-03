@@ -60,7 +60,6 @@ gulp.task('javascript-lib', function() {
     './app/assets/javascripts/polyfills/prototype_bind.js',
     config.bowerDir + '/jquery/dist/jquery.js',
     config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-    config.bowerDir + '/d3/d3.js',
     config.bowerDir + '/moment/moment.js'
   ];
 

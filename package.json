@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "browserify": "^9.0.3",
+    "d3": "^3.5.5",
     "del": "^1.1.1",
     "gulp-add-src": "^0.2.0",
     "gulp-batch": "^1.0.5",
