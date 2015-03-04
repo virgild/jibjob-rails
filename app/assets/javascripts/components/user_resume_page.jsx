@@ -42,7 +42,7 @@ module.exports = React.createClass({
                 <b>Published:</b> {resume.is_published ? "Yes" : "No"}
               </div>
               <div>
-                <b>Publish URL:</b> <a href={pub_url}>{pub_url}</a>
+                <b>Publish URL:</b> <a id="publish-url" href={pub_url}>{pub_url}</a>
               </div>
               {accessCode}
             </div>

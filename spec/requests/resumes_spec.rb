@@ -65,9 +65,27 @@ RSpec.describe "Resumes", type: :request, js: true do
     end
   end
 
-  example "published" do
+  example "published with no access code" do
     click_link "/test-resume"
     expect(page).to have_text "Thomas B. Seeker"
+  end
+
+  example "published with access code" do
+    click_link "Test Resume"
+    click_link "Edit"
+    fill_in "Access Code", with: "secret"
+    click_button "Save Resume"
+
+    click_on "publish-url"
+    expect(page).to have_content("Enter Access Code")
+
+    fill_in "access_code", with: "guesswork"
+    click_on "Submit"
+    expect(page).to have_content("Incorrect access code")
+
+    fill_in "access_code", with: "secret"
+    click_on "Submit"
+    expect(page).to_not have_content("Enter Access Code")
   end
 
   example "stats" do

@@ -1,11 +1,12 @@
 .page.publication-access-code-page
-  %h3 Enter Access Code
-  - if @msg
-    .msg.bg-danger= @msg
-  = form_for publication_post_access_code_path do
-    .form-group
-      %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", spellcheck: "false", class: "form-control"}
-    %button{type: "submit", class: "btn btn-success"} Submit
+  .form-container
+    %h3.title Enter Access Code
+    - if @msg
+      .msg.bg-danger= @msg
+    = form_for publication_post_access_code_path do
+      .form-group
+        %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", spellcheck: "false", class: "form-control"}
+      %button{type: "submit", class: "btn btn-success"} Submit
 
 .footer
   .powered
