@@ -72,6 +72,5 @@ RSpec.describe "Resumes", type: :request, js: true do
 
   example "stats" do
     click_link "Stats Page"
-    save_screen
   end
 end
