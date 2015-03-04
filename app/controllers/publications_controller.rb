@@ -1,8 +1,6 @@
 class PublicationsController < ApplicationController
   layout 'publication'
 
-  force_ssl if: -> { Rails.env == 'production' }
-
   before_filter :load_resume
   before_filter :check_access_code, only: [:show]
 

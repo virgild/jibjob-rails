@@ -1,6 +1,4 @@
 class PasswordRecoveryController < ApplicationController
-  force_ssl if: -> { Rails.env == 'production' }
-
   before_filter :check_valid_reset_token, only: [:edit, :update]
 
   def index
