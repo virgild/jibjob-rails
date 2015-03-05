@@ -13,4 +13,4 @@
     :javascript
       var React = require("react/addons");
       var ResumeForm = require("resume_form");
-      React.render(React.createElement(ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resume_url(current_user, @resume)}", saveMethod: 'PUT', usePlainEditor: #{@use_plain_editor} }), document.getElementById("resume_form"));
+      React.render(React.createElement(ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resume_url(current_user, @resume)}", saveMethod: 'PUT', usePlainEditor: #{@use_plain_editor}, sampleURL: "/assets/text/sample-resume.txt" }), document.getElementById("resume_form"));
