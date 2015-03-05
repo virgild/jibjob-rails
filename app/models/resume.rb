@@ -120,6 +120,9 @@ class Resume < ActiveRecord::Base
           return fragments
         elsif section.has_periods?
           fragments << section.periods[0].title
+          return fragments
+        else
+          return fragments
         end
       end
     }
