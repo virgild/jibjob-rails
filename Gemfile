@@ -66,9 +66,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'timecop'
   gem 'puma'
-  gem 'rspec-rails', '~> 3.0'
   gem 'faker'
 end
 
@@ -77,4 +75,6 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
   gem 'codeclimate-test-reporter', require: false
+  gem 'timecop'
+  gem 'rspec-rails', '~> 3.0'
 end
