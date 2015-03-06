@@ -14,10 +14,11 @@
 #  pdf_content_type :string
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
-#  edition          :integer          default("1")
+#  edition          :integer          default("0"), not null
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
 #  access_code      :string
+#  pdf_edition      :integer          default("0"), not null
 #
 # Indexes
 #
@@ -60,7 +61,11 @@ RSpec.describe Resume, type: :model do
     end
 
     example "edition" do
-      expect(resume.edition).to eq 1
+      expect(resume.edition).to eq 0
+    end
+
+    example "pdf_edition" do
+      expect(resume.pdf_edition).to eq 0
     end
 
     example "is_published" do
@@ -92,6 +97,10 @@ RSpec.describe Resume, type: :model do
       expect(resume.edition).to eq 1
     end
 
+    it "has pdf_edition 1" do
+      expect(resume.pdf_edition).to eq 1
+    end
+
     it "generates guid" do
       expect(resume.guid).to_not be_blank
     end
@@ -110,6 +119,10 @@ RSpec.describe Resume, type: :model do
 
     it "has status 0" do
       expect(resume.status).to eq 0
+    end
+
+    it "pdf_file_synced? is true" do
+      expect(resume.pdf_file_synced?).to eq true
     end
   end
 
@@ -143,7 +156,7 @@ RSpec.describe Resume, type: :model do
     subject do |example|
       example.description
     end
-    let(:resume) { user.resumes.build(name: subject, slug: 'new-resume', content: "\n") }
+    let(:resume) { user.resumes.build(name: subject, slug: 'new-resume', content: "") }
 
     context "invalid format" do
       after(:each) do
@@ -222,29 +235,28 @@ RSpec.describe Resume, type: :model do
     end
   end
 
-  context "incrementing edition when content changes" do
+  context "after content changes" do
     let(:resume) { user.resumes.first }
 
-    example "updating content increments edition 1 to 2" do
+    example "edition increments from 1 to 2" do
       expect(resume.edition).to eq 1
+      expect(resume.pdf_edition).to eq 1
       expect(resume.content).to match(/Thomas/)
 
       resume.content.gsub! /Thomas/, 'Gourdough'
       expect(resume.save).to eq true
       expect(resume.edition).to eq 2
+      expect(resume.pdf_edition).to eq 1
+      expect(resume.pdf_file_synced?).to eq false
     end
-  end
 
-  context "pdf file gets recreated when content changes" do
-    let(:resume) { user.resumes.first }
-
-    example "updating content regenerates the pdf file" do
+    example "pdf refresh job is queued" do
       expect(resume.pdf.path).to be_blank
 
-      resume.content.gsub! /Thomas/, 'Gourdough'
-      expect(resume.save).to eq true
-      expect(resume.pdf.path).to_not be_blank
-      expect(File.exists?(resume.pdf.path)).to eq true
+      assert_enqueued_with(job: PdfRefreshJob) do
+        resume.content.gsub! /Thomas/, 'Gourdough'
+        expect(resume.save).to eq true
+      end
     end
   end
 
@@ -276,11 +288,6 @@ RSpec.describe Resume, type: :model do
     end
   end
 
-  example "ensure the content has a newline at the end" do
-    resume = user.resumes.create(name: "New Test Resume", slug: "new-test-resume", content: "")
-    expect(resume.content.last).to eq "\n"
-  end
-
   example "presence of access_code makes requires_access_code? true" do
     resume = user.resumes.first
     expect(resume.access_code).to be_blank
@@ -288,5 +295,12 @@ RSpec.describe Resume, type: :model do
 
     expect(resume.update(access_code: "ABCDEF")).to eq true
     expect(resume.requires_access_code?).to eq true
+  end
+
+  context "content normalization" do
+    it "ensures there is always a newline at the end of the content" do
+      resume = user.resumes.create(name: "My Resume", slug: "my-resume", content: "")
+      expect(resume.content.last).to eq "\n"
+    end
   end
 end

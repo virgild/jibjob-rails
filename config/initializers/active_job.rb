@@ -1,3 +1,7 @@
 Rails.application.configure do
-  config.active_job.queue_adapter = :sidekiq
+  if Rails.env.test?
+    config.active_job.queue_adapter = :test
+  else
+    config.active_job.queue_adapter = :sidekiq
+  end
 end

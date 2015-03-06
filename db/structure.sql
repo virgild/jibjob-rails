@@ -116,10 +116,11 @@ CREATE TABLE resumes (
     pdf_content_type character varying,
     pdf_file_size integer,
     pdf_updated_at timestamp without time zone,
-    edition integer DEFAULT 1,
+    edition integer DEFAULT 0 NOT NULL,
     slug character varying NOT NULL,
     is_published boolean DEFAULT false NOT NULL,
-    access_code character varying
+    access_code character varying,
+    pdf_edition integer DEFAULT 0 NOT NULL
 );
 
 
@@ -400,4 +401,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150218182355');
 INSERT INTO schema_migrations (version) VALUES ('20150221024933');
 
 INSERT INTO schema_migrations (version) VALUES ('20150224030817');
+
+INSERT INTO schema_migrations (version) VALUES ('20150305183547');
+
+INSERT INTO schema_migrations (version) VALUES ('20150305231357');
 

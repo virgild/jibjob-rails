@@ -14,10 +14,11 @@
 #  pdf_content_type :string
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
-#  edition          :integer          default("1")
+#  edition          :integer          default("0"), not null
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
 #  access_code      :string
+#  pdf_edition      :integer          default("0"), not null
 #
 # Indexes
 #
@@ -31,10 +32,11 @@ appleseed_resume:
   slug: "test-resume"
   is_published: true
   edition: 1
+  pdf_edition: 1
   status: 0
   guid: "258e532590dd62d5371cc21a15f97663"
   access_code: ~
-  content: |
+  content: &default_content |
     #N Thomas B. Seeker
     #A 1234 Northern Star Circle
     #A Baltimore, MD 12345
@@ -172,3 +174,16 @@ appleseed_resume:
     - Member, Armed Forces Communications and Electronics Association (AFCEA).
     - Recipient, Department of Defense Meritorious Service Medal, Defense
       Information Systems Agency (DISA).
+
+unsynced_resume:
+  id: 2
+  user_id: 1
+  name: "Unsynced Resume"
+  slug: "unsynced-resume"
+  is_published: true
+  edition: 2
+  pdf_edition: 1
+  status: 0
+  guid: "a6d8eb0714cc799d24b597cf05dab321"
+  access_code: ~
+  content: *default_content

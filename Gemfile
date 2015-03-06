@@ -44,7 +44,7 @@ gem 'google-analytics-rails'
 
 gem 'active_type'
 gem 'active_model_serializers'
-gem 'resumetools'
+gem 'resumetools', '= 0.2.9.1'
 gem 'paperclip'
 gem 'sanitize'
 gem 'pragmatic_segmenter'
@@ -77,4 +77,5 @@ group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
   gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activejob'
 end

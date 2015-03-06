@@ -3,6 +3,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
+require 'rspec/active_job'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'sidekiq/testing'
 require 'capybara/rails'
@@ -71,6 +72,8 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
     FileUtils.rm_rf(Dir["#{Rails.root}/public/test"])
+    ActiveJob::Base.queue_adapter.enqueued_jobs = []
+    ActiveJob::Base.queue_adapter.performed_jobs = []
     Rails.cache.clear
     REDIS_POOL.flushdb
   end

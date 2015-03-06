@@ -14,10 +14,11 @@
 #  pdf_content_type :string
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
-#  edition          :integer          default("1")
+#  edition          :integer          default("0"), not null
 #  slug             :string           not null
 #  is_published     :boolean          default("false"), not null
 #  access_code      :string
+#  pdf_edition      :integer          default("0"), not null
 #
 # Indexes
 #
@@ -34,6 +35,7 @@ class Resume < ActiveRecord::Base
   validates :guid, presence: true, uniqueness: true
   validates :status, presence: true, numericality: true
   validates :edition, presence: true, numericality: true
+  validates :pdf_edition, presence: true, numericality: true
   validates :is_published, inclusion: [true, false]
   validates :slug, presence: true
 
@@ -65,10 +67,12 @@ class Resume < ActiveRecord::Base
   before_validation :fill_guid, on: :create
   before_validation :set_new_status, on: :create
   before_validation :set_publication, on: :create
-  before_validation :ensure_newline_at_end
+  before_validation :ensure_content_footer
 
-  before_save :update_pdf_attachment, if: :content_changed?
-  before_save :increment_edition, if: Proc.new { |resume| !resume.new_record? && resume.content_changed? }
+  before_save :increment_edition, on: [:create, :update], if: Proc.new { |resume| resume.content_changed? }
+  before_create :update_pdf_attachment
+
+  after_commit :queue_pdf_refresh, on: :update, if: Proc.new { |resume| !resume.pdf_file_synced? }
 
   after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
   after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
@@ -149,7 +153,28 @@ class Resume < ActiveRecord::Base
     date_values.zip(stat_values.map { |count| count.to_i || 0 }).map { |row| row.flatten }
   end
 
+  def update_pdf_attachment
+    file_data = StringIO.new(generate_pdf_data)
+    resume = self
+    file_data.define_singleton_method :original_filename do
+      "#{resume.guid}.pdf"
+    end
+
+    self.pdf = file_data
+    self.pdf_edition = edition
+  end
+
+  def pdf_file_synced?
+    pdf_edition == edition
+  end
+
   private
+
+  def ensure_content_footer
+    if (content == '') || (content.last != "\n")
+      content << "\n"
+    end
+  end
 
   def fill_guid
     self.guid ||= SecureRandom.hex(16)
@@ -164,20 +189,8 @@ class Resume < ActiveRecord::Base
     always_pass_this_filter = true
   end
 
-  def update_pdf_attachment
-    file_data = StringIO.new(generate_pdf_data)
-    resume = self
-    file_data.define_singleton_method :original_filename do
-      "#{resume.guid}.pdf"
-    end
-
-    self.pdf = file_data
-  end
-
-  def ensure_newline_at_end
-    if content.last != "\n"
-      content << "\n"
-    end
+  def queue_pdf_refresh
+    PdfRefreshJob.perform_later(self)
   end
 
   def increment_edition

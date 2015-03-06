@@ -87,8 +87,4 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_on "Submit"
     expect(page).to_not have_content("Enter Access Code")
   end
-
-  example "stats" do
-    click_link "Stats Page"
-  end
 end
