@@ -38,7 +38,7 @@ $front-title-font: "Open Sans";
   }
 
   .example {
-    margin: 20px;
+    padding-bottom: 20px;
   }
 
   .front-splash .container {
@@ -122,6 +122,18 @@ $front-title-font: "Open Sans";
       box-shadow: inset rgba(#000, 0.3) 0px 1px 3px;
     }
 
+    .syntax-min-a {
+      @media (min-width: $screen-sm-min) {
+        min-height: 140px;
+      }
+    }
+
+    .syntax-min-b {
+      @media (min-width: $screen-sm-min) {
+        min-height: 210px;
+      }
+    }
+
     .mini-preview {
       text-align: left;
       font-family: "Source Sans Pro", Helvetica;
@@ -132,6 +144,10 @@ $front-title-font: "Open Sans";
       padding: 20px;
       margin: 5px;
       @include rounded(2px);
+
+      @media (min-width: $screen-sm-min) {
+        min-height: 140px;
+      }
 
       .header {
         text-align: center;
