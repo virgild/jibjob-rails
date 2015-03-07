@@ -28,6 +28,12 @@ $front-title-font: "Open Sans";
     .subtitle2 {
       font-family: $front-title-font;
       text-shadow: rgba(#111, 0.5) 0px 1px 1px;
+
+      em {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.1em;
+      }
     }
   }
 
@@ -48,38 +54,36 @@ $front-title-font: "Open Sans";
     min-height: 100px;
     padding-top: 15px;
     padding-bottom: 15px;
+    font-family: "Open Sans";
 
     .feature {
-      padding: 20px;
-      background-color: #f6f6f6;
-      margin-bottom: 5px;
-      box-shadow: inset 0px -3px 0px 0px #e6e6e6, 0px -3px 0px 0px #fff;
+      margin: 20px auto;
+      max-width: 700px;
 
       .title {
         font-weight: 800;
-        font-size: 18px;
+        font-size: 20px;
         font-family: $front-title-font;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 10px;
+        text-shadow: 0px 1px 1px rgba(#000, 0.5);
       }
 
       p {
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: 300;
+        background-color: rgba(#f6f6f6, 1.0);
+        box-shadow: 0px 2px 3px 0px rgba(#000, 0.5);
+        padding: 20px;
+        @include rounded(2px);
       }
     }
-  }
-
-  .front-details {
-    background-color: #000;
-    padding: 20px;
-    color: #fff;
-    min-height: 200px;
   }
 
   .signup-area {
     text-align: center;
     color: #fff;
-  }
-
-  .signup-area {
     margin-top: 30px;
     padding-bottom: 20px;
 

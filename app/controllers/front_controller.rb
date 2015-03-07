@@ -4,19 +4,11 @@ class FrontController < ApplicationController
 
   end
 
-  def features
-
-  end
-
   def get_started
 
   end
 
   def about
-
-  end
-
-  def team
 
   end
 
@@ -26,14 +18,6 @@ class FrontController < ApplicationController
 
   def privacy_policy
 
-  end
-
-  def pricing
-
-  end
-
-  def wallaby
-    render layout: false
   end
 
 end

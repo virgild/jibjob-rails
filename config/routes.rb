@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     # Static pages
     get 'get_started' => 'front#get_started'
+    get 'about' => 'front#about'
     get 'terms_of_service' => 'front#terms_of_service'
     get 'privacy_policy' => 'front#privacy_policy'
   end

@@ -3,7 +3,7 @@
     .col-md-12
       - if current_user
         .small
-          = link_to "Sign out", logout_url
+          = link_to "Sign out", logout_url, class: "signout-link"
       .small
         = link_to "Terms of Use", terms_of_service_url
         |
