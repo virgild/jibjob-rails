@@ -1,5 +1,5 @@
 .page.front-page
-  .splash-header
+  .front-header
     .container
       .row
         .col-md-12
@@ -7,33 +7,90 @@
           .subtitle
             Easy resume editing and publishing
           .subtitle2
-            Write your resumes in <em>plain text</em> and publish them for <em>web</em>, <em>mobile</em>, and <em>print</em>.
+            Write your resumes in <em>plain text</em> and publish them for
+            <em>web</em>, <em>mobile</em>, and <em>print</em>.
   .front-splash
     .container
 
   .front-features
     .container
       .row
-        .col-sm-12.col-xs-12
+        .col-xs-12
           .feature
-            .title Quickly and easily compose your resume
-            %p
-              Writing your resume is as easy as editing a plain text file.
-              There is no need to worry about formatting.
-        .col-sm-12.col-xs-12
+            .feature__title Quickly and easily compose your resume in plain text
+            .content
+              %p
+                Writing your resume is as easy as editing plain text
+                so you can focus on your content.
+              .row.example
+                .col-sm-6
+                  %p Header example:
+                  .syntax
+                    \#N Thomas B. Seeker
+                    %br
+                    \#A 1234 Northern Star Circle, Baltimore, MD 12345
+                    %br
+                    \#T (555)-123-4567
+                    %br
+                    \#E seeker@nettcom.com
+                    %br
+                    \#U http://nettcom.com/tseeker
+                .col-sm-6
+                  %p Published header:
+                  .mini-preview
+                    .header
+                      .name Thomas B. Seeker
+                      .address 1234 Northern Star Circle, Baltimore, MD 12345
+                      .telephone (555)-123-4567
+                      .email seeker@nettcom.com
+                      .webpage http://nettcom.com/tseeker
+              .row.example
+                .col-sm-6
+                  %p Section example:
+                  .syntax
+                    + Systems Engineer<br/>
+                    >O Computer Engineering Corporation<br/>
+                    >L Los Angeles, CA<br/>
+                    >D 1993 to Present<br/>
+                    \- Provide systems engineering, software engineering, technical consulting, and
+                    marketing services<br/>
+                    %br
+                    \- Designed and managed the development of an enterprise-level client/server
+                    automated auditing application<br/>
+                .col-sm-6
+                  %p Published section:
+                  .mini-preview
+                    .section
+                      .period
+                        .title System Engineer
+                        .org Computer Engineering Corporation
+                        .loc Los Angeles, CA
+                        .date 1993 to Present
+                        %ul
+                          %li
+                            Provide systems engineering, software engineering, technical consulting, and
+                            marketing services
+                          %li
+                            Designed and managed the development of an enterprise-level client/server
+                            automated auditing application
+        .col-xs-12
           .feature
-            .title Publish for web, mobile, and print
-            %p
-              Your published resume is accessible via web and mobile. It is also exported to
-              PDF format.
-              <br/><br/>
-              = link_to "Click here to see sample resume", publication_path(slug: "sample")
+            .feature__title Instantly publish for web, mobile, and print
+            .content
+              %p
+                Your published resume is accessible via web and mobile. Save it as
+                a PDF file and attach it to e-mail.
+              %p
+                See a sample resume at:
+              .sample-link
+                = link_to publication_url(slug: "sample"), publication_path(slug: "sample")
 
-        .col-sm-12.col-xs-12
+        .col-xs-12
           .feature
-            .title Track views
-            %p
-              Track page views and downloads of your resume.
+            .feature__title Create multiple resumes and track page views
+            .content
+              You can create multiple resumes and
+              submit and track page views and downloads.
       .row
         .col-sm-12.signup-area
           = link_to signup_url do

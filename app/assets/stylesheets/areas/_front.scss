@@ -5,7 +5,7 @@ $front-title-font: "Open Sans";
 .front-page {
   @include theme-background;
 
-  .splash-header {
+  .front-header {
     text-align: center;
     color: #fff;
 
@@ -37,6 +37,10 @@ $front-title-font: "Open Sans";
     }
   }
 
+  .example {
+    margin: 20px;
+  }
+
   .front-splash .container {
     color: #fff;
     background-image: image-url($front-splash-bg-image);
@@ -54,29 +58,83 @@ $front-title-font: "Open Sans";
     min-height: 100px;
     padding-top: 15px;
     padding-bottom: 15px;
-    font-family: "Open Sans";
+    font-family: $front-title-font;
 
     .feature {
       margin: 20px auto;
-      max-width: 700px;
 
-      .title {
-        font-weight: 800;
+      .feature__title {
+        font-weight: 600;
         font-size: 20px;
-        font-family: $front-title-font;
         text-align: center;
         color: #fff;
         margin-bottom: 10px;
         text-shadow: 0px 1px 1px rgba(#000, 0.5);
       }
 
-      p {
+      .content {
         font-size: 14px;
         font-weight: 300;
-        background-color: rgba(#f6f6f6, 1.0);
-        box-shadow: 0px 2px 3px 0px rgba(#000, 0.5);
+        background-color: rgba(#f6f6f6, 0.9);
+        box-shadow: 0px 1px 3px 0px rgba(#000, 0.3);
         padding: 20px;
         @include rounded(2px);
+      }
+    }
+
+    .sample-link {
+      text-align: center;
+      margin: 10px auto;
+      box-shadow: inset 0px 1px 1px 0px rgba(#000, 0.5);
+      background-color: rgba(#fff, 0.4);
+      @include rounded(2px);
+      padding: 10px;
+      max-width: 250px;
+
+      a {
+        text-decoration: none;
+        color: lighten(#297894, 5%);
+        font-size: 18px;
+        font-weight: 400;
+      }
+    }
+
+    .syntax {
+      font-family: Monaco, Menlo, "Courier New", monospace;
+      font-size: 12px;
+      background-color: rgba(#fff, 0.1);
+      // border: solid 1px rgba(#000, 0.1);
+      padding: 10px;
+      margin: 5px;
+      @include rounded(2px);
+      box-shadow: inset rgba(#000, 0.3) 0px 1px 3px;
+    }
+
+    .mini-preview {
+      font-family: "Source Sans Pro", Helvetica;
+      font-size: 14px;
+      font-weight: 300;
+      background-color: rgba(#000, 0.02);
+      // border: solid 1px rgba(#000, 0.05);
+      box-shadow: rgba(#000, 0.3) 0px 1px 2px;
+      padding: 20px;
+      margin: 5px;
+      @include rounded(2px);
+
+      .header {
+        text-align: center;
+
+        .name {
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+
+      .section {
+        .title {
+          font-size: 18px;
+          font-weight: 400;
+        }
       }
     }
   }
