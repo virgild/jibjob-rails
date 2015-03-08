@@ -3,6 +3,7 @@ $mark-color: lighten(#000, 87%);
 .get_started-page {
   font-family: Open Sans;
   font-weight: 300;
+  @include content-page;
 
   em {
     font-weight: 400;

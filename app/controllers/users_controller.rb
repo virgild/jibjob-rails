@@ -61,6 +61,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete
+
+  end
+
+  def destroy
+    AccountDeletionJob.perform_later(current_user)
+
+    redirect_to action: :delete, processing: true
+  end
+
   private
 
   def load_user

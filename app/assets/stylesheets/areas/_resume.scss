@@ -98,30 +98,18 @@
   }
 }
 
-.new-resume-page {
-  background-color: #fff;
-}
-
-.resume-form {
-  textarea {
-    font-family: "Monaco", "Courier New", monospace;
-    font-size: 10px;
-  }
-}
-
-// TODO: Reorganize this style
-textarea.console {
-  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  font-size: 10px;
-
-  @media (max-width: $screen-xs-min) {
-    font-size: 10px;
-  }
-}
-
 .resume-form {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.resume-form__content {
+  font-family: Menlo, "Courier New", monospace;
+  font-size: 12px;
+
+  @media (max-width: $screen-xs) {
+    font-size: 10px;
+  }
 }
 
 .user-resumes-page {

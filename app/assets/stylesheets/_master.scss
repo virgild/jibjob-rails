@@ -15,22 +15,11 @@ body {
 }
 
 .page {
-  min-height: 500px;
-  background-color: #fff;
+  @include page();
 }
 
 .content-page {
-  @include theme-background();
-}
-
-.small-white-content-page {
-  @media (min-width: $screen-xs) {
-    background-color: #fff;
-  }
-
-  @media (min-width: $screen-sm) {
-    @include theme-background();
-  }
+  @include content-page();
 }
 
 /* General Page Elements */

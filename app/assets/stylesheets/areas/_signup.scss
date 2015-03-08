@@ -1,5 +1,5 @@
 .signup-page {
-  @include theme-background;
+  @include content-page();
 
   .form-container {
     max-width: 500px;

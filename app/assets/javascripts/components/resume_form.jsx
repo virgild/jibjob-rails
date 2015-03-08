@@ -170,7 +170,7 @@ module.exports = React.createClass({
 
     if (this.props.usePlainEditor) {
       var editor = (
-        <textarea id="resume_content" name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="form-control" rows="40" />
+        <textarea id="resume_content" name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="resume-form__content form-control" rows="40" />
       );
     } else {
       var editor = (

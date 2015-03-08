@@ -1,32 +1,35 @@
-.page.user_page
+.user_page
   .container
-    .page-header
-      %h2= @user.username
-    .row
-      .col-sm-2
-        %h4 Users
-        %h4 Password
-      .col-sm-10
-        %h3 Update
-        = form_for @user do |user_form|
-          .form-group
-            = user_form.label :timezone
-            = user_form.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {} , { class: "form-control" }
-          .form-group
-            = user_form.label :email
-            = user_form.email_field :email, class: "form-control", autocomplete: "off", autocorrect: "off", spellcheck: "false"
-          = user_form.submit "Save", class: "btn btn-success"
-    .row
-      .col-sm-10.col-sm-offset-2
-        %h3 Change Password
-        = form_for @user do |user_form|
-          .form-group
-            = user_form.label :password, "Current password"
-            = user_form.password_field :password, class: "form-control", autocomplete: "off", autocorrect: "off"
-          .form-group
-            = user_form.label :new_password, "New password"
-            = user_form.password_field :new_password, class: "form-control", autocomplete: "off", autocorrect: "off"
-          .form-group
-            = user_form.label :new_password_confirmation, "Confirm new password"
-            = user_form.password_field :new_password_confirmation, class: "form-control", autocomplete: "off", autocorrect: "off"
-          = user_form.submit "Save", class: "btn btn-success"
+    .page-contents
+      .row
+        .col-sm-12
+          .user-page__area
+            %h3 Account Details
+            = form_for @user do |user_form|
+              .form-group
+                = user_form.label :timezone
+                = user_form.time_zone_select :timezone, ActiveSupport::TimeZone.us_zones, {} , { class: "form-control" }
+              .form-group
+                = user_form.label :email
+                = user_form.email_field :email, class: "form-control", autocomplete: "off", autocorrect: "off", spellcheck: "false"
+              = user_form.submit "Save", class: "btn btn-success"
+      .row
+        .col-sm-12
+          .user-page__area
+            %h3 Change Password
+            = form_for @user do |user_form|
+              .form-group
+                = user_form.label :password, "Current password"
+                = user_form.password_field :password, class: "form-control", autocomplete: "off", autocorrect: "off"
+              .form-group
+                = user_form.label :new_password, "New password"
+                = user_form.password_field :new_password, class: "form-control", autocomplete: "off", autocorrect: "off"
+              .form-group
+                = user_form.label :new_password_confirmation, "Confirm new password"
+                = user_form.password_field :new_password_confirmation, class: "form-control", autocomplete: "off", autocorrect: "off"
+              = user_form.submit "Save", class: "btn btn-success"
+      .row
+        .col-sm-12
+          .user-page__area.last
+            %h4 Account Deletion
+            = link_to "Delete my JibJob account", delete_user_url(current_user)

@@ -24,3 +24,20 @@
   box-shadow: inset darken($col, 5%) 0px -2px 0px, inset lighten($col, 5%) 0px 1px 0px;
   @include rounded(2px);
 }
+
+@mixin page() {
+  min-height: 500px;
+  background-color: #fff;
+}
+
+@mixin content-page() {
+  @include page();
+
+  @media (min-width: $screen-xs) {
+    background-color: #fff;
+  }
+
+  @media (min-width: $screen-sm) {
+    @include theme-background();
+  }
+}

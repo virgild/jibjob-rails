@@ -1,5 +1,6 @@
 .faq-page {
   font-family: "Open Sans";
+  @include content-page;
 
   li {
     line-height: 1.5em;

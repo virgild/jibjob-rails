@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => ENV['SIDEKIQ_WEB_MOUNT']
 
   scope '/app' do
-    resources :users, param: :username, except: [:index, :destroy] do
+    resources :users, param: :username, except: [:index] do
+      member do
+        get 'delete'
+      end
       resources :resumes do
         member do
           get 'delete'

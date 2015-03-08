@@ -1,7 +1,14 @@
 .user_page {
   padding-bottom: 20px;
+  @include content-page;
+}
 
-  .page-header {
-    padding: 10px 0px;
+.user-page__area {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: dotted 1px rgba(#000, 0.1);
+
+  &.last {
+    border: none;
   }
 }
