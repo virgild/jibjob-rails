@@ -1,5 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
 @import url(//fonts.googleapis.com/css?family=Fugaz+One);
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic);
 
 $theme-pink: #ec148e;
 
@@ -16,6 +17,20 @@ body {
 .page {
   min-height: 500px;
   background-color: #fff;
+}
+
+.content-page {
+  @include theme-background();
+}
+
+.small-white-content-page {
+  @media (min-width: $screen-xs) {
+    background-color: #fff;
+  }
+
+  @media (min-width: $screen-sm) {
+    @include theme-background();
+  }
 }
 
 /* General Page Elements */
@@ -35,4 +50,25 @@ button .glyphicon {
     color: #fff;
     padding: 2px 5px;
   }
+}
+
+.page-contents {
+  background-color: #fff;
+  @include rounded(2px);
+  padding: 10px;
+  margin-bottom: 30px;
+
+  @media (min-width: $screen-sm) {
+    margin-top: 30px;
+    padding: 20px 30px;
+  }
+
+  @media (max-width: $screen-xs) {
+    margin: 0px;
+    padding: 10px;
+  }
+}
+
+#user-page {
+  background-color: #fff;
 }

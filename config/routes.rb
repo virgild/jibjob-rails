@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     get 'about' => 'front#about'
     get 'terms_of_service' => 'front#terms_of_service'
     get 'privacy_policy' => 'front#privacy_policy'
+    get 'faq' => 'front#faq'
   end
 
   get '/:slug' => 'publications#show', as: 'publication'

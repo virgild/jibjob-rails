@@ -12,6 +12,10 @@ class FrontController < ApplicationController
 
   end
 
+  def faq
+
+  end
+
   def terms_of_service
 
   end

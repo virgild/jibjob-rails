@@ -1,25 +1,39 @@
-.page.get_started-page
-  .page-header
-    .container
+.page.get_started-page.small-white-content-page
+  .container
+    .page-contents
       .row
-        .col-md-12.col-xs-12
-          %h2 Getting Started
-          %p
-            JibJob lets you compose your resume in plain text and exports it to a web page and PDF format.
-        .col-md-12.col-xs-12
-          %h2 Creating the resume
+        -#.col-md-3.hidden-sm.hidden-xs
+          .table_of_contents
+            %h4 Getting Started
+            %ol
+              %li
+                = link_to "Creating the Resume", "#creating"
+                %ul
+                  %li= link_to "Assigning a Link Name", "#link-name"
+              %li
+                = link_to "Composing", "#composing"
+                %ul
+                  %li= link_to "Header", "#header"
+                  %li= link_to "Sections", "#sections"
+                  %li= link_to "Paragraphs", "#paragraphs"
+                  %li= link_to "List of Items", "#item-list"
+                  %li= link_to "Periods", "#periods"
+              %li= link_to "Previewing", "#previewing"
+              %li= link_to "Publishing", "#publishing"
+              %li= link_to "Access Code", "#access-code"
+              %li= link_to "Stats", "#stats"
+        .col-md-12.contents__section
+          %h2#creating Creating the resume
 
-          %h3 Assigning a Link Name
+          %h3#link-name Assigning a Link Name
           %p
-            The link name you specify becomes the URL of your resume when you publish it.
-            For example A resume with the link name 'sample' will be published to
-            http://jibjob.co/sample.
+            The <em>link name</em> you specify becomes the URL of your resume when you publish it.
+            For example A resume with the link name '<code>sample</code>' will be published to
+            <code>http://jibjob.co/sample</code>.
 
-        .col-md-12.col-xs-12
-          %h2 Composing the resume
-          %p
-            Writing your resume is easier.
-          %h3 Header
+        .col-md-12.contents__section
+          %h2#composing Composing the resume
+          %h3#header Header
           %p
             The header contains your name and contact information.
           %ul.syntax-list
@@ -29,104 +43,108 @@
             %li <mark>#E</mark> - E-mail
             %li <mark>#U</mark> - Web page URL
 
-        .col-md-6.col-sm-6
-          .illustration-label Example:
-          .syntax
-            \#N Thomas B. Seeker
-            %br
-            \#A 1234 Northern Star Circle, Baltimore, MD 12345
-            %br
-            \#T (555)-123-4567
-            %br
-            \#E seeker@nettcom.com
-            %br
-            \#U http://nettcom.com/tseeker
-        .col-md-6.col-sm-6
-          .illustration-label Preview:
-          .mini-preview
-            .header
-              .name Thomas B. Seeker
-              .address 1234 Northern Star Circle, Baltimore, MD 12345
-              .telephone (555)-123-4567
-              .email seeker@nettcom.com
-              .webpage http://nettcom.com/tseeker
-        .col-md-12.col-xs-12
+          .row
+            .col-sm-6
+              .illustration-label Example:
+              .syntax
+                \#N Thomas B. Seeker
+                %br
+                \#A 1234 Northern Star Circle, Baltimore, MD 12345
+                %br
+                \#T (555)-123-4567
+                %br
+                \#E seeker@nettcom.com
+                %br
+                \#U http://nettcom.com/tseeker
+            .col-sm-6
+              .illustration-label Preview:
+              .mini-preview
+                .header
+                  .name Thomas B. Seeker
+                  .address 1234 Northern Star Circle, Baltimore, MD 12345
+                  .telephone (555)-123-4567
+                  .email seeker@nettcom.com
+                  .webpage http://nettcom.com/tseeker
           %p Header lines are optional.
-        .col-md-6.col-sm-6
-          .illustration-label Example:
-          .syntax
-            \#N Thomas B. Seeker
-            %br
-            \#A 1234 Northern Star Circle, Baltimore, MD 12345
-            %br
-            \#T (555)-123-4567
-        .col-md-6.col-sm-6
-          .illustration-label Preview:
-          .mini-preview
-            .header
-              .name Thomas B. Seeker
-              .address 1234 Northern Star Circle, Baltimore, MD 12345
-              .telephone (555)-123-4567
+          .row
+            .col-sm-6
+              .illustration-label Example:
+              .syntax
+                \#N Thomas B. Seeker
+                %br
+                \#A 1234 Northern Star Circle, Baltimore, MD 12345
+                %br
+                \#T (555)-123-4567
+            .col-sm-6
+              .illustration-label Preview:
+              .mini-preview
+                .header
+                  .name Thomas B. Seeker
+                  .address 1234 Northern Star Circle, Baltimore, MD 12345
+                  .telephone (555)-123-4567
 
-        .col-md-12.col-xs-12
-          %h3 Sections
+        .col-md-12.contents__section
+          %h3#sections Sections
           %p
             Sections are the main parts of the resume. Examples are Objectives, Skills, Work History, and Education.
             Start a new section with the <mark>=</mark> sign.
 
-          %h4 Section with Paragraph
+        .col-md-12.contents__section
+          %h4#paragraphs Section with Paragraph
           %p
             A section with a paragraph. Use three (3) dashes <mark>---</mark> to mark the start and end of a paragraph.
-        .col-md-6.col-sm-6
-          .illustration-label Example:
-          .syntax
-            \= Qualifications
-            %br
-            \---
-            %br
-            Nine years of experience in designing, installing, and troubleshooting
-            computing systems; a proven track record in identifying problems and
-            developing innovative solutions.
-            %br
-            \---
-        .col-md-6.col-sm-6
-          .illustration-label Preview:
-          .mini-preview
-            .section
-              .title Qualifications
-              %p
+          .row
+            .col-sm-6
+              .illustration-label Example:
+              .syntax
+                \= Qualifications
+                %br
+                \---
+                %br
                 Nine years of experience in designing, installing, and troubleshooting
                 computing systems; a proven track record in identifying problems and
                 developing innovative solutions.
+                %br
+                \---
+            .col-sm-6
+              .illustration-label Preview:
+              .mini-preview
+                .section
+                  .title Qualifications
+                  %p
+                    Nine years of experience in designing, installing, and troubleshooting
+                    computing systems; a proven track record in identifying problems and
+                    developing innovative solutions.
 
-        .col-md-12.col-xs-12
-          %h4 Section with List of Items
+        .col-md-12.contents__section
+          %h4#item-list Section with List of Items
           %p
             A section with a list of items. Mark each item with a single dash <mark>-</mark>.
-        .col-md-6.col-sm-6
-          .illustration-label Example:
-          .syntax
-            \= Skills
-            %br
-            \- Programming
-            %br
-            \- Operating Systems
-            %br
-            \- Networking
-        .col-md-6.col-sm-6
-          .illustration-label Preview:
-          .mini-preview
-            .section
-              .title Skills
-              %ul
-                %li Programming
-                %li Operating Systems
-                %li Networking
+          .row
+            .col-sm-6
+              .illustration-label Example:
+              .syntax
+                \= Skills
+                %br
+                \- Programming
+                %br
+                \- Operating Systems
+                %br
+                \- Networking
+            .col-sm-6
+              .illustration-label Preview:
+              .mini-preview
+                .section
+                  .title Skills
+                  %ul
+                    %li Programming
+                    %li Operating Systems
+                    %li Networking
 
-        .col-md-12.col-xs-12
-          %h4 Section with Periods
+        .col-md-12.contents__section
+          %h4#periods Section with Periods
           %p
-            A section with chronological periods. Examples are Work Exprience and Education.
+            A section with chronological periods. Examples are Work Experience and Education.
             Each period is marked by the <mark>+</mark> sign.
           %p
             Each period has the following elements:
@@ -136,74 +154,82 @@
               %li <mark>&gt;L</mark> Location
               %li <mark>&gt;D</mark> Dates
               %li <mark>-</mark> List of items
-        .col-md-6.col-sm-6
-          .illustration-label Example:
-          .syntax
-            + Systems Engineer<br/>
-            >O Computer Engineering Corporation<br/>
-            >L Los Angeles, CA<br/>
-            >D 1993 to Present<br/>
-            \- Provide systems engineering, software engineering, technical consulting, and
-            marketing services<br/>
-            %br
-            \- Designed and managed the development of an enterprise-level client/server
-            automated auditing application<br/>
-            %br
-            + Systems Analyst<br/>
-            >O Business Consultants, Inc.<br/>
-            >L Washington, DC<br/>
-            >D 1990 to 1993<br/>
-            \- Provided technical consulting services to the Smithsonian Institute's
-            Information Technology Services Group, Amnesty International, and
-            internal research and development initiatives.<br/>
-            %br
-            \- Consolidated and documented the Smithsonian Laboratory's Testing,
-            Demonstration, and Training databases onto a single server, maximizing
-            the use of the laboratory's computing resources.<br/>
-        .col-md-6.col-sm-6
-          .illustration-label Preview:
-          .mini-preview
-            .section
-              .period
-                .title System Engineer
-                .org Computer Engineering Corporation
-                .loc Los Angeles, CA
-                .date 1993 to Present
-                %ul
-                  %li
-                    Provide systems engineering, software engineering, technical consulting, and
-                    marketing services
-                  %li
-                    Designed and managed the development of an enterprise-level client/server
-                    automated auditing application
-              .period
-                .title Systems Analyst
-                .org Business Consultants, Inc.
-                .loc Washington, DC
-                .date 1990 to 1993
-                %ul
-                  %li
-                    Provided technical consulting services to the Smithsonian Institute's
-                    Information Technology Services Group, Amnesty International, and
-                    internal research and development initiatives.
-                  %li
-                    Consolidated and documented the Smithsonian Laboratory's Testing,
-                    Demonstration, and Training databases onto a single server, maximizing
-                    the use of the laboratory's computing resources.
-        .col-md-12.col-xs-12
-          %h2 Previewing
+          .row
+            .col-sm-6
+              .illustration-label Example:
+              .syntax
+                + Systems Engineer<br/>
+                >O Computer Engineering Corporation<br/>
+                >L Los Angeles, CA<br/>
+                >D 1993 to Present<br/>
+                \- Provide systems engineering, software engineering, technical consulting, and
+                marketing services<br/>
+                %br
+                \- Designed and managed the development of an enterprise-level client/server
+                automated auditing application<br/>
+                %br
+                + Systems Analyst<br/>
+                >O Business Consultants, Inc.<br/>
+                >L Washington, DC<br/>
+                >D 1990 to 1993<br/>
+                \- Provided technical consulting services to the Smithsonian Institute's
+                Information Technology Services Group, Amnesty International, and
+                internal research and development initiatives.<br/>
+                %br
+                \- Consolidated and documented the Smithsonian Laboratory's Testing,
+                Demonstration, and Training databases onto a single server, maximizing
+                the use of the laboratory's computing resources.<br/>
+            .col-sm-6
+              .illustration-label Preview:
+              .mini-preview
+                .section
+                  .period
+                    .title System Engineer
+                    .org Computer Engineering Corporation
+                    .loc Los Angeles, CA
+                    .date 1993 to Present
+                    %ul
+                      %li
+                        Provide systems engineering, software engineering, technical consulting, and
+                        marketing services
+                      %li
+                        Designed and managed the development of an enterprise-level client/server
+                        automated auditing application
+                  .period
+                    .title Systems Analyst
+                    .org Business Consultants, Inc.
+                    .loc Washington, DC
+                    .date 1990 to 1993
+                    %ul
+                      %li
+                        Provided technical consulting services to the Smithsonian Institute's
+                        Information Technology Services Group, Amnesty International, and
+                        internal research and development initiatives.
+                      %li
+                        Consolidated and documented the Smithsonian Laboratory's Testing,
+                        Demonstration, and Training databases onto a single server, maximizing
+                        the use of the laboratory's computing resources.
+
+        .col-md-12.contents__section
+          %h2#previewing Previewing
           %p
             After saving your resume, you can preview it in HTML, PDF, and plain text.
-        .col-md-12.col-xs-12
-          %h2 Publishing
-          %p
-            To make your resume publicly accessibly you have to publish it.
 
-        .col-md-12.col-xs-12
-          %h2 Setting an Access Code
+        .col-md-12.contents__section
+          %h2#publishing Publishing
           %p
-            Setting an access code allows you to lock your resume.
-        .col-md-12.col-xs-12
-          %h2 Checking Page Views
+            Marking a resume as published makes it publicly available through the link name.
+
+        .col-md-12.contents__section
+          %h2#access-code Setting an Access Code
+          %p
+            You can keep your published resume private by setting an access code in the <code>Edit</code> form.
+            Once an it is set, anyone who visits your resume URL will be asked to enter the access code before
+            showing the resume.
+          %p
+            To disable the access code, just set it to blank in the <code>Edit</code> form.
+
+        .col-md-12.contents__section
+          %h2#stats Checking Page Views
           %p
             Your resume's stats page shows how many page views it had in the last 5 days.

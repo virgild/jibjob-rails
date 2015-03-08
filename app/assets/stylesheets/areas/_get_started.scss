@@ -1,15 +1,18 @@
 $mark-color: lighten(#000, 87%);
 
-@mixin pebble($color) {
-  $col: lighten($color, 0%);
-  background-color: $col;
-  box-shadow: inset darken($col, 5%) 0px -2px 0px, inset lighten($col, 5%) 0px 1px 0px;
-  @include rounded(2px);
-}
-
 .get_started-page {
   font-family: Open Sans;
   font-weight: 300;
+
+  em {
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .contents__section {
+    border-bottom: dotted 1px rgba(#ccc, 0.5);
+    padding-bottom: 20px;
+  }
 
   .syntax {
     font-family: Monaco, Menlo, "Courier New", monospace;
@@ -68,5 +71,23 @@ $mark-color: lighten(#000, 87%);
     padding: 2px 8px;
     color: #000;
     @include pebble($mark-color);
+  }
+
+  .table_of_contents {
+    font-size: 12px;
+    font-weight: 300;
+    font-family: "Source Sans Pro";
+
+    ol {
+      margin: 0px;
+      padding: 0px;
+      margin-left: 20px;
+    }
+
+    ul {
+      margin: 0px;
+      padding: 0px;
+      margin-left: 20px;
+    }
   }
 }

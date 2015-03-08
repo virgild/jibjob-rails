@@ -18,13 +18,13 @@
         .col-xs-12
           .feature
             .feature__title Quickly and easily compose your resume in plain text
-            .content
-              %p
+            .feature__content
+              .feature__p
                 Writing your resume in plain text means you can focus on the content
                 and not worry about formatting.
               .row.example
                 .col-sm-6
-                  .caption Header text:
+                  .feature__caption Header text:
                   .syntax.syntax-min-a
                     \#N Thomas B. Seeker
                     %br
@@ -36,7 +36,7 @@
                     %br
                     \#U http://nettcom.com/tseeker
                 .col-sm-6
-                  .caption Published header:
+                  .feature__caption Published header:
                   .mini-preview
                     .header
                       .name Thomas B. Seeker
@@ -46,7 +46,7 @@
                       .webpage http://nettcom.com/tseeker
               .row.example
                 .col-sm-6
-                  .caption Section text:
+                  .feature__caption Section text:
                   .syntax.syntax-min-b
                     + Systems Engineer<br/>
                     >O Computer Engineering Corporation<br/>
@@ -58,7 +58,7 @@
                     \- Designed and managed the development of an enterprise-level client/server
                     automated auditing application<br/>
                 .col-sm-6
-                  .caption Published section:
+                  .feature__caption Published section:
                   .mini-preview
                     .section
                       .period
@@ -76,22 +76,31 @@
         .col-xs-12
           .feature
             .feature__title Instantly publish for web, mobile, and print
-            .content
-              %p
+            .feature__content
+              .feature__p
                 Your published resume is accessible via web and mobile.
                 Share your resume link with potential employers or
                 save it as a PDF file and attach it to e-mail.
-              %p
+              .feature__p
                 See a sample resume at:
-              .sample-link
-                = link_to publication_url(slug: "sample"), publication_path(slug: "sample")
+              .feature__sample-link
+                = link_to publication_url(slug: "sample") do
+                  .span.glyphicon.glyphicon-chevron-left
+                  = publication_url(slug: "sample")
+                  .span.glyphicon.glyphicon-chevron-right
+              %br
+              .feature__sample-link
+                = link_to publication_url(slug: "sample", format: :pdf) do
+                  .span.glyphicon.glyphicon-file
+                  = publication_url(slug: "sample", format: :pdf)
 
         .col-xs-12
           .feature
             .feature__title Create multiple resumes and track page views
-            .content
-              You can create multiple resumes and
-              submit and track page views and downloads.
+            .feature__content
+              .feature__p
+                You can create multiple resumes and
+                submit and track page views and downloads.
       .row
         .col-sm-12.signup-area
           = link_to signup_url do

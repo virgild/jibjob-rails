@@ -17,3 +17,10 @@
   background: radial-gradient(ellipse at center, rgba(123,170,181,1) 0%,rgba(22,126,158,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7baab5', endColorstr='#167e9e',GradientType=1 );
 }
+
+@mixin pebble($color) {
+  $col: lighten($color, 0%);
+  background-color: $col;
+  box-shadow: inset darken($col, 5%) 0px -2px 0px, inset lighten($col, 5%) 0px 1px 0px;
+  @include rounded(2px);
+}
