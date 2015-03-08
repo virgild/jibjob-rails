@@ -9,6 +9,7 @@ class ResumeSerializer < BaseSerializer
   attributes :user_pdf_file, :user_plaintext_file, :user_json_file
   attributes :structure, :pageview_count, :new_record, :publish_url
   attributes :total_page_views, :access_code
+  attributes :thumbnail, :recently_new
 
   # has_one :user
 
@@ -22,6 +23,13 @@ class ResumeSerializer < BaseSerializer
     return nil if object.new_record?
     if object.pdf
       object.pdf.url
+    end
+  end
+
+  def thumbnail
+    return nil if object.new_record?
+    if object.pdf
+      object.pdf.url(:thumb)
     end
   end
 
@@ -87,6 +95,14 @@ class ResumeSerializer < BaseSerializer
   def updated_at
     unless object.new_record?
       object.updated_at.in_time_zone(object.user.timezone).strftime("%b. %d, %Y %l:%M %p")
+    end
+  end
+
+  def recently_new
+    if object.new_record?
+      true
+    else
+      object.recently_new?
     end
   end
 end

@@ -5,7 +5,8 @@ var React = require('react/addons');
 module.exports = React.createClass({
   propTypes: {
     resumes: React.PropTypes.array.isRequired,
-    createPage: React.PropTypes.string,
+    createPage: React.PropTypes.string.isRequired,
+    showCreateButton: React.PropTypes.bool.isRequired,
   },
 
   getDefaultProps: function() {
@@ -23,17 +24,30 @@ module.exports = React.createClass({
       return <ResumeItem resume={resume} key={key} />;
     });
 
+    if (this.props.showCreateButton) {
+      var createButton = (
+        <div className="col-md-3 col-sm-4 col-xs-12">
+          <div className="resume-list-item resume-list-item__placeholder">
+            <a id="create-button" href={this.props.createPage}>
+              <div className="resume-list-item__thumb">
+                <span className="glyphicon glyphicon-plus icon"/>
+                <br/>
+                Create
+              </div>
+            </a>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container">
-        <ul className="list-group resume-list">
-          {resumes}
-          <li className="resume-index-item-placeholder list-group-item">
-            <a href={this.props.createPage} className="btn btn-success create-new-button">
-              <span className="glyphicon glyphicon-plus"></span>
-              Create New
-            </a>
-          </li>
-        </ul>
+        <div className="resume-list">
+          <div className="row">
+            {resumes}
+            {createButton}
+          </div>
+        </div>
       </div>
     );
   }
@@ -64,7 +78,7 @@ var ResumeItem = React.createClass({
     if (resume.is_published) {
       var published = (
         <div>
-          <span className="published">
+          <span className="resume-list-item__published">
             Published at <a href={resume.publish_url}>{resume.publish_url}</a>
           </span>
         </div>
@@ -72,7 +86,7 @@ var ResumeItem = React.createClass({
     } else {
       var published = (
         <div>
-          <span className="unpublished">
+          <span className="resume-list-item__unpublished">
             Unpublished
           </span>
         </div>
@@ -81,22 +95,32 @@ var ResumeItem = React.createClass({
 
     if (resume.access_code) {
       var accessCode = (
-        <div className="access-code">
+        <div className="resume-list-item__access-code">
           Access code: {resume.access_code}
         </div>
       );
     }
 
-    return (
-      <li className="resume-index-item list-group-item">
-        <a href={resume.show_page} className="header-title">{resume.name}</a>
-        <div className="descriptor">{resume.descriptor}</div>
-        {published}
-        {accessCode}
-        <div className="statslink">
-          <a href={resume.stats_page} className="label label-warning">Stats Page</a>
+    if (resume.recently_new) {
+      var newRibbon = (
+        <div className="resume-list-item__ribbon">
+          <span>NEW</span>
         </div>
-      </li>
+      );
+    }
+
+    return (
+      <div className="col-md-3 col-sm-4 col-xs-12">
+        <div className="resume-list-item">
+          <a className="resume-list-item__thumb-wrap" href={resume.show_page}>
+            {newRibbon}
+            <img className="resume-list-item__thumb" src={resume.thumbnail} />
+          </a>
+          <a href={resume.show_page} className="resume-list-item__name">{resume.name}</a>
+          {published}
+          {accessCode}
+        </div>
+      </div>
     );
   }
 });

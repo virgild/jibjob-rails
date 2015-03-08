@@ -16,6 +16,10 @@ class ResumesController < ApplicationController
   end
 
   def new
+    unless current_user.has_available_resume_slot?
+      redirect_to user_resumes_url(current_user)
+    end
+
     build_resume
     @resume_data = ResumeSerializer.new(@resume).to_json
   end

@@ -58,4 +58,7 @@ Rails.application.configure do
   config.action_mailer.default_options = {
     from: ENV['MAILER_DEFAULT_FROM']
   }
+
+  # Cache to nothing
+  config.cache_store = :null_store
 end

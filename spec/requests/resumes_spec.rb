@@ -14,7 +14,7 @@ RSpec.describe "Resumes", type: :request, js: true do
   end
 
   example "creation" do
-    click_link "Create New"
+    click_link "create-button"
 
     fill_in "Name", with: "A New Resume"
     expect(page).to have_field("Link Name", with: "a-new-resume")

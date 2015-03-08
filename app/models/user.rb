@@ -15,7 +15,7 @@
 class User < ActiveRecord::Base
   has_secure_password
 
-  has_many :resumes, -> { order("updated_at desc") }, dependent: :destroy
+  has_many :resumes, -> { order("id") }, dependent: :destroy
   has_one :signup, dependent: :destroy
   has_one :signup_confirmation, dependent: :destroy
   has_one :password_recovery, dependent: :destroy, inverse_of: :user
@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role
 
+  MAX_RESUMES_COUNT = 10
+
   def signup_confirmed?
     signup_confirmation &&
       signup_confirmation.confirmed_at &&
@@ -38,6 +40,14 @@ class User < ActiveRecord::Base
 
   def to_param
     self.username
+  end
+
+  def available_resumes_count
+    MAX_RESUMES_COUNT - resumes.count
+  end
+
+  def has_available_resume_slot?
+    available_resumes_count > 0
   end
 
   private

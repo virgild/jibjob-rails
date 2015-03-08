@@ -1,11 +1,10 @@
-.page.resumes.user-page
-  .page-header
-    .container
-      %h4 My Resumes
+.user-resumes-page.page.small-white-content-page
+  .container
+    .user-resumes-page__title My Resumes
   #resumes
 
 - content_for :body_javascript do
   :javascript
     var React = require("react/addons");
     var ResumeList = require("user_resume_list");
-    React.render(React.createElement(ResumeList, { resumes: #{@resumes_data}, createPage: "#{new_user_resume_url(current_user)}" }), document.getElementById("resumes"));
+    React.render(React.createElement(ResumeList, { resumes: #{@resumes_data}, createPage: "#{new_user_resume_url(current_user)}", showCreateButton: #{current_user.has_available_resume_slot?} }), document.getElementById("resumes"));

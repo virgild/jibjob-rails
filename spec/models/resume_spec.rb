@@ -33,59 +33,58 @@ RSpec.describe Resume, type: :model do
   let(:user) { users(:appleseed) }
   let(:sample_content) { resumes(:appleseed_resume).content }
 
-  context "attributes" do
+  context "as a new instance" do
     let(:resume) { Resume.new }
 
-    example "user" do
+    example "has nil user" do
       expect(resume.user).to be_nil
     end
 
-    example "name" do
+    example "has blank name" do
       expect(resume.name).to be_blank
     end
 
-    example "content" do
+    example "has blank content" do
       expect(resume.content).to be_blank
     end
 
-    example "slug" do
+    example "has blank slug" do
       expect(resume.slug).to be_blank
     end
 
-    example "guid" do
+    example "has blank guid" do
       expect(resume.guid).to be_blank
     end
 
-    example "status" do
+    example "has 0 status" do
       expect(resume.status).to eq 0
     end
 
-    example "edition" do
+    example "has 0 edition" do
       expect(resume.edition).to eq 0
     end
 
-    example "pdf_edition" do
+    example "has 0 pdf_edition" do
       expect(resume.pdf_edition).to eq 0
     end
 
-    example "is_published" do
+    example "has false is_published" do
       expect(resume.is_published).to eq false
     end
 
-    example "pdf" do
+    example "has nil pdf" do
       expect(resume.pdf).to_not be_nil
     end
 
-    example "publication_views" do
-      expect(resume.publication_views).to_not be_nil
+    example "has 0 publication_views" do
       expect(resume.publication_views.length).to eq 0
     end
 
-    example "access_code" do
+    example "has blank access_code" do
       expect(resume.access_code).to be_blank
     end
 
-    example "requires_access_code?" do
+    example "has false requires_access_code?" do
       expect(resume.requires_access_code?).to eq false
     end
   end
@@ -288,19 +287,32 @@ RSpec.describe Resume, type: :model do
     end
   end
 
-  example "presence of access_code makes requires_access_code? true" do
-    resume = user.resumes.first
-    expect(resume.access_code).to be_blank
-    expect(resume.requires_access_code?).to eq false
+  context "with present access_code" do
+    it "makes requires_access_code? true" do
+      resume = user.resumes.first
+      expect(resume.access_code).to be_blank
+      expect(resume.requires_access_code?).to eq false
 
-    expect(resume.update(access_code: "ABCDEF")).to eq true
-    expect(resume.requires_access_code?).to eq true
+      expect(resume.update(access_code: "ABCDEF")).to eq true
+      expect(resume.requires_access_code?).to eq true
+    end
   end
 
-  context "content normalization" do
-    it "ensures there is always a newline at the end of the content" do
-      resume = user.resumes.create(name: "My Resume", slug: "my-resume", content: "")
-      expect(resume.content.last).to eq "\n"
+  context "saving" do
+    context "on create" do
+      it "ensures there is always a newline at the end of the content" do
+        resume = user.resumes.create(name: "My Resume", slug: "my-resume", content: "")
+        expect(resume.content.last).to eq "\n"
+      end
+    end
+
+    context "on update" do
+      it "ensures there is always a newline at the end of the content" do
+        resume = resumes(:appleseed_resume)
+        resume.content = "#N Terry Gourdough"
+        resume.save!
+        expect(resume.content).to eq("#N Terry Gourdough\n")
+      end
     end
   end
 end

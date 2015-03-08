@@ -30,14 +30,17 @@ class Resume < ActiveRecord::Base
     slug: "Link name"
   }
 
+  NAME_MIN_LENGTH = 5
+  NAME_MAX_LENGTH = 25
+  SLUG_MIN_LENGTH = 4
+  SLUG_MAX_LENGTH = 25
+
   validates :user, presence: true
-  validates :name, presence: true
   validates :guid, presence: true, uniqueness: true
   validates :status, presence: true, numericality: true
   validates :edition, presence: true, numericality: true
   validates :pdf_edition, presence: true, numericality: true
   validates :is_published, inclusion: [true, false]
-  validates :slug, presence: true
 
   validates_uniqueness_of :name, scope: :user
   validates_uniqueness_of :slug
@@ -45,6 +48,9 @@ class Resume < ActiveRecord::Base
   validates_format_of :slug, with: /\A[A-Za-z0-9][A-Za-z0-9-]+\Z/, message: "should contain only text and dashes (eg. \"my-resume\")", unless: "slug.blank?"
   validates_exclusion_of :slug, in: ['app', 'pages', 'admin', 'tmp', 'public', 'support', 'help', 'rails', 'api'], message: "has already been taken", unless: "slug.blank?"
   validates_format_of :name, with: /\A[A-Za-z0-9][A-Za-z0-9 ]+\Z/, unless: "name.blank?"
+  validates_length_of :name, in: NAME_MIN_LENGTH..NAME_MAX_LENGTH
+  validates_length_of :slug, in: SLUG_MIN_LENGTH..SLUG_MAX_LENGTH
+  validates_length_of :access_code, in: 4..16, allow_nil: true, allow_blank: true
 
   belongs_to :user
   has_many :publication_views, -> { order('created_at desc') }, dependent: :destroy
@@ -166,6 +172,10 @@ class Resume < ActiveRecord::Base
 
   def pdf_file_synced?
     pdf_edition == edition
+  end
+
+  def recently_new?
+    created_at > 30.minutes.ago
   end
 
   private
