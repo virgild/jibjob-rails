@@ -6,6 +6,7 @@ class PublicationsController < ApplicationController
 
   def show
     @resume_data = PublicationSerializer.new(@resume).to_json
+    @title_name_frag = @resume.data.full_name.present? ? @resume.data.full_name : "JibJob Resume"
 
     # Log page view
     record_pageview
