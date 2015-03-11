@@ -42,6 +42,7 @@ gem 'tzinfo-data'
 gem 'browser'
 gem 'google-analytics-rails'
 gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'autoprefixer-rails'
 
 gem 'active_type'
 gem 'active_model_serializers'
