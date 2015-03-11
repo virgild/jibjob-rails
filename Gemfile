@@ -60,9 +60,11 @@ group :development do
   gem 'annotate'
   gem 'pry-rails'
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  # gem 'web-console', '~> 2.0'
   gem 'rack-mini-profiler', require: false
   gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :development, :test do

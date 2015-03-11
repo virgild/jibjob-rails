@@ -35,6 +35,9 @@ else
   set :default_env, {}
 end
 
+# NewRelic deploy notification params
+set :newrelic_license_key, ENV['NEWRELIC_DEPLOY_LICENSE_KEY']
+
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
