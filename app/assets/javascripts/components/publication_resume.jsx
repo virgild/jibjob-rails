@@ -60,7 +60,7 @@
           var elements = items.map(function(item, index) {
             var key = "section-" + sectionIndex + "-listitem-" + index;
             return <li key={key}>
-              {item}
+              {item.text}
             </li>;
           });
           return <ul>
@@ -105,7 +105,7 @@
         if (items && items.length > 0) {
           var itemlist = items.map(function(item, index) {
             var key = "period-" + periodIndex + "-item-" + index;
-            return <li key={key}>{item}</li>;
+            return <li key={key}>{item.text}</li>;
           });
           return <ul className="period-items">
             {itemlist}
