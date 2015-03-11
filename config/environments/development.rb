@@ -61,4 +61,7 @@ Rails.application.configure do
 
   # Cache to nothing
   config.cache_store = :null_store
+
+  #
+  config.react.variant = :development
 end

@@ -11,6 +11,6 @@
 
 - content_for :body_javascript do
   :javascript
-    var React = require("react/addons");
-    var ResumeForm = require("resume_form");
-    React.render(React.createElement(ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resumes_url(current_user)}", saveMethod: 'POST', usePlainEditor: #{@use_plain_editor}, sampleURL: "/assets/text/sample-resume.txt", nameMaxLength: #{Resume::NAME_MAX_LENGTH}, slugMaxLength: #{Resume::SLUG_MAX_LENGTH} }), document.getElementById("resume_form"));
+    $(function(){
+      React.render(React.createElement(JibJob.ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resumes_url(current_user)}", saveMethod: 'POST', usePlainEditor: #{@use_plain_editor}, sampleURL: "/assets/text/sample-resume.txt", nameMaxLength: #{Resume::NAME_MAX_LENGTH}, slugMaxLength: #{Resume::SLUG_MAX_LENGTH} }), document.getElementById("resume_form"));
+    });

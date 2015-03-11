@@ -51,20 +51,3 @@ namespace :deploy do
     end
   end
 end
-
-namespace :assets do
-  task :build do
-    on roles(:app) do
-      within release_path do
-        with rails_env: :production do
-          execute :npm, :install
-          execute :gulp, :compress
-          execute :gulp, :install
-          execute :gulp, :manifest
-        end
-      end
-    end
-  end
-end
-
-after "deploy:updated", "assets:build"

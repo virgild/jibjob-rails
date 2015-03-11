@@ -1,43 +1,47 @@
-var React = require('react/addons');
+/** @jsx React.DOM */
 
-module.exports = React.createClass({
-  propTypes: {
-    model: React.PropTypes.object.isRequired
-  },
+(function(global){
+  global.JibJob = global.JibJob || {};
 
-  render: function() {
-    var model = this.props.model;
+  global.JibJob.ErrorDisplay = React.createClass({
+    propTypes: {
+      model: React.PropTypes.object.isRequired
+    },
 
-    var items = model.errors.map(function(error, index) {
-      var key = "error-" + index;
-      return <ErrorItem data={error} key={key} />;
-    });
+    render: function() {
+      var model = this.props.model;
 
-    if (Object.getOwnPropertyNames(model.errors).length > 1) {
-      return (
-        <div className="error-display">
-          <h4>There are errors in the form</h4>
-          <ul>
-            {items}
-          </ul>
-        </div>
-      );
-    } else {
-      return null;
+      var items = model.errors.map(function(error, index) {
+        var key = "error-" + index;
+        return <ErrorItem data={error} key={key} />;
+      });
+
+      if (Object.getOwnPropertyNames(model.errors).length > 1) {
+        return (
+          <div className="error-display">
+            <h4>There are errors in the form</h4>
+            <ul>
+              {items}
+            </ul>
+          </div>
+        );
+      } else {
+        return null;
+      }
     }
-  }
-});
+  });
 
-var ErrorItem = React.createClass({
-  propTypes: {
-    data: React.PropTypes.any.isRequired
-  },
+  var ErrorItem = React.createClass({
+    propTypes: {
+      data: React.PropTypes.any.isRequired
+    },
 
-  render: function() {
-    var errorMessage = this.props.data;
+    render: function() {
+      var errorMessage = this.props.data;
 
-    return (
-      <li>{errorMessage}</li>
-    );
-  }
-});
+      return (
+        <li>{errorMessage}</li>
+      );
+    }
+  });
+}(window));

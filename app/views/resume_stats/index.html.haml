@@ -3,8 +3,5 @@
 - content_for :body_javascript do
   :javascript
     $(function(){
-      var React = require('react/addons');
-      var ResumeStatsPage = require('resume_stats_page');
-
-      React.render(React.createElement(ResumeStatsPage, { resume: #{@resume_data}, pageViews: #{@views_data}, resumeStats: #{@resume_stats}, resumesPage: "#{user_resumes_url(current_user)}"}), document.getElementById('stats-page'));
+      React.render(React.createElement(JibJob.ResumeStatsPage, { resume: #{@resume_data}, pageViews: #{@views_data}, resumeStats: #{@resume_stats}, resumesPage: "#{user_resumes_url(current_user)}"}), document.getElementById('stats-page'));
     });

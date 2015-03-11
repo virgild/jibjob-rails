@@ -8,4 +8,15 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w()
+Rails.application.config.assets.precompile += %w(
+  publication.css
+  admin.css
+  publication.js
+  admin.js
+)
+Rails.application.config.assets.precompile += [
+  %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+]
+
+#  Minimum Sass number precision required by bootstrap-sass
+::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max

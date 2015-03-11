@@ -94,4 +94,7 @@ Rails.application.configure do
   config.action_mailer.default_options = {
     from: ENV['MAILER_DEFAULT_FROM']
   }
+
+  #
+  config.react.variant = :production
 end

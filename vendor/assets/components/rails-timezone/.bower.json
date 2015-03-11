@@ -1,0 +1,14 @@
+{
+  "name": "rails-timezone",
+  "_cacheHeaders": {
+    "ETag": "\"7ca6ea417b6f5355adb94186451adb9e06b5c30a\"",
+    "Content-Length": "8891",
+    "Content-Type": "text/plain; charset=utf-8"
+  },
+  "_release": "e-tag:7ca6ea417",
+  "main": "index.js",
+  "_source": "https://raw.githubusercontent.com/davidwood/rails-timezone-js/master/rails-timezone.js",
+  "_target": "*",
+  "_originalSource": "https://raw.githubusercontent.com/davidwood/rails-timezone-js/master/rails-timezone.js",
+  "_direct": true
+}

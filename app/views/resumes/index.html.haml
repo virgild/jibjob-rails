@@ -5,6 +5,6 @@
 
 - content_for :body_javascript do
   :javascript
-    var React = require("react/addons");
-    var ResumeList = require("user_resume_list");
-    React.render(React.createElement(ResumeList, { resumes: #{@resumes_data}, createPage: "#{new_user_resume_url(current_user)}", showCreateButton: #{current_user.has_available_resume_slot?} }), document.getElementById("resumes"));
+    $(function(){
+      React.render(React.createElement(JibJob.ResumeList, { resumes: #{@resumes_data}, createPage: "#{new_user_resume_url(current_user)}", showCreateButton: #{current_user.has_available_resume_slot?} }), document.getElementById("resumes"));
+    });

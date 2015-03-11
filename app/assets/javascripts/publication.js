@@ -5,11 +5,12 @@
 //= require moment/moment
 //= require react
 //= require react_ujs
-//= require d3/d3
 //= require jstimezonedetect/jstz
 //= require rails-timezone/index
 //= require_self
-//= require components
+//= require components/publication_package_panel
+//= require components/publication_resume
+//= require components/publication_page
 //= require signup
 
 var JibJob = {

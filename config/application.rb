@@ -32,11 +32,17 @@ module JibJob
     # Set cache store
     config.cache_store = :mem_cache_store
 
-    # Disable asset generator
-    config.generators do |g|
-      g.assets false
+    # Add bower components path
+    root.join('vendor', 'assets', 'components').to_s.tap do |bower_path|
+      config.sass.load_paths << bower_path
+      config.assets.paths << bower_path
     end
-    config.assets.enabled = false
-    config.assets.compile = false
+
+    # ReactJS
+    config.react.jsx_transform_options = {
+      harmony: true,
+      strip_types: true
+    }
+    config.react.addons = true
   end
 end

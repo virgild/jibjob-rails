@@ -2,7 +2,5 @@
 - content_for :body_javascript do
   :javascript
     $(function(){
-      var React = require("react/addons");
-      var PublicationPage = require("publication_page");
-      React.render(React.createElement(PublicationPage, { resume: #{@resume_data} }), document.getElementById("resume"));
+      React.render(React.createElement(JibJob.PublicationPage, { resume: #{@resume_data} }), document.getElementById("resume"));
     });
