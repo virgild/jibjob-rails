@@ -62,6 +62,9 @@ Rails.application.configure do
   # Cache to nothing
   config.cache_store = :null_store
 
-  #
+  # ReactJS variant
   config.react.variant = :development
+
+  # http://stackoverflow.com/questions/27446841/activejob-does-not-use-sidekiq-in-production-enviroment
+  config.active_job.queue_adapter = :sidekiq
 end

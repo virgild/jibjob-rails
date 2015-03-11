@@ -95,6 +95,9 @@ Rails.application.configure do
     from: ENV['MAILER_DEFAULT_FROM']
   }
 
-  #
+  # ReactJS variant
   config.react.variant = :production
+
+  # http://stackoverflow.com/questions/27446841/activejob-does-not-use-sidekiq-in-production-enviroment
+  config.active_job.queue_adapter = :sidekiq
 end
