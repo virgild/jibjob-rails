@@ -8,6 +8,7 @@
 //= require d3/d3
 //= require jstimezonedetect/jstz
 //= require rails-timezone/index
+//= require remarkable-bootstrap-notify/bootstrap-notify
 //= require_self
 //= require components
 //= require signup

@@ -46,6 +46,8 @@ RSpec.describe "Resumes", type: :request, js: true do
     fill_in "Access Code", with: "DOODLES"
     click_button "Save Resume"
 
+    click_on "Test Resume"
+
     within("#resume .details") do
       expect(page).to have_text("Modified Resume")
       expect(page).to have_text("Published: Yes")
@@ -75,6 +77,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_link "Edit"
     fill_in "Access Code", with: "secret"
     click_button "Save Resume"
+    click_on "Test Resume"
 
     click_on "publish-url"
     expect(page).to have_content("Enter Access Code")

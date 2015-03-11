@@ -45,6 +45,9 @@
       e.preventDefault();
       this.setState({isLoading: true});
 
+      document.activeElement.blur();
+      $("input").blur();
+
       var self = this;
       var resume_data = {
         name: this.props.resume.name,
@@ -59,8 +62,20 @@
         data: {resume: resume_data},
         method: this.props.saveMethod,
       }).done(function(data) {
-        var nextPage = data.meta.redirect;
-        window.location.href = nextPage;
+        if (data.meta.redirect) {
+          window.location.href = data.meta.redirect;
+        } else {
+          try {
+            self.setProps({
+              resume: React.addons.update(self.props.resume, {
+                $merge: data.resume
+              })
+            });
+          } catch(error) {
+            console.error(error);
+          }
+          self.showSaveNotification();
+        }
       }).fail(function(xhr, status) {
         try {
           self.setProps({
@@ -147,6 +162,21 @@
           editor.scrollToLine(0);
           editor.gotoLine(1);
           editor.clearSelection();
+        }
+      });
+    },
+
+    showSaveNotification: function() {
+      $.notify({
+        message: "Resume saved.",
+        icon: "glyphicon glyphicon-refresh"
+      }, {
+        type: 'success',
+        allow_dismiss: true,
+        delay: 1000,
+        animate: {
+          enter: 'animated fadeInRight',
+          exit: 'animated fadeOutRight'
         }
       });
     },

@@ -60,7 +60,7 @@ class ResumesController < ApplicationController
 
     if @resume.save
       code = :ok
-      @meta = { redirect: user_resume_url(current_user, @resume) }
+      @meta = {}
       clear_list_cache
     else
       code = :conflict
