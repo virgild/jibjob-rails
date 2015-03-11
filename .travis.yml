@@ -9,6 +9,4 @@ before_script:
   - phantomjs --version
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database jib_job_travis;' -U postgres
-  - npm install -g gulp
-  - npm install
-  - gulp dev:install
+cache: bundler
