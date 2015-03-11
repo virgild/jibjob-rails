@@ -54,7 +54,7 @@ gem 'encrypted_strings'
 
 gem 'dotenv-rails'
 gem 'rack-protection'
-# gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'annotate'
