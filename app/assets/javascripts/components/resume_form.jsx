@@ -10,7 +10,8 @@
       saveURL: React.PropTypes.string.isRequired,
       usePlainEditor: React.PropTypes.bool,
       nameMaxLength: React.PropTypes.number.isRequired,
-      slugMaxLength: React.PropTypes.number.isRequired
+      slugMaxLength: React.PropTypes.number.isRequired,
+      getStartedURL: React.PropTypes.string
     },
 
     getInitialState: function() {
@@ -242,7 +243,7 @@
               <label htmlFor="resume_content">Content</label>
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
               <p className="help-block">
-                Read <a href="">'Get Started'</a> for an overview of composing resumes.
+                Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
               </p>
               {editor}
             </div>

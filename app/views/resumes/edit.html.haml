@@ -12,5 +12,5 @@
   - content_for :body_javascript do
     :javascript
       $(function(){
-        React.render(React.createElement(JibJob.ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resume_url(current_user, @resume)}", saveMethod: 'PUT', usePlainEditor: #{@use_plain_editor}, sampleURL: "#{asset_url('sample-resume.txt')}", nameMaxLength: #{Resume::NAME_MAX_LENGTH}, slugMaxLength: #{Resume::SLUG_MAX_LENGTH} }), document.getElementById("resume_form"));
+        React.render(React.createElement(JibJob.ResumeForm, { resume: #{@resume_data}, saveURL: "#{user_resume_url(current_user, @resume)}", saveMethod: 'PUT', usePlainEditor: #{@use_plain_editor}, sampleURL: "#{asset_url('sample-resume.txt')}", nameMaxLength: #{Resume::NAME_MAX_LENGTH}, slugMaxLength: #{Resume::SLUG_MAX_LENGTH}, getStartedURL: "#{get_started_url}" }), document.getElementById("resume_form"));
       });
