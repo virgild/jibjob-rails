@@ -9,6 +9,7 @@
 //= require jstimezonedetect/jstz
 //= require rails-timezone/index
 //= require remarkable-bootstrap-notify/bootstrap-notify
+//= require classnames/index
 //= require_self
 //= require components
 //= require signup

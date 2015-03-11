@@ -3,7 +3,7 @@
 (function(global){
   global.JibJob = global.JibJob || {};
 
-  var cx = React.addons.classSet;
+  var cx = classNames;
 
   global.JibJob.GlyphedButton = React.createClass({
     propTypes: {

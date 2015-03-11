@@ -24,6 +24,7 @@
     "jstimezonedetect": "~1.0.5",
     "rails-timezone": "https://raw.githubusercontent.com/davidwood/rails-timezone-js/master/rails-timezone.js",
     "remarkable-bootstrap-notify": "~3.0.0",
-    "animate.css": "~3.2.3"
+    "animate.css": "~3.2.3",
+    "classnames": "~1.1.4"
   }
 }
