@@ -1,10 +1,13 @@
+/*
+*= require animate.css/animate.css
+*/
+
 $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "strapons/variables";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "mixins";
 @import "strapons/overrides";
-@import "animate.css/animate.css";
 @import "master";
 
 /* General parts */
