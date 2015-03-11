@@ -51,3 +51,6 @@ namespace :deploy do
     end
   end
 end
+
+# Notify NewRelic
+after "deploy:updated", "newrelic:notice_deployment"
