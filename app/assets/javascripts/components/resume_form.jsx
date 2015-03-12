@@ -255,7 +255,7 @@
               <label htmlFor="resume_access_code">Access Code</label>
               <input type="text" id="resume_access_code" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="false"
-                autoCapitalize="false" maxLength="16" />
+                autoCapitalize="off" maxLength="16" />
                 <p className="help-block">The viewer will be required to enter this access code when specified</p>
             </div>
             <div className="form-group">
