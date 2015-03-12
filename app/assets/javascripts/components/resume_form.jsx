@@ -40,6 +40,25 @@
           self.props.resume.content = editor.getValue();
         });
       }
+
+      this.startCapturingShortcuts();
+    },
+
+    startCapturingShortcuts: function() {
+      var self = this;
+      $(global).bind('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+          var letter = (String.fromCharCode(event.which)).toLowerCase();
+          switch(letter) {
+            case 's':
+              event.preventDefault();
+              self.submitForm(event);
+              break;
+            default:
+              break;
+          }
+        }
+      });
     },
 
     submitForm: function(e) {
@@ -244,6 +263,7 @@
               <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
               <p className="help-block">
                 Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
+                Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.
               </p>
               {editor}
             </div>
