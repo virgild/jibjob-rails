@@ -18,6 +18,7 @@
 vendor/bundle
 public/system
 public/assets
+public/test
 node_modules
 coverage
 .module-cache
