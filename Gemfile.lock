@@ -51,9 +51,9 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    annotate (2.6.7)
-      activerecord (>= 2.3.0)
-      rake (~> 10.4.2, >= 10.4.2)
+    annotate (2.6.8)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arel (6.0.0)
     autoprefixer-rails (5.1.7)
       execjs
@@ -184,7 +184,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    pdf-core (0.5.0)
+    pdf-core (0.5.1)
     pg (0.18.1)
     poltergeist (1.6.0)
       capybara (~> 2.1)
@@ -254,7 +254,7 @@ GEM
     rspec-activejob (0.2.0)
       activejob (>= 4.2)
       rspec-mocks
-    rspec-core (3.2.1)
+    rspec-core (3.2.2)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -323,7 +323,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
     timecop (0.7.3)
     timers (4.0.1)
