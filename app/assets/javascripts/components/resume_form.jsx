@@ -11,7 +11,8 @@
       usePlainEditor: React.PropTypes.bool,
       nameMaxLength: React.PropTypes.number.isRequired,
       slugMaxLength: React.PropTypes.number.isRequired,
-      getStartedURL: React.PropTypes.string
+      getStartedURL: React.PropTypes.string,
+      showExampleLoader: React.PropTypes.bool
     },
 
     getInitialState: function() {
@@ -230,6 +231,12 @@
         );
       }
 
+      if (this.props.showExampleLoader) {
+        var exampleLoader = (
+          <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
+        );
+      }
+
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay model={resume} />
@@ -260,7 +267,7 @@
             </div>
             <div className="form-group">
               <label htmlFor="resume_content">Content</label>
-              <a href="#" className="btn btn-xs btn-default pull-right" onClick={this.loadExampleContent}>Load Example</a>
+              {exampleLoader}
               <p className="help-block">
                 Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
                 Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.
