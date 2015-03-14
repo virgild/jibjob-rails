@@ -14,7 +14,7 @@ module Auth
     end
 
     # Callback that Facebook calls when the user removes the app in Facebook
-    def delete
+    def deleted
       @user = User::AsFacebookSignUp.where(auth_uid: auth_hash.uid).first
       if @user
         AccountDeletionJob.perform_later(@user)
