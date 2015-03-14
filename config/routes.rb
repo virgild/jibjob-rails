@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
       namespace :facebook do
         get 'callback'
-        get 'deleted'
+        post 'deleted'
       end
 
       namespace :twitter do
