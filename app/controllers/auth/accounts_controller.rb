@@ -1,8 +1,8 @@
 module Auth
   class AccountsController < ApplicationController
     def failure
-      flash[:info] = "Login with #{params[:strategy].titleize} not authorized"
-      redirect_to params[:origin] if params[:origin]
+      flash[:info] = "Login was not authorized"
+      redirect_to signup_url
     end
 
     protected
