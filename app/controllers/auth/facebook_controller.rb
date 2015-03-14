@@ -1,5 +1,6 @@
 module Auth
   class FacebookController < AccountsController
+    protect_from_forgery except: :deleted
 
     def callback
       @user = User::AsFacebookSignUp.where(auth_uid: auth_hash.uid).first
