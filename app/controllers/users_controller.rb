@@ -74,7 +74,10 @@ class UsersController < ApplicationController
   private
 
   def load_user
-    @user ||= User.find_by_username(params[:username])
+    @user ||= User.find(params[:id])
+    if @user.id != current_user.id
+      error404
+    end
   end
 
   def build_user

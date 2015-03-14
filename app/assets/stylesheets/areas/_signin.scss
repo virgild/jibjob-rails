@@ -25,3 +25,14 @@
     text-transform: uppercase;
   }
 }
+
+.social-buttons {
+  border-top: dotted 1px rgba(#ccc, 0.5);
+  margin-top: 10px;
+  padding-top: 10px;
+
+  a {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}

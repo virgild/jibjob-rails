@@ -51,6 +51,9 @@ gem 'paperclip'
 gem 'sanitize'
 gem 'pragmatic_segmenter'
 gem 'encrypted_strings'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
 
 gem 'dotenv-rails'
 gem 'rack-protection'
@@ -71,6 +74,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'puma'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-activejob'
   gem 'faker'
 end
 
@@ -80,6 +85,4 @@ group :test do
   gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
-  gem 'rspec-rails', '~> 3.0'
-  gem 'rspec-activejob'
 end

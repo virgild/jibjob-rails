@@ -4,7 +4,24 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => ENV['SIDEKIQ_WEB_MOUNT']
 
   scope '/app' do
-    resources :users, param: :username, except: [:index] do
+    namespace :auth do
+      get 'failure', to: 'accounts#failure'
+
+      namespace :facebook do
+        get 'callback'
+        get 'deleted'
+      end
+
+      namespace :twitter do
+        get 'callback'
+      end
+
+      namespace :google do
+        get 'callback'
+      end
+    end
+
+    resources :users, except: [:index] do
       member do
         get 'delete'
       end

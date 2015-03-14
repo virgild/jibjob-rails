@@ -5,7 +5,7 @@
       .msg.bg-danger= @msg
     = form_for publication_post_access_code_path do
       .form-group
-        %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", autocapitalize: "off", spellcheck: "false", class: "form-control"}
+        %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false", class: "form-control"}
       %button{type: "submit", class: "btn btn-success"} Submit
 
 .footer

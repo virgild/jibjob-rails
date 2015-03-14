@@ -245,14 +245,14 @@
               <label htmlFor="resume_name">Name</label>
               <input type="text" id="resume_name" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Name" autoFocus="true"
-                autoCorrect="false" autoCapitalize="off" maxLength={this.props.nameMaxLength} />
+                autoCorrect="off" autoCapitalize="sentence" maxLength={this.props.nameMaxLength} />
               <p className="help-block">Your private name for this resume</p>
             </div>
             <div className="form-group">
               <label htmlFor="resume_slug">Link Name</label>
               <input type="text" id="resume_slug" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name"
-                autoCorrect="false" autoCapitalize="false" maxLength={this.props.slugMaxLength} />
+                autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
               <p className="help-block">
                 A public name that identifies your resume. (i.e. {origin}/my-resume)
               </p>
@@ -261,8 +261,8 @@
             <div className="form-group">
               <label htmlFor="resume_access_code">Access Code</label>
               <input type="text" id="resume_access_code" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="false"
-                autoCapitalize="off" maxLength="16" />
+                className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
+                autoCapitalize="characters" maxLength="16" />
                 <p className="help-block">The viewer will be required to enter this access code when specified</p>
             </div>
             <div className="form-group">

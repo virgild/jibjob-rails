@@ -13,10 +13,8 @@ Rails.application.config.assets.precompile += %w(
   admin.css
   publication.js
   admin.js
+  font-awesome.css
 )
 Rails.application.config.assets.precompile += [
   %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
 ]
-
-#  Minimum Sass number precision required by bootstrap-sass
-::Sass::Script::Number.precision = [8, ::Sass::Script::Number.precision].max

@@ -14,10 +14,10 @@
             = f.hidden_field :timezone
             .form-group
               = f.label :username
-              = f.text_field :username, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'off', autocomplete: 'off'
+              = f.text_field :username, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'none', autocomplete: 'off'
             .form-group
               = f.label :email
-              = f.email_field :email, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'off', autocomplete: 'off'
+              = f.email_field :email, class: "form-control", spellcheck: false, autocorrect: 'off', autocapitalize: 'none', autocomplete: 'off'
             .form-group
               = f.label :password
               = f.password_field :password, class: "form-control"
@@ -28,6 +28,26 @@
               = f.check_box :terms
               = f.label :terms, "I accept the terms and conditions.", class: "small"
             = f.submit "Submit", class: "btn btn-success"
+
+          .social-buttons.row
+            .col-sm-12.hidden-xs
+              Log in with the following:
+            .col-sm-4
+              = link_to "/app/auth/facebook", class: "btn btn-block btn-social btn-facebook" do
+                %i.fa.fa-facebook
+                .name.hidden-xs Facebook
+                .name.hidden-sm.hidden-md.hidden-lg Log in with Facebook
+            .col-sm-4
+              = link_to "/app/auth/twitter", class: "btn btn-block btn-social btn-twitter" do
+                %i.fa.fa-twitter
+                .name.hidden-xs Twitter
+                .name.hidden-sm.hidden-md.hidden-lg Sign in with Twitter
+            .col-sm-4
+              = link_to "/app/auth/google", class: "btn btn-block btn-social btn-google-plus" do
+                %i.fa.fa-google-plus
+                .name.hidden-xs Google+
+                .name.hidden-sm.hidden-md.hidden-lg Sign in with Google+
+
 
 - content_for :body_javascript do
   :javascript

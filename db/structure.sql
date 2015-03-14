@@ -223,12 +223,18 @@ ALTER SEQUENCE signups_id_seq OWNED BY signups.id;
 CREATE TABLE users (
     id bigint NOT NULL,
     username character varying NOT NULL,
-    email character varying NOT NULL,
+    email character varying,
     password_digest character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     default_role character varying,
-    timezone character varying
+    timezone character varying,
+    auth_provider character varying,
+    auth_uid character varying,
+    auth_name character varying,
+    auth_token character varying,
+    auth_secret character varying,
+    auth_expires timestamp without time zone
 );
 
 
@@ -356,6 +362,34 @@ CREATE UNIQUE INDEX index_resumes_on_slug ON resumes USING btree (slug);
 
 
 --
+-- Name: index_users_on_auth_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_auth_provider ON users USING btree (auth_provider);
+
+
+--
+-- Name: index_users_on_auth_provider_and_auth_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_auth_provider_and_auth_uid ON users USING btree (auth_provider, auth_uid);
+
+
+--
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_username ON users USING btree (username);
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -405,4 +439,12 @@ INSERT INTO schema_migrations (version) VALUES ('20150224030817');
 INSERT INTO schema_migrations (version) VALUES ('20150305183547');
 
 INSERT INTO schema_migrations (version) VALUES ('20150305231357');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313044136');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313184743');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313210233');
+
+INSERT INTO schema_migrations (version) VALUES ('20150313213446');
 

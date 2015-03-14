@@ -1,11 +1,13 @@
 /*
 *= require animate.css/animate.css
+*= require font-awesome/scss/font-awesome
 */
 
 $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "strapons/variables";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "bootstrap-social/bootstrap-social.scss";
 @import "mixins";
 @import "strapons/overrides";
 @import "master";

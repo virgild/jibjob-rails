@@ -11,5 +11,8 @@
         .form-group
           %label Password
           %input.form-control{type: "password", name: "password"}
-        %button.button{type: "submit", class: "btn btn-success"} Submit
-        .pull-right.small= link_to "Forgot password?", reset_password_url
+        .form-group
+          %button.button{type: "submit", class: "btn btn-success"} Submit
+          .pull-right.small= link_to "Forgot password?", reset_password_url
+
+      = render partial: "oauth_buttons"

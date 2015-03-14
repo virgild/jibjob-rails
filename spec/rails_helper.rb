@@ -98,12 +98,11 @@ end
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
     debug: false,
-    inspector: true,
+    inspector: false,
     timeout: 60,
     js_errors: true,
     window_size: [1024, 900],
-    phantomjs_options: ['--ignore-ssl-errors=yes'],
-    port: 5000
+    phantomjs_options: ['--ignore-ssl-errors=yes']
   })
 end
 

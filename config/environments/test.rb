@@ -47,4 +47,9 @@ Rails.application.configure do
   config.active_job.queue_adapter = :test
 
   config.cache_store = :memory_store
+
+  config.assets.configure do |env|
+    env.cache = ActiveSupport::Cache.lookup_store(:null_store)
+  end
+  config.sass.cache = false
 end
