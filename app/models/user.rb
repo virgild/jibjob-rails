@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     available_resumes_count > 0
   end
 
+  def oauth_signup?
+    self.auth_provider.present?
+  end
+
   private
 
   def set_default_role
