@@ -5,7 +5,7 @@ class PublicationsController < ApplicationController
   before_filter :check_access_code, only: [:show]
 
   def show
-    @resume_data = PublicationSerializer.new(@resume).to_json
+    @resume_data = Resume::PublicationSerializer.new(@resume).to_json
     @title_name_frag = @resume.data.full_name.present? ? @resume.data.full_name : "JibJob Resume"
 
     # Log page view

@@ -89,6 +89,27 @@ RSpec.configure do |config|
     end
   end
 
+  def wait_for(&blk)
+    begin
+      Timeout.timeout(16) do
+        sleep(0.1) until blk.call
+      end
+    rescue TimeoutError => error
+      error.set_backtrace(error.backtrace - error.backtrace[0..3])
+      raise error
+    end
+  end
+
+  def wait_for_selector(selector)
+    wait_for do
+      page_has_selector?(selector)
+    end
+  end
+
+  def page_has_selector?(selector)
+    page.all(selector).count > 0
+  end
+
   def save_screen
     page.save_screenshot("page-#{Time.now.to_i}.png", full: true)
   end

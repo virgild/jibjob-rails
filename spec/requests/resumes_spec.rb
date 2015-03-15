@@ -22,7 +22,11 @@ RSpec.describe "Resumes", type: :request, js: true do
     fill_in "Access Code", with: "SESAME"
     click_on "Load Example"
     wait_for_ajax
+
     click_button "Save Resume"
+    wait_for_ajax
+    wait_for_selector(".details")
+
     expect(page).to have_content("A New Resume Details")
 
     within(".topnav") do

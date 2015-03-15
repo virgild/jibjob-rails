@@ -1,4 +1,4 @@
-class PublicationSerializer < ResumeSerializer
+class Resume::PublicationSerializer < ResumeSerializer
   attributes :id
   attributes :pdf_file_url, :plaintext_file_url, :json_url, :package_url
 
@@ -23,29 +23,13 @@ class PublicationSerializer < ResumeSerializer
   end
 
   def filter(keys)
-    keys - [
-      :errors,
-      :created_at,
-      :updated_at,
-      :edition,
-      :is_published,
-      :name,
-      :show_page,
-      :delete_page,
-      :destroy_page,
-      :edit_page,
-      :stats_page,
-      :slug,
-      :guid,
-      :status,
-      :user_id,
-      :user_json_file,
-      :user_pdf_file,
-      :user_plaintext_file,
-      :username,
-      :content,
-      :descriptor,
-      :pageview_count
+    [
+      :id,
+      :json_url,
+      :package_url,
+      :pdf_file_url,
+      :plaintext_file_url,
+      :structure
     ]
   end
 

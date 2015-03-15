@@ -56,6 +56,7 @@ class Resume < ActiveRecord::Base
   has_many :publication_views, -> { order('created_at desc') }, dependent: :destroy
 
   scope :published, -> { where(is_published: true) }
+  scope :list, -> { select(self.column_names - ["content", "pdf_content_type", "pdf_file_size", "pdf_updated_at"]) }
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
@@ -175,7 +176,7 @@ class Resume < ActiveRecord::Base
   end
 
   def recently_new?
-    created_at > 30.minutes.ago
+    new_record? ? true : (created_at > 30.minutes.ago)
   end
 
   private

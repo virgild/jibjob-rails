@@ -26,19 +26,30 @@
 #
 
 class ResumeSerializer < BaseSerializer
-  attributes :id, :name, :content, :slug, :guid, :status,
-    :created_at, :updated_at, :edition, :descriptor,
-    :is_published, :user_id
-
-  attributes :username, :errors
-
-  attributes :show_page, :edit_page, :delete_page, :destroy_page, :stats_page
-  attributes :user_pdf_file, :user_plaintext_file, :user_json_file
-  attributes :structure, :pageview_count, :new_record, :publish_url
-  attributes :total_page_views, :access_code
-  attributes :thumbnail, :recently_new
-
-  # has_one :user
+  attributes :id,
+    :name,
+    :slug,
+    :created_at,
+    :updated_at,
+    :is_published,
+    :show_page,
+    :edit_page,
+    :delete_page,
+    :destroy_page,
+    :stats_page,
+    :user_pdf_file,
+    :user_plaintext_file,
+    :user_json_file,
+    :pageview_count,
+    :new_record,
+    :publish_url,
+    :total_page_views,
+    :access_code,
+    :thumbnail,
+    :recently_new,
+    :content,
+    :structure,
+    :errors
 
   self.root = false
 
@@ -105,7 +116,7 @@ class ResumeSerializer < BaseSerializer
   end
 
   def publish_url
-    return nil if object.new_record? || object.invalid?
+    return nil if object.new_record?
     publication_path(object.slug)
   end
 
@@ -126,10 +137,6 @@ class ResumeSerializer < BaseSerializer
   end
 
   def recently_new
-    if object.new_record?
-      true
-    else
-      object.recently_new?
-    end
+    object.recently_new?
   end
 end

@@ -11,7 +11,7 @@ class ResumesController < ApplicationController
     load_resumes
 
     @resumes_data = Rails.cache.fetch(list_cache_key) do
-      ActiveModel::ArraySerializer.new(@resumes).to_json
+      ActiveModel::ArraySerializer.new(@resumes, each_serializer: Resume::LightSerializer).to_json
     end
   end
 
@@ -52,7 +52,7 @@ class ResumesController < ApplicationController
 
   def edit
     build_resume
-    @resume_data = ResumeSerializer.new(@resume).to_json
+    @resume_data = Resume::EditorSerializer.new(@resume).to_json
   end
 
   def update
@@ -85,7 +85,7 @@ class ResumesController < ApplicationController
 
   def load_resumes
     # TODO: Slow when things grow
-    @resumes ||= resume_scope
+    @resumes ||= resume_scope.list
   end
 
   def resume_scope

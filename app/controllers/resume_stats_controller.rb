@@ -4,7 +4,7 @@ class ResumeStatsController < ApplicationController
   before_filter :load_resume
 
   def index
-    @resume_data = ResumeSerializer.new(@resume).to_json
+    @resume_data = Resume::LightSerializer.new(@resume).to_json
     @views = @resume.publication_views.in_range(Time.now, 2.months.ago).paginate(per_page: 10, page: 1)
     @views_data = ActiveModel::ArraySerializer.new(@views).to_json
 
