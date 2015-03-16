@@ -12,9 +12,11 @@
 !/log/.keep
 /tmp
 
+.DS_Store
 .powenv
 .env
 .capistrano
+.vagrant
 vendor/bundle
 public/system
 public/assets
