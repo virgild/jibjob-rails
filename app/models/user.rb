@@ -41,6 +41,9 @@ class User < ActiveRecord::Base
 
   after_initialize :set_default_role
 
+  scope :oauth_signups, -> { where.not(auth_provider: nil) }
+  scope :password_recoverable, -> { where(auth_provider: nil).where.not(email: nil) }
+
   MAX_RESUMES_COUNT = 10
 
   def signup_confirmed?
@@ -59,6 +62,10 @@ class User < ActiveRecord::Base
 
   def oauth_signup?
     self.auth_provider.present?
+  end
+
+  def can_recover_password?
+    !self.oauth_signup?
   end
 
   private

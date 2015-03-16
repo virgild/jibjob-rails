@@ -127,5 +127,9 @@ RSpec.describe User::AsSignUp, type: :model do
     it "automatically sets default_role to 'user'" do
       expect(user.default_role).to eq 'user'
     end
+
+    it "is password recoverable" do
+      expect(user.can_recover_password?).to eq true
+    end
   end
 end

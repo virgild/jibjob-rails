@@ -3,7 +3,8 @@ class PasswordRecoveryJob < ActiveJob::Base
 
   def perform(*args)
     identifier = args
-    user = User.find_by_username(identifier) || User.find_by_email(identifier)
+    user_scope = User.password_recoverable
+    user = user_scope.find_by_username(identifier) || user_scope.find_by_email(identifier)
 
     if user
       user.password_recovery ||= user.create_password_recovery
