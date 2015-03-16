@@ -18,6 +18,10 @@ role :worker, [ENV['DEPLOY_APP_SERVER']]
 server ENV['DEPLOY_APP_SERVER'], user: ENV['DEPLOY_APP_USER'], roles: %w{web app db worker}
 
 
+set :ssh_options, {
+  forward_agent: true
+}
+
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
