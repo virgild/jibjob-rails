@@ -1,4 +1,4 @@
-class RecordSignupJob < ActiveJob::Base
+class RecordSignupJob < BaseJob
   queue_as :logging
 
   def perform(*args)

@@ -84,6 +84,8 @@ class Resume < ActiveRecord::Base
   after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
   after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
 
+  after_commit :delete_stored_stats, on: :destroy
+
   def self.human_attribute_name(attr, options = {})
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
@@ -148,6 +150,14 @@ class Resume < ActiveRecord::Base
 
   def recently_new?
     new_record? ? true : (created_at > 30.minutes.ago)
+  end
+
+  def publication_view_stats_key
+    "resume-#{self.id}-stats"
+  end
+
+  def delete_stored_stats
+    REDIS_POOL.del(self.publication_view_stats_key)
   end
 
   private

@@ -1,4 +1,4 @@
-class AccountDeletionJob < ActiveJob::Base
+class AccountDeletionJob < BaseJob
   queue_as :default
 
   def perform(*args)

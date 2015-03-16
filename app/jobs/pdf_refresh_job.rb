@@ -1,4 +1,4 @@
-class PdfRefreshJob < ActiveJob::Base
+class PdfRefreshJob < BaseJob
   queue_as :default
 
   def perform(*args)

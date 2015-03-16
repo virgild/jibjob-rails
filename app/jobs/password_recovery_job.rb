@@ -1,4 +1,4 @@
-class PasswordRecoveryJob < ActiveJob::Base
+class PasswordRecoveryJob < BaseJob
   queue_as :default
 
   def perform(*args)

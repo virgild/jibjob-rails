@@ -311,4 +311,14 @@ RSpec.describe Resume, type: :model do
       end
     end
   end
+
+  context "on after destroy" do
+    let(:resume) { user.resumes.last }
+
+    it "deletes stored stats" do
+      expect(resume).to receive(:delete_stored_stats).once
+
+      resume.destroy
+    end
+  end
 end

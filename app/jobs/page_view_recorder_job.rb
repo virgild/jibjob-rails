@@ -1,4 +1,4 @@
-class PageViewRecorderJob < ActiveJob::Base
+class PageViewRecorderJob < BaseJob
   queue_as :logging
 
   def perform(resume_id, ip_addr, url, referrer, user_agent, t=DateTime.now)

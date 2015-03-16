@@ -59,7 +59,7 @@ class PublicationView < ActiveRecord::Base
   end
 
   def stats_key
-    "resume-#{resume.id}-stats"
+    resume.publication_view_stats_key
   end
 
   def stat_key_for_hour
