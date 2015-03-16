@@ -113,35 +113,6 @@ class Resume < ActiveRecord::Base
     JSON.parse(generate_json_text)
   end
 
-  def descriptor
-    selector = lambda { |sections|
-      fragments = []
-      sections.each do |section|
-        if section.has_title?
-          fragments << section.title
-        end
-
-        if section.has_para?
-          segmenter = PragmaticSegmenter::Segmenter.new(text: section.para)
-          fragments << segmenter.segment.first
-          return fragments
-        elsif section.has_items?
-          segmenter = PragmaticSegmenter::Segmenter.new(text: section.items[0].text)
-          fragments << segmenter.segment.first
-          return fragments
-        elsif section.has_periods?
-          fragments << section.periods[0].title
-          return fragments
-        else
-          return fragments
-        end
-      end
-    }
-
-    text = selector.call(data.sections).join(' - ')
-    text.blank? ? 'No content' : text
-  end
-
   def total_page_views
     publication_views.count
   end

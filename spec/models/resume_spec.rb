@@ -278,10 +278,6 @@ RSpec.describe Resume, type: :model do
       expect(resume.structure).to_not be_blank
     end
 
-    example "descriptor" do
-      expect(resume.descriptor).to_not be_blank
-    end
-
     example "total_page_views" do
       expect(resume.total_page_views).to eq 0
     end
