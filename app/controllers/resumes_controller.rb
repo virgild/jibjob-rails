@@ -31,7 +31,6 @@ class ResumesController < ApplicationController
     if @resume.save
       code = :ok
       @meta = { redirect: user_resume_url(current_user, @resume) }
-      clear_list_cache
     else
       code = :conflict
     end
@@ -62,7 +61,6 @@ class ResumesController < ApplicationController
     if @resume.save
       code = :ok
       @meta = {}
-      clear_list_cache
     else
       code = :conflict
     end
@@ -78,7 +76,6 @@ class ResumesController < ApplicationController
 
   def destroy
     @resume.destroy
-    clear_list_cache
     redirect_to user_resumes_url(current_user)
   end
 
@@ -128,12 +125,15 @@ class ResumesController < ApplicationController
     @use_plain_editor = always_use_plain_editor_for_now = true
   end
 
-  def list_cache_key
-    "user-#{current_user.id}-resumes-list"
+  def list_cache_identifier
+    if resume_scope.recently_updated.count > 0
+      "resumes-#{resume_scope.count}-#{@resumes.recently_updated.first.updated_at.to_i}"
+    else
+      "resumes-0-0"
+    end
   end
 
-  def clear_list_cache
-    # TODO: Automate cache bust
-    Rails.cache.delete(list_cache_key)
+  def list_cache_key
+    @_list_cache_key ||= "user-#{current_user.id}-#{list_cache_identifier}"
   end
 end

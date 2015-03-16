@@ -57,6 +57,7 @@ class Resume < ActiveRecord::Base
 
   scope :published, -> { where(is_published: true) }
   scope :list, -> { select(self.column_names - ["content", "pdf_content_type", "pdf_file_size", "pdf_updated_at"]) }
+  scope :recently_updated, -> { order('updated_at DESC') }
 
   has_attached_file :pdf, styles: {
     thumb: ["100x100#", :png]
