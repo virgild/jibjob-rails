@@ -44,5 +44,13 @@ module JibJob
       strip_types: true
     }
     config.react.addons = true
+
+    # Unauthorized error
+    config.action_dispatch.rescue_responses.merge!(
+      'Errors::Unauthorized' => :unauthorized
+    )
+
+    # Autoload on lib dir
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

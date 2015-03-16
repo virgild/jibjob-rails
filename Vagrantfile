@@ -9,5 +9,6 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vbox|
     vbox.gui = false
     vbox.memory = "2048"
+    vbox.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/-timesync-set-threshold", 10_000]
   end
 end

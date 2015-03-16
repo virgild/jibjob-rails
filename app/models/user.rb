@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
 
   scope :oauth_signups, -> { where.not(auth_provider: nil) }
   scope :password_recoverable, -> { where(auth_provider: nil).where.not(email: nil) }
+  scope :with_owner, -> (user_id) { where(id: user_id) }
 
   MAX_RESUMES_COUNT = 10
 

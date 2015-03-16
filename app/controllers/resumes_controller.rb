@@ -2,6 +2,7 @@ class ResumesController < ApplicationController
   protect_from_forgery except: [:publish, :unpublish, :create, :update]
 
   before_filter :require_current_user
+  before_filter :require_resume_access
   before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
   before_filter :set_editor_mode, only: [:new, :edit, :create, :update]
 
@@ -110,6 +111,12 @@ class ResumesController < ApplicationController
     end
 
     resume_params ? resume_params.permit(:name, :content, :slug, :is_published, :access_code) : {}
+  end
+
+  def require_resume_access
+    if params[:user_id].to_i != current_user.id
+      error401
+    end
   end
 
   def set_editor_mode

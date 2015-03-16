@@ -36,10 +36,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
     load_user
     build_user
@@ -73,10 +69,14 @@ class UsersController < ApplicationController
 
   private
 
+  def user_scope
+    User.with_owner(params[:id])
+  end
+
   def load_user
-    @user ||= User.find(params[:id])
+    @user ||= user_scope.first
     if @user.id != current_user.id
-      error404
+      error401
     end
   end
 
@@ -88,5 +88,4 @@ class UsersController < ApplicationController
     user_params = params[:user]
     user_params ? user_params.permit(:username, :email, :password, :password_confirmation, :timezone, :terms) : {}
   end
-
 end

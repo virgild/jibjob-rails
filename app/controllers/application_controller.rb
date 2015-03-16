@@ -6,7 +6,24 @@ class ApplicationController < ActionController::Base
   include AuthenticatedUser
   include GeokitOverrides
 
+  rescue_from ::Errors::Unauthorized, with: :go_unauthorized
+
   def error404
     raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def error401
+    raise ::Errors::Unauthorized.new("Unauthorized resource")
+  end
+
+  protected
+
+  def go_unauthorized
+    if current_user
+      flash[:warning] = "You have no access to the requested resource."
+      redirect_to user_url(current_user)
+    else
+      redirect_to login_url
+    end
   end
 end
