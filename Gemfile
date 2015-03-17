@@ -46,7 +46,7 @@ gem 'autoprefixer-rails'
 
 gem 'active_type'
 gem 'active_model_serializers'
-gem 'resumetools', '= 0.2.9.1'
+gem 'resumetools'
 gem 'paperclip'
 gem 'sanitize'
 gem 'pragmatic_segmenter'

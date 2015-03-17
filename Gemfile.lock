@@ -67,9 +67,8 @@ GEM
       debug_inspector (>= 0.0.1)
     browser (0.8.0)
     builder (3.2.2)
-    byebug (4.0.1)
+    byebug (4.0.2)
       columnize (= 0.9.0)
-      rb-readline (= 0.5.2)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -269,19 +268,18 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    rb-readline (0.5.2)
     rdoc (4.2.0)
-    react-source (0.13.0)
+    react-source (0.13.1)
     redis (3.2.1)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     request_store (1.1.0)
-    resumetools (0.2.9.1)
-      activesupport (~> 4.2.0)
-      prawn (~> 2.0.0)
+    resumetools (1.0.0)
+      activesupport (~> 4.2, >= 4.2.0)
+      prawn (~> 2.0, >= 2.0.0)
       prawn-table (~> 0.2.1)
-      treetop (~> 1.5.3)
+      treetop (~> 1.5, >= 1.5.3)
     rspec-activejob (0.2.0)
       activejob (>= 4.2)
       rspec-mocks
@@ -426,7 +424,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   react-rails (~> 1.0.0.pre)!
   redis
-  resumetools (= 0.2.9.1)
+  resumetools
   rspec-activejob
   rspec-rails (~> 3.0)
   sanitize
