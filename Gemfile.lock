@@ -275,7 +275,7 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     request_store (1.1.0)
-    resumetools (1.0.0)
+    resumetools (1.0.1)
       activesupport (~> 4.2, >= 4.2.0)
       prawn (~> 2.0, >= 2.0.0)
       prawn-table (~> 0.2.1)
