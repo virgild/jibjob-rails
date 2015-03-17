@@ -26,7 +26,8 @@
               = f.password_field :password_confirmation, class: "form-control"
             .form-group
               = f.check_box :terms
-              = f.label :terms, "I accept the terms and conditions.", class: "small"
+              = f.label :terms, class: "small" do
+                I accept the <a href="#{terms_of_service_url}">terms of service.</a>
             = f.submit "Submit", class: "btn btn-success"
 
           .social-buttons.row
