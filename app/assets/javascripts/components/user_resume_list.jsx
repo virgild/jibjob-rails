@@ -107,6 +107,24 @@
         );
       }
 
+      var pageCountIndicator = (function() {
+        return (
+          <div className="pdf-page-count" title={resume.pdf_page_count + ' pages'}>
+            <span className="fa fa-copy" />
+            {resume.pdf_page_count}
+          </div>
+        );
+      }());
+
+      var pageViewsIndicator = (function() {
+        return (
+          <div className="page-views-count" title="Resume page views">
+            <span className="fa fa-compass" />
+            {resume.total_page_views}
+          </div>
+        );
+      }());
+
       return (
         <div className="col-md-3 col-sm-4 col-xs-12">
           <div className="resume-list-item">
@@ -117,6 +135,8 @@
             <a href={resume.show_page} className="resume-list-item__name">{resume.name}</a>
             {published}
             {accessCode}
+            {pageCountIndicator}
+            {pageViewsIndicator}
             <div className="page-links">
               <a className="stats-link" href={resume.stats_page}>
                 <span className="fa fa-bar-chart"></span>

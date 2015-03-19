@@ -76,8 +76,13 @@ RSpec.describe "Resumes", type: :request, js: true do
   end
 
   example "published with no access code" do
-    click_on "/test-resume"
-    expect(page).to have_text "Thomas B. Seeker"
+    publication_window = window_opened_by do
+      click_on "Published at /test-resume"
+    end
+
+    within_window(publication_window) do
+      expect(page).to have_text "Thomas B. Seeker"
+    end
   end
 
   example "published with access code" do

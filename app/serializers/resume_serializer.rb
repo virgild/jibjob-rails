@@ -19,6 +19,7 @@
 #  is_published     :boolean          default(FALSE), not null
 #  access_code      :string
 #  pdf_edition      :integer          default(0), not null
+#  pdf_pages        :integer
 #
 # Indexes
 #
@@ -49,7 +50,8 @@ class ResumeSerializer < BaseSerializer
     :recently_new,
     :content,
     :structure,
-    :errors
+    :errors,
+    :pdf_page_count
 
   self.root = false
 
@@ -138,5 +140,9 @@ class ResumeSerializer < BaseSerializer
 
   def recently_new
     object.recently_new?
+  end
+
+  def pdf_page_count
+    object.pdf_pages
   end
 end

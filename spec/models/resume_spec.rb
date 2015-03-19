@@ -19,6 +19,7 @@
 #  is_published     :boolean          default(FALSE), not null
 #  access_code      :string
 #  pdf_edition      :integer          default(0), not null
+#  pdf_pages        :integer
 #
 # Indexes
 #
@@ -87,6 +88,10 @@ RSpec.describe Resume, type: :model do
     example "has false requires_access_code?" do
       expect(resume.requires_access_code?).to eq false
     end
+
+    example "has 0 pdf_pages" do
+      expect(resume.pdf_pages).to eq 0
+    end
   end
 
   context "after creation" do
@@ -98,6 +103,10 @@ RSpec.describe Resume, type: :model do
 
     it "has pdf_edition 1" do
       expect(resume.pdf_edition).to eq 1
+    end
+
+    it "has 2 pdf_pages" do
+      expect(resume.pdf_pages).to eq 2
     end
 
     it "generates guid" do

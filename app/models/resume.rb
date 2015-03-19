@@ -19,6 +19,7 @@
 #  is_published     :boolean          default(FALSE), not null
 #  access_code      :string
 #  pdf_edition      :integer          default(0), not null
+#  pdf_pages        :integer
 #
 # Indexes
 #
@@ -72,6 +73,8 @@ class Resume < ActiveRecord::Base
   }
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
+  after_initialize :set_zero_page_count
+
   before_validation :fill_guid, on: :create
   before_validation :set_new_status, on: :create
   before_validation :set_publication, on: :create
@@ -101,7 +104,14 @@ class Resume < ActiveRecord::Base
   alias :data :resume_data
 
   def generate_pdf_data
-    resume_data.render_pdf
+    pages = 0
+    content = resume_data.render_pdf do |data|
+      pages = data[:pages]
+    end
+
+    { content: content,
+      pages: pages
+    }
   end
 
   def generate_plain_text
@@ -135,7 +145,8 @@ class Resume < ActiveRecord::Base
   end
 
   def update_pdf_attachment
-    file_data = StringIO.new(generate_pdf_data)
+    pdf_data = generate_pdf_data
+    file_data = StringIO.new(pdf_data[:content])
     resume = self
     file_data.define_singleton_method :original_filename do
       "#{resume.guid}.pdf"
@@ -143,6 +154,7 @@ class Resume < ActiveRecord::Base
 
     self.pdf = file_data
     self.pdf_edition = edition
+    self.pdf_pages = pdf_data[:pages]
   end
 
   def pdf_file_synced?
@@ -196,5 +208,9 @@ class Resume < ActiveRecord::Base
 
   def did_unpublish
     Rails.logger.debug "DID UNPUBLISH"
+  end
+
+  def set_zero_page_count
+    self.pdf_pages ||= 0
   end
 end

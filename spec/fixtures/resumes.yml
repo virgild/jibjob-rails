@@ -19,6 +19,7 @@
 #  is_published     :boolean          default(FALSE), not null
 #  access_code      :string
 #  pdf_edition      :integer          default(0), not null
+#  pdf_pages        :integer
 #
 # Indexes
 #
