@@ -1,11 +1,17 @@
 .page.publication-access-code-page
   .form-container
-    %h3.title Enter Access Code
+    .title
+      %span.fa.fa-lock
+      Enter Access Code
+      %span.subtitle
+        (case-sensitive)
     - if @msg
-      .msg.bg-danger= @msg
+      .msg.bg-danger
+        %span.fa.fa-exclamation-triangle
+        = @msg
     = form_for publication_post_access_code_path do
       .form-group
-        %input{type: "text", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false", class: "form-control"}
+        %input{type: "password", name: "access_code", autofocus: "true", autocomplete: "off", autocorrect: "off", autocapitalize: "none", spellcheck: "false", class: "form-control code-box"}
       %button{type: "submit", class: "btn btn-success"} Submit
 
 .footer

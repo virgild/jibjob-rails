@@ -95,6 +95,11 @@
                 = link_to publication_url(slug: "sample", format: :pdf) do
                   %span.fa.fa-file-pdf-o
                   = publication_url(slug: "sample", format: :pdf)
+              %br
+              .feature__sample-link
+                = link_to publication_url(slug: "sample", format: :txt) do
+                  %span.fa.fa-file-text-o
+                  = publication_url(slug: "sample", format: :txt)
 
         .col-xs-12
           .feature

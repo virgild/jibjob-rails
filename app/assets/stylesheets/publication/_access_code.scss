@@ -5,8 +5,26 @@
   margin: 50px auto;
   @include rounded(2px);
 
+  .title {
+    font-size: 24px;
+    font-family: "Source Sans Pro";
+    font-weight: 300;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    font-family: "Source Sans Pro";
+    font-weight: 300;
+  }
+
   .msg {
     padding: 10px;
     margin-bottom: 10px;
+  }
+
+  .code-box {
+    font-family: Monaco, Menlo, "Courier New", monospace;
+    font-size: 18px;
+
   }
 }

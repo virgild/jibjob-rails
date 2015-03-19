@@ -190,7 +190,7 @@
     showSaveNotification: function() {
       $.notify({
         message: "Resume saved.",
-        icon: "glyphicon glyphicon-refresh"
+        icon: "fa fa-spinner fa-spin"
       }, {
         type: 'success',
         allow_dismiss: true,
