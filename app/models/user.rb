@@ -69,6 +69,14 @@ class User < ActiveRecord::Base
     !self.oauth_signup?
   end
 
+  def descriptor
+    if oauth_signup?
+      auth_name
+    else
+      username
+    end
+  end
+
   private
 
   def set_default_role

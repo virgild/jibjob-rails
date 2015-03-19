@@ -4,7 +4,7 @@
       - if params[:processing]
         %h3 Your account is being processed for deletion.
       - else
-        %h3 Are you sure you want to delete your account, #{current_user.username}?
+        %h3 Are you sure you want to delete your account, #{current_user.descriptor}?
         %p (This action is not undoable.)
         = form_tag(user_url(current_user), method: "DELETE") do
-          = submit_tag "Yes - Delete it", class: "btn btn-danger btn-xs"
+          = submit_tag "Yes - Delete it", class: "btn btn-danger btn-xs", data: {confirm: "Are you sure?"}
