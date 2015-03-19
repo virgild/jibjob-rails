@@ -12,5 +12,9 @@ footer {
   .signout-link {
     font-weight: 600;
     font-size: 12px;
+    text-decoration: none;
+    &:hover {
+      color: #C7102E;
+    }
   }
 }

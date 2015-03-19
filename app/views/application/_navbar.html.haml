@@ -8,13 +8,23 @@
       = link_to "jibjob", root_url, class: "navbar-brand navlogo"
 
     %ul.nav.navbar-nav.navbar-collapse.collapse
-      %li= link_to "Get Started", get_started_url
-      %li= link_to "About", about_url
-      %li= link_to "FAQ", faq_url
+      %li
+        = link_to get_started_url do
+          %span.fa.fa-lightbulb-o
+          Get started
+
+      %li
+        = link_to about_url do
+          %span.fa.fa-quote-left
+          About
+      %li
+        = link_to faq_url do
+          %span.fa.fa-question-circle
+          FAQ
       - unless current_user
         %li.topnav-signup-link
           = link_to new_user_url do
-            .span.glyphicon.glyphicon-user
+            .span.fa.fa-user-plus
             Sign up
 
     %ul.nav.navbar-nav.navbar-right.navbar-collapse.collapse
@@ -28,4 +38,7 @@
             .span.glyphicon.glyphicon-user
             My Account
       - else
-        %li= link_to "Sign in", login_url
+        %li
+          = link_to login_url do
+            %span.fa.fa-sign-in
+            Sign in

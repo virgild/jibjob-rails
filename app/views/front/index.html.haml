@@ -88,13 +88,12 @@
                 See a sample resume at:
               .feature__sample-link
                 = link_to publication_url(slug: "sample") do
-                  .span.glyphicon.glyphicon-chevron-left
+                  %span.fa.fa-file-code-o
                   = publication_url(slug: "sample")
-                  .span.glyphicon.glyphicon-chevron-right
               %br
               .feature__sample-link
                 = link_to publication_url(slug: "sample", format: :pdf) do
-                  .span.glyphicon.glyphicon-file
+                  %span.fa.fa-file-pdf-o
                   = publication_url(slug: "sample", format: :pdf)
 
         .col-xs-12
@@ -107,5 +106,5 @@
       .row
         .col-sm-12.signup-area
           = link_to signup_url do
-            .span.glyphicon.glyphicon-user
+            %span.fa.fa-user-plus
             Sign up
