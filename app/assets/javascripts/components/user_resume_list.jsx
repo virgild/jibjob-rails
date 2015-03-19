@@ -78,18 +78,15 @@
 
       if (resume.is_published) {
         var published = (
-          <div>
-            <span className="resume-list-item__published">
-              Published at <a href={resume.publish_url}>{resume.publish_url}</a>
-            </span>
+          <div className="resume-list-item__published">
+            <span className="fa fa-external-link">&nbsp;</span>
+            <a href={resume.publish_url} target="__blank">Published at {resume.publish_url}</a>
           </div>
         );
       } else {
         var published = (
-          <div>
-            <span className="resume-list-item__unpublished">
-              Unpublished
-            </span>
+          <div className="resume-list-item__unpublished">
+            Unpublished
           </div>
         );
       }
@@ -120,6 +117,12 @@
             <a href={resume.show_page} className="resume-list-item__name">{resume.name}</a>
             {published}
             {accessCode}
+            <div className="page-links">
+              <a className="stats-link" href={resume.stats_page}>
+                <span className="fa fa-bar-chart"></span>
+                Stats
+              </a>
+            </div>
           </div>
         </div>
       );
