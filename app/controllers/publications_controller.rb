@@ -36,8 +36,12 @@ class PublicationsController < ApplicationController
 
   private
 
+  def resumes_scope
+    Resume.published
+  end
+
   def load_resume
-    @resume = Resume.published.where(slug: params[:slug]).last or error404
+    @resume = resumes_scope.where(slug: params[:slug]).last or error404
   end
 
   def check_access_code
