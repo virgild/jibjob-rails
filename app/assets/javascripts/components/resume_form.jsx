@@ -270,7 +270,7 @@
               {exampleLoader}
               <p className="help-block">
                 Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
-                Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.
+                <span className="hidden-xs">Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.</span>
               </p>
               {editor}
             </div>
