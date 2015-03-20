@@ -31,16 +31,18 @@
         var published = (function(isPublished) {
           if (isPublished) {
             return (
-              <a href={resume.publish_url} target="_blank" title="Published link" className="published-marker">
-                <span className="fa fa-external-link" />
-                PUBLISHED: /{resume.slug}
-              </a>
+              <div className="published-marker">
+                <a href={resume.publish_url} target="_blank" title="Published link">
+                  <span className="fa fa-external-link" />
+                  PUBLISHED: /{resume.slug}
+                </a>
+              </div>
             );
           }
         }(resume.is_published));
 
         return (
-          <div className="title pull-left">{resume.name} {published}</div>
+          <div className="title">{resume.name} {published}</div>
         );
       }());
 
@@ -69,6 +71,7 @@
                     <span className="fa fa-clock-o" /> {resume.updated_at}
                   </div>
                 </div>
+                {accessCode}
                 <div className="properties">
                   <div className="item page-count" title="Number of pages">
                     <span className="fa fa-copy" /> {resume.pdf_page_count}
@@ -77,7 +80,6 @@
                     <span className="fa fa-eye" /> {resume.total_page_views}
                   </div>
                 </div>
-                {accessCode}
               </div>
             </div>
           </div>

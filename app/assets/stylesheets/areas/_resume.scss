@@ -31,27 +31,45 @@
 
     .title {
       font-size: 24px;
+
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+      }
     }
 
     .published-marker {
       font-size: 10px;
-      position: relative;
-      top: -5px;
-      background-color: #fff;
-      color: rgba(#4B90A6, 1.0);
       font-weight: 600;
       font-family: "Source Sans Pro";
-      padding: 2px 5px;
-      text-decoration: none;
-      @include rounded(3px);
+      display: inline-block;
+      position: relative;
+      top: -5px;
+
+      @media (max-width: $screen-sm-min) {
+        font-size: 14px;
+        display: block;
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        top: inherit;
+      }
+
+      a {
+        background-color: #fff;
+        text-decoration: none;
+        @include rounded(3px);
+        padding: 2px 5px;
+        color: rgba(#4B90A6, 1.0);
+
+        @media (max-width: $screen-sm-min) {
+          background-color: rgba(#50A61D, 1.0);
+          color: #fff;
+          padding: 5px 10px;
+        }
+      }
 
       .fa {
         margin-right: 3px;
-      }
-
-      @media (max-width: $screen-sm-min) {
-        background-color: rgba(#50A61D, 1.0);
-        color: #fff;
       }
     }
 
@@ -59,7 +77,13 @@
       float: right;
 
       @media (max-width: $screen-sm-min) {
-        float: inherit;
+        float: none;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
       }
 
       a {
@@ -75,15 +99,21 @@
 
         @media (max-width: $screen-sm-min) {
           color: #000;
+          margin: 0px;
+          padding: 10px;
+          font-size: 28px;
         }
       }
     }
 
     .dates {
       display: block;
-      float: left;
-      clear: left;
       font-size: 10px;
+
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+        font-size: 12px;
+      }
     }
 
     .properties {
@@ -99,17 +129,17 @@
       @extend .dates;
       display: inline-block;
       font-size: 10px;
-      background-color: #fff;
-      color: #4B90A6;
-      padding: 2px 6px;
-      margin-top: 2px;
-      @include rounded(4px);
+      color: #fff;
       font-family: "Source Sans Pro";
       font-weight: 600;
 
       @media (max-width: $screen-sm-min) {
-        color: #fff;
-        background: #000;
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        color: #000;
+        font-size: 12px;
       }
     }
   }
@@ -132,7 +162,7 @@
       font-family: "Source Sans Pro";
       font-weight: 300;
 
-      @media (max-width: $screen-xs-min) {
+      @media (max-width: $screen-sm-min) {
         font-size: 12px;
         border-top: solid 1px darken(#fff, 10%);
         border-bottom: solid 1px darken(#fff, 10%);
@@ -175,11 +205,12 @@
     .control-panel {
       text-align: right;
       padding-top: 10px;
-      padding-bottom: 5px;
+      padding-bottom: 10px;
       font-size: 10px;
 
       @media (max-width: $screen-sm-min) {
         color: #000;
+        text-align: center;
       }
 
       a {
