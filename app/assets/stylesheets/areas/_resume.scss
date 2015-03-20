@@ -89,19 +89,27 @@
     .properties {
       @extend .dates;
 
-      .access-code {
-        background-color: #fff;
-        color: #4B90A6;
-        padding: 2px 6px;
-        margin-top: 2px;
-        @include rounded(4px);
-        font-family: "Source Sans Pro";
-        font-weight: 600;
+      .item {
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
 
-        @media (max-width: $screen-sm-min) {
-          color: #fff;
-          background: #000;
-        }
+    .access-code {
+      @extend .dates;
+      display: inline-block;
+      font-size: 10px;
+      background-color: #fff;
+      color: #4B90A6;
+      padding: 2px 6px;
+      margin-top: 2px;
+      @include rounded(4px);
+      font-family: "Source Sans Pro";
+      font-weight: 600;
+
+      @media (max-width: $screen-sm-min) {
+        color: #fff;
+        background: #000;
       }
     }
   }

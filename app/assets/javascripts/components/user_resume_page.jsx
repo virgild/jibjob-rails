@@ -44,37 +44,23 @@
         );
       }());
 
-      var buttons = (function() {
-        return (
-          <div className="buttons">
-            <a href={resume.edit_page} title="Edit">
-              <span className="fa fa-edit" />
-            </a>
-            <a href={resume.stats_page} title="Stats">
-              <span className="fa fa-bar-chart" />
-            </a>
-            <a href={resume.delete_page} title="Delete">
-              <span className="fa fa-trash-o" />
-            </a>
-          </div>
-        );
-      }());
-
-      var pageViews = (function() {
-        return (
-          <div className="page-views" title="Page views">
-            <span className="fa fa-eye" /> {resume.total_page_views}
-          </div>
-        );
-      }());
-
       return (
         <div className="container">
           <div className="row">
             <div className="col-sm-12">
               <div className="details">
                 {details}
-                {buttons}
+                <div className="buttons">
+                  <a href={resume.edit_page} title="Edit">
+                    <span className="fa fa-edit" />
+                  </a>
+                  <a href={resume.stats_page} title="Stats">
+                    <span className="fa fa-bar-chart" />
+                  </a>
+                  <a href={resume.delete_page} title="Delete">
+                    <span className="fa fa-trash-o" />
+                  </a>
+                </div>
                 <div className="dates">
                   <div title="Created at">
                     <span className="fa fa-plus-square" /> {resume.created_at}
@@ -84,9 +70,14 @@
                   </div>
                 </div>
                 <div className="properties">
-                  {pageViews}
-                  {accessCode}
+                  <div className="item page-count" title="Number of pages">
+                    <span className="fa fa-copy" /> {resume.pdf_page_count}
+                  </div>
+                  <div className="item page-views" title="Page views">
+                    <span className="fa fa-eye" /> {resume.total_page_views}
+                  </div>
                 </div>
+                {accessCode}
               </div>
             </div>
           </div>
