@@ -27,7 +27,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     wait_for_ajax
     wait_for_selector(".details")
 
-    expect(page).to have_content("A New Resume Details")
+    expect(page).to have_content("A New Resume")
 
     within(".topnav") do
       click_on "My Resumes"
@@ -58,8 +58,8 @@ RSpec.describe "Resumes", type: :request, js: true do
 
     within("#resume .details") do
       expect(page).to have_text("Modified Resume")
-      expect(page).to have_text("Published: Yes")
-      expect(page).to have_text("Access code: DOODLES")
+      expect(page).to have_text("PUBLISHED")
+      expect(page).to have_text("DOODLES")
       expect(page).to have_text("test-resume-2")
     end
   end
@@ -95,15 +95,19 @@ RSpec.describe "Resumes", type: :request, js: true do
     sleep 1
     click_on "Test Resume"
 
-    click_on "publish-url"
-    expect(page).to have_content("Enter Access Code")
+    publication_window = window_opened_by do
+      click_on "Published link"
+    end
 
-    fill_in "access_code", with: "guesswork"
-    click_on "Submit"
-    expect(page).to have_content("Incorrect access code")
+    within_window(publication_window) do
+      expect(page).to have_content("Enter Access Code")
+      fill_in "access_code", with: "guesswork"
+      click_on "Submit"
+      expect(page).to have_content("Incorrect access code")
 
-    fill_in "access_code", with: "secret"
-    click_on "Submit"
-    expect(page).to_not have_content("Enter Access Code")
+      fill_in "access_code", with: "secret"
+      click_on "Submit"
+      expect(page).to_not have_content("Enter Access Code")
+    end
   end
 end

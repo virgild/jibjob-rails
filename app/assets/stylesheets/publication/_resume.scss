@@ -63,7 +63,6 @@ html, body {
 
 .control-panel {
   @include rounded(1px);
-  margin-bottom: 10px;
   padding: 10px;
   transition: opacity 0.5s ease;
   font-size: 10px;
@@ -72,10 +71,12 @@ html, body {
 
   @media (max-width: $screen-phone) {
     text-align: center;
-    font-size: 8px;
+    font-size: 14px;
   }
 
   a {
+    margin-left: 10px;
+
     &:hover {
       color: rgba(200, 56, 56, 1.0);
     }

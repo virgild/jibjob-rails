@@ -20,44 +20,79 @@
       var accessCode = (function(access_code) {
         if (access_code) {
           return (
-            <div>
-              <b>Access code:</b> {resume.access_code}
+            <div className="access-code" title="Access code">
+              <span className="fa fa-lock" /> {resume.access_code}
             </div>
           );
         }
       }(resume.access_code));
 
+      var details = (function() {
+        var published = (function(isPublished) {
+          if (isPublished) {
+            return (
+              <a href={resume.publish_url} target="_blank" title="Published link" className="published-marker">
+                <span className="fa fa-external-link" />
+                PUBLISHED: /{resume.slug}
+              </a>
+            );
+          }
+        }(resume.is_published));
+
+        return (
+          <div className="title pull-left">{resume.name} {published}</div>
+        );
+      }());
+
+      var buttons = (function() {
+        return (
+          <div className="buttons">
+            <a href={resume.edit_page} title="Edit">
+              <span className="fa fa-edit" />
+            </a>
+            <a href={resume.stats_page} title="Stats">
+              <span className="fa fa-bar-chart" />
+            </a>
+            <a href={resume.delete_page} title="Delete">
+              <span className="fa fa-trash-o" />
+            </a>
+          </div>
+        );
+      }());
+
+      var pageViews = (function() {
+        return (
+          <div className="page-views" title="Page views">
+            <span className="fa fa-eye" /> {resume.total_page_views}
+          </div>
+        );
+      }());
+
       return (
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-sm-12">
               <div className="details">
-                <h3>{resume.name} Details </h3>
-                <div>
-                  <b>Created:</b> {resume.created_at}
+                {details}
+                {buttons}
+                <div className="dates">
+                  <div title="Created at">
+                    <span className="fa fa-plus-square" /> {resume.created_at}
+                  </div>
+                  <div title="Last updated">
+                    <span className="fa fa-clock-o" /> {resume.updated_at}
+                  </div>
                 </div>
-                <div>
-                  <b>Updated:</b> {resume.updated_at}
+                <div className="properties">
+                  {pageViews}
+                  {accessCode}
                 </div>
-                <div>
-                  <b>Published:</b> {resume.is_published ? "Yes" : "No"}
-                </div>
-                <div>
-                  <b>Publish URL:</b> <a id="publish-url" href={pub_url}>{pub_url}</a>
-                </div>
-                {accessCode}
               </div>
             </div>
-            <div className="col-md-9">
-              <div className="actions">
-                <a href={resume.edit_page} className="btn btn-primary">Edit</a>
-                <a href={resume.stats_page} className="btn btn-default stats-button">Stats</a>
-                <a href={resume.delete_page} className="btn btn-danger delete-button">Delete</a>
-              </div>
-            </div>
-            <div className="col-md-9">
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
               <div className="preview">
-                <h3>Preview</h3>
                 <JibJob.PublicationPackagePanel pdf_url={resume.user_pdf_file} plaintext_url={resume.user_plaintext_file} />
                 <JibJob.PublicationResume data={resume.structure} />
               </div>

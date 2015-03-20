@@ -14,7 +14,7 @@
     render: function() {
       if (this.props.pdf_url) {
         var pdf_link = (
-          <a href={this.props.pdf_url} className="btn btn-xs">
+          <a href={this.props.pdf_url} className="">
             <span className="fa fa-file-pdf-o" />
             PDF
           </a>
@@ -23,7 +23,7 @@
 
       if (this.props.plaintext_url) {
         var plaintext_link = (
-          <a href={this.props.plaintext_url} className="btn btn-xs">
+          <a href={this.props.plaintext_url} className="">
             <span className="fa fa-file-text-o" />
             Plain Text
           </a>
@@ -32,7 +32,7 @@
 
       if (this.props.zip_url) {
         var zip_link = (
-          <a href={this.props.zip_url} className="btn btn-xs">
+          <a href={this.props.zip_url} className="">
             <span className="glyphicon glyphicon-file" />
             Zip
           </a>

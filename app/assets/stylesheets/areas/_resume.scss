@@ -1,5 +1,7 @@
 /* User views own resume page */
 .user-resume-page {
+  @include content-page;
+
   .actions {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -18,12 +20,96 @@
     }
   }
 
-  .preview {
-    background-color: lighten(#000, 18%);
-    padding: 10px 40px 40px 40px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  .details {
     color: #fff;
+    margin-top: 15px;
+
+    @media (max-width: $screen-sm-min) {
+      padding: 0px;
+      color: #000;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+    .published-marker {
+      font-size: 10px;
+      position: relative;
+      top: -5px;
+      background-color: #fff;
+      color: rgba(#4B90A6, 1.0);
+      font-weight: 600;
+      font-family: "Source Sans Pro";
+      padding: 2px 5px;
+      text-decoration: none;
+      @include rounded(3px);
+
+      .fa {
+        margin-right: 3px;
+      }
+
+      @media (max-width: $screen-sm-min) {
+        background-color: rgba(#50A61D, 1.0);
+        color: #fff;
+      }
+    }
+
+    .buttons {
+      float: right;
+
+      @media (max-width: $screen-sm-min) {
+        float: inherit;
+      }
+
+      a {
+        font-size: 18px;
+        color: rgba(#4B90A6, 1.0);
+        position: relative;
+        top: 2px;
+        margin-left: 8px;
+        display: inline-block;
+        padding: 2px 6px;
+        @include rounded(2px);
+        background-color: rgba(#fff, 0.9);
+
+        @media (max-width: $screen-sm-min) {
+          color: #000;
+        }
+      }
+    }
+
+    .dates {
+      display: block;
+      float: left;
+      clear: left;
+      font-size: 10px;
+    }
+
+    .properties {
+      @extend .dates;
+
+      .access-code {
+        background-color: #fff;
+        color: #4B90A6;
+        padding: 2px 6px;
+        margin-top: 2px;
+        @include rounded(4px);
+        font-family: "Source Sans Pro";
+        font-weight: 600;
+
+        @media (max-width: $screen-sm-min) {
+          color: #fff;
+          background: #000;
+        }
+      }
+    }
+  }
+
+  .preview {
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
 
     @media (max-width: $screen-xs-min) {
       padding: 0px;
@@ -80,11 +166,23 @@
 
     .control-panel {
       text-align: right;
+      padding-top: 10px;
       padding-bottom: 5px;
       font-size: 10px;
 
+      @media (max-width: $screen-sm-min) {
+        color: #000;
+      }
+
       a {
-        font-size: 10px;
+        color: #fff;
+        margin-left: 10px;
+        text-decoration: none;
+
+        @media (max-width: $screen-sm-min) {
+          color: #000;
+          font-size: 14px;
+        }
 
         &:hover {
           color: rgba(200, 56, 56, 1.0);
