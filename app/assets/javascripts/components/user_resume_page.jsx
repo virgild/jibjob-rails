@@ -46,7 +46,7 @@
           return (
             <div className="publish-url">
               <span className="fa fa-external-link-square icon" />
-              <a href={pub_url} target="_blank">{pub_url}</a>
+              <a title="Publish URL" href={pub_url} target="_blank">{pub_url}</a>
             </div>
           );
         } else {

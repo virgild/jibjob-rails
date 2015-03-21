@@ -77,7 +77,8 @@ RSpec.describe "Resumes", type: :request, js: true do
 
   example "published with no access code" do
     publication_window = window_opened_by do
-      click_on "Published at /test-resume"
+      click_on "Test Resume"
+      click_on "Publish URL"
     end
 
     within_window(publication_window) do
@@ -96,7 +97,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_on "Test Resume"
 
     publication_window = window_opened_by do
-      click_on "Published link"
+      click_on "Publish URL"
     end
 
     within_window(publication_window) do
