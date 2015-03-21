@@ -31,12 +31,7 @@
         var published = (function(isPublished) {
           if (isPublished) {
             return (
-              <div className="published-marker">
-                <a href={resume.publish_url} target="_blank" title="Published link">
-                  <span className="fa fa-external-link" />
-                  PUBLISHED: /{resume.slug}
-                </a>
-              </div>
+              <div className="published-marker">PUBLISHED</div>
             );
           }
         }(resume.is_published));
@@ -44,6 +39,24 @@
         return (
           <div className="title">{resume.name} {published}</div>
         );
+      }());
+
+      var publishURL = (function() {
+        if (resume.is_published) {
+          return (
+            <div className="publish-url">
+              <span className="fa fa-external-link-square icon" />
+              <a href={pub_url} target="_blank">{pub_url}</a>
+            </div>
+          );
+        } else {
+          return (
+            <div className="publish-url">
+              <span className="fa fa-anchor icon" />
+              <a>{pub_url}</a>
+            </div>
+          );
+        }
       }());
 
       return (
@@ -71,6 +84,7 @@
                     <span className="fa fa-clock-o" /> {resume.updated_at}
                   </div>
                 </div>
+                {publishURL}
                 {accessCode}
                 <div className="properties">
                   <div className="item page-count" title="Number of pages">

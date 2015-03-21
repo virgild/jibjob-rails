@@ -1,0 +1,247 @@
+/* User views own resume page */
+.user-resume-page {
+  @include content-page;
+
+  .actions {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+
+    @media (max-width: $screen-md-min) {
+      text-align: inherit;
+    }
+
+    .delete-button {
+      margin-left: 20px;
+    }
+
+    .stats-button {
+      margin-left: 10px;
+    }
+  }
+
+  .details {
+    color: #fff;
+    margin-top: 15px;
+
+    @media (max-width: $screen-sm-min) {
+      padding: 0px;
+      color: #000;
+    }
+
+    .title {
+      font-size: 24px;
+
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+      }
+    }
+
+    .publish-url {
+      font-family: "Source Sans Pro";
+      font-size: 12px;
+      display: block;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .icon {
+        margin-right: 2px;
+      }
+    }
+
+    .published-marker {
+      font-size: 10px;
+      font-weight: 600;
+      font-family: "Source Sans Pro";
+      display: inline;
+      position: relative;
+      top: -4px;
+      background-color: #fff;
+      text-decoration: none;
+      @include rounded(3px);
+      padding: 2px 5px;
+      color: rgba(#4B90A6, 1.0);
+
+      @media (max-width: $screen-sm-min) {
+        font-size: 14px;
+        display: block;
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        top: inherit;
+        background-color: rgba(#50A61D, 1.0);
+        color: #fff;
+        padding: 5px 10px;
+      }
+
+      .fa {
+        margin-right: 3px;
+      }
+    }
+
+    .buttons {
+      float: right;
+
+      @media (max-width: $screen-sm-min) {
+        float: none;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+      }
+
+      a {
+        font-size: 18px;
+        color: #fff;
+        position: relative;
+        top: 2px;
+        margin-left: 8px;
+        display: inline-block;
+        padding: 2px 6px;
+
+        @media (max-width: $screen-sm-min) {
+          color: #000;
+          margin: 0px;
+          padding: 10px;
+          font-size: 28px;
+        }
+      }
+    }
+
+    .dates {
+      display: block;
+      font-size: 10px;
+
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+
+    .properties {
+      @extend .dates;
+
+      .item {
+        display: inline-block;
+        margin-right: 10px;
+      }
+    }
+
+    .access-code {
+      @extend .dates;
+      display: inline-block;
+      font-size: 10px;
+      color: #fff;
+      font-family: "Source Sans Pro";
+      font-weight: 600;
+
+      @media (max-width: $screen-sm-min) {
+        display: block;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        color: #000;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .preview {
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    @media (max-width: $screen-xs-min) {
+      padding: 0px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .resume {
+      background-color: #fff;
+      color: #000;
+      padding: 30px 40px;
+      font-family: "Source Sans Pro";
+      font-weight: 300;
+
+      @media (max-width: $screen-sm-min) {
+        font-size: 12px;
+        border-top: solid 1px darken(#fff, 10%);
+        border-bottom: solid 1px darken(#fff, 10%);
+      }
+
+      .resume-header {
+        text-align: center;
+      }
+
+      .fullname {
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .resume-section {
+        margin-top: 20px;
+      }
+
+      .section {
+        margin-top: 10px;
+        margin-bottom: 20px;
+
+        .section-title {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+
+        .period-title {
+          font-size: 16px;
+          font-weight: 400;
+        }
+      }
+
+      .period {
+        margin-top: 10px;
+      }
+    }
+
+    .control-panel {
+      text-align: right;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 10px;
+
+      @media (max-width: $screen-sm-min) {
+        color: #000;
+        text-align: center;
+      }
+
+      a {
+        color: #fff;
+        margin-left: 10px;
+        text-decoration: none;
+
+        @media (max-width: $screen-sm-min) {
+          color: #000;
+          font-size: 14px;
+        }
+
+        &:hover {
+          color: rgba(200, 56, 56, 1.0);
+        }
+
+        .glyphicon {
+          margin-right: 2px;
+        }
+
+        .fa {
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}

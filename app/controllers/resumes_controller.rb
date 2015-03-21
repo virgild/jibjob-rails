@@ -87,7 +87,7 @@ class ResumesController < ApplicationController
   end
 
   def resume_scope
-    current_user.resumes
+    current_user.resumes.order(:id)
   end
 
   def load_resume
