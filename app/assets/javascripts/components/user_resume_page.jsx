@@ -31,7 +31,7 @@
         var published = (function(isPublished) {
           if (isPublished) {
             return (
-              <div className="published-marker">PUBLISHED</div>
+              <div className="published-marker"><span>PUBLISHED</span></div>
             );
           }
         }(resume.is_published));

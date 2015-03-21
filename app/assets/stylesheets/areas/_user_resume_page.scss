@@ -42,9 +42,18 @@
       font-size: 12px;
       display: block;
 
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+        font-size: 16px;
+      }
+
       a {
         color: #fff;
         text-decoration: none;
+
+        @media (max-width: $screen-sm-min) {
+          color: #000;
+        }
       }
 
       .icon {
@@ -53,32 +62,33 @@
     }
 
     .published-marker {
-      font-size: 10px;
-      font-weight: 600;
-      font-family: "Source Sans Pro";
       display: inline;
-      position: relative;
-      top: -4px;
-      background-color: #fff;
-      text-decoration: none;
-      @include rounded(3px);
-      padding: 2px 5px;
-      color: rgba(#4B90A6, 1.0);
 
       @media (max-width: $screen-sm-min) {
-        font-size: 14px;
         display: block;
-        color: #fff;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        top: inherit;
-        background-color: rgba(#50A61D, 1.0);
-        color: #fff;
-        padding: 5px 10px;
       }
 
-      .fa {
-        margin-right: 3px;
+      span {
+        font-size: 10px;
+        font-weight: 600;
+        font-family: "Source Sans Pro";
+        position: relative;
+        top: -4px;
+        background-color: #fff;
+        text-decoration: none;
+        @include rounded(3px);
+        padding: 2px 5px;
+        color: rgba(#4B90A6, 1.0);
+
+        @media (max-width: $screen-sm-min) {
+          font-size: 10px;
+          display: inline-block;
+          color: #fff;
+          top: inherit;
+          background-color: #000;
+          color: #fff;
+          padding: 2px 5px;
+        }
       }
     }
 
