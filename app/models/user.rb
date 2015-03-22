@@ -77,6 +77,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def cached_total_resume_views
+    REDIS_POOL.get("user-#{self.id}-cached_total_resume_views").try(:to_i) || 0
+  end
+
+  def increment_cached_total_resume_views
+    REDIS_POOL.incr("user-#{self.id}-cached_total_resume_views")
+  end
+
   private
 
   def set_default_role

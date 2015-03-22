@@ -115,7 +115,7 @@ class ResumeSerializer < BaseSerializer
 
   def pageview_count
     return nil if object.new_record?
-    object.publication_views.count
+    object.total_page_views
   end
 
   def publish_url

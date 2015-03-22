@@ -128,7 +128,7 @@ class Resume < ActiveRecord::Base
   end
 
   def total_page_views
-    publication_views.count
+    self.publication_views_count
   end
 
   def requires_access_code?
@@ -172,6 +172,22 @@ class Resume < ActiveRecord::Base
 
   def delete_stored_stats
     REDIS_POOL.del(self.publication_view_stats_key)
+  end
+
+  def cached_total_page_views
+    Resume.cached_total_page_views_for(user_id, id)
+  end
+
+  def increment_cached_total_page_views
+    Resume.increment_cached_total_page_views_for(user_id, id)
+  end
+
+  def self.cached_total_page_views_for(user_id, resume_id)
+    REDIS_POOL.hget("user-#{user_id}-cached_total_page_views", resume_id).try(:to_i) || 0
+  end
+
+  def self.increment_cached_total_page_views_for(user_id, resume_id)
+    REDIS_POOL.hincrby("user-#{user_id}-cached_total_page_views", resume_id, 1)
   end
 
   private

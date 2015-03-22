@@ -11,8 +11,14 @@ class ResumesController < ApplicationController
   def index
     load_resumes
 
+    Rails.logger.debug("Fetching resume list with: #{list_cache_key}")
     @resumes_data = Rails.cache.fetch(list_cache_key) do
-      ActiveModel::ArraySerializer.new(@resumes, each_serializer: Resume::LightSerializer).to_json
+      @resumes.pluck(:id).map { |resume_id|
+        resume_cached_total_views = Resume.cached_total_page_views_for(current_user.id, resume_id)
+        Rails.cache.fetch("user-#{current_user.id}-resume_list_item-#{resume_id}-#{resume_cached_total_views}") do
+          Resume::LightSerializer.new(Resume.find(resume_id))
+        end
+      }.to_json
     end
   end
 
@@ -134,6 +140,7 @@ class ResumesController < ApplicationController
   end
 
   def list_cache_key
-    @_list_cache_key ||= "user-#{current_user.id}-#{list_cache_identifier}"
+    total_resume_views = current_user.cached_total_resume_views
+    @_list_cache_key ||= "user-#{current_user.id}-#{list_cache_identifier}-#{total_resume_views}"
   end
 end
