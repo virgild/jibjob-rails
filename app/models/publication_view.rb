@@ -27,7 +27,7 @@ class PublicationView < ActiveRecord::Base
   validates :ip_addr, presence: true
   validates :url, presence: true
 
-  belongs_to :resume
+  belongs_to :resume, counter_cache: true
   has_one :user, through: :resume
 
   scope :in_range, -> (time_start, time_end) { where('created_at < ? and created_at > ?', time_start, time_end) }

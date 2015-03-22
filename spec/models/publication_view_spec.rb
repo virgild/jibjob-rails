@@ -92,6 +92,13 @@ RSpec.describe PublicationView, type: :model do
       expect(pubview.save).to eq true
       expect(pubview.new_record?).to eq false
     end
+
+    it "should increment counter on resume" do
+      expect(resume.publication_views_count).to eq 0
+      pubview.save
+      resume.reload
+      expect(resume.publication_views_count).to eq 1
+    end
   end
 
   context "callbacks" do

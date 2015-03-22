@@ -2,24 +2,25 @@
 #
 # Table name: resumes
 #
-#  id               :integer          not null, primary key
-#  user_id          :integer          not null
-#  name             :string           not null
-#  content          :text             not null
-#  guid             :string           not null
-#  status           :integer          default(0), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  pdf_file_name    :string
-#  pdf_content_type :string
-#  pdf_file_size    :integer
-#  pdf_updated_at   :datetime
-#  edition          :integer          default(0), not null
-#  slug             :string           not null
-#  is_published     :boolean          default(FALSE), not null
-#  access_code      :string
-#  pdf_edition      :integer          default(0), not null
-#  pdf_pages        :integer
+#  id                      :integer          not null, primary key
+#  user_id                 :integer          not null
+#  name                    :string           not null
+#  content                 :text             not null
+#  guid                    :string           not null
+#  status                  :integer          default(0), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  pdf_file_name           :string
+#  pdf_content_type        :string
+#  pdf_file_size           :integer
+#  pdf_updated_at          :datetime
+#  edition                 :integer          default(0), not null
+#  slug                    :string           not null
+#  is_published            :boolean          default(FALSE), not null
+#  access_code             :string
+#  pdf_edition             :integer          default(0), not null
+#  pdf_pages               :integer
+#  publication_views_count :integer          default(0), not null
 #
 # Indexes
 #
@@ -91,6 +92,10 @@ RSpec.describe Resume, type: :model do
 
     example "has 0 pdf_pages" do
       expect(resume.pdf_pages).to eq 0
+    end
+
+    example "has 0 publication_views_count" do
+      expect(resume.publication_views_count).to eq 0
     end
   end
 
