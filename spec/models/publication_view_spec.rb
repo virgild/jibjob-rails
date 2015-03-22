@@ -132,13 +132,5 @@ RSpec.describe PublicationView, type: :model do
         expect(pubview.lng).to eq 0.0
       end
     end
-
-    context "updates stats" do
-      example "increments hour and week stat in redis" do
-        expect(REDIS_POOL).to receive(:hincrby).with(/^resume/, /^week/, 1)
-        expect(REDIS_POOL).to receive(:hincrby).with(/^resume/, /^day/, 1)
-        pubview.save
-      end
-    end
   end
 end

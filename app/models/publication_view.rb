@@ -35,6 +35,8 @@ class PublicationView < ActiveRecord::Base
   before_save :geocode_ip, on: :create, unless: :skip_geocode
   after_save :increment_hour_stat, on: :create
   after_save :increment_week_stat, on: :create
+  after_save :increment_resume_cached_total_page_views, on: :create
+  after_save :increment_user_cached_total_resume_views, on: :create
 
   def timezone
     user.timezone
@@ -76,5 +78,13 @@ class PublicationView < ActiveRecord::Base
 
   def increment_week_stat
     REDIS_POOL.hincrby(stats_key, stat_key_for_week, 1)
+  end
+
+  def increment_resume_cached_total_page_views
+    resume.increment_cached_total_page_views
+  end
+
+  def increment_user_cached_total_resume_views
+    user.increment_cached_total_resume_views
   end
 end

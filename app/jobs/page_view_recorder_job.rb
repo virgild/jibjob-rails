@@ -15,12 +15,6 @@ class PageViewRecorderJob < BaseJob
         created_at: t
       )
       pubview.save
-
-      # Increment resume cached total page views count
-      resume.increment_cached_total_page_views
-
-      # Increment user cached total resume views count
-      resume.user.increment_cached_total_resume_views
     end
   end
 end
