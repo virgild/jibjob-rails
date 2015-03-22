@@ -62,9 +62,6 @@ Rails.application.configure do
     from: ENV['MAILER_DEFAULT_FROM']
   }
 
-  # Cache to nothing
-  config.cache_store = :null_store
-
   # ReactJS variant
   config.react.variant = :development
 
