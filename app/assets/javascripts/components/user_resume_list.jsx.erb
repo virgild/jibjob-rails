@@ -78,7 +78,7 @@
       if (resume.is_published) {
         var published = (
           <div className="published-marker">
-            <span>PUBLISHED</span>
+            <span><%= I18n.t(:published).upcase %></span>
           </div>
         );
       }
@@ -92,7 +92,7 @@
       if (resume.recently_new) {
         var newRibbon = (
           <div className="resume-list-item__ribbon">
-            <span>NEW</span>
+            <span><%= I18n.t(:new_resume_label) %></span>
           </div>
         );
       }

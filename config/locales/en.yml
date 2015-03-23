@@ -21,3 +21,23 @@
 
 en:
   jibjob: "JibJob"
+  get_started: "Get started"
+  about: "About"
+  faq: "FAQ"
+  sign_up: "Sign up"
+  sign_in: "Sign in"
+  my_resumes: "My resumes"
+  my_account: "My account"
+  terms_of_service: "Terms of service"
+
+  published: "Published"
+  unpublished: "Unpublished"
+  new_resume_label: "New"
+
+  username_label: "Username"
+  email_label: "E-mail"
+  password_label: "Password"
+  password_confirm_label: "Confirm password"
+  submit_button_label: "Submit"
+  accept_terms_of_service_label: "I accept the %{link}."
+  login_with_choices: "Log in with the following:"

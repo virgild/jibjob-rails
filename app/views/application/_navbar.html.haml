@@ -10,32 +10,32 @@
     %ul.nav.navbar-nav.navbar-collapse.collapse
       %li
         = link_to get_started_url do
-          Get started
+          = t(:get_started)
 
       %li
         = link_to about_url do
-          About
+          = t(:about)
       %li
         = link_to faq_url do
-          FAQ
+          = t(:faq)
       - unless current_user
         %li.topnav-signup-link
           = link_to new_user_url do
             .span.fa.fa-user-plus
-            Sign up
+            = t(:sign_up)
 
     %ul.nav.navbar-nav.navbar-right.navbar-collapse.collapse
       - if current_user
         %li
           = link_to user_resumes_url(current_user) do
             .span.glyphicon.glyphicon-file
-            My Resumes
+            = t(:my_resumes)
         %li
           = link_to user_url(current_user) do
             .span.glyphicon.glyphicon-user
-            My Account
+            = t(:my_account)
       - else
         %li
           = link_to login_url do
             %span.fa.fa-sign-in
-            Sign in
+            = t(:sign_in)
