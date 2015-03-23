@@ -30,7 +30,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     expect(page).to have_content("A New Resume")
 
     within(".topnav") do
-      click_on "My Resumes"
+      click_on "My resumes"
     end
     within(".resume-list") do
       expect(page).to have_content("A New Resume")

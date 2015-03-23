@@ -6,10 +6,10 @@ RSpec.describe "UserSignups", type: :request, js: true do
   before :each do
     visit "/app/users/new"
     fill_in "Username", with: "testuser"
-    fill_in "Email", with: "testuser@example.com"
+    fill_in "E-mail", with: "testuser@example.com"
     fill_in "Password", with: "testpass"
     fill_in "Confirm password", with: "testpass"
-    check "I accept the terms of service"
+    check "I accept the Terms of service"
 
     click_button "Submit"
   end
