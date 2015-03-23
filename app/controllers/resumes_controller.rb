@@ -13,9 +13,11 @@ class ResumesController < ApplicationController
 
     Rails.logger.debug("Fetching resume list with: #{list_cache_key}")
     @resumes_data = Rails.cache.fetch(list_cache_key) do
-      @resumes.pluck(:id).map { |resume_id|
+      @resumes.pluck(:id, :updated_at).map { |resume_data|
+        resume_id, updated_at = resume_data
         resume_cached_total_views = Resume.cached_total_page_views_for(current_user.id, resume_id)
-        Rails.cache.fetch("user-#{current_user.id}-resume_list_item-#{resume_id}-#{resume_cached_total_views}") do
+        key = "user-#{current_user.id}-resume_list_item-#{resume_id}-#{updated_at.to_i}-#{resume_cached_total_views}"
+        Rails.cache.fetch(key) do
           Resume::LightSerializer.new(Resume.find(resume_id))
         end
       }.to_json
@@ -133,7 +135,7 @@ class ResumesController < ApplicationController
 
   def list_cache_identifier
     if resume_scope.recently_updated.count > 0
-      "resumes-#{resume_scope.count}-#{@resumes.recently_updated.first.updated_at.to_i}"
+      "resumes-#{resume_scope.count}-#{current_user.resumes.recently_updated.first.updated_at.to_i}"
     else
       "resumes-0-0"
     end
