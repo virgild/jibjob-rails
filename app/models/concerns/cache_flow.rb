@@ -18,7 +18,6 @@ module CacheFlow
         ].concat(elements.map { |name, meth| "#{name}:#{meth.call(self)}" })
 
         key = key_elements.map { |item| item.is_a?(Enumerable) ? item.join(':') : item }.join('-')
-        Rails.logger.debug("#{'Key'.yellow}: #{key.green}")
 
         Rails.cache.fetch(key) do
           blk.yield

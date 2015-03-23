@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
 
   has_cache :resume_list, with_elements: {
     count: -> (user) { user.resumes.count },
+    views: -> (user) { user.cached_total_resume_views },
     last_update: -> (user) { user.resumes.most_recently_updated.try(:updated_at).to_i }
   }
 

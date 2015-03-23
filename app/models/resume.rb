@@ -174,6 +174,10 @@ class Resume < ActiveRecord::Base
     new_record? ? true : (created_at > 30.minutes.ago)
   end
 
+  def cache_key
+    "resume/#{self.id}/:#{updated_at.to_i}:#{cached_total_page_views}"
+  end
+
   def publication_view_stats_key
     "resume-#{self.id}-stats"
   end
