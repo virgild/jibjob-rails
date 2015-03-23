@@ -26,6 +26,8 @@
 #
 
 class User < ActiveRecord::Base
+  include CacheFlow
+
   has_secure_password
 
   has_many :resumes, dependent: :destroy
@@ -45,7 +47,12 @@ class User < ActiveRecord::Base
   scope :password_recoverable, -> { where(auth_provider: nil).where.not(email: nil) }
   scope :with_owner, -> (user_id) { where(id: user_id) }
 
-  MAX_RESUMES_COUNT = 10
+  MAX_RESUMES_COUNT ||= 10
+
+  has_cache :resume_list, with_elements: {
+    count: -> (user) { user.resumes.count },
+    last_update: -> (user) { user.resumes.most_recently_updated.try(:updated_at).to_i }
+  }
 
   def signup_confirmed?
     signup_confirmation &&

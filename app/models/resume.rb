@@ -95,6 +95,14 @@ class Resume < ActiveRecord::Base
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
 
+  def self.most_recently_updated
+    recently_updated.first
+  end
+
+  def self.list_with_update_timestamps
+    list.pluck(:id, :updated_at)
+  end
+
   def resume_data(reload = false)
     if reload
       @resume_data = ResumeTools::Resume.from_text(content || '')

@@ -9,12 +9,9 @@ class ResumesController < ApplicationController
   include HasUserResume
 
   def index
-    load_resumes
-
-    Rails.logger.debug("Fetching resume list with: #{list_cache_key}")
-    @resumes_data = Rails.cache.fetch(list_cache_key) do
-      @resumes.pluck(:id, :updated_at).map { |resume_data|
-        resume_id, updated_at = resume_data
+    @resumes_data = current_user.cached_resume_list do
+      resume_scope.list_with_update_timestamps.map { |_resume|
+        resume_id, updated_at = _resume
         resume_cached_total_views = Resume.cached_total_page_views_for(current_user.id, resume_id)
         key = "user-#{current_user.id}-resume_list_item-#{resume_id}-#{updated_at.to_i}-#{resume_cached_total_views}"
         Rails.cache.fetch(key) do
