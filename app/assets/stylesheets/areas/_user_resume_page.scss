@@ -2,6 +2,8 @@
 .user-resume-page {
   @include content-page;
 
+  $blue-color: #4B90A6;
+
   .actions {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -30,10 +32,83 @@
     }
 
     .title {
+      height: 40px;
+      line-height: 40px;
       font-size: 30px;
+      display: flex;
+      align-items: center;
 
       @media (max-width: $screen-sm-min) {
         text-align: center;
+        display: block;
+        align-items: inherit;
+        height: inherit;
+        line-height: inherit;
+      }
+    }
+
+    .publish-toggler {
+      font-size: 10px;
+      display: inline-block;
+      margin-left: 10px;
+
+      @media (max-width: $screen-sm-min) {
+        display: block;
+        font-size: 16px;
+      }
+
+      a {
+        display: inline;
+        text-decoration: none;
+        color: $blue-color;
+        background: #fff;
+        font-weight: 600;
+        padding: 5px 8px;
+        @include rounded(4px);
+
+        @media (max-width: $screen-sm-min) {
+          display: inline-block;
+          color: #000;
+          background-color: #fff;
+          border: solid 1px #000;
+          margin-top: 5px;
+          @include rounded(8px);
+        }
+
+        &.published {
+          @media (max-width: $screen-sm-min) {
+            background-color: #000;
+            color: #fff;
+          }
+        }
+
+        &.unpublished {
+          background-color: $blue-color;
+          color: #fff;
+          border: solid 1px #fff;
+
+          @media (max-width: $screen-sm-min) {
+            background-color: #fff;
+            color: #000;
+            border: solid 1px #000;
+          }
+        }
+
+        .icon {
+          margin-right: 5px;
+
+          &.unpublished {
+
+          }
+
+          &.published {
+
+          }
+
+          &.updating {
+
+          }
+        }
       }
     }
 

@@ -8,14 +8,69 @@
       resume: React.PropTypes.object.isRequired,
     },
 
+    getInitialState: function() {
+      return {
+        isUpdating: false
+      };
+    },
+
     componentDidMount: function() {
 
+    },
+
+    publishResume: function(e) {
+      e.preventDefault();
+
+      if (this.state.isUpdating) {
+        return;
+      }
+
+      this.setState({ isUpdating: true });
+
+      var self = this;
+
+      $.ajax({
+        url: this.props.resume.show_page,
+        data: { resume: { is_published: true } },
+        method: "PUT"
+      }).done(function(data) {
+        self.props.resume.is_published = data.resume.is_published;
+      }).fail(function(xhr, status) {
+
+      }).always(function() {
+        self.setState({isUpdating: false});
+      });
+    },
+
+    unpublishResume: function(e) {
+      e.preventDefault();
+
+      if (this.state.isUpdating) {
+        return;
+      }
+
+      this.setState({ isUpdating: true });
+
+      var self = this;
+
+      $.ajax({
+        url: this.props.resume.show_page,
+        data: { resume: {is_published: false} },
+        method: "PUT"
+      }).done(function(data) {
+        self.props.resume.is_published = data.resume.is_published;
+      }).fail(function(xhr, status) {
+
+      }).always(function() {
+        self.setState({isUpdating: false});
+      });
     },
 
     render: function() {
       var resume = this.props.resume;
       var origin = window.location.origin;
       var pub_url = origin + resume.publish_url;
+      var self = this;
 
       var accessCode = (function(access_code) {
         if (access_code) {
@@ -27,19 +82,31 @@
         }
       }(resume.access_code));
 
-      var details = (function() {
-        var published = (function(isPublished) {
-          if (isPublished) {
-            return (
-              <div className="published-marker"><span>PUBLISHED</span></div>
-            );
-          }
-        }(resume.is_published));
 
-        return (
-          <div className="title">{resume.name} {published}</div>
+      // Publish Toggler
+      if (this.props.resume.is_published) {
+        var publishToggler = (
+          <div className="publish-toggler">
+            <a href="#" onClick={self.unpublishResume} className="published">
+              <span className="icon unpublished fa fa-toggle-off" />
+              PUBLISHED
+            </a>
+          </div>
         );
-      }());
+      } else {
+        var publishToggler = (
+          <div className="publish-toggler">
+            <a href="#" onClick={self.publishResume} className="unpublished">
+              <span className="icon published fa fa-toggle-on" />
+              UNPUBLISHED
+            </a>
+          </div>
+        );
+      }
+
+      var details = (
+        <div className="title">{resume.name}{publishToggler}</div>
+      );
 
       var publishURL = (function() {
         if (resume.is_published) {
