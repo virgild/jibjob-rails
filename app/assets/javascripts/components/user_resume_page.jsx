@@ -76,6 +76,7 @@
                     <span className="fa fa-trash-o" />
                   </a>
                 </div>
+                {publishURL}
                 <div className="dates">
                   <div title="Created at">
                     <span className="fa fa-plus-square" /> {resume.created_at}
@@ -84,7 +85,6 @@
                     <span className="fa fa-clock-o" /> {resume.updated_at}
                   </div>
                 </div>
-                {publishURL}
                 {accessCode}
                 <div className="properties">
                   <div className="item page-count" title="Number of pages">

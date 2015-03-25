@@ -30,7 +30,7 @@
     }
 
     .title {
-      font-size: 24px;
+      font-size: 30px;
 
       @media (max-width: $screen-sm-min) {
         text-align: center;
@@ -39,8 +39,9 @@
 
     .publish-url {
       font-family: "Source Sans Pro";
-      font-size: 12px;
+      font-size: 18px;
       display: block;
+      margin-bottom: 5px;
 
       @media (max-width: $screen-sm-min) {
         text-align: center;
@@ -69,7 +70,7 @@
       }
 
       span {
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         font-family: "Source Sans Pro";
         position: relative;
@@ -106,7 +107,7 @@
       }
 
       a {
-        font-size: 18px;
+        font-size: 24px;
         color: #fff;
         position: relative;
         top: 2px;
@@ -125,7 +126,7 @@
 
     .dates {
       display: block;
-      font-size: 10px;
+      font-size: 14px;
 
       @media (max-width: $screen-sm-min) {
         text-align: center;
@@ -145,7 +146,7 @@
     .access-code {
       @extend .dates;
       display: inline-block;
-      font-size: 10px;
+      font-size: 14px;
       color: #fff;
       font-family: "Source Sans Pro";
       font-weight: 600;
@@ -223,7 +224,7 @@
       text-align: right;
       padding-top: 10px;
       padding-bottom: 10px;
-      font-size: 10px;
+      font-size: 14px;
 
       @media (max-width: $screen-sm-min) {
         color: #000;
@@ -234,6 +235,7 @@
         color: #fff;
         margin-left: 10px;
         text-decoration: none;
+        padding: 5px;
 
         @media (max-width: $screen-sm-min) {
           color: #000;
@@ -245,11 +247,11 @@
         }
 
         .glyphicon {
-          margin-right: 2px;
+          margin-right: 4px;
         }
 
         .fa {
-          margin-right: 2px;
+          margin-right: 4px;
         }
       }
     }
