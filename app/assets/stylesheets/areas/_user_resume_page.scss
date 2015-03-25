@@ -76,6 +76,8 @@
         }
 
         &.published {
+          transition: background-color 1s;
+
           @media (max-width: $screen-sm-min) {
             background-color: #000;
             color: #fff;
@@ -86,6 +88,7 @@
           background-color: $blue-color;
           color: #fff;
           border: solid 1px #fff;
+          transition: background-color 1s;
 
           @media (max-width: $screen-sm-min) {
             background-color: #fff;
@@ -98,11 +101,11 @@
           margin-right: 5px;
 
           &.unpublished {
-
+            transition: background 1s;
           }
 
           &.published {
-
+            transition: background 1s;
           }
 
           &.updating {
