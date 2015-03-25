@@ -53,6 +53,7 @@ class Resume < ActiveRecord::Base
   validates_length_of :name, in: NAME_MIN_LENGTH..NAME_MAX_LENGTH
   validates_length_of :slug, in: SLUG_MIN_LENGTH..SLUG_MAX_LENGTH
   validates_length_of :access_code, in: 4..16, allow_nil: true, allow_blank: true
+  validates_length_of :content, maximum: 50_000
 
   belongs_to :user
   has_many :publication_views, -> { order('created_at desc') }, dependent: :destroy
