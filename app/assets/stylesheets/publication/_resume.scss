@@ -94,7 +94,7 @@ html, body {
 }
 
 .control-panel.inactive {
-  opacity: 0.0;
+  opacity: 0.5;
   transition: opacity 0.5s ease;
 
   @media (max-width: $screen-phone) {
