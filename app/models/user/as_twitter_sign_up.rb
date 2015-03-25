@@ -26,6 +26,8 @@
 #
 
 class User::AsTwitterSignUp < ActiveType::Record[User]
+  include WithSignupData
+
   validates_presence_of :auth_provider
   validates_presence_of :auth_uid
   validates_inclusion_of :auth_provider, in: ['twitter']

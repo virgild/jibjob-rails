@@ -26,29 +26,19 @@
 #
 
 class User::AsSignUp < ActiveType::Record[User]
+  include WithSignupData
+
   attribute :terms, :string
-  attribute :signup_data, :hash, default: proc { Hash.new }
 
   validates_format_of :username, with: /\A[A-Za-z][A-Za-z0-9_]{4}[A-Za-z0-9_]+\Z/
   validates_acceptance_of :terms
   validates_presence_of :email
   validates_uniqueness_of :email
 
-  after_commit :save_signup_data, on: :create
   after_commit :create_signup_confirmation, on: :create
   after_commit :send_signup_confirmation_email, on: :create
 
   private
-
-  def save_signup_data
-    unless signup_data.empty?
-      signup_data[:created_at] = signup_data[:created_at].to_i if signup_data[:created_at]
-      signup_data[:user_id] = self.id
-
-      signup = self.build_signup(signup_data)
-      signup.save
-    end
-  end
 
   def create_signup_confirmation
     confirmation = self.build_signup_confirmation
@@ -58,5 +48,4 @@ class User::AsSignUp < ActiveType::Record[User]
   def send_signup_confirmation_email
     AccountsMailer.signup_confirmation(self).deliver_later
   end
-
 end

@@ -7,6 +7,12 @@ module Auth
 
       unless @user
         @user = User::AsFacebookSignUp.new_from_auth_hash(auth_hash)
+        @user.signup_data.merge!({
+          :ip_address => request.remote_ip,
+          :user_agent => request.env["HTTP_USER_AGENT"],
+          :extras => { env: Rails.env },
+          :created_at => Time.now
+        })
         @user.save!
       end
 
