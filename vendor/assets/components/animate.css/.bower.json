@@ -1,6 +1,6 @@
 {
   "name": "animate.css",
-  "version": "3.2.3",
+  "version": "3.2.6",
   "main": "./animate.css",
   "ignore": [
     ".*",
@@ -11,14 +11,13 @@
     "*.md"
   ],
   "homepage": "https://github.com/daneden/animate.css",
-  "_release": "3.2.3",
+  "_release": "3.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.3",
-    "commit": "4c37d5ba35251e7925883bf0eeaa3f60c4d17108"
+    "tag": "3.2.6",
+    "commit": "64d14c1b65c89d588aefe6fccd3a8b76eefd534a"
   },
   "_source": "git://github.com/daneden/animate.css.git",
   "_target": "~3.2.3",
-  "_originalSource": "animate.css",
-  "_direct": true
+  "_originalSource": "animate.css"
 }
