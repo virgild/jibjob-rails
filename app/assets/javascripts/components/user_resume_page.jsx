@@ -72,16 +72,14 @@
       var pub_url = origin + resume.publish_url;
       var self = this;
 
-      var accessCode = (function(access_code) {
-        if (access_code) {
-          return (
-            <div className="access-code" title="Access code">
-              <span className="fa fa-lock" /> {resume.access_code}
-            </div>
-          );
-        }
-      }(resume.access_code));
-
+      // Access code
+      if (resume.access_code) {
+        var accessCode = (
+          <div className="access-code" title="Access code">
+            <span className="fa fa-lock" /> {resume.access_code}
+          </div>
+        );
+      }
 
       // Publish Toggler
       if (this.props.resume.is_published) {
@@ -104,27 +102,25 @@
         );
       }
 
+      // Title
       var details = (
         <div className="title">{resume.name}{publishToggler}</div>
       );
 
-      var publishURL = (function() {
-        if (resume.is_published) {
-          return (
-            <div className="publish-url">
-              <span className="fa fa-external-link-square icon" />
-              <a title="Publish URL" href={pub_url} target="_blank">{pub_url}</a>
-            </div>
-          );
-        } else {
-          return (
-            <div className="publish-url">
-              <span className="fa fa-anchor icon" />
-              <a>{pub_url}</a>
-            </div>
-          );
-        }
-      }());
+      // Publish URL
+      if (resume.is_published) {
+        var publishURL = (
+          <div className="publish-url">
+            <a title="Publish URL" href={pub_url} target="_blank">{pub_url}</a>
+          </div>
+        );
+      } else {
+        var publishURL = (
+          <div className="publish-url">
+            <span>{pub_url}</span>
+          </div>
+        );
+      }
 
       return (
         <div className="container">
