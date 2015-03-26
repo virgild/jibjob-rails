@@ -77,7 +77,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-passenger (0.0.3)
+    capistrano-passenger (0.0.2)
       capistrano (~> 3.0)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
@@ -391,7 +391,7 @@ DEPENDENCIES
   binding_of_caller
   browser
   byebug
-  capistrano-passenger
+  capistrano-passenger (= 0.0.2)
   capistrano-rails
   capistrano-sidekiq
   capybara
