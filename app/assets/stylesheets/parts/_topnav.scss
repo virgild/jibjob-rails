@@ -29,8 +29,9 @@ $topnav-logo-font: "Fugaz One";
   }
 
   &:hover {
-    background: #fff;
+    background-color: #fff;
     color: #000;
+    transition: background-color 0.2s, color 0.5s;
   }
 }
 
