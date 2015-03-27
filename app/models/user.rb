@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :resumes, dependent: :destroy
+  has_many :activity_logs, dependent: :destroy
   has_one :signup, dependent: :destroy
   has_one :signup_confirmation, dependent: :destroy
   has_one :password_recovery, dependent: :destroy, inverse_of: :user

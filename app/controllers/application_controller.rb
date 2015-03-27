@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedUser
   include GeokitOverrides
+  include ActivityLogger
+
+  records_actions
 
   rescue_from ::Errors::Unauthorized, with: :go_unauthorized
 

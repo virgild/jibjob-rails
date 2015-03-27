@@ -1,0 +1,17 @@
+# == Schema Information
+#
+# Table name: user_agents
+#
+#  id           :integer          not null, primary key
+#  agent_id     :string           not null
+#  agent_string :string           not null
+#
+# Indexes
+#
+#  index_user_agents_on_agent_id  (agent_id) UNIQUE
+#
+
+test_browser:
+  id: 1
+  agent_id: "2183246388"
+  agent_string: Test Browser 1.0

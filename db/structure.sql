@@ -30,6 +30,41 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: activity_logs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE activity_logs (
+    id bigint NOT NULL,
+    user_id bigint NOT NULL,
+    event character varying NOT NULL,
+    url character varying NOT NULL,
+    ip_address inet,
+    user_agent_id integer,
+    metadata jsonb,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: activity_logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE activity_logs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: activity_logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE activity_logs_id_seq OWNED BY activity_logs.id;
+
+
+--
 -- Name: password_recoveries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -219,6 +254,36 @@ ALTER SEQUENCE signups_id_seq OWNED BY signups.id;
 
 
 --
+-- Name: user_agents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_agents (
+    id integer NOT NULL,
+    agent_id character varying NOT NULL,
+    agent_string character varying NOT NULL
+);
+
+
+--
+-- Name: user_agents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_agents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_agents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_agents_id_seq OWNED BY user_agents.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -263,6 +328,13 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY activity_logs ALTER COLUMN id SET DEFAULT nextval('activity_logs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY password_recoveries ALTER COLUMN id SET DEFAULT nextval('password_recoveries_id_seq'::regclass);
 
 
@@ -298,7 +370,22 @@ ALTER TABLE ONLY signups ALTER COLUMN id SET DEFAULT nextval('signups_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_agents ALTER COLUMN id SET DEFAULT nextval('user_agents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: activity_logs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY activity_logs
+    ADD CONSTRAINT activity_logs_pkey PRIMARY KEY (id);
 
 
 --
@@ -342,6 +429,14 @@ ALTER TABLE ONLY signups
 
 
 --
+-- Name: user_agents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_agents
+    ADD CONSTRAINT user_agents_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -361,6 +456,13 @@ CREATE INDEX index_publication_views_on_resume_id ON publication_views USING btr
 --
 
 CREATE UNIQUE INDEX index_resumes_on_slug ON resumes USING btree (slug);
+
+
+--
+-- Name: index_user_agents_on_agent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_user_agents_on_agent_id ON user_agents USING btree (agent_id);
 
 
 --
@@ -453,4 +555,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150313213446');
 INSERT INTO schema_migrations (version) VALUES ('20150319201843');
 
 INSERT INTO schema_migrations (version) VALUES ('20150322001716');
+
+INSERT INTO schema_migrations (version) VALUES ('20150327165859');
+
+INSERT INTO schema_migrations (version) VALUES ('20150327195440');
 
