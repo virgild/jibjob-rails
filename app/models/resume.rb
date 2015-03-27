@@ -62,17 +62,13 @@ class Resume < ActiveRecord::Base
   scope :list, -> { select(self.column_names - ["content", "pdf_content_type", "pdf_file_size", "pdf_updated_at"]) }
   scope :recently_updated, -> { order('updated_at DESC') }
 
-  has_attached_file :pdf, styles: {
-    thumb: ["100x100#", :png]
-  }, convert_options: {
-    thumb: "-density 300"
-  }, path: Proc.new {
-    if Rails.env == 'test'
-      ':rails_root/public/test/:class/:attachment/:id_partition/:style/:filename'
-    else
-      ':rails_root/public/system/:class/:attachment/:id_partition/:style/:filename'
-    end
-  }
+  has_attached_file :pdf, { styles: {
+      thumb: ["100x100#", :png]
+    }, convert_options: {
+      thumb: "-density 300"
+    }
+  }.merge(Rails.configuration.x.paperclip.storage_options)
+
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
   after_initialize :set_zero_page_count

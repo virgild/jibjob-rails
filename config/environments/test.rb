@@ -52,4 +52,9 @@ Rails.application.configure do
     env.cache = ActiveSupport::Cache.lookup_store(:null_store)
   end
   config.sass.cache = false
+
+  # Paperclip storage options
+  config.x.paperclip.storage_options = {
+    path: ':rails_root/public/test/:class/:attachment/:id_partition/:style/:filename'
+  }
 end
