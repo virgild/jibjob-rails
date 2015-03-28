@@ -36,6 +36,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
+    record_activity
     destroy
 
     redirect_to login_path
