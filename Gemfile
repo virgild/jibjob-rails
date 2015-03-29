@@ -48,6 +48,7 @@ gem 'active_type'
 gem 'active_model_serializers'
 gem 'resumetools'
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 gem 'render_anywhere', require: false
 gem 'paperclip'
 gem 'aws-sdk-v1'
