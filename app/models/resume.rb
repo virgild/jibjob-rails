@@ -115,11 +115,34 @@ class Resume < ActiveRecord::Base
 
   def generate_pdf_data
     pages = 0
-    content = WickedPdf.new.pdf_from_string(
+    pdf_data = WickedPdf.new.pdf_from_string(
       render template: "resumes/show.pdf.haml", layout: false, locals: { :@resume => self }
     )
 
-    { content: content,
+    meta_dump = nil
+    IO.popen("#{ENV['PDFTK_BIN']} - dump_data_utf8 output -", "w+") do |pipe|
+      pipe.write pdf_data
+      pipe.close_write
+      meta_dump = pipe.read
+    end
+
+    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: #{self.resume_data.full_name}\n")
+    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: JibJob - Easy resume publishing - https://jibjob.co\n")
+
+    dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
+    dump_tmpfile.write(meta_dump)
+    dump_tmpfile.rewind
+    IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output -", "w+") do |pipe|
+      pipe.write pdf_data
+      pipe.close_write
+      pdf_data = pipe.read
+    end
+    dump_tmpfile.close
+
+
+    pages = meta_dump.match(/^NumberOfPages:\ (\d+)\n/)[1].to_i
+
+    { content: pdf_data,
       pages: pages
     }
   end
