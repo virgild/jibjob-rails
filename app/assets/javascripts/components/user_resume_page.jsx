@@ -158,6 +158,11 @@
                   </div>
                 </div>
               </div>
+              <div>
+                <a href={resume.show_page + '.pdf'} style={{color: '#fff', fontSize: "12px"}}>PDF</a>
+                <span> | </span>
+                <a href={resume.show_page + '.xml'} style={{color: '#fff', fontSize: "12px"}}>XML</a>
+              </div>
             </div>
           </div>
           <div className="row">

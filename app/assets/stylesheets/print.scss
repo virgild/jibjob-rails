@@ -1,0 +1,47 @@
+@import "mixins";
+
+body {
+  font-family: "Source Sans Pro";
+  font-weight: 300;
+  font-size: 14px;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: solid 1px #ccc;
+  margin-bottom: 20px;
+
+  .full_name {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.section {
+  padding: 5px 0px;
+  margin-bottom: 10px;
+  line-height: 1.5em;
+
+  .section__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+    background-color: rgba(#000, 0.76);
+    padding: 5px 10px;
+    display: inline-block;
+    @include rounded(1px);
+  }
+}
+
+.period {
+  padding-bottom: 10px;
+  .period__title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}

@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w(
   publication.js
   admin.js
   font-awesome.css
+  print.css
 )
 Rails.application.config.assets.precompile += [
   %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
