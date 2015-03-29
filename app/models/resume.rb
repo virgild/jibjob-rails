@@ -27,7 +27,11 @@
 #  index_resumes_on_slug  (slug) UNIQUE
 #
 
+require 'render_anywhere'
+
 class Resume < ActiveRecord::Base
+  include RenderAnywhere
+
   HUMANIZED_ATTRIBUTES ||= {
     slug: "Link name"
   }
@@ -111,9 +115,9 @@ class Resume < ActiveRecord::Base
 
   def generate_pdf_data
     pages = 0
-    content = resume_data.render_pdf do |data|
-      pages = data[:pages]
-    end
+    content = WickedPdf.new.pdf_from_string(
+      render template: "resumes/show.pdf.haml", layout: false, locals: { :@resume => self }
+    )
 
     { content: content,
       pages: pages

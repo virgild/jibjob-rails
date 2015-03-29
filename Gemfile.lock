@@ -278,6 +278,8 @@ GEM
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
+    render_anywhere (0.0.11)
+      rails (>= 3.0.7)
     request_store (1.1.0)
     resumetools (1.0.2)
       activesupport (~> 4.2, >= 4.2.0)
@@ -432,6 +434,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   react-rails (~> 1.0.0.pre)!
   redis
+  render_anywhere
   resumetools
   rspec-activejob
   rspec-rails (~> 3.0)
