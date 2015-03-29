@@ -110,8 +110,8 @@ RSpec.describe Resume, type: :model do
       expect(resume.pdf_edition).to eq 1
     end
 
-    it "has 2 pdf_pages" do
-      expect(resume.pdf_pages).to eq 2
+    it "has pdf_pages > 0" do
+      expect(resume.pdf_pages).to be > 0
     end
 
     it "generates guid" do

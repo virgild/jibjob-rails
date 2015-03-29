@@ -67,9 +67,9 @@ class Resume < ActiveRecord::Base
   scope :recently_updated, -> { order('updated_at DESC') }
 
   has_attached_file :pdf, { styles: {
-      thumb: ["100x100#", :png]
+      thumb: ["200x200#", :png]
     }, convert_options: {
-      thumb: "-density 300"
+      thumb: "-strip"
     }
   }.merge(Rails.configuration.x.paperclip.storage_options)
 
@@ -116,7 +116,13 @@ class Resume < ActiveRecord::Base
   def generate_pdf_data
     pages = 0
     pdf_data = WickedPdf.new.pdf_from_string(
-      render template: "resumes/show.pdf.haml", layout: false, locals: { :@resume => self }
+      render template: "resumes/show.pdf.haml",
+        layout: false,
+        locals: { :@resume => self },
+        disable_external_links: true,
+        disable_internal_links: true,
+        print_media_type: false,
+        outline: { outline: true }
     )
 
     meta_dump = nil
