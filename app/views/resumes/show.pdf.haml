@@ -2,7 +2,7 @@
 %html
   %head
     %meta{charset: 'utf8'}
-    = wicked_pdf_stylesheet_link_tag "print", media: "print"
+    = wicked_pdf_stylesheet_link_tag "print"
   %body
     .header
       %h1.full_name= @resume.data.full_name
