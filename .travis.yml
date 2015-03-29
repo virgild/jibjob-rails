@@ -6,6 +6,7 @@ addons:
 services:
   - redis-server
 before_script:
+  - apt-get install wkhtmltox pdftk
   - phantomjs --version
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database jib_job_travis;' -U postgres
