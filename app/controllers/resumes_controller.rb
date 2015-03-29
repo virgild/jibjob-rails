@@ -54,7 +54,7 @@ class ResumesController < ApplicationController
           show_as_html: params[:debug].present?,
           disable_external_links: true,
           disable_internal_links: true,
-          print_media_type: false,
+          print_media_type: true,
           outline: { outline: true }
       }
       format.xml { render layout: false }

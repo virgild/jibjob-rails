@@ -6,7 +6,6 @@ addons:
 services:
   - redis-server
 before_install:
-  - sudo apt-get update -qq
   - sudo apt-get install -y wkhtmltopdf pdftk
 before_script:
   - phantomjs --version

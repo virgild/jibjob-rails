@@ -1,15 +1,18 @@
-$icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
-@import "strapons/variables";
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
-@import "mixins";
-@import "strapons/overrides";
 @import "master_print";
 
-@import "fonts/source_sans_pro";
+@font-face {
+  font-family: "Source Sans Pro";
+  font-weight: normal;
+  font-style: normal;
+  src: font-url("SourceSansPro-Regular.eot");
+  src: font-url("SourceSansPro-Regular.woff") format("woff"),
+       font-url("SourceSansPro-Regular.ttf") format("truetype"),
+       gont-url("SourceSansPro-Regular.svg") format("svg");
+}
 
 body {
-  font-family: "source_sans_prolight";
+  font-family: "Source Sans Pro";
+  font-weight: 300;
   font-size: 12px;
   padding: 20px;
   background-color: #fff;
