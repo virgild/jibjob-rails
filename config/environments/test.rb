@@ -55,6 +55,7 @@ Rails.application.configure do
 
   # Paperclip storage options
   config.x.paperclip.storage_options = {
-    path: ':rails_root/public/test/:class/:attachment/:id_partition/:style/:filename'
+    path: ':rails_root/public/test/:class/:attachment/:id_partition/:style/:filename',
+    url: '/test/:class/:attachment/:id/:style/:filename'
   }
 end

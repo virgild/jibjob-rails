@@ -68,10 +68,9 @@ Rails.application.configure do
   # http://stackoverflow.com/questions/27446841/activejob-does-not-use-sidekiq-in-production-enviroment
   config.active_job.queue_adapter = :sidekiq
 
-  # Paperclip storage
-  Rails.configuration.x.paperclip.storage_options = {
-    storage: :s3,
-    s3_credentials: { bucket: ENV['S3_BUCKET_NAME'], access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['AWS_SECRET_KEY_ID'] },
-    path: -> (a) { "#{Rails.env}/resumes/:id/:style/:filename" }
+  # Paperclip storage options
+  config.x.paperclip.storage_options = {
+    path: ':rails_root/public/system/:class/:attachment/:id/:style/:filename',
+    url: '/system/:class/:attachment/:id/:style/:filename'
   }
 end
