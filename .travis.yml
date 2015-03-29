@@ -5,8 +5,10 @@ addons:
   postgresql: "9.4"
 services:
   - redis-server
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y wkhtmltox pdftk
 before_script:
-  - apt-get install wkhtmltox pdftk
   - phantomjs --version
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database jib_job_travis;' -U postgres
