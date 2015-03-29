@@ -24,6 +24,8 @@ REQUIREMENTS:
 * Postgresql 9.4
 * Redis
 * Memcache
+* wkhtmltopdf
+* pdftk
 
 DEPLOY ENVIRONMENTS:
 --------------------

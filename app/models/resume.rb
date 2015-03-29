@@ -129,15 +129,19 @@ class Resume < ActiveRecord::Base
     meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: #{self.resume_data.full_name}\n")
     meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: JibJob - Easy resume publishing - https://jibjob.co\n")
 
-    dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
-    dump_tmpfile.write(meta_dump)
-    dump_tmpfile.rewind
-    IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output -", "w+") do |pipe|
-      pipe.write pdf_data
-      pipe.close_write
-      pdf_data = pipe.read
+    begin
+      dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
+      dump_tmpfile.write(meta_dump)
+      dump_tmpfile.rewind
+      IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output -", "w+") do |pipe|
+        pipe.write pdf_data
+        pipe.close_write
+        pdf_data = pipe.read
+      end
+    ensure
+      dump_tmpfile.close
+      dump_tmpfile.unlink
     end
-    dump_tmpfile.close
 
 
     pages = meta_dump.match(/^NumberOfPages:\ (\d+)\n/)[1].to_i
