@@ -56,7 +56,7 @@ RSpec.describe "Resumes", type: :request, js: true do
 
     click_on "Test Resume"
 
-    within("#resume .details") do
+    within(".details") do
       expect(page).to have_text("Modified Resume")
       expect(page).to have_text("PUBLISHED")
       expect(page).to have_text("DOODLES")

@@ -5,11 +5,10 @@
     %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
     %meta{name: "viewport", content: "width=device-width, initial-scale=1, user-scalable=no"}
     %title #{@title_name_frag}
-    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700", media: "screen, print"
     = stylesheet_link_tag "//fonts.googleapis.com/css?family=Fugaz+One", media: "screen, print"
-    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic", media: "all"
     = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", media: "all"
     = stylesheet_link_tag "publication", media: "all"
+    = yield :stylesheet_links
     %link{rel: 'shortcut icon', href: image_url('favicon.png')}
     = yield :head_javascript
     = include_gon
@@ -18,6 +17,10 @@
     = analytics_init if Rails.env.production?
   %body
     = yield
+    .footer.hidden-print
+      .powered
+        Published by
+        = link_to "jibjob", root_url
 
     = javascript_include_tag "publication"
     = yield :body_javascript
