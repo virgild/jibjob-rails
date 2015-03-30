@@ -1,0 +1,54 @@
+$header-font-face: "Helvetica Neue";
+
+.resume-presentation {
+  font-family: $header-font-face;
+  font-weight: 200;
+  font-size: 12px;
+  padding: 40px;
+  background-color: #fff;
+  color: #000;
+  margin: auto;
+
+  @media screen {
+    font-size: 1em;
+  }
+
+  @media print {
+
+  }
+
+  .header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    .full_name {
+      font-family: $header-font-face;
+      font-size: 32px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .section {
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    line-height: 1.5em;
+
+    .section__title {
+      font-family: $header-font-face;
+      font-size: 20px;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  .period {
+    .period__title {
+      padding: 0;
+      margin: 0;
+      font-size: 18px;
+      font-family: $header-font-face;
+    }
+  }
+}
