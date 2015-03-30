@@ -18,5 +18,6 @@ Rails.application.config.assets.precompile += %w(
 )
 Rails.application.config.assets.precompile += [
   %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$),
-  %r(themes\/.+\.css)
+  %r(themes\/[^_]+\.css),
+  'normalize.css/normalize.css'
 ]
