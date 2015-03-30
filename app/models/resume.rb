@@ -141,23 +141,23 @@ class Resume < ActiveRecord::Base
     end
 
     # Mutate some PDF metadata values
-    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: JibJob PDF Renderer\n")
-    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: https://jibjob.co\n")
+    # meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: JibJob PDF Renderer\n")
+    # meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: https://jibjob.co\n")
 
-    # Inject updated PDF metadata back
-    begin
-      dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
-      dump_tmpfile.write(meta_dump)
-      dump_tmpfile.rewind
-      IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output - keep_first_id", "w+") do |pipe|
-        pipe.write pdf_data
-        pipe.close_write
-        pdf_data = pipe.read
-      end
-    ensure
-      dump_tmpfile.close
-      dump_tmpfile.unlink
-    end
+    # # Inject updated PDF metadata back
+    # begin
+    #   dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
+    #   dump_tmpfile.write(meta_dump)
+    #   dump_tmpfile.rewind
+    #   IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output - uncompress", "w+") do |pipe|
+    #     pipe.write pdf_data
+    #     pipe.close_write
+    #     pdf_data = pipe.read
+    #   end
+    # ensure
+    #   dump_tmpfile.close
+    #   dump_tmpfile.unlink
+    # end
 
     # Fetch some PDF metadata values
     pages = meta_dump.match(/^NumberOfPages:\ (\d+)\n/)[1].to_i
