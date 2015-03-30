@@ -1,0 +1,14 @@
+/* Variables to be included in all themes */
+$page-width: 210mm;
+
+/* Styles to be included in all themes */
+.resume-presentation {
+  h1, h2, h3, h4, h5 {
+    padding: 0;
+    margin: 0;
+  }
+
+  &.publication-view {
+    max-width: $page-width;
+  }
+}

@@ -1,3 +1,5 @@
+@import "globals";
+
 @import url(http://fonts.googleapis.com/css?family=Grand+Hotel);
 
 .resume-presentation {
@@ -53,7 +55,6 @@
       font-size: 28px;
       line-height: 36px;
       font-family: "Grand Hotel";
-      text-align: center;
     }
   }
 }

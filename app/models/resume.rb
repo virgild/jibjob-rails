@@ -86,10 +86,11 @@ class Resume < ActiveRecord::Base
   before_save :increment_edition, on: [:create, :update], if: Proc.new { |resume| resume.content_changed? }
   before_create :update_pdf_attachment
 
-  after_commit :queue_pdf_refresh, on: :update, if: Proc.new { |resume| !resume.pdf_file_synced? }
+  after_commit :queue_pdf_refresh, on: :update, if: Proc.new { |resume| !resume.pdf_file_synced? || resume.unmark_for_theme_update_refresh }
 
   after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
   after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
+  after_update :mark_for_theme_update_refresh, if: -> (resume) { resume.theme != resume.theme_was }
 
   after_commit :delete_stored_stats, on: :destroy
 
@@ -240,6 +241,18 @@ class Resume < ActiveRecord::Base
 
   def self.increment_cached_total_page_views_for(user_id, resume_id)
     REDIS_POOL.hincrby("user-#{user_id}-cached_total_page_views", resume_id, 1)
+  end
+
+  protected
+
+  def mark_for_theme_update_refresh
+    key = "user:#{self.user_id}-resume:#{self.id}-theme_update_refresh"
+    REDIS_POOL.set(key, 1)
+    REDIS_POOL.expire(key, 1.day)
+  end
+
+  def unmark_for_theme_update_refresh
+    REDIS_POOL.del("user:#{self.user_id}-resume:#{self.id}-theme_update_refresh") == 1
   end
 
   private

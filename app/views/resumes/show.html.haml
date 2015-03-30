@@ -40,6 +40,9 @@
               .item.page-views{title: "Page views"}
                 %span.icon.fa.fa-eye
                 = @resume.total_page_views
+            .theme
+              %span Theme:
+              = @resume.current_theme
         .col-sm-12
           .control-panel.hidden-print
             %span.desc Other formats:
