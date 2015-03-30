@@ -1,1 +1,1 @@
-= ResumeRenderer.new(@resume).render_theme(@resume.theme || 'default', with_layout: true)
+= ResumeRenderer.new(@user_resume).render_theme(@resume.current_theme, layout: 'pdf_page')

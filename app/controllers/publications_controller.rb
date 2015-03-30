@@ -16,7 +16,6 @@ class PublicationsController < ApplicationController
       format.json { render json: @resume.generate_json_text }
       format.text { render text: @resume.generate_plain_text }
       format.pdf { redirect_to @resume.pdf.url }
-      format.zip { }
     end
   end
 

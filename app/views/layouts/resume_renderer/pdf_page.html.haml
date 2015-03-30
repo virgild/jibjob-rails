@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %title= resume.structure['full_name']
+    %meta{charset: 'utf8'}
+    %meta{name: "author", content: resume.structure['full_name']}
+    = wicked_pdf_stylesheet_link_tag "themes/#{resume.current_theme}"
+  %body
+    .resume-presentation.pdf-page
+      = yield

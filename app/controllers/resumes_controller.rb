@@ -43,10 +43,10 @@ class ResumesController < ApplicationController
   end
 
   def show
+    @user_resume = ResumeSerializer.new(@resume)
+
     respond_to do |format|
-      format.html do
-        @user_resume = ResumeSerializer.new(@resume).to_json
-      end
+      format.html { }
       format.text { render plain: @resume.generate_plain_text }
       format.json { render json: @resume.generate_json_text }
       format.pdf {

@@ -1,0 +1,59 @@
+@import url(http://fonts.googleapis.com/css?family=Grand+Hotel);
+
+.resume-presentation {
+  font-family: "Arial Narrow";
+  font-size: 12px;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+  margin: auto;
+
+  @media screen {
+    font-size: 1em;
+  }
+
+  @media print {
+
+  }
+
+  .header {
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    .full_name {
+      font-family: "Grand Hotel";
+      font-size: 36px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .section {
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    line-height: 1.5em;
+
+    .section__title {
+      font-family: "Grand Hotel";
+      font-size: 26px;
+      margin: 0;
+      margin-bottom: 10px;
+      color: #fff;
+      background-color: #000;
+      padding: 10px 10px;
+      text-align: center;
+    }
+  }
+
+  .period {
+    .period__title {
+      padding: 0;
+      margin: 0;
+      font-size: 28px;
+      line-height: 36px;
+      font-family: "Grand Hotel";
+      text-align: center;
+    }
+  }
+}

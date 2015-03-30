@@ -8,10 +8,10 @@
       = link_to publication_path(@resume.slug, format: :txt) do
         %span.icon.fa.fa-file-text-o
         Plain text
-    = ResumeRenderer.new(@resume).render_theme(@resume.theme || 'default', with_layout: false)
+    = ResumeRenderer.new(@resume).render_theme(@resume.current_theme, layout: 'publication')
 
 - content_for :stylesheet_links do
-  = stylesheet_link_tag "themes/#{@resume.theme || 'default'}", media: :all
+  = stylesheet_link_tag "themes/#{@resume.current_theme}", media: :all
 
 - content_for :body_javascript do
   :javascript

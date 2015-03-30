@@ -116,21 +116,11 @@ class Resume < ActiveRecord::Base
 
   #TODO: Make composable pipeline
   def generate_pdf_data
-    theme = self.theme || 'default'
     pages = 0
 
     # Render the PDF data to string
     pdf_data = WickedPdf.new.pdf_from_string(
-      render(
-        template: "resume_renderer/themes/#{theme}",
-        layout: "resume_renderer/layout",
-        locals: { resume: self }
-      ), {
-        disable_external_links: true,
-        disable_internal_links: true,
-        print_media_type: true,
-        outline: { outline: true }
-      }
+      ResumeRenderer.new(self).render_theme(self.current_theme, layout: 'pdf_page')
     )
 
     # Extract the PDF metadata
@@ -179,6 +169,10 @@ class Resume < ActiveRecord::Base
 
   def structure
     JSON.parse(generate_json_text)
+  end
+
+  def current_theme
+    self.theme || 'default'
   end
 
   def total_page_views
