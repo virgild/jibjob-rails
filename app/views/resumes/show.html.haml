@@ -46,10 +46,10 @@
 
       .row
         .col-sm-12
-          = ResumeRenderer.new(@resume).render_theme('default', with_layout: false)
+          = ResumeRenderer.new(@resume).render_theme(@resume.theme || 'default', with_layout: false)
 
 - content_for :stylesheet_links do
-  = stylesheet_link_tag "themes/default", media: :all
+  = stylesheet_link_tag "themes/#{@resume.theme || 'default'}", media: :all
 
 - content_for :body_javascript do
   :javascript

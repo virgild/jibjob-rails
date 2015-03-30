@@ -116,12 +116,13 @@ class Resume < ActiveRecord::Base
 
   #TODO: Make composable pipeline
   def generate_pdf_data
+    theme = self.theme || 'default'
     pages = 0
 
     # Render the PDF data to string
     pdf_data = WickedPdf.new.pdf_from_string(
       render(
-        template: "resume_renderer/default",
+        template: "resume_renderer/themes/#{theme}",
         layout: "resume_renderer/layout",
         locals: { resume: self }
       ), {

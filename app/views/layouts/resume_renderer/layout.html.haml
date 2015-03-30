@@ -4,7 +4,6 @@
     %title= resume.data.full_name
     %meta{charset: 'utf8'}
     %meta{name: "author", content: resume.data.full_name}
-    %meta{name: "subject", content: "Resume"}
-    = wicked_pdf_stylesheet_link_tag "themes/default"
+    = wicked_pdf_stylesheet_link_tag "themes/#{resume.theme || 'default'}"
   %body
     = yield

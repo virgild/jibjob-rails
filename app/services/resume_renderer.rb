@@ -11,7 +11,7 @@ class ResumeRenderer
   def render_theme(theme, opts={})
     with_layout = opts.delete(:with_layout)
     render_opts = {
-      template: "resume_renderer/#{theme}",
+      template: "resume_renderer/themes/#{theme}",
       locals: { resume: @resume },
       disable_external_links: true,
       disable_internal_links: true,
