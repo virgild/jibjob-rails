@@ -1,13 +1,55 @@
 .page.user-resume-page
-  %ol.breadcrumb
+  %ol.breadcrumb.hidden-print
     %li= link_to "My Resumes", user_resumes_url(current_user)
     %li= @resume.name
 
   .page-content
-    #resume
+    .container
+      .row
+        .col-sm-12
+          .details
+            .title= @resume.name
+            .buttons
+              = link_to edit_user_resume_path(current_user, @resume) do
+                %span.fa.fa-edit
+              = link_to stats_user_resume_path(current_user, @resume) do
+                %span.fa.fa-bar-chart
+              = link_to delete_user_resume_path(current_user, @resume) do
+                %span.fa.fa-trash-o
+            .dates
+              %div{title: "Created"}
+                %span.icon.fa.fa-plus-square
+                = @resume.created_at
+              %div{title: "Last updated"}
+                %span.icon.fa.fa-clock-o
+                = @resume.updated_at
+            - if @resume.requires_access_code?
+              .access-code{title: "Access code"}
+                %span.icon.fa.fa-lock
+                = @resume.access_code
+            .properties
+              .item.page-count{title: "Number of pages"}
+                %span.icon.fa.fa-copy
+                = @resume.pdf_pages
+              .item.page-views{title: "Page views"}
+                %span.icon.fa.fa-eye
+                = @resume.total_page_views
+        .col-sm-12
+          .control-panel.hidden-print
+            %span.desc Other formats:
+            = link_to @resume.pdf.url do
+              %span.icon.fa.fa-file-pdf-o
+              PDF
+            = link_to user_resume_path(current_user, @resume, format: :txt) do
+              %span.icon.fa.fa-file-text-o
+              Plain text
+
+      .row
+        .col-sm-12
+          = ResumeRenderer.new(@resume).render_theme('default', with_layout: false)
+
+- content_for :stylesheet_links do
+  = stylesheet_link_tag "themes/default", media: :all
 
 - content_for :body_javascript do
   :javascript
-    $(function(){
-      React.render(React.createElement(JibJob.UserResumePage, { resume: #{@user_resume} }), document.getElementById("resume"));
-    });

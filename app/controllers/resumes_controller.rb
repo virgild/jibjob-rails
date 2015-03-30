@@ -51,6 +51,7 @@ class ResumesController < ApplicationController
       format.json { render json: @resume.generate_json_text }
       format.pdf {
         render pdf: @resume.id.to_s,
+          layout: nil,
           show_as_html: params[:debug].present?,
           disable_external_links: true,
           disable_internal_links: true,

@@ -21,6 +21,7 @@
 #  pdf_edition             :integer          default(0), not null
 #  pdf_pages               :integer
 #  publication_views_count :integer          default(0), not null
+#  theme                   :string
 #
 # Indexes
 #
@@ -113,18 +114,25 @@ class Resume < ActiveRecord::Base
   end
   alias :data :resume_data
 
+  #TODO: Make composable pipeline
   def generate_pdf_data
     pages = 0
+
+    # Render the PDF data to string
     pdf_data = WickedPdf.new.pdf_from_string(
-      render template: "resumes/show.pdf.haml",
-        layout: false,
-        locals: { :@resume => self },
+      render(
+        template: "resume_renderer/default",
+        layout: "resume_renderer/layout",
+        locals: { resume: self }
+      ), {
         disable_external_links: true,
         disable_internal_links: true,
         print_media_type: true,
         outline: { outline: true }
+      }
     )
 
+    # Extract the PDF metadata
     meta_dump = nil
     IO.popen("#{ENV['PDFTK_BIN']} - dump_data_utf8 output -", "w+") do |pipe|
       pipe.write pdf_data
@@ -132,14 +140,16 @@ class Resume < ActiveRecord::Base
       meta_dump = pipe.read
     end
 
-    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: #{self.resume_data.full_name}\n")
-    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: JibJob - Easy resume publishing - https://jibjob.co\n")
+    # Mutate some PDF metadata values
+    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Creator\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Creator\nInfoValue: JibJob PDF Renderer\n")
+    meta_dump.gsub!(/^InfoBegin\nInfoKey:\ Producer\nInfoValue:\ .+\n/, "InfoBegin\nInfoKey: Producer\nInfoValue: https://jibjob.co\n")
 
+    # Inject updated PDF metadata back
     begin
       dump_tmpfile = Tempfile.new("jibjob-resume-#{self.id}")
       dump_tmpfile.write(meta_dump)
       dump_tmpfile.rewind
-      IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output -", "w+") do |pipe|
+      IO.popen("#{ENV['PDFTK_BIN']} - update_info_utf8 #{dump_tmpfile.path} output - keep_first_id", "w+") do |pipe|
         pipe.write pdf_data
         pipe.close_write
         pdf_data = pipe.read
@@ -149,9 +159,10 @@ class Resume < ActiveRecord::Base
       dump_tmpfile.unlink
     end
 
-
+    # Fetch some PDF metadata values
     pages = meta_dump.match(/^NumberOfPages:\ (\d+)\n/)[1].to_i
 
+    # Return PDF data wrapper
     { content: pdf_data,
       pages: pages
     }

@@ -157,7 +157,8 @@ CREATE TABLE resumes (
     access_code character varying,
     pdf_edition integer DEFAULT 0 NOT NULL,
     pdf_pages integer,
-    publication_views_count bigint DEFAULT 0 NOT NULL
+    publication_views_count bigint DEFAULT 0 NOT NULL,
+    theme character varying
 );
 
 
@@ -559,4 +560,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150322001716');
 INSERT INTO schema_migrations (version) VALUES ('20150327165859');
 
 INSERT INTO schema_migrations (version) VALUES ('20150327195440');
+
+INSERT INTO schema_migrations (version) VALUES ('20150329201514');
 

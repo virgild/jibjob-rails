@@ -21,6 +21,7 @@
 #  pdf_edition             :integer          default(0), not null
 #  pdf_pages               :integer
 #  publication_views_count :integer          default(0), not null
+#  theme                   :string
 #
 # Indexes
 #

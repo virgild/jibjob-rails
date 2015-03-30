@@ -17,5 +17,6 @@ Rails.application.config.assets.precompile += %w(
   resume-default.css
 )
 Rails.application.config.assets.precompile += [
-  %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+  %r(bootstrap-sass-official/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$),
+  %r(themes\/.+\.css)
 ]

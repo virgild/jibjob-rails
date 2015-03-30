@@ -25,6 +25,7 @@
   .details {
     color: #fff;
     margin-top: 15px;
+    margin-bottom: 20px;
 
     @media (max-width: $screen-sm-min) {
       padding: 0px;
@@ -240,6 +241,43 @@
     }
   }
 
+  .control-panel {
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #fff;
+
+    @media (max-width: $screen-sm-min) {
+      color: #000;
+      text-align: center;
+    }
+
+    a {
+      color: #fff;
+      margin-left: 10px;
+      text-decoration: none;
+      padding: 5px;
+
+      @media (max-width: $screen-sm-min) {
+        color: #000;
+        font-size: 14px;
+      }
+
+      &:hover {
+        color: rgba(200, 56, 56, 1.0);
+      }
+
+      .glyphicon {
+        margin-right: 4px;
+      }
+
+      .fa {
+        margin-right: 4px;
+      }
+    }
+  }
+
   .preview {
     color: #fff;
     padding-top: 20px;
@@ -295,42 +333,6 @@
 
       .period {
         margin-top: 10px;
-      }
-    }
-
-    .control-panel {
-      text-align: right;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      font-size: 14px;
-
-      @media (max-width: $screen-sm-min) {
-        color: #000;
-        text-align: center;
-      }
-
-      a {
-        color: #fff;
-        margin-left: 10px;
-        text-decoration: none;
-        padding: 5px;
-
-        @media (max-width: $screen-sm-min) {
-          color: #000;
-          font-size: 14px;
-        }
-
-        &:hover {
-          color: rgba(200, 56, 56, 1.0);
-        }
-
-        .glyphicon {
-          margin-right: 4px;
-        }
-
-        .fa {
-          margin-right: 4px;
-        }
       }
     }
   }

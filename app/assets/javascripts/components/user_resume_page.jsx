@@ -169,7 +169,6 @@
             <div className="col-sm-12">
               <div className="preview">
                 <JibJob.PublicationPackagePanel pdf_url={resume.user_pdf_file} plaintext_url={resume.user_plaintext_file} />
-                <JibJob.PublicationResume data={resume.structure} />
               </div>
             </div>
           </div>
