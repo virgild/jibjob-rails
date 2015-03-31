@@ -239,6 +239,12 @@
         font-size: 12px;
       }
     }
+
+    .theme {
+      @media (max-width: $screen-sm-min) {
+        text-align: center;
+      }
+    }
   }
 
   .control-panel {
