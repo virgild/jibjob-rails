@@ -213,6 +213,31 @@
       });
     },
 
+    themeOptions: function() {
+      var themes = _.without(this.props.themes, 'default').sort();
+
+      var defaultOption = (
+        <optgroup key="default_theme">
+          <option value="default" key="theme_option_default">Default</option>
+        </optgroup>
+      );
+
+      var options = themes.map(function(theme, n) {
+        var key = "theme_option_" + theme;
+        var name = s(theme).capitalize().value();
+        return (
+          <option value={theme} key={key}>{name}</option>
+        );
+      });
+
+      return [
+        defaultOption,
+        <optgroup key="custom_themes" label="________________">
+          {options}
+        </optgroup>
+      ];
+    },
+
     render: function() {
       var resume = this.props.resume;
       var origin = window.location.origin;
@@ -248,13 +273,6 @@
         );
       }
 
-      var themeOptions = this.props.themes.map(function(theme, n) {
-        var key = "theme-option-" + theme;
-        return (
-          <option value={theme} key={key}>{theme}</option>
-        );
-      });
-
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay model={resume} />
@@ -286,7 +304,7 @@
             <div className="form-group">
               <label htmlFor="resume_theme">Theme</label>
               <select className="form-control" id="resume_theme" name="resume[theme]" value={resume.theme} onChange={this.themeChange}>
-                {themeOptions}
+                {this.themeOptions()}
               </select>
             </div>
             <div className="form-group">

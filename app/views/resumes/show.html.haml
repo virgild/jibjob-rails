@@ -42,7 +42,7 @@
                 = @resume.total_page_views
             .theme
               %span Theme:
-              = @resume.current_theme
+              = @resume.current_theme.titleize
         .col-sm-12
           .control-panel.hidden-print
             %span.desc Other formats:
