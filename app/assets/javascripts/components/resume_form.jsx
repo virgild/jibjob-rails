@@ -75,6 +75,7 @@
         slug: this.props.resume.slug,
         is_published: this.props.resume.is_published,
         access_code: this.props.resume.access_code,
+        theme: this.props.resume.theme,
         content: this.props.resume.content
       };
 
@@ -149,6 +150,16 @@
       this.setProps({
         resume: React.addons.update(this.props.resume, {
           access_code: {$set: newValue}
+        })
+      });
+    },
+
+    themeChange: function(e) {
+      var newValue = e.target.value;
+
+      this.setProps({
+        resume: React.addons.update(this.props.resume, {
+          theme: {$set: newValue}
         })
       });
     },
@@ -237,6 +248,13 @@
         );
       }
 
+      var themeOptions = this.props.themes.map(function(theme, n) {
+        var key = "theme-option-" + theme;
+        return (
+          <option value={theme} key={key}>{theme}</option>
+        );
+      });
+
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay model={resume} />
@@ -264,6 +282,12 @@
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
                 autoCapitalize="characters" maxLength="16" />
                 <p className="help-block">The viewer will be required to enter this access code when specified</p>
+            </div>
+            <div className="form-group">
+              <label htmlFor="resume_theme">Theme</label>
+              <select className="form-control" id="resume_theme" name="resume[theme]" value={resume.theme} onChange={this.themeChange}>
+                {themeOptions}
+              </select>
             </div>
             <div className="form-group">
               <label htmlFor="resume_content">Content</label>

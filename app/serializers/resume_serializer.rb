@@ -54,7 +54,8 @@ class ResumeSerializer < BaseSerializer
     :structure,
     :errors,
     :pdf_page_count,
-    :current_theme
+    :current_theme,
+    :theme
 
   self.root = false
 

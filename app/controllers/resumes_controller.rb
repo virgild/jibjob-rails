@@ -119,7 +119,7 @@ class ResumesController < ApplicationController
       resume_params[:content].gsub!(/\r\n/, "\n")
     end
 
-    resume_params ? resume_params.permit(:name, :content, :slug, :is_published, :access_code) : {}
+    resume_params ? resume_params.permit(:name, :content, :slug, :is_published, :access_code, :theme) : {}
   end
 
   def require_resume_access
