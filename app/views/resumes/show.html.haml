@@ -25,10 +25,10 @@
             .dates
               %div{title: "Created"}
                 %span.icon.fa.fa-plus-square
-                = @resume.created_at
+                = @user_resume.created_at
               %div{title: "Last updated"}
                 %span.icon.fa.fa-clock-o
-                = @resume.updated_at
+                = @user_resume.updated_at
             - if @resume.requires_access_code?
               .access-code{title: "Access code"}
                 %span.icon.fa.fa-lock
