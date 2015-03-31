@@ -1,11 +1,12 @@
 @import "includes/globals";
 
-$header-font-face: "Helvetica Neue";
+$header-font-face: "Source Sans Pro";
 
 .resume-presentation {
   font-family: $header-font-face;
-  font-weight: 200;
   font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
   padding: 40px;
   background-color: #fff;
   color: #000;
@@ -40,12 +41,14 @@ $header-font-face: "Helvetica Neue";
     .section__title {
       font-family: $header-font-face;
       font-size: 20px;
+      font-weight: bold;
       margin: 0;
       margin-bottom: 10px;
     }
   }
 
   .period {
+    break-inside: avoid;
     .period__title {
       padding: 0;
       margin: 0;
