@@ -9,22 +9,14 @@ $base-font-size: 12px;
   font-family: "Source Sans Pro";
   font-weight: 300;
   font-size: $base-font-size;
-  background-color: #fff;
-  color: #000;
-  max-width: $page-width;
 
   &.user-view {
     max-width: inherit;
   }
 
   @media screen {
-    padding: 35px 0.5in;
+    padding: 35px 1.0in;
     margin: auto;
-    zoom: 1.2;
-  }
-
-  @media print {
-    padding: 35px 0.5in;
   }
 
   .header {

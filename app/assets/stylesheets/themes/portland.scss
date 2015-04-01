@@ -15,8 +15,8 @@ $header-font-face: "Roboto";
   margin: auto;
 
   @media screen {
-    font-size: 1em;
     font-weight: light;
+    padding: 35px 1.0in;
   }
 
   @media print {

@@ -3,6 +3,13 @@ $page-width: 210mm;
 
 /* Styles to be included in all themes */
 .resume-presentation {
+  background-color: #fff;
+  color: #000;
+
+  @media print {
+    padding: 35px 0.5in;
+  }
+
   h1, h2, h3, h4, h5 {
     padding: 0;
     margin: 0;
