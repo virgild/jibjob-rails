@@ -106,4 +106,7 @@ Rails.application.configure do
     path: ':rails_root/public/system/:class/:attachment/:id/:style/:filename',
     url: '/system/:class/:attachment/:id/:style/:filename'
   }
+
+  #
+  GC::Profiler.enable
 end
