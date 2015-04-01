@@ -35,27 +35,27 @@ $base-font-size: 12px;
 
     .full_name {
       font-family: $header-font;
-      font-size: $base-font-size * 1.8;
+      font-size: $base-font-size * 1.4;
       font-weight: 600;
     }
   }
 
   .section {
-    line-height: $base-font-size * 1.8;
+    line-height: $base-font-size * 1.4;
     padding-top: 20px;
 
     .section__title {
       font-family: $header-font;
       font-family: "Source Sans Pro";
       font-weight: bold;
-      font-size: $base-font-size * 1.8;
+      font-size: $base-font-size * 1.4;
       margin-bottom: 10px;
     }
   }
 
   .period {
     .period__title {
-      font-size: $base-font-size * 1.6;
+      font-size: $base-font-size * 1.2;
       font-weight: 600;
       font-family: $header-font;
     }
