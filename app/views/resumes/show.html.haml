@@ -21,7 +21,11 @@
               = link_to delete_user_resume_path(current_user, @resume), title: "Delete" do
                 %span.fa.fa-trash-o
             .publish-url
-              = link_to publication_url(slug: @resume.slug), publication_url(slug: @resume.slug), target: "_blank", title: "Publish URL"
+              - if @resume.is_published?
+                = link_to publication_url(slug: @resume.slug), publication_url(slug: @resume.slug), target: "_blank", title: "Publish URL"
+              - else
+                = publication_url(slug: @resume.slug)
+
             .dates
               %div{title: "Created"}
                 %span.icon.fa.fa-plus-square
