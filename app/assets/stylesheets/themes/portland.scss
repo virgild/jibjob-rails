@@ -1,12 +1,14 @@
 @import "includes/globals";
 
-$header-font-face: "Source Sans Pro";
+@import url(http://fonts.googleapis.com/css?family=Roboto:400italic,700italic,300,700,300italic,400);
+
+$header-font-face: "Roboto";
 
 .resume-presentation {
   font-family: $header-font-face;
   font-size: 12px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
   padding: 40px;
   background-color: #fff;
   color: #000;
@@ -27,7 +29,8 @@ $header-font-face: "Source Sans Pro";
 
     .full_name {
       font-family: $header-font-face;
-      font-size: 32px;
+      font-size: 20px;
+      font-weight: 700;
       padding: 0;
       margin: 0;
     }
@@ -48,7 +51,6 @@ $header-font-face: "Source Sans Pro";
   }
 
   .period {
-    break-inside: avoid;
     .period__title {
       padding: 0;
       margin: 0;
