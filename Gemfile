@@ -77,7 +77,7 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'puma', require: false
+  gem 'thin'
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec-activejob'
   gem 'faker'
