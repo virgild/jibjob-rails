@@ -304,6 +304,6 @@ class Resume < ActiveRecord::Base
   end
 
   def set_default_theme
-    self.theme ||= 'default'
+    self.theme = 'default' if self.theme.blank?
   end
 end
