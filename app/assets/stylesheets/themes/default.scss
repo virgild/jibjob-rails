@@ -1,11 +1,13 @@
 @import "includes/globals";
 
-$header-font: "Helvetica";
+@import "//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic";
+
+$header-font: "Source Sans Pro";
 $base-font-size: 12px;
 
 .resume-presentation {
-  font-family: "Helvetica";
-  font-weight: normal;
+  font-family: "Source Sans Pro";
+  font-weight: 300;
   font-size: $base-font-size;
   background-color: #fff;
   color: #000;
@@ -30,7 +32,7 @@ $base-font-size: 12px;
     .full_name {
       font-family: $header-font;
       font-size: $base-font-size * 1.8;
-      font-weight: bold;
+      font-weight: 600;
     }
   }
 
@@ -39,15 +41,16 @@ $base-font-size: 12px;
 
     .section__title {
       font-family: $header-font;
-      font-size: $base-font-size * 1.8;
+      font-family: "Source Sans Pro";
       font-weight: bold;
+      font-size: $base-font-size * 1.8;
     }
   }
 
   .period {
     .period__title {
       font-size: $base-font-size * 1.6;
-      font-weight: bold;
+      font-weight: 600;
       font-family: $header-font;
     }
   }
