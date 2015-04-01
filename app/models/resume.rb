@@ -81,6 +81,7 @@ class Resume < ActiveRecord::Base
   before_validation :fill_guid, on: :create
   before_validation :set_new_status, on: :create
   before_validation :set_publication, on: :create
+  before_validation :set_default_theme, on: :create
   before_validation :ensure_content_footer
 
   before_save :increment_edition, on: [:create, :update], if: Proc.new { |resume| resume.content_changed? }
@@ -294,5 +295,9 @@ class Resume < ActiveRecord::Base
 
   def set_zero_page_count
     self.pdf_pages ||= 0
+  end
+
+  def set_default_theme
+    self.theme = 'default'
   end
 end
