@@ -19,6 +19,10 @@ $base-font-size: 12px;
     margin: auto;
   }
 
+  @media screen and (max-width: $small-screen-size) {
+    padding: 20px;
+  }
+
   .header {
     text-align: center;
     border-bottom: solid 1px #ccc;

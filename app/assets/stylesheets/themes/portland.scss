@@ -19,6 +19,10 @@ $header-font-face: "Roboto";
     padding: 35px 1.0in;
   }
 
+  @media screen and (max-width: $small-screen-size) {
+    padding: 20px;
+  }
+
   @media print {
     font-weight: 200;
   }

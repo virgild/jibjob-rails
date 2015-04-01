@@ -13,6 +13,10 @@
     font-size: 1em;
   }
 
+  @media screen and (max-width: $small-screen-size) {
+    padding: 20px;
+  }
+
   @media print {
     padding: 35px 0.5in;
   }
