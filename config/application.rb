@@ -52,5 +52,13 @@ module JibJob
 
     # Autoload on lib dir
     config.autoload_paths << Rails.root.join('lib')
+
+    # Set server tag
+    hostname = `hostname`.strip!
+    pid = $$
+
+    config.action_dispatch.default_headers = {
+      'X-Worker-Pants' => "#{hostname}-#{pid}"
+    }
   end
 end
