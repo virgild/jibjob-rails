@@ -159,7 +159,8 @@
 
       this.setProps({
         resume: React.addons.update(this.props.resume, {
-          theme: {$set: newValue}
+          theme: {$set: newValue},
+          current_theme: {$set: newValue}
         })
       });
     },
@@ -303,7 +304,7 @@
             </div>
             <div className="form-group">
               <label htmlFor="resume_theme">Theme</label>
-              <select className="form-control" id="resume_theme" name="resume[theme]" value={resume.theme} onChange={this.themeChange}>
+              <select className="form-control" id="resume_theme" name="resume[theme]" value={resume.current_theme} onChange={this.themeChange}>
                 {this.themeOptions()}
               </select>
             </div>
