@@ -48,12 +48,6 @@ developing innovative solutions.
   oriented, client/server architecture involving Windows for Workgroups,
   Windows NT Advanced Server, Microsoft SQL Server, Oracle7, and UNIX.
 
-- Designed an enterprise level, high performance, mission-critical,
-  client/server database system incorporating symmetric multiprocessing
-  computers (SMP), Oracle7's Parallel Server, Tuxedo's on-line transaction
-  processing (OLTP) monitor, and redundant array of inexpensive disks
-  (RAID) technology.
-
 + Systems Analyst
 >O Business Consultants, Inc.
 >L Washington, DC
@@ -85,13 +79,6 @@ developing innovative solutions.
 - Designed a maintenance reporting program that converted the labor
   intensive task of producing weekly status reports from a 4-day to a
   2-hour process.
-
-- Developed a departmental computer literacy training program, teaching
-  classes on microcomputer operating systems, office automation software,
-  and introductory programming.
-
-- Taught a "Structured Programming and Problem Solving" course for the
-  Community Education Center after work hours.
 
 = Education
 
@@ -127,8 +114,6 @@ developing innovative solutions.
 
 = Certification, Honors, and Professional Affiliations
 
-- MCP Trainer, DCS.
-- MCP Trainer, SDD.
 - MCP Certified Systems Engineer.
 - MCP Certified Product Specialist, Networking, MS TCP/IP, and
   MS Mail 3.2 for PC Networks.

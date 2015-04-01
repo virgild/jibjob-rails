@@ -18,16 +18,19 @@ $base-font-size: 12px;
   }
 
   @media screen {
-    padding: 35px 55px;
+    padding: 35px 0.5in;
     margin: auto;
   }
 
   @media print {
-
+    padding: 35px 0.5in;
   }
 
   .header {
     text-align: center;
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 
     .full_name {
       font-family: $header-font;
@@ -38,12 +41,14 @@ $base-font-size: 12px;
 
   .section {
     line-height: $base-font-size * 1.8;
+    padding-top: 20px;
 
     .section__title {
       font-family: $header-font;
       font-family: "Source Sans Pro";
       font-weight: bold;
       font-size: $base-font-size * 1.8;
+      margin-bottom: 10px;
     }
   }
 
