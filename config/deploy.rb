@@ -53,7 +53,18 @@ namespace :deploy do
       # end
     end
   end
+
+  desc "Copy fonts"
+  task :copy_fonts do
+    on roles([:app, :worker]) do |host|
+      info "Host: #{host}"
+      execute :cp, "-R", "#{release_path}/app/assets/fonts/print/*", ENV['FONTS_INSTALL_DIR']
+      execute "fc-cache", "-f -v"
+    end
+  end
 end
+
+after "deploy:normalize_assets", "deploy:copy_fonts"
 
 # Notify NewRelic
 after "deploy:updated", "newrelic:notice_deployment"
