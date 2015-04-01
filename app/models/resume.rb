@@ -122,7 +122,13 @@ class Resume < ActiveRecord::Base
 
     # Render the PDF data to string
     pdf_data = WickedPdf.new.pdf_from_string(
-      ResumeRenderer.new(self).render_theme(self.current_theme, layout: 'pdf_page')
+      ResumeRenderer.new(self).render_theme(self.current_theme, layout: 'pdf_page'),
+      {
+        disable_external_links: true,
+        disable_internal_links: true,
+        print_media_type: true,
+        outline: { outline: true }
+      }
     )
 
     # Extract the PDF metadata

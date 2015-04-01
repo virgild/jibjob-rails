@@ -17,10 +17,6 @@ class ResumeRenderer
     render_opts = {
       template: "resume_renderer/themes/#{theme}",
       locals: { resume: @resume },
-      disable_external_links: true,
-      disable_internal_links: true,
-      print_media_type: true,
-      outline: { outline: true },
       layout: "resume_renderer/#{layout}"
     }
 
