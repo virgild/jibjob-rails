@@ -70,7 +70,7 @@ class Resume < ActiveRecord::Base
   has_attached_file :pdf, { styles: {
       thumb: ["500", :jpg]
     }, convert_options: {
-      thumb: "-background white -alpha remove"
+      thumb: "-background white"
     }
   }.merge(Rails.configuration.x.paperclip.storage_options)
 
