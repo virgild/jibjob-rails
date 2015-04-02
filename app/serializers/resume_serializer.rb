@@ -122,7 +122,7 @@ class ResumeSerializer < BaseSerializer
   end
 
   def publish_url
-    return nil if object.new_record?
+    return nil if (object.new_record? || object.slug.blank?)
     publication_path(object.slug)
   end
 
