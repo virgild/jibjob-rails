@@ -68,9 +68,9 @@ class Resume < ActiveRecord::Base
   scope :recently_updated, -> { order('updated_at DESC') }
 
   has_attached_file :pdf, { styles: {
-      thumb: ["200x200#", :png]
+      thumb: ["500", :jpg]
     }, convert_options: {
-      thumb: "-strip"
+      thumb: "-background white -alpha remove"
     }
   }.merge(Rails.configuration.x.paperclip.storage_options)
 

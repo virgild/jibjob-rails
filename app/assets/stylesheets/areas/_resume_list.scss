@@ -3,11 +3,15 @@
   margin: 0px;
   padding: 0px;
 
+  $thumbnail-width: 182px;
+  $thumbnail-height: 232px;
+  $item-height: 330px;
+
   .resume-list-item {
     text-align: center;
     padding: 20px;
     margin-bottom: 20px;
-    height: 300px;
+    height: $item-height;
     color: #fff;
     transition: background-color 0.3s;
 
@@ -34,14 +38,18 @@
     }
 
     .thumb-wrap {
-      width: 122px;
-      height: 152px;
+      width: $thumbnail-width;
+      height: $thumbnail-height;
       display: block;
       margin: 0px auto;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
       box-shadow: 0px 3px 3px 0px rgba(#000, 0.2);
+
+      img {
+        image-rendering: crisp-edges;
+      }
     }
 
     .thumb {
@@ -50,8 +58,8 @@
       margin: auto;
       padding: 20px 10px;
 
-      width: 122px;
-      height: 152px;
+      width: $thumbnail-width;
+      height: $thumbnail-height;
     }
 
     .name {
@@ -123,7 +131,7 @@
   position: absolute;
   transform: rotate(45deg);
   width: 75px;
-  left: 70px;
+  left: 131px;
   top: 6px;
   box-shadow: 0px 1px 1px rgba(#000, 0.2);
 
