@@ -23,7 +23,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_on "Load Example"
     wait_for_ajax
 
-    click_button "Save Resume"
+    click_button "Save"
     wait_for_ajax
     wait_for_selector(".details")
 
@@ -49,7 +49,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     check "Publish now"
     fill_in "Access Code", with: "DOODLES"
 
-    click_on "Save Resume"
+    click_on "Save"
     wait_for_ajax
     # TODO: Do not sleep
     sleep 1
@@ -90,7 +90,7 @@ RSpec.describe "Resumes", type: :request, js: true do
     click_on "Test Resume"
     click_on "Edit"
     fill_in "Access Code", with: "secret"
-    click_button "Save Resume"
+    click_button "Save"
     wait_for_ajax
     # TODO: Do not sleep
     sleep 1
