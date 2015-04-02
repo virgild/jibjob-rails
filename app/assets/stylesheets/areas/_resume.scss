@@ -1,6 +1,29 @@
 .resume-form {
   padding-top: 20px;
   padding-bottom: 20px;
+
+  .save-button {
+
+    @media screen and (max-width: $screen-phone) {
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      @include rounded(0);
+      z-index: 5000;
+      height: 50px;
+    }
+
+    &[disabled] {
+      opacity: 1.0;
+    }
+
+    .icon {
+      margin-right: 10px;
+    }
+  }
 }
 
 .resume-form__content {

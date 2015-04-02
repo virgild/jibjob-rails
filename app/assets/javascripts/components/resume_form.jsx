@@ -24,6 +24,7 @@
         accessCode: this.props.resume.access_code,
         theme: this.props.resume.current_theme,
         content: this.props.resume.content,
+        contentChanged: false,
         errors: this.props.resume.errors
       };
     },
@@ -72,6 +73,10 @@
     submitForm: function(e) {
       e.preventDefault();
 
+      if (this.state.isLoading) {
+        return;
+      }
+
       this.setState({isLoading: true});
 
       document.activeElement.blur();
@@ -83,9 +88,12 @@
         slug: this.state.slug,
         is_published: this.state.isPublished,
         access_code: this.state.accessCode,
-        theme: this.state.theme,
-        content: this.state.content
+        theme: this.state.theme
       };
+
+      if (this.state.contentChanged) {
+        resume_data.content = this.state.content;
+      }
 
       $.ajax({
         url: this.props.saveURL,
@@ -103,12 +111,14 @@
               accessCode: data.resume.access_code,
               theme: data.resume.theme,
               content: data.resume.content,
+              contentChanged: false,
               errors: data.resume.errors
             });
+
+            self.showSaveNotification();
           } catch(error) {
             console.error(error);
           }
-          self.showSaveNotification();
         }
       }).fail(function(xhr, status) {
         try {
@@ -149,7 +159,7 @@
 
     contentChange: function(e) {
       var newValue = e.target.value;
-      this.setState({content: newValue});
+      this.setState({content: newValue, contentChanged: true});
     },
 
     loadExampleContent: function(e) {
@@ -159,14 +169,14 @@
 
       $.get(url).done(function(data) {
         var newContent = data;
-        self.setState({content: data});
+        self.setState({content: data, contentChanged: true});
       });
     },
 
     showSaveNotification: function() {
       $.notify({
         message: "Resume saved.",
-        icon: "fa fa-spinner fa-spin"
+        icon: ""
       }, {
         type: 'success',
         allow_dismiss: true,
@@ -241,6 +251,25 @@
         );
       }
 
+      if (this.state.isLoading) {
+        var submitButton = (
+          <button className="btn btn-warning form-control save-button" disabled="true">
+            <div>
+              <span className="icon fa fa-spin fa-spinner" />
+              <span>Saving</span>
+            </div>
+          </button>
+        );
+      } else {
+        var submitButton = (
+          <button className="btn btn-success form-control save-button">
+            <div>
+              <span>Save</span>
+            </div>
+          </button>
+        );
+      }
+
       return (
         <div className="container resume-form">
           <JibJob.ErrorDisplay errors={this.state.errors} />
@@ -284,9 +313,7 @@
               </p>
               {editor}
             </div>
-            <JibJob.GlyphedButton type="submit" showLoading={this.state.isLoading} className="btn btn-success form-control" buttonType="success">
-              <span>Save Resume</span>
-            </JibJob.GlyphedButton>
+            {submitButton}
           </form>
         </div>
       );
