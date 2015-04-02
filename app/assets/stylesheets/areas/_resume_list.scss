@@ -9,7 +9,7 @@
 
   .resume-list-item {
     text-align: center;
-    padding: 20px;
+    padding-top: 20px;
     margin-bottom: 20px;
     height: $item-height;
     color: #fff;
@@ -55,9 +55,9 @@
     .thumb {
       display: block;
       background-color: #fff;
-      margin: auto;
-      padding: 20px 10px;
-
+      margin: 0px auto;
+      padding: 0px;
+      padding-bottom: 10px;
       width: $thumbnail-width;
       height: $thumbnail-height;
     }
@@ -103,8 +103,13 @@
       }
 
       .thumb {
+        padding-top: 80px;
         background-color: rgba(#fff, 0.4);
         box-shadow: 0px 3px 5px 0px rgba(#000, 0.2);
+
+        .icon {
+          font-size: 32px;
+        }
       }
 
       &:hover {
