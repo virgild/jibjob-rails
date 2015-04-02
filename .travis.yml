@@ -6,6 +6,9 @@ addons:
 services:
   - redis-server
 before_install:
+  - sudo add-apt-repository -y ppa:moti-p/cc
+  - sudo apt-get update
+  - sudo apt-get -y --reinstall install imagemagick
   - sudo apt-get install -y wkhtmltopdf pdftk
 before_script:
   - phantomjs --version
