@@ -80,7 +80,6 @@ class Resume < ActiveRecord::Base
 
   before_validation :fill_guid, on: :create
   before_validation :set_new_status, on: :create
-  before_validation :set_publication, on: :create
   before_validation :set_default_theme, on: :create
   before_validation :ensure_content_footer
 
@@ -276,11 +275,6 @@ class Resume < ActiveRecord::Base
 
   def set_new_status
     self.status ||= 1
-  end
-
-  def set_publication
-    self.is_published = false
-    always_pass_this_filter = true
   end
 
   def queue_pdf_refresh

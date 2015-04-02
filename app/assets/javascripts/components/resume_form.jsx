@@ -17,7 +17,14 @@
 
     getInitialState: function() {
       return {
-        isLoading: false
+        isLoading: false,
+        name: this.props.resume.name,
+        slug: this.props.resume.slug,
+        isPublished: this.props.resume.is_published,
+        accessCode: this.props.resume.access_code,
+        theme: this.props.resume.current_theme,
+        content: this.props.resume.content,
+        errors: this.props.resume.errors
       };
     },
 
@@ -64,6 +71,7 @@
 
     submitForm: function(e) {
       e.preventDefault();
+
       this.setState({isLoading: true});
 
       document.activeElement.blur();
@@ -71,12 +79,12 @@
 
       var self = this;
       var resume_data = {
-        name: this.props.resume.name,
-        slug: this.props.resume.slug,
-        is_published: this.props.resume.is_published,
-        access_code: this.props.resume.access_code,
-        theme: this.props.resume.theme,
-        content: this.props.resume.content
+        name: this.state.name,
+        slug: this.state.slug,
+        is_published: this.state.isPublished,
+        access_code: this.state.accessCode,
+        theme: this.state.theme,
+        content: this.state.content
       };
 
       $.ajax({
@@ -88,10 +96,14 @@
           window.location.href = data.meta.redirect;
         } else {
           try {
-            self.setProps({
-              resume: React.addons.update(self.props.resume, {
-                $merge: data.resume
-              })
+            self.setState({
+              name: data.resume.name,
+              slug: data.resume.slug,
+              isPublished: data.resume.is_published,
+              accessCode: data.resume.access_code,
+              theme: data.resume.theme,
+              content: data.resume.content,
+              errors: data.resume.errors
             });
           } catch(error) {
             console.error(error);
@@ -100,11 +112,7 @@
         }
       }).fail(function(xhr, status) {
         try {
-          self.setProps({
-            resume: React.addons.update(self.props.resume, {
-              $merge: xhr.responseJSON.resume
-            })
-          });
+          self.setState({errors: xhr.responseJSON.resume.errors});
         } catch (error) {
           console.error(error);
         }
@@ -116,63 +124,32 @@
     nameFieldChange: function(e) {
       var newName = e.target.value;
       var newSlug = newName.replace(/['/]/g, '').replace(/[ .,:-]/g, '-').toLocaleLowerCase();
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          $merge: {name: newName, slug: newSlug}
-        })
-      });
+      this.setState({name: newName, slug: newSlug});
     },
 
     slugFieldChange: function(e) {
-      var newSlug = e.target.value;
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          slug: {$set: newSlug}
-        })
-      });
+      var newValue = e.target.value;
+      this.setState({slug: newValue});
     },
 
     isPublishedChange: function(e) {
       var newValue = e.target.checked;
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          is_published: {$set: newValue}
-        })
-      });
+      this.setState({isPublished: newValue});
     },
 
     accessCodeChange: function(e) {
       var newValue = e.target.value;
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          access_code: {$set: newValue}
-        })
-      });
+      this.setState({accessCode: newValue});
     },
 
     themeChange: function(e) {
       var newValue = e.target.value;
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          theme: {$set: newValue},
-          current_theme: {$set: newValue}
-        })
-      });
+      this.setState({theme: newValue});
     },
 
     contentChange: function(e) {
-      var newContent = e.target.value;
-
-      this.setProps({
-        resume: React.addons.update(this.props.resume, {
-          content: {$set: newContent}
-        })
-      });
+      var newValue = e.target.value;
+      this.setState({content: newValue});
     },
 
     loadExampleContent: function(e) {
@@ -182,20 +159,7 @@
 
       $.get(url).done(function(data) {
         var newContent = data;
-
-        self.setProps({
-          resume: React.addons.update(self.props.resume, {
-            content: {$set: newContent}
-          })
-        });
-
-        if (self.props.usePlainEditor != true) {
-          var editor = ace.edit("resume-editor");
-          editor.setValue(newContent);
-          editor.scrollToLine(0);
-          editor.gotoLine(1);
-          editor.clearSelection();
-        }
+        self.setState({content: data});
       });
     },
 
@@ -233,7 +197,7 @@
 
       return [
         defaultOption,
-        <optgroup key="custom_themes" label="________________">
+        <optgroup key="custom_themes" label="Custom Themes">
           {options}
         </optgroup>
       ];
@@ -243,19 +207,18 @@
       var resume = this.props.resume;
       var origin = window.location.origin;
 
-      if (resume.slug) {
-        var pub_url = origin + "/" + resume.slug;
+      if (this.state.slug) {
+        var pub_url = origin + "/" + this.state.slug;
       } else {
         var pub_url = origin + "/" + "_________" ;
       }
-
 
       var isPublishedGroup = (
         <div className="form-group">
           <label htmlFor="resume_is_published">Publish now</label>
           <br/>
           <label>
-            <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
+            <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={this.state.isPublished} onChange={this.isPublishedChange} className="" />
             <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
           </label>
         </div>
@@ -263,7 +226,7 @@
 
       if (this.props.usePlainEditor) {
         var editor = (
-          <textarea id="resume_content" name="resume[content]" value={this.props.resume.content} onChange={this.contentChange} className="resume-form__content form-control" rows="40" />
+          <textarea id="resume_content" name="resume[content]" value={this.state.content} onChange={this.contentChange} className="resume-form__content form-control" rows="40" />
         );
       } else {
         var editor = (
@@ -280,18 +243,18 @@
 
       return (
         <div className="container resume-form">
-          <JibJob.ErrorDisplay model={resume} />
+          <JibJob.ErrorDisplay errors={this.state.errors} />
           <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
             <div className="form-group">
               <label htmlFor="resume_name">Name</label>
-              <input type="text" id="resume_name" name="resume[name]" value={resume.name} onChange={this.nameFieldChange}
+              <input type="text" id="resume_name" name="resume[name]" value={this.state.name} onChange={this.nameFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Name" autoFocus="true"
                 autoCorrect="off" autoCapitalize="sentence" maxLength={this.props.nameMaxLength} />
               <p className="help-block">Your private name for this resume</p>
             </div>
             <div className="form-group">
               <label htmlFor="resume_slug">Link Name</label>
-              <input type="text" id="resume_slug" name="resume[slug]" value={resume.slug} onChange={this.slugFieldChange}
+              <input type="text" id="resume_slug" name="resume[slug]" value={this.state.slug} onChange={this.slugFieldChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name"
                 autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
               <p className="help-block">
@@ -301,14 +264,14 @@
             {isPublishedGroup}
             <div className="form-group">
               <label htmlFor="resume_access_code">Access Code</label>
-              <input type="text" id="resume_access_code" name="resume[access_code]" value={resume.access_code} onChange={this.accessCodeChange}
+              <input type="text" id="resume_access_code" name="resume[access_code]" value={this.state.accessCode} onChange={this.accessCodeChange}
                 className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
                 autoCapitalize="characters" maxLength="16" />
                 <p className="help-block">The viewer will be required to enter this access code when specified</p>
             </div>
             <div className="form-group">
               <label htmlFor="resume_theme">Theme</label>
-              <select className="form-control" id="resume_theme" name="resume[theme]" value={resume.current_theme} onChange={this.themeChange}>
+              <select className="form-control" id="resume_theme" name="resume[theme]" value={this.state.theme} onChange={this.themeChange}>
                 {this.themeOptions()}
               </select>
             </div>

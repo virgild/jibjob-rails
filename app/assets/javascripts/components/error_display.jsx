@@ -5,18 +5,16 @@
 
   global.JibJob.ErrorDisplay = React.createClass({
     propTypes: {
-      model: React.PropTypes.object.isRequired
+      errors: React.PropTypes.array.isRequired
     },
 
     render: function() {
-      var model = this.props.model;
-
-      var items = model.errors.map(function(error, index) {
+      var items = this.props.errors.map(function(error, index) {
         var key = "error-" + index;
         return <ErrorItem data={error} key={key} />;
       });
 
-      if (Object.getOwnPropertyNames(model.errors).length > 1) {
+      if (Object.getOwnPropertyNames(this.props.errors).length > 1) {
         return (
           <div className="error-display">
             <h4>There are errors in the form</h4>
