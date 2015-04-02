@@ -242,20 +242,24 @@
     render: function() {
       var resume = this.props.resume;
       var origin = window.location.origin;
-      var pub_url = origin + "/" + resume.slug;
 
-      if (resume.new_record == false) {
-        var isPublishedGroup = (
-          <div className="form-group">
-            <label htmlFor="resume_is_published">Publish now</label>
-            <br/>
-            <label>
-              <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
-              <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
-            </label>
-          </div>
-        );
+      if (resume.slug) {
+        var pub_url = origin + "/" + resume.slug;
+      } else {
+        var pub_url = origin + "/" + "_________" ;
       }
+
+
+      var isPublishedGroup = (
+        <div className="form-group">
+          <label htmlFor="resume_is_published">Publish now</label>
+          <br/>
+          <label>
+            <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={resume.is_published} onChange={this.isPublishedChange} className="" />
+            <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
+          </label>
+        </div>
+      );
 
       if (this.props.usePlainEditor) {
         var editor = (

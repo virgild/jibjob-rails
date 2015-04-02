@@ -76,6 +76,12 @@
         color: rgba(#fff, 0.9);
         text-decoration: none;
       }
+
+      .icon {
+        position: relative;
+        top: -1px;
+        left: -2px;
+      }
     }
 
     .published-marker {
@@ -129,6 +135,8 @@
   margin-top: 20px;
   text-shadow: 0px 1px 1px rgba(#000, 0.4);
   text-align: center;
+  font-family: "Source Sans Pro";
+  font-weight: 400;
 }
 
 .resume-list-item__ribbon {
