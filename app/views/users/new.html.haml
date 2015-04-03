@@ -27,7 +27,7 @@
             .form-group
               = f.check_box :terms
               = f.label :terms, class: "small" do
-                = raw(t(:accept_terms_of_service_label, link: link_to(t(:terms_of_service), terms_of_service_path)))
+                = raw(t(:accept_terms_of_service_label, link: link_to(t(:terms_of_service), terms_of_service_path, target: '_blank')))
             = f.submit t(:submit_button_label), class: "btn btn-success"
 
           .social-buttons.row
