@@ -205,7 +205,7 @@ class Resume < ActiveRecord::Base
     file_data = StringIO.new(pdf_data[:content])
     resume = self
     file_data.define_singleton_method :original_filename do
-      "#{resume.guid}.pdf"
+      "#{resume.guid}-#{Time.now.to_i}.pdf"
     end
 
     self.pdf = file_data
