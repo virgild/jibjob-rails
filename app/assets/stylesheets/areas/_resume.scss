@@ -24,6 +24,20 @@
       margin-right: 10px;
     }
   }
+
+  &.tablet-view {
+    .save-button {
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      @include rounded(0);
+      z-index: 5000;
+      height: 50px;
+    }
+  }
 }
 
 .resume-form__content {

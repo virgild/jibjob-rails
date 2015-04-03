@@ -125,6 +125,10 @@ class ResumesController < ApplicationController
       @use_plain_editor = true
     end
 
+    if browser.tablet?
+      @tablet_view = true
+    end
+
     @use_plain_editor = always_use_plain_editor_for_now = true
   end
 

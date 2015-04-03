@@ -12,7 +12,8 @@
       nameMaxLength: React.PropTypes.number.isRequired,
       slugMaxLength: React.PropTypes.number.isRequired,
       getStartedURL: React.PropTypes.string,
-      showExampleLoader: React.PropTypes.bool
+      showExampleLoader: React.PropTypes.bool,
+      tabletView: React.PropTypes.bool
     },
 
     getInitialState: function() {
@@ -271,8 +272,14 @@
         );
       }
 
+      var containerClasses = { 'resume-form': true };
+      if (this.props.tabletView) {
+        containerClasses['tablet-view'] = true;
+      }
+      containerClasses = classNames(containerClasses);
+
       return (
-        <div className="resume-form">
+        <div className={containerClasses}>
           <JibJob.ErrorDisplay errors={this.state.errors} />
           <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
             <div className="form-group">
