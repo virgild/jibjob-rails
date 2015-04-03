@@ -25,7 +25,7 @@
         accessCode: this.props.resume.access_code,
         theme: this.props.resume.current_theme,
         content: this.props.resume.content,
-        contentChanged: false,
+        contentChanged: true,
         errors: this.props.resume.errors
       };
     },

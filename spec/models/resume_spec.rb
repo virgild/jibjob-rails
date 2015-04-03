@@ -146,7 +146,7 @@ RSpec.describe Resume, type: :model do
     example "another resume with the same name is invalid" do
       expect(user.resumes.first.name).to eq 'Test Resume'
 
-      resume = user.resumes.build(name: 'Test Resume', slug: 'test-resume-2', content: "\n")
+      resume = user.resumes.build(name: 'Test Resume', slug: 'test-resume-2', content: "#N Test User")
       expect(resume).to_not be_valid
       expect(resume.errors[:name]).to_not be_empty
     end
@@ -159,7 +159,7 @@ RSpec.describe Resume, type: :model do
     example "another resume with the same slug is invalid" do
       expect(user1.resumes.first.slug).to eq 'test-resume'
 
-      resume = user2.resumes.build(name: 'Test Resume', slug: 'test-resume', content: "\n")
+      resume = user2.resumes.build(name: 'Test Resume', slug: 'test-resume', content: "#N Test User")
       expect(resume).to_not be_valid
       expect(resume.errors[:slug]).to_not be_empty
     end
@@ -170,7 +170,7 @@ RSpec.describe Resume, type: :model do
     subject do |example|
       example.description
     end
-    let(:resume) { user.resumes.build(name: subject, slug: 'new-resume', content: "") }
+    let(:resume) { user.resumes.build(name: subject, slug: 'new-resume', content: "#N Test User") }
 
     context "invalid format" do
       after(:each) do
@@ -203,7 +203,7 @@ RSpec.describe Resume, type: :model do
     subject do |example|
       example.description
     end
-    let(:resume) { user.resumes.build(name: "New Resume", slug: subject, content: "\n") }
+    let(:resume) { user.resumes.build(name: "New Resume", slug: subject, content: "#N Test User") }
 
     context "invalid format" do
       after(:each) do

@@ -59,6 +59,7 @@ class Resume < ActiveRecord::Base
   validates_length_of :slug, in: SLUG_MIN_LENGTH..SLUG_MAX_LENGTH
   validates_length_of :access_code, in: 4..16, allow_nil: true, allow_blank: true
   validates_length_of :content, maximum: 50_000
+  validates_presence_of :content
 
   belongs_to :user
   has_many :publication_views, -> { order('created_at desc') }, dependent: :destroy
@@ -264,7 +265,7 @@ class Resume < ActiveRecord::Base
   private
 
   def ensure_content_footer
-    if (content == '') || (content.last != "\n")
+    if content && ((content == '') || (content.last != "\n"))
       content << "\n"
     end
   end
