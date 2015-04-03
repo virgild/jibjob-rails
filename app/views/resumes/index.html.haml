@@ -3,10 +3,5 @@
     .user-resumes-page__title
       %span.glyphicon.glyphicon-file
       = t("my_resumes").titleize
-  #resumes
 
-- content_for :body_javascript do
-  :javascript
-    $(function(){
-      React.render(React.createElement(JibJob.ResumeList, { resumes: #{@resumes_data}, createPage: "#{new_user_resume_url(current_user)}", showCreateButton: #{current_user.has_available_resume_slot?} }), document.getElementById("resumes"));
-    });
+  = react_component('JibJob.ResumeList', { resumes: JSON.parse(@resumes_data), createPage: new_user_resume_url(current_user), showCreateButton: current_user.has_available_resume_slot? }, { prerender: true })

@@ -215,7 +215,8 @@
 
     render: function() {
       var resume = this.props.resume;
-      var origin = window.location.origin;
+      // var origin = global.location.origin;
+      var origin = "";
 
       if (this.state.slug) {
         var pub_url = origin + "/" + this.state.slug;
@@ -271,7 +272,7 @@
       }
 
       return (
-        <div className="container resume-form">
+        <div className="resume-form">
           <JibJob.ErrorDisplay errors={this.state.errors} />
           <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
             <div className="form-group">
