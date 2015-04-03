@@ -13,5 +13,6 @@ before_install:
 before_script:
   - phantomjs --version
   - cp config/database.yml.travis config/database.yml
+  - cp config/mailer.yml.travis config/mailer.yml
   - psql -c 'create database jib_job_travis;' -U postgres
 cache: bundler

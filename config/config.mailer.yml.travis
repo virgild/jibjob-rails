@@ -1,0 +1,6 @@
+test:
+  :delivery_method: :test
+  :default_url_options:
+    :host: jibjob.test
+  :default_options:
+    :from: noreply@jibjob.co
