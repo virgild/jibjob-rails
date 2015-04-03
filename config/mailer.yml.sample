@@ -1,0 +1,27 @@
+development:
+  :default_url_options:
+    :host: <%= ENV['DEFAULT_HOSTNAME'] %>
+  :default_options:
+    :from: 'noreply@jibjob.dev'
+  :delivery_method: :sendmail
+
+staging:
+  :default_url_options:
+    :host: <%= ENV['DEFAULT_HOSTNAME'] %>
+  :default_options:
+    :from: 'noreply@jibjob.dev'
+  :delivery_method: :sendmail
+
+production:
+  :default_url_options:
+    :host: <%= ENV['DEFAULT_HOSTNAME'] %>
+  :default_options:
+    :from: 'noreply@jibjob.dev'
+  :delivery_method: :sendmail
+
+test:
+  :delivery_method: :test
+  :default_url_options:
+    :host: <%= ENV['DEFAULT_HOSTNAME'] %>
+  :default_options:
+    :from: noreply@jibjob.co

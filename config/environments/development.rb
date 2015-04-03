@@ -47,20 +47,6 @@ Rails.application.configure do
 
   # Mailer settings
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: ENV['DEFAULT_HOSTNAME'] }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    authentication: 'plain',
-    enable_starttls_auto: true,
-    address: ENV['MAILER_SMTP_HOST'],
-    port: ENV['MAILER_SMTP_PORT'].to_i,
-    domain: ENV['MAILER_SMTP_DOMAIN'],
-    user_name: ENV['MAILER_SMTP_USERNAME'],
-    password: ENV['MAILER_SMTP_PASSWORD']
-  }
-  config.action_mailer.default_options = {
-    from: ENV['MAILER_DEFAULT_FROM']
-  }
 
   # ReactJS variant
   config.react.variant = :development

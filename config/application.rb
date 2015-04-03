@@ -60,5 +60,9 @@ module JibJob
     config.action_dispatch.default_headers = {
       'X-Worker-Pants' => "#{hostname}-#{pid}"
     }
+
+    # Mailer config
+    mailer_config = YAML.load(ERB.new(File.read("config/mailer.yml")).result)[Rails.env]
+    config.action_mailer.merge!(mailer_config)
   end
 end
