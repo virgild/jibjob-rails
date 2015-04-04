@@ -1,10 +1,13 @@
+/*
+*= require animate.css/animate.css
+*/
+
 $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "strapons/variables";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "bootstrap-social/bootstrap-social.scss";
 @import "gridforms/gridforms/gridforms.sass";
-@import "animate.css/animate.css";
 @import "mixins";
 @import "strapons/overrides";
 @import "strapons/decombobulators";
