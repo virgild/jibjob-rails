@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def load_users
-    @users ||= users_scope.all.limit(25).order(:created_at).reverse_order
+    @users ||= users_scope.all.order(:created_at).reverse_order
   end
 
   def users_scope
