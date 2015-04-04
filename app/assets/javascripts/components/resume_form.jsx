@@ -8,7 +8,6 @@
       resume: React.PropTypes.object.isRequired,
       saveMethod: React.PropTypes.oneOf(['POST', 'PUT']).isRequired,
       saveURL: React.PropTypes.string.isRequired,
-      usePlainEditor: React.PropTypes.bool,
       nameMaxLength: React.PropTypes.number.isRequired,
       slugMaxLength: React.PropTypes.number.isRequired,
       getStartedURL: React.PropTypes.string,
@@ -31,26 +30,6 @@
     },
 
     componentDidMount: function() {
-      if (this.props.usePlainEditor != true) {
-        var editor = ace.edit(this.refs.editor.getDOMNode());
-        $(this.refs.editor.getDOMNode()).height(1000);
-        editor.setTheme("ace/theme/chrome");
-        editor.renderer.setShowGutter(false);
-        editor.renderer.setPrintMarginColumn(false);
-        editor.getSession().setMode("ace/mode/text");
-        editor.setValue(this.props.resume.content);
-
-        editor.scrollToLine(0);
-        editor.gotoLine(1);
-        editor.clearSelection();
-
-        var self = this;
-
-        editor.getSession().on('change', function(e) {
-          self.props.resume.content = editor.getValue();
-        });
-      }
-
       this.startCapturingShortcuts();
     },
 
@@ -193,7 +172,7 @@
       var themes = _.without(this.props.themes, 'default').sort();
 
       var defaultOption = (
-        <optgroup key="default_theme">
+        <optgroup key="default_theme" label="Select theme">
           <option value="default" key="theme_option_default">Default</option>
         </optgroup>
       );
@@ -208,7 +187,7 @@
 
       return [
         defaultOption,
-        <optgroup key="custom_themes" label="Custom Themes">
+        <optgroup key="custom_themes" label="Custom themes">
           {options}
         </optgroup>
       ];
@@ -222,29 +201,7 @@
       if (this.state.slug) {
         var pub_url = origin + "/" + this.state.slug;
       } else {
-        var pub_url = origin + "/" + "_________" ;
-      }
-
-      var isPublishedGroup = (
-        <div className="form-group">
-          <label htmlFor="resume_is_published">Publish now</label>
-          <br/>
-          <label>
-            <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={this.state.isPublished} onChange={this.isPublishedChange} className="" />
-            <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
-          </label>
-        </div>
-      );
-
-      if (this.props.usePlainEditor) {
-        var editor = (
-          <textarea id="resume_content" name="resume[content]" value={this.state.content} onChange={this.contentChange} className="resume-form__content form-control" rows="40" />
-        );
-      } else {
-        var editor = (
-          <div className="editor" id="resume-editor" ref="editor">
-          </div>
-        );
+        var pub_url = origin + "/[link name]";
       }
 
       if (this.props.showExampleLoader) {
@@ -281,46 +238,71 @@
       return (
         <div className={containerClasses}>
           <JibJob.ErrorDisplay errors={this.state.errors} />
-          <form action={this.props.saveURL} method="POST" className="form" onSubmit={this.submitForm}>
-            <div className="form-group">
-              <label htmlFor="resume_name">Name</label>
-              <input type="text" id="resume_name" name="resume[name]" value={this.state.name} onChange={this.nameFieldChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="Name" autoFocus="true"
-                autoCorrect="off" autoCapitalize="sentence" maxLength={this.props.nameMaxLength} />
-              <p className="help-block">Your private name for this resume</p>
-            </div>
-            <div className="form-group">
-              <label htmlFor="resume_slug">Link Name</label>
-              <input type="text" id="resume_slug" name="resume[slug]" value={this.state.slug} onChange={this.slugFieldChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="Link name"
-                autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
-              <p className="help-block">
-                A public name that identifies your resume. (i.e. {origin}/my-resume)
-              </p>
-            </div>
-            {isPublishedGroup}
-            <div className="form-group">
-              <label htmlFor="resume_access_code">Access Code</label>
-              <input type="text" id="resume_access_code" name="resume[access_code]" value={this.state.accessCode} onChange={this.accessCodeChange}
-                className="form-control" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
-                autoCapitalize="characters" maxLength="16" />
-                <p className="help-block">The viewer will be required to enter this access code when specified</p>
-            </div>
-            <div className="form-group">
-              <label htmlFor="resume_theme">Theme</label>
-              <select className="form-control" id="resume_theme" name="resume[theme]" value={this.state.theme} onChange={this.themeChange}>
-                {this.themeOptions()}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="resume_content">Content</label>
-              {exampleLoader}
-              <p className="help-block">
-                Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
-                <span className="hidden-xs">Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.</span>
-              </p>
-              {editor}
-            </div>
+          <form action={this.props.saveURL} method="POST" className="grid-form" onSubmit={this.submitForm}>
+            <fieldset>
+              <legend>Resume Properties</legend>
+              <div data-row-span="3">
+                <div data-field-span="2">
+                  <label htmlFor="resume_name">Resume Label</label>
+                  <input type="text" id="resume_name" name="resume[name]" value={this.state.name} onChange={this.nameFieldChange}
+                    className="" autoComplete="off" spellCheck="false" placeholder="Label" autoFocus="true"
+                    autoCorrect="off" autoCapitalize="sentence" maxLength={this.props.nameMaxLength} />
+                  <p className="help-block">Your private label for this resume</p>
+                </div>
+
+                <div data-field-span="1">
+                  <label htmlFor="resume_slug">Link Name</label>
+                  <input type="text" id="resume_slug" name="resume[slug]" value={this.state.slug} onChange={this.slugFieldChange}
+                    className="" autoComplete="off" spellCheck="false" placeholder="Link name"
+                    autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
+                  <p className="help-block">
+                    A public name that identifies your resume. (i.e. {origin}/my-resume)
+                  </p>
+                </div>
+              </div>
+
+              <div data-row-span="3">
+                <div data-field-span="1">
+                  <label htmlFor="resume_is_published">Publish now</label>
+                  <label>
+                    <input id="resume_is_published" type="checkbox" name="resume[is_published]" checked={this.state.isPublished} onChange={this.isPublishedChange} className="" />
+                    <span style={{paddingLeft: "10px", fontWeight: "normal"}}>Published to {pub_url}</span>
+                  </label>
+                </div>
+
+                <div data-field-span="1">
+                  <label htmlFor="resume_access_code">Access Code</label>
+                  <input type="text" id="resume_access_code" name="resume[access_code]" value={this.state.accessCode} onChange={this.accessCodeChange}
+                    className="" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
+                    autoCapitalize="characters" maxLength="16" />
+                    <p className="help-block">The viewer will be required to enter this access code when specified</p>
+                </div>
+
+                <div data-field-span="1">
+                  <label htmlFor="resume_theme">Theme</label>
+                  <select className="" id="resume_theme" name="resume[theme]" value={this.state.theme} onChange={this.themeChange}>
+                    {this.themeOptions()}
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Resume Content</legend>
+              <div data-row-span="1">
+                {exampleLoader}
+                <p className="help-block">
+                  Read <a href={this.props.getStartedURL} target="_blank">'Get Started'</a> for an overview of composing resumes.
+                  <span className="hidden-xs">Press <kbd>Ctrl + S</kbd> or <kbd>&#8984; + S</kbd> while editing to save.</span>
+                </p>
+              </div>
+              <div data-row-span="1">
+                <div data-field-span="1">
+                  <textarea id="resume_content" name="resume[content]" value={this.state.content} onChange={this.contentChange} className="content" rows="40" />
+                </div>
+              </div>
+            </fieldset>
+
             {submitButton}
           </form>
         </div>

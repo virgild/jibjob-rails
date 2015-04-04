@@ -8,11 +8,4 @@
 //= require d3/d3
 //= require jstimezonedetect/jstz
 //= require rails-timezone/index
-//= require_self
 //= require components
-//= require signup
-
-var JibJob = {
-  Version: "1.0",
-  CurrentPage: null,
-};

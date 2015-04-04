@@ -2,6 +2,19 @@
   padding-top: 20px;
   padding-bottom: 20px;
 
+  legend {
+    padding-top: 20px;
+  }
+
+  .help-block {
+    font-size: 11px;
+  }
+
+  input[type='text'] {
+    font-family: "Menlo", "Monaco", "Courier New", monospace;
+    font-weight: bold;
+  }
+
   .save-button {
 
     @media screen and (max-width: $screen-phone) {
@@ -38,13 +51,13 @@
       height: 50px;
     }
   }
-}
 
-.resume-form__content {
-  font-family: Menlo, "Courier New", monospace;
-  font-size: 12px;
+  textarea.content {
+    font-family: "Menlo", "Monaco", "Courier New", monospace;
+    font-size: 12px;
 
-  @media (max-width: $screen-xs) {
-    font-size: 10px;
+    @media (max-width: $screen-xs) {
+      font-size: 10px;
+    }
   }
 }
