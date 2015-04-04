@@ -26,6 +26,11 @@
 
     %ul.nav.navbar-nav.navbar-right.navbar-collapse.collapse
       - if current_user
+        - if current_user.is_admin?
+          %li
+            = link_to admin_dashboards_path do
+              .span.icon.fa.fa-dashboard
+              Admin
         %li
           = link_to user_resumes_url(current_user) do
             .span.glyphicon.glyphicon-file

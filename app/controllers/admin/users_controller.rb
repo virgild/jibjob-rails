@@ -11,7 +11,7 @@ class Admin::UsersController < Admin::ApplicationController
   private
 
   def load_user
-    @user ||= users_scope.find_by_username(params[:username])
+    @user ||= users_scope.find(params[:id])
   end
 
   def load_users

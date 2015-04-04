@@ -1,12 +1,21 @@
+/*
+*= require animate.css/animate.css
+*/
+
 $icon-font-path: "bootstrap-sass-official/assets/fonts/bootstrap/";
 @import "strapons/variables";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "bootstrap-social/bootstrap-social.scss";
 @import "mixins";
 @import "strapons/overrides";
 @import "master";
 @import "admin/master";
 
+/* General parts */
 @import "parts/topnav";
 @import "parts/notification";
+@import "parts/error-display";
 @import "parts/footer";
+
+/* Admin */

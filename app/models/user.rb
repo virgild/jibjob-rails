@@ -94,6 +94,10 @@ class User < ActiveRecord::Base
     REDIS_POOL.incr("user-#{self.id}-cached_total_resume_views")
   end
 
+  def is_admin?
+    self.default_role == 'admin'
+  end
+
   private
 
   def set_default_role
