@@ -245,7 +245,7 @@
                 <div data-field-span="2">
                   <label htmlFor="resume_name">Resume Label</label>
                   <input type="text" id="resume_name" name="resume[name]" value={this.state.name} onChange={this.nameFieldChange}
-                    className="" autoComplete="off" spellCheck="false" placeholder="Label" autoFocus="true"
+                    className="" autoComplete="off" spellCheck="false" placeholder="" autoFocus="true"
                     autoCorrect="off" autoCapitalize="sentence" maxLength={this.props.nameMaxLength} />
                   <p className="help-block">Your private label for this resume</p>
                 </div>
@@ -253,7 +253,7 @@
                 <div data-field-span="1">
                   <label htmlFor="resume_slug">Link Name</label>
                   <input type="text" id="resume_slug" name="resume[slug]" value={this.state.slug} onChange={this.slugFieldChange}
-                    autoComplete="off" spellCheck="false" placeholder="Link name"
+                    autoComplete="off" spellCheck="false" placeholder=""
                     autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
                   <p className="help-block">
                     A public name that identifies your resume. (i.e. {origin}/my-resume)
@@ -273,7 +273,7 @@
                 <div data-field-span="1">
                   <label htmlFor="resume_access_code">Access Code</label>
                   <input type="text" id="resume_access_code" name="resume[access_code]" value={this.state.accessCode} onChange={this.accessCodeChange}
-                    className="" autoComplete="off" spellCheck="false" placeholder="Access code" autoCorrect="off"
+                    className="" autoComplete="off" spellCheck="false" placeholder="" autoCorrect="off"
                     autoCapitalize="characters" maxLength="16" />
                     <p className="help-block">The viewer will be required to enter this access code when specified</p>
                 </div>

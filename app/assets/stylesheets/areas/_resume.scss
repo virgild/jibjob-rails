@@ -3,6 +3,7 @@
 
   legend {
     padding-top: 10px;
+    margin-bottom: 10px;
   }
 
   .help-block {
@@ -15,6 +16,7 @@
   }
 
   .save-button {
+    margin-top: 10px;
 
     @media screen and (max-width: $screen-phone) {
       display: block;
