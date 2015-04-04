@@ -253,7 +253,7 @@
                 <div data-field-span="1">
                   <label htmlFor="resume_slug">Link Name</label>
                   <input type="text" id="resume_slug" name="resume[slug]" value={this.state.slug} onChange={this.slugFieldChange}
-                    className="" autoComplete="off" spellCheck="false" placeholder="Link name"
+                    autoComplete="off" spellCheck="false" placeholder="Link name"
                     autoCorrect="off" autoCapitalize="none" maxLength={this.props.slugMaxLength} />
                   <p className="help-block">
                     A public name that identifies your resume. (i.e. {origin}/my-resume)
