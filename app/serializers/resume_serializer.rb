@@ -55,7 +55,8 @@ class ResumeSerializer < BaseSerializer
     :errors,
     :pdf_page_count,
     :current_theme,
-    :theme
+    :theme,
+    :pdf_file_synced
 
   self.root = false
 
@@ -148,5 +149,9 @@ class ResumeSerializer < BaseSerializer
 
   def pdf_page_count
     object.pdf_pages
+  end
+
+  def pdf_file_synced
+    object.pdf_file_synced?
   end
 end

@@ -111,12 +111,23 @@
 
       var resumeId = "resume_" + resume.id;
 
+      // Thumbnail when PDF file is generated or not:
+      if (resume.pdf_file_synced) {
+        var thumbElement = (<img className="thumb" src={resume.thumbnail} />);
+      } else {
+        var thumbElement = (
+          <div className="spinner-container">
+            <span className="icon fa fa-spin fa-refresh"  />
+          </div>
+        )
+      }
+
       return (
         <div className="col-md-3 col-sm-4 col-xs-12">
           <div id={resumeId} className="resume-list-item" onTouchStart={this.touchStart} onTouchEnd={this.touchEnd} onTouchCancel={this.touchCancel}>
             <a className="thumb-wrap" href={resume.show_page}>
               {newRibbon}
-              <img className="thumb" src={resume.thumbnail} />
+              {thumbElement}
             </a>
             <a href={resume.show_page} className="name">{lockFlag}{resume.name}</a>
             {published}

@@ -136,6 +136,18 @@
       }
     }
   }
+
+  .spinner-container {
+    width: 182px;
+    height: 232px;
+    background-color: #eee;
+
+    .icon {
+      padding: 100px 0px;
+      color: #000;
+      font-size: 32px;
+    }
+  }
 }
 
 .user-resumes-page__title {
