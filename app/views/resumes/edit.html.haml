@@ -5,4 +5,4 @@
     %li Edit
 
   .container
-    ~ react_component('JibJob.ResumeForm', { resume: JSON.parse(@resume_data), themes: Themes.list, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT', usePlainEditor: @use_plain_editor, sampleURL: asset_url('sample-resume.txt'), nameMaxLength: Resume::NAME_MAX_LENGTH, slugMaxLength: Resume::SLUG_MAX_LENGTH, getStartedURL: get_started_url, tabletView: @tablet_view }, { prerender: true })
+    ~ react_component('JibJob.ResumeForm', { resume: JSON.parse(@resume_data), themes: Themes.list, saveURL: user_resume_url(current_user, @resume), saveMethod: 'PUT', sampleURL: asset_url('sample-resume.txt'), nameMaxLength: Resume::NAME_MAX_LENGTH, slugMaxLength: Resume::SLUG_MAX_LENGTH, getStartedURL: get_started_url, tabletView: @tablet_view }, { prerender: true })

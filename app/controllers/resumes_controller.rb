@@ -4,7 +4,6 @@ class ResumesController < ApplicationController
   before_filter :require_current_user
   before_filter :require_resume_access
   before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
-  before_filter :set_editor_mode, only: [:new, :edit, :create, :update]
 
   include HasUserResume
 
@@ -117,19 +116,6 @@ class ResumesController < ApplicationController
     if params[:user_id].to_i != current_user.id
       error401
     end
-  end
-
-  def set_editor_mode
-    browser = Browser.new(ua: request.user_agent)
-    if browser.mobile?
-      @use_plain_editor = true
-    end
-
-    if browser.tablet?
-      @tablet_view = true
-    end
-
-    @use_plain_editor = always_use_plain_editor_for_now = true
   end
 
   def list_cache_identifier
