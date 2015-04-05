@@ -18,7 +18,7 @@ RSpec.describe "Resumes", type: :request, js: true do
 
     fill_in "Resume Label", with: "A New Resume"
 
-    expect(page).to have_field("Link name", with: "a-new-resume")
+    expect(page).to have_field("Link Name", with: "a-new-resume")
 
     fill_in "Access Code", with: "SESAME"
     click_on "Load Example"
@@ -44,9 +44,9 @@ RSpec.describe "Resumes", type: :request, js: true do
     expect(page).to have_css(".resume-form")
 
     fill_in "Resume Label", with: "Modified Resume"
-    expect(page).to have_field("Link name", with: "modified-resume")
+    expect(page).to have_field("Link Name", with: "modified-resume")
 
-    fill_in "Link name", with: "test-resume-2"
+    fill_in "Link Name", with: "test-resume-2"
     check "Publish now"
     fill_in "Access Code", with: "DOODLES"
 
