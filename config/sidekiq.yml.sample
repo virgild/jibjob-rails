@@ -3,5 +3,5 @@
 :pidfile: tmp/pids/sidekiq.pid
 :queues:
   - [default, 2]
-  - mailer
+  - mailers
   - logging
