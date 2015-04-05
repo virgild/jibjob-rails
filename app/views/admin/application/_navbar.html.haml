@@ -1,4 +1,4 @@
-.topnav.nav.navbar.navbar-inverse
+.topnav.nav.navbar.navbar-inverse.navbar-fixed-top
   .container-fluid
     .navbar-header
       %button.btn.btn-sm.navbar-toggle.collapsed{'data-toggle': 'collapse', 'data-target': '.navbar-collapse'}
@@ -6,17 +6,6 @@
         %span.icon-bar
         %span.icon-bar
       = link_to "jibjob", root_url, class: "navbar-brand navlogo"
-
-    %ul.nav.navbar-nav.navbar-collapse.collapse
-      %li
-        = link_to get_started_url do
-          = t(:get_started)
-      %li
-        = link_to about_url do
-          = t(:about)
-      %li
-        = link_to faq_url do
-          = t(:faq)
 
     %ul.nav.navbar-nav.navbar-right.navbar-collapse.collapse
       %li
@@ -31,3 +20,14 @@
         = link_to user_url(current_user) do
           .span.glyphicon.glyphicon-user
           = t(:my_account)
+
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav.side-nav
+        %li
+          = link_to admin_dashboards_path do
+            %span.icon.fa.fa-dashboard
+            Dashboards
+        %li
+          = link_to admin_users_path do
+            %span.icon.fa.fa-users
+            Users

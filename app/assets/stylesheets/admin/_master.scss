@@ -1,6 +1,11 @@
 .admin-page {
   min-height: 500px;
-  background-color: #fff;
+  background-color: #222;
+  padding-top: 32px;
+
+  @media screen and (min-width: $screen-sm) {
+    padding-left: 225px;
+  }
 }
 
 .admin-sidebar {
@@ -12,5 +17,46 @@
 
 .admin-content {
   background-color: rgba(#fff, 1.0);
-  margin-top: 10px;
+}
+
+/* Sidebar */
+@media (min-width: $screen-sm) {
+  .side-nav {
+    position: fixed;
+    top: 32px;
+    left: 225px;
+    width: 225px;
+    margin-left: -225px;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    background-color: #222;
+  }
+
+  .side-nav>li>a {
+    width: 225px;
+  }
+
+  .side-nav li a:hover,
+  .side-nav li a:focus {
+    outline: none;
+    background-color: #000 !important;
+    color: #fff !important;
+    transition: background-color 0.2s, color 0.5s;
+  }
+}
+
+.side-nav>li>ul {
+  padding: 0;
+}
+
+.side-nav>li>ul>li>a {
+  display: block;
+  padding: 10px 15px 10px 38px;
+  text-decoration: none;
+  color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+  color: #fff;
 }

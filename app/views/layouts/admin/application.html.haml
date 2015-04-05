@@ -21,13 +21,10 @@
     = render partial: "navbar"
     = render partial: "notification"
     .admin-page
-      .container-fluid
-        .row
-          .col-sm-2
-            = render partial: "sidebar"
-          .col-sm-10
-            .admin-content
-              = yield
+      .admin-content
+        .container-fluid
+          = yield
+
 
     = render partial: "footer"
 
