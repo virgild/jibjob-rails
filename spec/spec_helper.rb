@@ -18,7 +18,10 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
+
+if ENV['TRAVIS_BUILD_ID']
+  CodeClimate::TestReporter.start
+end
 
 Dir["./spec/support/**/*.rb"].each { |f| require f }
 

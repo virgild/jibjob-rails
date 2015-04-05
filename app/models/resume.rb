@@ -72,11 +72,14 @@ class Resume < ActiveRecord::Base
       thumb: ["500", :jpg]
     }, convert_options: {
       thumb: "-background white -alpha remove"
-    }
+    }, default_url: "/static/:attachment/:style/processing.jpg"
   }.merge(Rails.configuration.x.paperclip.storage_options)
 
   validates_attachment :pdf, content_type: { content_type: ["application/pdf"] }
 
+  #*************************
+  # CALLBACKS
+  #*************************
   after_initialize :set_zero_page_count
 
   before_validation :fill_guid, on: :create
@@ -85,15 +88,14 @@ class Resume < ActiveRecord::Base
   before_validation :ensure_content_footer
 
   before_save :increment_edition, on: [:create, :update], if: Proc.new { |resume| resume.content_changed? }
-  before_create :update_pdf_attachment
-
-  after_commit :queue_pdf_refresh, on: :update, if: Proc.new { |resume| !resume.pdf_file_synced? || resume.unmark_for_theme_update_refresh }
 
   after_update :did_publish, if: Proc.new { |resume| resume.is_published_changed? && resume.is_published && !resume.is_published_was }
   after_update :did_unpublish, if: Proc.new { |resume| resume.is_published_changed? && !resume.is_published && resume.is_published_was }
   after_update :mark_for_theme_update_refresh, if: -> (resume) { resume.theme != resume.theme_was }
 
+  after_commit :queue_pdf_refresh, on: [:create, :update], if: Proc.new { |resume| !resume.pdf_file_synced? || resume.unmark_for_theme_update_refresh }
   after_commit :delete_stored_stats, on: :destroy
+  #*************************
 
   def self.human_attribute_name(attr, options = {})
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super

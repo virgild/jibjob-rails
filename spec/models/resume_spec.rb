@@ -107,12 +107,12 @@ RSpec.describe Resume, type: :model do
       expect(resume.edition).to eq 1
     end
 
-    it "has pdf_edition 1" do
-      expect(resume.pdf_edition).to eq 1
+    it "has pdf_edition 0" do
+      expect(resume.pdf_edition).to eq 0
     end
 
-    it "has pdf_pages > 0" do
-      expect(resume.pdf_pages).to be > 0
+    it "has pdf_pages = 0" do
+      expect(resume.pdf_pages).to eq 0
     end
 
     it "generates guid" do
@@ -123,10 +123,6 @@ RSpec.describe Resume, type: :model do
       expect(resume.user).to eq(user)
     end
 
-    it "creates pdf file" do
-      expect(File.exists?(resume.pdf.path)).to eq true
-    end
-
     it "is not published" do
       expect(resume.is_published).to eq false
     end
@@ -135,8 +131,8 @@ RSpec.describe Resume, type: :model do
       expect(resume.status).to eq 0
     end
 
-    it "pdf_file_synced? is true" do
-      expect(resume.pdf_file_synced?).to eq true
+    it "pdf_file_synced? is false" do
+      expect(resume.pdf_file_synced?).to eq false
     end
   end
 
