@@ -23,7 +23,7 @@ set :format, :pretty
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml', 'config/redis.yml', 'config/mailer.yml')
+set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml', 'config/redis.yml', 'config/mailer.yml', 'config/sidekiq.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/assets', 'node_modules')
@@ -42,7 +42,7 @@ set :newrelic_license_key, ENV['NEWRELIC_DEPLOY_LICENSE_KEY']
 # set :keep_releases, 5
 
 set :sidekiq_role, :worker
-set :sidekiq_queue, ['default', 'mailers', 'logging']
+set :sidekiq_config, -> { File.join(shared_path, 'config', 'sidekiq.yml') }
 
 namespace :deploy do
   after :restart, :clear_cache do

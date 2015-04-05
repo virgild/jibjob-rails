@@ -40,7 +40,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Set dev prefix for ActiveJob queues
-  config.active_job.queue_name_prefix = 'jibjob'
+  # config.active_job.queue_name_prefix = ''
 
   # Quiet assets logging
   config.quiet_assets = true
