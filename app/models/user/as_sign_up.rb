@@ -46,6 +46,6 @@ class User::AsSignUp < ActiveType::Record[User]
   end
 
   def send_signup_confirmation_email
-    AccountsMailer.signup_confirmation(self).deliver_later
+    AccountsMailer.signup_confirmation(self).deliver_later(wait: 10.minutes)
   end
 end
