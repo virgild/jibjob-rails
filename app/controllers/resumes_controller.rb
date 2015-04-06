@@ -3,7 +3,7 @@ class ResumesController < ApplicationController
 
   before_filter :require_current_user
   before_filter :require_resume_access
-  before_filter :load_resume, only: [:show, :pdf_status, :edit, :update, :delete, :destroy, :publish, :unpublish]
+  before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
 
   include HasUserResume
 
@@ -53,13 +53,10 @@ class ResumesController < ApplicationController
   end
 
   def pdf_status
-    result = {
-      pdf_file_synced: @resume.pdf_file_synced?,
-      thumbnail: @resume.pdf.url(:thumb)
-    }
+    resumes = ActiveModel::ArraySerializer.new(resume_scope.find(params[:ids]), each_serializer: Resume::PDFStatusSerializer)
 
     respond_to do |format|
-      format.json { render json: result }
+      format.json { render json: resumes }
     end
   end
 

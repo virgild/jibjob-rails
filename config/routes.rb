@@ -26,11 +26,13 @@ Rails.application.routes.draw do
         get 'delete'
       end
       resources :resumes do
+        collection do
+          get 'pdf_status'
+        end
         member do
           get 'delete'
           get 'stats' => 'resume_stats#index'
           get 'stats/:year/:month/:day/:hour' => 'resume_stats#hour_views', as: 'hour_views'
-          get 'pdf_status' => 'resumes#pdf_status'
         end
       end
     end
