@@ -8,9 +8,7 @@
 //= require jstimezonedetect/jstz
 //= require rails-timezone/index
 //= require_self
-//= require components/publication_package_panel
-//= require components/publication_resume
-//= require components/publication_page
+//= require_tree ./components/publication
 //= require signup
 
 var JibJob = {

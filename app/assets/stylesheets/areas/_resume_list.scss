@@ -137,14 +137,14 @@
     }
   }
 
-  .spinner-container {
+  .pending-indicator {
     width: 182px;
     height: 232px;
     background-color: #eee;
 
     .icon {
       padding: 100px 0px;
-      color: #000;
+      color: darken(#eee, 15%);
       font-size: 32px;
     }
   }

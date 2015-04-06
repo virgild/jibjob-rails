@@ -3,7 +3,7 @@ class ResumesController < ApplicationController
 
   before_filter :require_current_user
   before_filter :require_resume_access
-  before_filter :load_resume, only: [:show, :edit, :update, :delete, :destroy, :publish, :unpublish]
+  before_filter :load_resume, only: [:show, :pdf_status, :edit, :update, :delete, :destroy, :publish, :unpublish]
 
   include HasUserResume
 
@@ -49,6 +49,17 @@ class ResumesController < ApplicationController
       format.text { render plain: @resume.generate_plain_text }
       format.json { render json: @resume.generate_json_text }
       format.xml { render layout: false }
+    end
+  end
+
+  def pdf_status
+    result = {
+      pdf_file_synced: @resume.pdf_file_synced?,
+      thumbnail: @resume.pdf.url(:thumb)
+    }
+
+    respond_to do |format|
+      format.json { render json: result }
     end
   end
 
