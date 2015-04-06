@@ -1,0 +1,14 @@
+- if current_user.oauth_signup?
+  - case current_user.auth_provider
+  - when 'facebook'
+    %span.icon.fa.fa-facebook-official
+    = current_user.auth_name
+  - when 'twitter'
+    %span.icon.fa.fa-twitter-square
+    = current_user.auth_name
+  - when 'google'
+    %span.icon.fa.fa-google-plus-square
+    = current_user.auth_name
+- else
+  .span.glyphicon.glyphicon-user
+  = t(:my_account)

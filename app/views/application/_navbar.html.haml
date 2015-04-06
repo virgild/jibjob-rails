@@ -36,8 +36,7 @@
             = t(:my_resumes)
         %li
           = link_to user_url(current_user) do
-            .span.glyphicon.glyphicon-user
-            = t(:my_account)
+            = render partial: "navbar_account_item"
       - else
         %li
           = link_to login_url do

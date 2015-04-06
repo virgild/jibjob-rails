@@ -9,15 +9,15 @@
             - if @user.oauth_signup?
               - if @user.auth_provider == 'facebook'
                 %h3
-                  %i.fa.fa-facebook
+                  %i.fa.fa-facebook-official
                   = @user.auth_name
               - elsif @user.auth_provider == 'twitter'
                 %h3
-                  %i.fa.fa-twitter
+                  %i.fa.fa-twitter-square
                   = @user.auth_name
               - elsif @user.auth_provider == 'google'
                 %h3
-                  %i.fa.fa-google
+                  %i.fa.fa-google-plus-square
                   = @user.auth_name
 
             - if @user.oauth_signup?
