@@ -30,7 +30,7 @@ module JibJob
     config.active_job.queue_name_delimiter = '.'
 
     # Set cache store
-    config.cache_store = :mem_cache_store
+    config.cache_store = :dalli_store
 
     # Add bower components path
     root.join('vendor', 'assets', 'components').to_s.tap do |bower_path|
