@@ -1,5 +1,10 @@
 #cloud-config
 
+# Note: This is for the development environment only.
+
+# TODO:
+# - Query for 192.168.113.105 (which is our VM private IP address) instead of hard coded
+
 hostname: jibjob.dev
 coreos:
   etcd:
@@ -7,7 +12,6 @@ coreos:
     peer-addr: $public_ipv4:7001
   fleet:
     public-ip: $public_ipv4
-    metadata: region=localdev
   flannel:
     interface: $public_ipv4
   units:
@@ -29,11 +33,128 @@ coreos:
 
         [Install]
         WantedBy=sockets.target
+    - name: dev_data_dir.service
+      command: start
+      content: |
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStart=/usr/bin/bash -c "/bin/mkdir -p /home/core/dev_data/{gems,postgres,redis,paperclip}"
+        ExecStart=/bin/chown -R core:core /home/core/dev_data
+        ExecStop=/usr/bin/rm -rf /home/core/dev_data
+    - name: gems_container.service
+      command: start
+      content: |
+        [Unit]
+        Description=Ruby gems bundle container
+        Requires=docker.service dev_data_dir.service
+        After=docker.service dev_data_dir.service
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStartPre=/usr/bin/docker pull jibjob/base
+        ExecStart=-/usr/bin/docker run --name=gems_container -v /home/core/dev_data/gems:/vendor/gems jibjob/base echo "Gems"
+        ExecStop=-/usr/bin/docker rm gems_container
+    - name: rails_root_container.service
+      command: start
+      content: |
+        [Unit]
+        Description=Rails root container
+        Requires=docker.service
+        After=docker.service
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStartPre=/usr/bin/docker pull jibjob/base
+        ExecStart=-/usr/bin/docker run --name=rails_root_container -v /home/core/share:/app jibjob/base echo "Rails root"
+        ExecStop=-/usr/bin/docker rm rails_root_container
+    - name: app_data_container.service
+      command: start
+      content: |
+        [Unit]
+        Description=App data volumes container
+        Requires=docker.service dev_data_dir.service
+        After=docker.service dev_data_dir.service
+
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStartPre=/usr/bin/docker pull jibjob/base
+        ExecStart=-/usr/bin/docker run --name=app_data_container -v /home/core/dev_data/postgres:/var/lib/postgresql/data -v /home/core/dev_data/redis:/data -v /home/core/dev_data/paperclip:/app/public/system jibjob/base echo "App data"
+        ExecStop=-/usr/bin/docker rm app_data_container
+    - name: consul.service
+      content: |
+        [Unit]
+        Description=Consul Service
+        Requires=docker.service
+        After=docker.service
+
+        [Service]
+        ExecStartPre=/usr/bin/docker pull progrium/consul
+        ExecStart=/usr/bin/docker run --name=consul -p 8400:8400 -p 8500:8500 -p 53:53/udp -h consul progrium/consul -server -bootstrap-expect 1 -advertise 192.168.113.105
+        ExecStop=/usr/bin/docker stop consul
+        ExecStopPost=/usr/bin/docker rm consul
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: registrator.service
+      content: |
+        [Unit]
+        Description=Registrator Service
+        Requires=docker.service consul.service
+        After=docker.service consul.service
+
+        [Service]
+        ExecStartPre=/usr/bin/docker pull gliderlabs/registrator
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name=registrator -v /var/run/docker.sock:/tmp/docker.sock -h registrator gliderlabs/registrator -ip 192.168.113.105 consul://$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' consul):8500"
+        ExecStop=/usr/bin/docker stop registrator
+        ExecStopPost=/usr/bin/docker rm registrator
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: memcache.service
+      content: |
+        [Unit]
+        Description=Memcached Service
+        Requires=docker.service registrator.service
+        After=docker.service registrator.service
+
+        [Service]
+        ExecStartPre=/usr/bin/docker pull memcached
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name=memcache -p 11211 -e SERVICE_NAME=memcache --dns=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' consul) memcached"
+        ExecStop=/usr/bin/docker stop memcache
+        ExecStopPost=/usr/bin/docker rm memcache
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: redis.service
+      content: |
+        [Unit]
+        Description=Redis Service
+        Requires=docker.service registrator.service
+        After=docker.service registrator.service
+
+        [Service]
+        ExecStartPre=/usr/bin/docker pull redis:3.0.0
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name=redis -p 6379 -e SERVICE_NAME=redis --volumes-from=app_data_container --dns=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' consul) redis:3.0.0"
+        ExecStop=/usr/bin/docker stop redis
+        ExecStopPost=/usr/bin/docker rm redis
+    - name: postgres.service
+      content: |
+        [Unit]
+        Description=Postgres 9.4 Service
+        Requires=docker.service registrator.service
+        After=docker.service registrator.service
+
+        [Service]
+        ExecStartPre=/usr/bin/docker pull postgres:9.4.1
+        ExecStart=/usr/bin/bash -c "/usr/bin/docker run --name=postgres -p 5432 --volumes-from=app_data_container -e SERVICE_NAME=postgres -e POSTGRES_USER=jib_job_development -e POSTGRES_PASSWORD=jib_job_development --dns=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' consul) postgres:9.4.1"
+        ExecStop=/usr/bin/docker stop postgres
+        ExecStopPost=/usr/bin/docker rm postgres
 write_files:
   - path: /home/core/.bashrc
     content: |
       # Generated by cloudinit
       alias ll="ls -l"
-  - path: /home/core/app_data/
-    owner: core:core
-final_message: "Welcome to JibJob Development (elapsed $UPTIMEs)"
