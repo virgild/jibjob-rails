@@ -1,0 +1,11 @@
+[Unit]
+Description=Memcache Service
+
+[Service]
+ExecStartPre=/bin/docker pull memcached
+ExecStart=/usr/bin/bash -c "/bin/docker run --name=memcache memcached"
+ExecStop=/bin/docker stop memcache
+ExecStopPost=/bin/docker rm -v memcache
+
+[X-Fleet]
+Conflicts=memcache.service

@@ -2,30 +2,45 @@
 
 # Note: This is for the development environment only.
 
-# TODO:
-# - Query for 192.168.113.105 (which is our VM private IP address) instead of hard coded
-
 hostname: jibjob.dev
 coreos:
-  etcd:
+  etcd2:
     addr: $public_ipv4:4001
-    peer-addr: $private_ipv4:7001
+    peer-addr: $public_ipv4:7001
   fleet:
     public-ip: $public_ipv4
+    metadata: "box=maindev"
   flannel:
     interface: $public_ipv4
+  update:
+    reboot-strategy: off
   units:
     - name: flanneld.service
       drop-ins:
         - name: 50-network-config.conf
           content: |
+            [Unit]
+            Requires=etcd.service
+            After=etcd.service
+
             [Service]
             ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.8.0.0/24" }'
       command: start
     - name: etcd.service
       command: start
+      enable: true
+      drop-ins:
+        - name: 50-etcd-config.conf
+          content: |
+            [Install]
+            WantedBy=multi-user.target
     - name: fleet.service
       command: start
+      drop-ins:
+        - name: 50-fleet-config.conf
+          content: |
+            [Install]
+            WantedBy=multi-user.target
     - name: docker-tcp.socket
       command: start
       enable: true
