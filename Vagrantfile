@@ -5,7 +5,6 @@ Vagrant.configure(2) do |config|
   config.vm.define :coreos do |coreos|
     coreos.vm.box = "coreos-%s" % "stable"
     coreos.vm.box_url = "http://%s.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json" % "stable"
-    coreos.vm.network :public_network, ip: "10.0.1.208", bridge: "en0: Wi-Fi (AirPort)"
     coreos.vm.network :private_network, ip: "192.168.113.108"
     coreos.vm.synced_folder ".", "/home/core/share", id: "core", nfs: true, mount_options: ['nolock,vers=3,udp']
     coreos.ssh.insert_key = false
@@ -15,8 +14,6 @@ Vagrant.configure(2) do |config|
       vbox.gui = false
       vbox.memory = 2048
       vbox.cpus = 1
-      # Set NIC 2 (public network above) promiscuity to allow VMs
-      vbox.customize ["modifyvm", :id, "--nicpromisc2", "allow-all"]
       vbox.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
     end
 

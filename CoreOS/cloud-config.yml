@@ -4,28 +4,15 @@
 
 hostname: jibjob.dev
 coreos:
-  etcd2:
+  etcd:
     addr: $public_ipv4:4001
     peer-addr: $public_ipv4:7001
   fleet:
     public-ip: $public_ipv4
     metadata: "box=maindev"
-  flannel:
-    interface: $public_ipv4
   update:
     reboot-strategy: off
   units:
-    - name: flanneld.service
-      drop-ins:
-        - name: 50-network-config.conf
-          content: |
-            [Unit]
-            Requires=etcd.service
-            After=etcd.service
-
-            [Service]
-            ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.8.0.0/24" }'
-      command: start
     - name: etcd.service
       command: start
       enable: true
