@@ -1,3 +1,4 @@
+# JibJob Base App
 FROM jibjob/base-ruby
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
@@ -23,9 +24,6 @@ RUN cd /tmp && \
     DEBIAN_FRONTEND=noninteractive apt-get install -f && \
     rm /tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
 
-# App user
-RUN useradd -m jibjob
-
 # Provide /opt/fonts/local.conf
 # or Insert <dir>/opt/fonts</dir> to /etc/fonts/fonts.conf
 # mkdir /opt/fonts && chown -R jibjob /opt/fonts
@@ -35,13 +33,9 @@ RUN cd /etc/fonts && \
     mkdir /opt/fonts && \
     chown -R jibjob: /opt/fonts
 
-# Bundler path directory
-RUN mkdir -p /vendor/gems && \
-    chown -R jibjob: /vendor
-VOLUME /vendor/gems
-
-# Rails root mount
-RUN mkdir /app && \
+RUN mkdir -p /vendor/bundle && \
+    chown -R jibjob: /vendor && \
+    mkdir -p /app && \
     chown -R jibjob: /app
-VOLUME /app
-ENV APP_DIR /app
+
+VOLUME ["/app", "/app/public/system", "/vendor/bundle"]

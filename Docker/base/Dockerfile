@@ -1,6 +1,8 @@
 FROM ubuntu:14.04.2
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
+RUN useradd -m jibjob
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl && \
