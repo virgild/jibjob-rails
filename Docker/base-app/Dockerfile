@@ -26,11 +26,11 @@ RUN cd /tmp && \
 
 # Provide /opt/fonts/local.conf
 # or Insert <dir>/opt/fonts</dir> to /etc/fonts/fonts.conf
-# mkdir /opt/fonts && chown -R jibjob /opt/fonts
+# mkdir -p /opt/fonts/truetype && chown -R jibjob /opt/fonts
 RUN cd /etc/fonts && \
     cp fonts.conf local.conf && \
     sed -i 's/<dir>\/usr\/share\/fonts<\/dir>/<dir>\/usr\/share\/fonts<\/dir><dir>\/opt\/fonts<\/dir>/' local.conf && \
-    mkdir /opt/fonts && \
+    mkdir -p /opt/fonts/truetype && \
     chown -R jibjob: /opt/fonts
 
 RUN mkdir -p /vendor/bundle && \

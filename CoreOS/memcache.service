@@ -2,6 +2,8 @@
 Description=Memcache Service
 
 [Service]
+ExecStartPre=-/bin/docker kill memcache
+ExecStartPre=-/bin/docker rm -v memcache
 ExecStartPre=/bin/docker pull memcached
 ExecStart=/usr/bin/bash -c "/bin/docker run --name=memcache -p 11211:11211 -e SERVICE_NAME=memcache memcached"
 ExecStop=/bin/docker stop memcache

@@ -1,0 +1,8 @@
+[Unit]
+Description=Ruby gems container
+
+[Service]
+RemainAfterExit=yes
+ExecStartPre=/bin/docker pull jibjob/gems-container
+ExecStart=/bin/docker run --name gems-container -v /vendor/bundle jibjob/gems-container
+ExecStop=/bin/docker rm -v gems-container

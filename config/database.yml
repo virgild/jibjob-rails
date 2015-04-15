@@ -1,11 +1,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV['JIB_JOB_POSTGRES_HOST'] %>
-  port: <%= ENV['JIB_JOB_POSTGRES_PORT'] %>
-  username: <%= ENV['JIB_JOB_POSTGRES_USER'] %>
-  password: <%= ENV['JIB_JOB_POSTGRES_PASSWORD'] %>
-  database: <%= ENV['JIB_JOB_POSTGRES_DATABASE'] %>
+  host: <%= ENV['JIBJOB_POSTGRES_HOST'] %>
+  port: <%= ENV['JIBJOB_POSTGRES_PORT'] %>
+  username: <%= ENV['JIBJOB_POSTGRES_USER'] %>
+  password: <%= ENV['JIBJOB_POSTGRES_PASSWORD'] %>
+  database: <%= ENV['JIBJOB_POSTGRES_DATABASE'] %>
 
 development:
   <<: *default
