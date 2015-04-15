@@ -1,0 +1,9 @@
+[Unit]
+Description=Redis Service (Master)
+
+[Service]
+ExecStartPre=-/bin/docker kill redis-master
+ExecStartPre=-/bin/docker rm -v redis-master
+ExecStartPre=/bin/docker pull redis:3.0.0
+ExecStart=/bin/docker run --name=redis-master -p 6379:6739 -e SERVICE_NAME=redis-master redis:3.0.0
+ExecStop=/bin/bash -c "/bin/docker stop redis-master && /bin/docker rm -v redis-master"

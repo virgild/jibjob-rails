@@ -1,0 +1,10 @@
+[Unit]
+Description=Registrator Service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStartPre=-/bin/docker kill registrator
+ExecStartPre=-/bin/docker rm -v registrator
+ExecStartPre=-/bin/docker pull gliderlabs/registrator
+ExecStart=/bin/bash -c "/bin/docker run --name=registrator -v /var/run/docker.sock:/tmp/docker.sock -h $(hostname) gliderlabs/registrator etcd://${COREOS_PUBLIC_IPV4}:4001/jibjob/services"
+ExecStop=/bin/bash -c "/bin/docker stop registrator && /bin/docker rm -v registrator"

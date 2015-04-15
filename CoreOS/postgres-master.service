@@ -1,0 +1,10 @@
+[Unit]
+Description=Postgres Master
+
+[Service]
+ExecStartPre=-/bin/docker kill postgres-master
+ExecStartPre=-/bin/docker rm -v postgres-master
+ExecStartPre=/bin/docker pull postgres:9.4.1
+ExecStart=/bin/docker run --name=postgres-master -p 5432:5432 -e SERVICE_NAME=postgres postgres:9.4.1
+ExecStop=/bin/docker stop postgres-master
+ExecStopPost=/bin/docker rm -v postgres-master
