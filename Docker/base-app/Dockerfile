@@ -1,10 +1,10 @@
 # JibJob Base App
-FROM jibjob/base-ruby
+FROM jibjob/base-ruby:1.0.0
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
 # Install app gem requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libpq-dev g++ imagemagick pdftk xfonts-base xfonts-75dpi && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libpq-dev g++ imagemagick pdftk xfonts-base xfonts-75dpi locales && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -18,11 +18,11 @@ RUN locale-gen en_US.UTF-8 && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install wkhtmltopdf
-COPY files/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb /tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+COPY files/wkhtmltox-0.12.2.1_linux-wheezy-amd64.deb /tmp/wkhtmltox-0.12.2.1_linux-wheezy-amd64.deb
 RUN cd /tmp && \
-    dpkg -i ./wkhtmltox-0.12.2.1_linux-trusty-amd64.deb && \
+    dpkg -i ./wkhtmltox-0.12.2.1_linux-wheezy-amd64.deb && \
     DEBIAN_FRONTEND=noninteractive apt-get install -f && \
-    rm /tmp/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb
+    rm /tmp/wkhtmltox-0.12.2.1_linux-wheezy-amd64.deb
 
 # Provide /opt/fonts/local.conf
 # or Insert <dir>/opt/fonts</dir> to /etc/fonts/fonts.conf

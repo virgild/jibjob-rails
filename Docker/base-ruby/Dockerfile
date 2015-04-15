@@ -6,10 +6,7 @@ ENV RUBY_DIR /opt/ruby/${RUBY_VERSION}
 ENV RUBY_PATH ${RUBY_DIR}/bin
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common && \
-    DEBIAN_FRONTEND=noninteractive add-apt-repository -y ppa:git-core/ppa && \
-    DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y git libssl-dev libncurses-dev gcc make libffi-dev libreadline-dev && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y git-core libssl-dev libncurses-dev gcc make libffi-dev libreadline-dev && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
