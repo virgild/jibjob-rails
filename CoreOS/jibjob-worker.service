@@ -1,0 +1,18 @@
+[Unit]
+Description=JibJob default worker service
+Requires=gems-container.service
+Requires=postgres-master.service
+Requires=redis-master.service
+Requires=resume-file-container.service
+
+[Service]
+ExecStartPre=-/bin/docker kill jibjob-worker
+ExecStart=/bin/docker run --name jibjob-worker \
+  --volumes-from gems-container \
+  -v /home/core/share:/app \
+  --volumes-from resume-file-container \
+  jibjob/app-worker \
+  -c 10 \
+  --queue default \
+  --queue mailers \
+  --queue logging

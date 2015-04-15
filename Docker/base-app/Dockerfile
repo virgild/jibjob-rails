@@ -33,9 +33,9 @@ RUN cd /etc/fonts && \
     mkdir -p /opt/fonts/truetype && \
     chown -R jibjob: /opt/fonts
 
-RUN mkdir -p /vendor/bundle && \
-    chown -R jibjob: /vendor && \
-    mkdir -p /app && \
-    chown -R jibjob: /app
+# RUN mkdir -p /vendor/bundle && \
+#     chown -R jibjob: /vendor && \
+#     mkdir -p /app && \
+#     chown -R jibjob: /app
 
-VOLUME ["/app", "/app/public/system", "/vendor/bundle"]
+# VOLUME ["/app", "/app/public/system", "/vendor/bundle"]
