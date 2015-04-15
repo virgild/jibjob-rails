@@ -1,9 +1,12 @@
 [Unit]
 Description=Redis Service (Master)
+Requires=redis-data-container.service
+After=redis-data-container.service
 
 [Service]
 ExecStartPre=-/bin/docker kill redis-master
-ExecStartPre=-/bin/docker rm -v redis-master
+ExecStartPre=-/bin/docker rm redis-master
 ExecStartPre=/bin/docker pull redis:3.0.0
-ExecStart=/bin/docker run --name=redis-master -p 6379:6379 -v /data -e SERVICE_NAME=redis-master redis:3.0.0
-ExecStop=/bin/bash -c "/bin/docker stop redis-master && /bin/docker rm -v redis-master"
+ExecStart=/bin/docker run --name=redis-master -p 6379:6379 --volumes-from redis-data-container redis:3.0.0
+ExecStop=/bin/docker stop redis-master
+ExecStopPost=/bin/docker rm redis-master
