@@ -32,10 +32,3 @@ RUN cd /etc/fonts && \
     sed -i 's/<dir>\/usr\/share\/fonts<\/dir>/<dir>\/usr\/share\/fonts<\/dir><dir>\/opt\/fonts<\/dir>/' local.conf && \
     mkdir -p /opt/fonts/truetype && \
     chown -R jibjob: /opt/fonts
-
-# RUN mkdir -p /vendor/bundle && \
-#     chown -R jibjob: /vendor && \
-#     mkdir -p /app && \
-#     chown -R jibjob: /app
-
-# VOLUME ["/app", "/app/public/system", "/vendor/bundle"]

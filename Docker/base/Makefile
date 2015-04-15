@@ -1,5 +1,12 @@
+TAG_VERSION=`cat ./Version`
+
 .PHONY: build
 build:
-	docker build -t="jibjob/base" .
+	@echo Building jibjob/base
+	@docker build -t="jibjob/base" .
 tag:
-	docker tag -f jibjob/base jibjob/base:1.0.0
+	@echo Tagging jibjob/base:$(TAG_VERSION)
+	@docker tag -f jibjob/base jibjob/base:$(TAG_VERSION)
+push:
+	@echo Pushing jibjob/base:$(TAG_VERSION)
+	@docker push jibjob/base:$(TAG_VERSION)

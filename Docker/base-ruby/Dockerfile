@@ -1,7 +1,7 @@
 FROM jibjob/base:1.0.0
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
-ENV RUBY_VERSION 2.2.1
+ENV RUBY_VERSION 2.2.2
 ENV RUBY_DIR /opt/ruby/${RUBY_VERSION}
 ENV RUBY_PATH ${RUBY_DIR}/bin
 
