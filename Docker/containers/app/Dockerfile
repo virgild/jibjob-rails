@@ -1,4 +1,4 @@
-# JibJob Base App
+# JibJob App Runner
 FROM jibjob/base-ruby:1.0.0
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 

@@ -1,5 +1,5 @@
 # JibJob App Developer Console
-FROM jibjob/base-app:1.0.0
+FROM jibjob/app:1.0.0
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
