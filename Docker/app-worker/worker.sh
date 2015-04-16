@@ -8,4 +8,4 @@ gosu jibjob /usr/bin/fc-cache -f
 # Run worker
 export PATH=/opt/ruby/2.2.1/bin:${PATH}
 cd /app
-exec gosu jibjob bin/bundle exec sidekiq $@
+exec gosu jibjob bin/sidekiq $@

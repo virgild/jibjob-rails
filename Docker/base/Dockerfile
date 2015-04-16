@@ -1,11 +1,11 @@
-FROM debian:7.8
+FROM ubuntu:14.10
 MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
 RUN useradd -m jibjob
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils wget curl && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
