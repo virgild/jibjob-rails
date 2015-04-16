@@ -4,7 +4,7 @@ MAINTAINER Virgil Dimaguila "virgild@gmail.com"
 
 # Install app gem requirements
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y libpq-dev g++ imagemagick pdftk xfonts-base xfonts-75dpi postgresql-client-9.4 && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y libpq-dev g++ imagemagick pdftk xfonts-base xfonts-75dpi libcurl4-openssl-dev postgresql-client-9.4 && \
     DEBIAN_FRONTEND=noninteractive apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -23,6 +23,11 @@ RUN cd /etc/fonts && \
     sed -i 's/<dir>\/usr\/share\/fonts<\/dir>/<dir>\/usr\/share\/fonts<\/dir><dir>\/opt\/fonts<\/dir>/' local.conf && \
     mkdir -p /opt/fonts/truetype && \
     chown -R jibjob: /opt/fonts
+
+# Install Passenger
+RUN RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH gem install passenger --no-rdoc --no-ri && \
+    RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH passenger-install-nginx-module --auto --prefix=/opt/nginx --auto-download --languages ruby
+COPY nginx.conf /opt/nginx/conf/nginx.conf
 
 COPY initializer.sh /usr/local/bin/initializer.sh
 RUN chmod +x /usr/local/bin/initializer.sh

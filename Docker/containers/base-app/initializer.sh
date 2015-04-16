@@ -6,7 +6,7 @@ mode=${MODE:-console}
 RAILS_ENV=${RAILS_ENV:-development}
 HAS_APP=0
 
-# Initialize app directory
+# Check app directory
 if [[ -d /app ]]; then
   if [[ -e /app/bin/rails ]]; then
     HAS_APP=1
@@ -47,7 +47,11 @@ if [[ $HAS_APP == "1" ]]; then
     echo "WARNING: /app/public/system is not mounted."
   else
     if [[ `stat -f -L -c %T /app/public/system` == "nfs" ]]; then
+      echo
+      echo "***********************************************"
       echo "WARNING: /app/public/system is an NFS directory"
+      echo "***********************************************"
+      echo
     else
       chown -R jibjob:jibjob /app/public/system
     fi
@@ -61,7 +65,13 @@ if [[ $HAS_APP == "1" ]]; then
     echo "Starting server..."
   elif [[ $mode == "worker" ]]; then
     echo "Starting workers..."
-    echo "Worker: $@"
+    cd /app
+    exec gosu jibjob bin/sidekiq "$@"
+  elif [[ $mode == "rails" ]]; then
+    cd /app
+    exec gosu jibjob bin/rails "$@"
+  elif [[ $mode == "su" ]]; then
+    bash -l
   else
     echo "Unknown MODE...doing nothing."
     exit 1
