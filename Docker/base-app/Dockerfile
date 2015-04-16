@@ -24,5 +24,14 @@ RUN cd /etc/fonts && \
     mkdir -p /opt/fonts/truetype && \
     chown -R jibjob: /opt/fonts
 
-# No given entrypoint.
-# Provide your own entrypoint here:
+RUN mkdir -p /vendor/bundle && \
+    chown -R jibjob:jibjob /vendor
+VOLUME "/vendor/bundle"
+
+RUN mkdir /app && \
+    chown -R jibjob:jibjob /app
+VOLUME "/app"
+
+COPY initializer.sh /usr/local/bin/initializer.sh
+RUN chmod +x /usr/local/bin/initializer.sh
+ENTRYPOINT ["/usr/local/bin/initializer.sh"]

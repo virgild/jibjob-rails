@@ -28,8 +28,3 @@ COPY tmux.conf /root/.tmux.conf
 COPY jibjob_home /home/jibjob/
 COPY tmux.conf /home/jibjob/.tmux
 RUN chown -R jibjob:jibjob /home/jibjob
-
-# Entry script
-COPY entry.sh /usr/local/bin/entry.sh
-RUN chmod +x /usr/local/bin/entry.sh
-ENTRYPOINT ["/usr/local/bin/entry.sh"]
