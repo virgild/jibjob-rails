@@ -4,8 +4,9 @@ set -e
 export PATH=${RUBY_PATH}:${PATH}
 export RAILS_ENV=${RAILS_ENV:-development}
 
-mode=${MODE:-none}
 HAS_APP=0
+PROGRAM=$1
+PROGRAM_ARGS=${*:2:500}
 
 function coloredEcho() {
   local exp=$1;
@@ -91,24 +92,27 @@ erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
 coloredEcho "Written config to /opt/ntinx/conf/nginx.conf" green
 
 # Invoke mode program
-case $mode in
+echo
+case $PROGRAM in
   console)
-    coloredEcho "Starting jibjob shell..." cyan
+    coloredEcho "Starting jibjob shell..." green
     exec gosu jibjob /bin/bash --login
     ;;
   server)
     prepare_fonts
-    coloredEcho "Starting nginx..." cyan
+    echo
+    coloredEcho "Starting nginx..." green
     exec /opt/nginx/sbin/nginx
     ;;
   worker)
     prepare_fonts
-    coloredEcho "Running sidekiq..." cyan
+    echo
+    coloredEcho "Running sidekiq..." green
     cd /app
-    exec gosu jibjob bin/sidekiq "$@"
+    exec gosu jibjob bin/sidekiq ${PROGRAM_ARGS}
     ;;
   root)
-    coloredEcho "Starting root shell..." cyan
+    coloredEcho "Starting root shell..." green
     exec bash -l
     ;;
   *)
