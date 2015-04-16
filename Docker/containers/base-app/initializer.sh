@@ -1,11 +1,15 @@
 #!/bin/bash
 
+export PATH=${RUBY_PATH}:${PATH}
+
 mode=${MODE:-console}
+RAILS_ENV=${RAILS_ENV:-development}
+HAS_APP=0
 
 # Initialize app directory
 if [[ -d /app ]]; then
   if [[ -e /app/bin/rails ]]; then
-    export HAS_APP=1
+    HAS_APP=1
     echo "Found Rails app in /app"
   else
     echo "Cannot find Rails app in /app"
@@ -14,16 +18,20 @@ else
   echo "Cannot find /app"
 fi
 
-# Initialize fonts
+# Prepare app
 if [[ $HAS_APP == "1" ]]; then
+  # Initialize fonts
   echo "Copy fonts from assets and refreshing font cache..."
   cp -R /app/app/assets/fonts/print/* /opt/fonts/truetype/
   fc-cache -f
-fi
 
-# Initialize gems
-if [[ $HAS_APP == "1" ]]; then
-  export PATH=${RUBY_PATH}:${PATH}
+  # Prepare gems directory
+  if [[ ! -d /vendor/bundle ]]; then
+    mkdir -p /vendor/bundle
+  fi
+  chown -R jibjob:jibjob /vendor
+
+  # Run bundler
   if [[ $SKIP_BUNDLER == "1" ]]; then
     echo "(Skipping bundler...)"
   else
@@ -33,28 +41,33 @@ if [[ $HAS_APP == "1" ]]; then
     gosu jibjob bundle install --path=/vendor/bundle
     gosu jibjob rm -f /vendor/BUNDLER_RUNNING
   fi
-fi
 
-if [[ $mode == "console" ]]; then
-  echo "Entering jibjob console..."
-  exec gosu jibjob /bin/bash --login
-elif [[ $mode == "server" ]]; then
-  echo "Starting server..."
-  if [[ $HAS_APP == "1" ]]; then
-    echo "server"
+  # Prepare attachments (Rails public/system) directory
+  if [[ ! -d /app/public/system ]]; then
+    echo "WARNING: /app/public/system is not mounted."
   else
-    echo "No Rails app found. Cannot start server."
-    exit 1
+    if [[ `stat -f -L -c %T /app/public/system` == "nfs" ]]; then
+      echo "WARNING: /app/public/system is an NFS directory"
+    else
+      chown -R jibjob:jibjob /app/public/system
+    fi
   fi
-elif [[ $mode == "worker" ]]; then
-  echo "Starting workers..."
-  if [[ $HAS_APP == "1" ]]; then
-    echo "worker"
+
+  # Invoke mode program
+  if [[ $mode == "console" ]]; then
+    echo "Entering jibjob console..."
+    exec gosu jibjob /bin/bash --login
+  elif [[ $mode == "server" ]]; then
+    echo "Starting server..."
+  elif [[ $mode == "worker" ]]; then
+    echo "Starting workers..."
+    echo "Worker: $@"
   else
-    echo "No Rails app found. Cannot start workers."
+    echo "Unknown MODE...doing nothing."
     exit 1
   fi
 else
-  echo "Unknown MODE...doing nothing."
-  exit 1
+  echo "No Rails app found. Reverting to console."
+  echo "Entering jibjob console..."
+  exec gosu jibjob /bin/bash --login
 fi
