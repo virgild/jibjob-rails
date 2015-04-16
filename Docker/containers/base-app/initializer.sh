@@ -1,9 +1,9 @@
 #!/bin/bash
 
 export PATH=${RUBY_PATH}:${PATH}
+export RAILS_ENV=${RAILS_ENV:-development}
 
 mode=${MODE:-console}
-RAILS_ENV=${RAILS_ENV:-development}
 HAS_APP=0
 
 # Check app directory
@@ -21,7 +21,7 @@ fi
 # Prepare app
 if [[ $HAS_APP == "1" ]]; then
   # Initialize fonts
-  echo "Copy fonts from assets and refreshing font cache..."
+  echo "Copying fonts from assets and refreshing font cache..."
   cp -R /app/app/assets/fonts/print/* /opt/fonts/truetype/
   fc-cache -f
 
@@ -57,12 +57,17 @@ if [[ $HAS_APP == "1" ]]; then
     fi
   fi
 
+  # Configure nginx
+  echo "Configuring nginx with RAILS_ENV=${RAILS_ENV}..."
+  erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
+
   # Invoke mode program
   if [[ $mode == "console" ]]; then
     echo "Entering jibjob console..."
     exec gosu jibjob /bin/bash --login
   elif [[ $mode == "server" ]]; then
     echo "Starting server..."
+    exec /opt/nginx/sbin/nginx
   elif [[ $mode == "worker" ]]; then
     echo "Starting workers..."
     cd /app

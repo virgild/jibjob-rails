@@ -1,6 +1,6 @@
 daemon off;
 user  jibjob;
-worker_processes  1;
+worker_processes 1;
 
 #error_log  logs/error.log;
 #error_log  logs/error.log  notice;
@@ -25,10 +25,13 @@ http {
   gzip on;
 
   server {
-    listen 80;
+    listen 8080;
     server_name _;
     passenger_enabled on;
-    passenger_app_env development;
+    passenger_app_env <%= ENV['RAILS_ENV'] %>;
     root /app/public;
+
+    <% if ENV['RAILS_ENV'] != 'development' %>
+    <% end %>
   }
 }
