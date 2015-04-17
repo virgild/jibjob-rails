@@ -21,7 +21,26 @@ Vagrant.configure(2) do |config|
       coreos.vbguest.auto_update = false
     end
 
-    config.vm.provision :file, source: "CoreOS/cloud-config.yml", destination: "/tmp/vagrantfile-user-data"
-    config.vm.provision :shell, inline: "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", privileged: true
+    coreos.vm.provision :file, source: "CoreOS/cloud-config.yml", destination: "/tmp/vagrantfile-user-data"
+    coreos.vm.provision :shell, inline: "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", privileged: true
+  end
+
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.vm.box = "ubuntu"
+    ubuntu.vm.network :private_network, ip: "192.168.113.109"
+    ubuntu.vm.synced_folder ".", "/vagrant_data", id: "vagrant_data", nfs: true, mount_options: ['nolock,vers=3,udp']
+    ubuntu.vm.provider :virtualbox do |vbox|
+      vbox.gui = false
+      vbox.memory = 2048
+      vbox.cpus = 1
+      vbox.customize ["modifyvm", :id, "--cpuexecutioncap", "90"]
+    end
+
+    # Resolve "stdin: is not a tty" errors (https://github.com/mitchellh/vagrant/issues/1673)
+    ubuntu.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
+    ubuntu.vm.provision :shell, inline: "mkdir -p /var/local/jibjob"
+    ubuntu.vm.provision :shell, inline: "sudo -u vagrant touch /home/vagrant"
+    ubuntu.vm.provision :shell, inline: "echo \"Box IP address: $(ip addr | grep eth1$ | cut -d ' ' -f 6 | cut -d '/' -f 1)\""
   end
 end
