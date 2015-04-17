@@ -29,6 +29,8 @@ RUN RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH gem install passen
     RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH passenger-install-nginx-module --auto --prefix=/opt/nginx --auto-download --languages ruby
 COPY nginx.conf.erb /config/nginx.conf.erb
 
+VOLUME ["/vendor/bundle", "/app/public/system"]
+    
 COPY initializer.sh /usr/local/bin/initializer.sh
 RUN chmod +x /usr/local/bin/initializer.sh
 ENTRYPOINT ["/usr/local/bin/initializer.sh"]
