@@ -15,6 +15,18 @@ http {
   passenger_root /opt/ruby/2.2.2/lib/ruby/gems/2.2.0/gems/passenger-5.0.6;
   passenger_ruby /opt/ruby/2.2.2/bin/ruby;
 
+  passenger_user_switching on;
+  passenger_default_user jibjob;
+  passenger_default_group jibjob;
+
+  passenger_show_version_in_header off;
+
+  <% if ENV['RAILS_ENV'] == 'development' %>
+    passenger_friendly_error_pages off;
+  <% else %>
+    passenger_friendly_error_pages on;
+  <% end %>
+
   include       mime.types;
   default_type  application/octet-stream;
 
@@ -28,10 +40,9 @@ http {
     listen 8080;
     server_name _;
     passenger_enabled on;
-    passenger_app_env <%= ENV['RAILS_ENV'] %>;
+    passenger_app_env "<%= ENV['RAILS_ENV'] %>";
+    passenger_user jibjob;
+    passenger_group jibjob;
     root /app/public;
-
-    <% if ENV['RAILS_ENV'] != 'development' %>
-    <% end %>
   }
 }
