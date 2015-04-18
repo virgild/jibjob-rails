@@ -1,0 +1,57 @@
+webapp:
+  image: jibjob/app:latest
+  command: server
+  ports:
+    - "8080:8080"
+  volumes:
+    - /vagrant_data:/app
+    - /var/local/jibjob/bundle:/vendor/bundle
+    - /var/local/jibjob/attachments:/app/public/system
+    - /var/local/jibjob/rails_web_tmp:/app/tmp
+    - /var/local/jibjob/rails_web_log:/app/log
+  environment:
+    - RAILS_ENV=development
+    - DEFAULT_HOSTNAME=
+    - JIBJOB_POSTGRES_HOST=
+    - JIBJOB_POSTGRES_PORT=
+    - JIBJOB_POSTGRES_DATABASE=
+    - MAILER_SMTP_HOST=
+    - MAILER_SMTP_PORT=
+    - MAILER_SMTP_DOMAIN=
+    - MAILER_SMTP_USERNAME=
+    - MAILER_SMTP_PASSWORD=
+    - MAILER_DEFAULT_FROM=
+    - SIDEKIQ_REDIS_URL=
+    - SIDEKIQ_WEB_MOUNT=
+    - JIBJOB_REDIS=
+    - JIBJOB_REDIS_TEST=
+    - CODECLIMATE_REPO_TOKEN=
+    - PASSWORD_RESET_SECRET=
+    - FACEBOOK_KEY=
+    - FACEBOOK_SECRET=
+    - TWITTER_KEY=
+    - TWITTER_SECRET=
+    - GOOGLE_CLIENT_KEY=
+    - GOOGLE_CLIENT_SECRET=
+    - DROPBOX_KEY=
+    - DROPBOX_CLIENT=
+    - STRIPE_SECRET_KEY=
+    - STRIPE_PUBLIC_KEY=
+    - MINI_PROFILER=
+    - AWS_ACCESS_KEY_ID=
+    - AWS_SECRET_KEY_ID=
+    - S3_BUCKET_NAME=
+    - WKHTMLTOPDF_BIN=/usr/local/bin/wkhtmltopdf
+    - PDFTK_BIN=/usr/bin/pdftk
+    - FONTS_INSTALL_DIR=/opt/fonts/truetype
+
+worker:
+  image: jibjob/app:latest
+  command: worker -c 10 --queue default --queue mailers --queue logging
+  volumes:
+    - /var/local/jibjob/rails_worker_tmp:/app/tmp
+    - /var/local/jibjob/rails_worker_log:/app/log
+  volumes_from:
+    - webapp
+  environment:
+    - RAILS_ENV=development
