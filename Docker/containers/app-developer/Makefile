@@ -1,11 +1,13 @@
 TAG_VERSION=`cat ./Version`
 
-.PHONY: build
+all: tag
+
+.PHONY: build tag
+
 build:
 	docker build -t="jibjob/app-developer" .
 
-.PHONY: tag
-tag:
+tag: build
 	docker tag -f jibjob/app-developer jibjob/app-developer:$(TAG_VERSION)
 
 push: build tag

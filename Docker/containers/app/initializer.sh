@@ -81,14 +81,6 @@ function check_config_files()
     has_missing_config_files=1
     printf "NOT FOUND\n"
   fi
-
-  printf " - secrets.yml..."
-  if [[ -e /app/config/secrets.yml ]]; then
-    printf "OK\n"
-  else
-    has_missing_config_files=1
-    printf "NOT FOUND\n"
-  fi
 }
 
 # Check files and directories
