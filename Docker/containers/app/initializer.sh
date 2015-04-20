@@ -30,33 +30,6 @@ if [[ $RAILS_ENV != "development" ]]; then
   chown -R jibjob:jibjob /app
 fi
 
-function check_directories()
-{
-  printf "Checking /app/log/..."
-  if [[ -d /app/log ]]; then
-    printf "found\n"
-    if [[ `stat -f -L -c %T /app/log` == "nfs" ]]; then
-      echo "Warning: /app/log/ is an NFS directory."
-    else
-      chown -R jibjob:jibjob /app/log
-    fi
-  else
-    printf "NOT FOUND\n"
-  fi
-
-  printf "Checking /app/tmp/..."
-  if [[ -d /app/tmp ]]; then
-    printf "found\n"
-    if [[ `stat -f -L -c %T /app/tmp` == "nfs" ]]; then
-      echo "Warning: /app/tmp/ is an NFS directory."
-    else
-      chown -R jibjob:jibjob /app/tmp
-    fi
-  else
-    printf "NOT FOUND\n"
-  fi
-}
-
 # Initialize fonts
 function prepare_fonts()
 {
@@ -88,7 +61,6 @@ function check_config_files()
 
 # Check files and directories
 check_config_files
-check_directories
 
 # Prepare gems directory
 printf "Checking /vendor/bundle directory..."
