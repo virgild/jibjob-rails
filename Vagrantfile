@@ -22,6 +22,8 @@ Vagrant.configure(2) do |config|
       puppet.manifest_file = "default.pp"
     end
 
+    default.vm.boot_timeout = 600
+
     default.vm.provision :shell, inline: "echo \"Box IP address: $(ip addr | grep eth1$ | cut -d ' ' -f 6 | cut -d '/' -f 1)\""
   end
 end
