@@ -26,6 +26,9 @@ else
 fi
 
 # Prepare app
+if [[ $RAILS_ENV != "development" ]]; then
+  chown -R jibjob:jibjob /app
+fi
 
 function check_directories()
 {
