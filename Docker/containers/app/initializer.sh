@@ -75,6 +75,9 @@ function main()
   erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
   printf "OK\n"
 
+  # Prepare fonts
+  prepare_fonts
+
   # Invoke mode program
   case $PROGRAM in
     console)
@@ -83,13 +86,11 @@ function main()
       exec gosu jibjob /bin/bash --login
       ;;
     server)
-      prepare_fonts
       echo
       echo "Starting nginx..."
       exec /opt/nginx/sbin/nginx
       ;;
     worker)
-      prepare_fonts
       echo
       echo "Running sidekiq..."
       cd /app
