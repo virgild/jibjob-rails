@@ -30,7 +30,12 @@ module JibJob
     config.active_job.queue_name_delimiter = '.'
 
     # Set cache store
-    config.cache_store = :dalli_store
+    if ENV['MEMCACHED_SERVERS']
+      memcache_servers = ENV['MEMCACHED_SERVERS'].split(' ')
+    else
+      memcache_servers = ['localhost:11211']
+    end
+    config.cache_store = :dalli_store, *memcache_servers
 
     # Add bower components path
     root.join('vendor', 'assets', 'components').to_s.tap do |bower_path|
