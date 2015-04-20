@@ -12,6 +12,7 @@ exec { "usermod-vagrant-docker":
 
 # Docker daemon
 service { "docker-daemon":
+  name => "docker",
   ensure => running,
   enable => true,
   require => Exec["install-docker"],
