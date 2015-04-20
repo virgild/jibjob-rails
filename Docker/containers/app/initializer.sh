@@ -65,28 +65,25 @@ check_config_files
 # Prepare gems directory
 printf "Checking /vendor/bundle directory..."
 if [[ ! -d /vendor/bundle ]]; then
-  printf "/vendor/bundle not found. Creating..."
-  mkdir -p /vendor/bundle
+  printf "ERROR: /vendor/bundle not found."
+  exit 1
 fi
 chown -R jibjob:jibjob /vendor
 printf "done.\n"
 
 # Run bundler
-if [[ $SKIP_BUNDLER == "1" ]]; then
-  echo "(Skipping bundler)"
-else
-  printf "Running bundler..."
-  gosu jibjob touch /vendor/BUNDLER_RUNNING
-  cd /app
-  gosu jibjob bundle install --path=/vendor/bundle --no-cache --shebang=${RUBY_PATH}/ruby &> /vendor/bundle/install.log
-  gosu jibjob rm -f /vendor/BUNDLER_RUNNING
-  printf "finished bundler install.\n"
-fi
+printf "Running bundler..."
+gosu jibjob touch /vendor/BUNDLER_RUNNING
+cd /app
+gosu jibjob bundle install --path=/vendor/bundle --no-cache --shebang=${RUBY_PATH}/ruby &> /vendor/bundle/install.log
+gosu jibjob rm -f /vendor/BUNDLER_RUNNING
+printf "finished bundler install.\n"
 
 # Prepare attachments (Rails public/system) directory
 echo "Checking /app/public/system mount..."
 if [[ ! -d /app/public/system ]]; then
-  echo " - WARNING: /app/public/system is not mounted."
+  echo " - ERROR: /app/public/system is not mounted."
+  exit 1
 else
   if [[ `stat -f -L -c %T /app/public/system` == "nfs" ]]; then
     echo " - WARNING: /app/public/system is an NFS directory. It may not be writable."
