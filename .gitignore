@@ -30,3 +30,4 @@ manifest.json
 config/mailer.yml
 config/redis.yml
 config/sidekiq.yml
+settings
