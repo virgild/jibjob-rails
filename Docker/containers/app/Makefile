@@ -11,4 +11,5 @@ tag: build
 	docker tag -f jibjob/app jibjob/app:$(TAG_VERSION)
 
 push:
+	docker push jibjob/app
 	docker push jibjob/app:$(TAG_VERSION)
