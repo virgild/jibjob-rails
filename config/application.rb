@@ -59,6 +59,7 @@ module JibJob
     config.autoload_paths << Rails.root.join('lib')
 
     # Set server tag
+    # TODO: Adapt this to docker container
     hostname = `hostname`.strip!
     pid = $$
 
@@ -69,5 +70,8 @@ module JibJob
     # Mailer config
     mailer_config = YAML.load(ERB.new(File.read("config/mailer.yml")).result)[Rails.env]
     config.action_mailer.merge!(mailer_config)
+
+    # Set logger
+    Rails.logger = Logger.new(STDOUT)
   end
 end
