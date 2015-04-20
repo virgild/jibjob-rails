@@ -18,7 +18,6 @@ role :worker, [ENV['STAGING_HOST']]
 
 server ENV['STAGING_HOST'], user: ENV['STAGING_USER'], roles: %w{web app db worker}
 
-
 set :ssh_options, {
   forward_agent: true,
   keys: ENV['STAGING_USER_KEY']
