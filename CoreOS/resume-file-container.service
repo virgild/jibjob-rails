@@ -1,7 +1,0 @@
-[Unit]
-Description=Resume file container service
-
-[Service]
-RemainAfterExit=yes
-ExecStartPre=/bin/docker pull jibjob/resume-file-container
-ExecStart=/bin/docker run --name resume-file-container -v /app/public/system jibjob/resume-file-container

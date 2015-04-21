@@ -1,7 +1,0 @@
-[Unit]
-Description=Redis master data container
-
-[Service]
-RemainAfterExit=yes
-ExecStartPre=/bin/docker pull jibjob/redis-data-container
-ExecStart=-/bin/docker run --name redis-data-container -v /data jibjob/redis-data-container

@@ -1,7 +1,0 @@
-[Unit]
-Description=Postgres master data container
-
-[Service]
-RemainAfterExit=yes
-ExecStartPre=/bin/docker pull jibjob/postgres-data-container
-ExecStart=-/bin/docker run --name postgres-data-container -v /var/lib/postgresql/data jibjob/postgres-data-container
