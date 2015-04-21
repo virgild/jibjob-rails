@@ -34,8 +34,6 @@ function main()
   # Check mounts
   check_mount "/app"
   check_mount "/app/public/system"
-  check_mount "/app/config/database.yml"
-  check_mount "/app/config/mailer.yml"
   check_mount "/vendor/bundle"
 
   if [[ $MOUNTS_PASSING -eq 0 ]]; then
