@@ -30,9 +30,8 @@ RUN cd /tmp && \
 COPY jibjob_sudoer /etc/sudoers.d/jibjob
 
 # root user config files
-COPY tmux.conf /root/.tmux.conf
+COPY jibjob_home/.tmux.conf /root/.tmux.conf
 
 # jibjob user home files
 COPY jibjob_home /home/jibjob/
-COPY tmux.conf /home/jibjob/.tmux
 RUN chown -R jibjob:jibjob /home/jibjob
