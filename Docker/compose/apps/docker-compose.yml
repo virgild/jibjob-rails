@@ -5,15 +5,9 @@ webapp:
   command: server
   ports:
     - "8080:8080"
-  volumes:
-    - /var/local/jibjob/rails_web_tmp:/app/tmp
-    - /var/local/jibjob/rails_web_log:/app/log
 
 worker:
   extends:
     file: common.yml
     service: rails
   command: worker -c 10 --queue default --queue mailers --queue logging
-  volumes:
-    - /var/local/jibjob/rails_worker_tmp:/app/tmp
-    - /var/local/jibjob/rails_worker_log:/app/log

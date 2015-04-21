@@ -82,17 +82,17 @@ function main()
   case $PROGRAM in
     console)
       echo
-      echo "Starting jibjob shell..."
+      echo "Starting jibjob shell (RAILS_ENV=${RAILS_ENV})..."
       exec gosu jibjob /bin/bash --login
       ;;
     server)
       echo
-      echo "Starting nginx..."
+      echo "Starting nginx (RAILS_ENV=${RAILS_ENV})..."
       exec /opt/nginx/sbin/nginx
       ;;
     worker)
       echo
-      echo "Running sidekiq..."
+      echo "Running sidekiq (RAILS_ENV=${RAILS_ENV})..."
       cd /app
       exec gosu jibjob bin/sidekiq ${PROGRAM_ARGS}
       ;;

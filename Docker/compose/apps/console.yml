@@ -1,6 +1,0 @@
-console:
-  extends:
-    file: common.yml
-    service: rails
-  image: jibjob/app-developer
-  command: console
