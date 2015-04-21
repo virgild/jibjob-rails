@@ -16,7 +16,7 @@ RUN cd /tmp && \
     make && \
     cd /usr/local/bin && \
     cp /tmp/redis-3.0.0/src/redis-cli . && \
-    rm -rf /tmp/redis-3.0.0.*
+    rm -rf /tmp/redis-3.0.0
 
 # Make jibjob sudoer
 COPY jibjob_sudoer /etc/sudoers.d/jibjob
