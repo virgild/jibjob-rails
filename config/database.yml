@@ -9,16 +9,26 @@ default: &default
 
 development:
   <<: *default
+  port: 5432
+  database: jib_job_development
+  username: jib_job_development
+  password: jib_job_development
   pool: 5
 
 test:
   <<: *default
+  database: jib_job_test
+  username: jib_job_test
+  password: jib_job_test
   pool: 5
 
 staging:
   <<: *default
+  database: jib_job_staging
+  username: jib_job_staging
+  password: jib_job_staging
   pool: 10
 
 production:
   <<: *default
-  pool: 10
+  pool: 25

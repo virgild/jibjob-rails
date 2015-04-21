@@ -1,3 +1,4 @@
+# Note: Do not use in production
 memcache:
   image: memcached
   ports:
