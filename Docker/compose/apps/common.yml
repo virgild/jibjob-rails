@@ -1,5 +1,5 @@
 rails:
-  image: jibjob/app:latest
+  image: jibjob/app:1.0.0
   volumes:
     - /vagrant_data:/app
     - /var/local/jibjob/bundle:/vendor/bundle
