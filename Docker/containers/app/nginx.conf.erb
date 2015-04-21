@@ -34,7 +34,7 @@ http {
   gzip on;
 
   server {
-    listen 8080;
+    listen 0.0.0.0:80;
     server_name _;
     passenger_enabled     on;
     passenger_app_env     "<%= ENV['RAILS_ENV'] %>";
