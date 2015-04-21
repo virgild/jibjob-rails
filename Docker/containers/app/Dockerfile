@@ -25,8 +25,8 @@ RUN cd /etc/fonts && \
     chown -R jibjob: /opt/fonts
 
 # Install Passenger
-RUN RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH gem install passenger --no-rdoc --no-ri && \
-    RUBY_VERSION=2.2.2 PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH passenger-install-nginx-module --auto --prefix=/opt/nginx --auto-download --languages ruby
+RUN PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH gem install passenger --no-rdoc --no-ri && \
+    PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH passenger-install-nginx-module --auto --prefix=/opt/nginx --auto-download --languages ruby
 COPY nginx.conf.erb /config/nginx.conf.erb
 
 COPY initializer.sh /usr/local/bin/initializer.sh

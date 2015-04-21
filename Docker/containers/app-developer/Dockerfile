@@ -35,3 +35,10 @@ COPY jibjob_home/.tmux.conf /root/.tmux.conf
 # jibjob user home files
 COPY jibjob_home /home/jibjob/
 RUN chown -R jibjob:jibjob /home/jibjob
+
+# Developer helper scripts
+COPY initialize-dev-database.sh /usr/local/bin/initialize-dev-database.sh
+RUN chmod +x /usr/local/bin/initialize-dev-database.sh
+
+# Default to jibjob user shell
+CMD ["console"]
