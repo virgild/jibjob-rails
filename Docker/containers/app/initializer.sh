@@ -71,9 +71,11 @@ function main()
   printf "OK\n"
 
   # Configure nginx
-  printf "Configuring nginx with RAILS_ENV=${RAILS_ENV}..."
-  erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
-  printf "OK\n"
+  if [[ $RAILS_ENV != "development" ]]; then
+    printf "Configuring nginx with RAILS_ENV=${RAILS_ENV}..."
+    erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
+    printf "OK\n"
+  fi
 
   # Prepare fonts
   prepare_fonts
@@ -87,8 +89,14 @@ function main()
       ;;
     server)
       echo
-      echo "Starting nginx (RAILS_ENV=${RAILS_ENV})..."
-      exec /opt/nginx/sbin/nginx
+      if [[ $RAILS_ENV == "development" ]]; then
+        echo "Starting Rails server (RAILS_ENV=$RAILS_ENV)..."
+        cd /app
+        exec gosu jibjob bin/rails s -p 3000 -b 0.0.0.0
+      else
+        echo "Starting nginx (RAILS_ENV=${RAILS_ENV})..."
+        exec /opt/nginx/sbin/nginx
+      fi
       ;;
     worker)
       echo
