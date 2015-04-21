@@ -72,6 +72,8 @@ module JibJob
     config.action_mailer.merge!(mailer_config)
 
     # Set logger
-    Rails.logger = Logger.new(STDOUT)
+    if !!ENV['RAILS_LOG_TO_FILE']
+      Rails.logger = Logger.new(STDOUT)
+    end
   end
 end
