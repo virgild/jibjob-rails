@@ -1,12 +1,14 @@
 TAG_VERSION=`cat ./Version`
 
-.PHONY: build
+.PHONY: build tag push
+
+all: tag
+
 build:
 	docker build -t="jibjob/base-ruby" .
 
-.PHONY: tag
-tag:
+tag: build
 	docker tag -f jibjob/base-ruby jibjob/base-ruby:$(TAG_VERSION)
 
-push: build tag
+push: tag
 	docker push jibjob/base-ruby:$(TAG_VERSION)
