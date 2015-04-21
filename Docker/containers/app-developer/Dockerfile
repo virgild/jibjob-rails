@@ -18,6 +18,14 @@ RUN cd /tmp && \
     cp /tmp/redis-3.0.0/src/redis-cli . && \
     rm -rf /tmp/redis-3.0.0
 
+# Install PhantomJS
+RUN cd /tmp && \
+    wget -q https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
+    bunzip2 phantomjs-1.9.8-linux-x86_64.tar.bz2 && \
+    tar xf phantomjs-1.9.8-linux-x86_64.tar && \
+    mv phantomjs-1.9.8-linux-x86_64/bin/phantomjs /usr/local/bin/ && \
+    rm -rf phantomjs-*
+
 # Make jibjob sudoer
 COPY jibjob_sudoer /etc/sudoers.d/jibjob
 
