@@ -34,41 +34,17 @@ function main()
   # Check mounts
   check_mount "/app"
   check_mount "/app/public/system"
-  check_mount "/vendor/bundle"
+  if [[ (RAILS_ENV == "staging") || (RAILS_ENV == "production") ]]; then
+    check_mount "/app/public/assets"
+  fi
+  check_mount "/app/vendor/bundle"
 
   if [[ $MOUNTS_PASSING -eq 0 ]]; then
     echo "ERROR: There are missing mounts"
     exit 1
   fi
 
-  # Prepare app
-  if [[ $RAILS_ENV != "development" ]]; then
-    chown -R jibjob:jibjob /app
-  fi
-
-  # Chown the chown
-  chown -R jibjob:jibjob /vendor
-
-  # Handle attachments directory special cases
-  if [[ `stat -f -L -c %T /app/public/system` == "nfs" ]]; then
-    echo " - WARNING: /app/public/system is an NFS directory."
-  else
-    chown -R jibjob:jibjob /app/public/system
-  fi
-
-  # Run bundler
-  printf "Running bundler..."
-  gosu jibjob touch /vendor/BUNDLER_RUNNING
-  cd /app
-  if [[ $RAILS_ENV == "development" ]]; then
-    gosu jibjob bundle install --path=/vendor/bundle --no-cache --shebang=${RUBY_PATH}/ruby &> /vendor/bundle/install.log
-  else
-    gosu jibjob bundle install --path=/vendor/bundle --deployment --without="development test" --no-cache --shebang=${RUBY_PATH}/ruby &> /vendor/bundle/install.log
-  fi
-  gosu jibjob rm -f /vendor/BUNDLER_RUNNING
-  printf "OK\n"
-
-  # Configure nginx
+  # Configure nginx (Remove after we configured our separate assets server)
   if [[ $RAILS_ENV != "development" ]]; then
     printf "Configuring nginx with RAILS_ENV=${RAILS_ENV}..."
     erb /config/nginx.conf.erb > /opt/nginx/conf/nginx.conf
@@ -101,6 +77,10 @@ function main()
       echo "Running sidekiq (RAILS_ENV=${RAILS_ENV})..."
       cd /app
       exec gosu jibjob bin/sidekiq ${PROGRAM_ARGS}
+      ;;
+    command)
+      echo "Running command (RAILS_ENV=$RAILS_ENV)..."
+      exec gosu jibjob ${PROGRAM_ARGS}
       ;;
     *)
       echo
