@@ -82,6 +82,11 @@ function main()
       echo "Running command (RAILS_ENV=$RAILS_ENV)..."
       exec gosu jibjob ${PROGRAM_ARGS}
       ;;
+    migrate)
+      echo "Running DB migrations (RAILS_ENV=$RAILS_ENV)..."
+      cd /app
+      exec gosu jibjob bin/rake db:migrate
+      ;;
     *)
       echo
       echo "Unknown mode...doing nothing. (Modes are: console | server | worker)"
