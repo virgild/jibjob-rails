@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
 
     default.vm.provision "puppet" do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file = "default.pp"
+      puppet.manifest_file = "bare.pp"
     end
 
     default.vm.boot_timeout = 600
