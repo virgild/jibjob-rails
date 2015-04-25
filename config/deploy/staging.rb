@@ -4,10 +4,10 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, [ENV['STAGING_HOST']]
-role :web, [ENV['STAGING_HOST']]
-role :db,  [ENV['STAGING_HOST']]
-role :worker, [ENV['STAGING_HOST']]
+# role :app, [ENV['STAGING_HOST']]
+# role :web, []
+# role :db,  []
+# role :worker, [ENV['STAGING_HOST']]
 
 
 # Extended Server Syntax
@@ -16,12 +16,14 @@ role :worker, [ENV['STAGING_HOST']]
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server ENV['STAGING_HOST'], user: ENV['STAGING_USER'], roles: %w{web app db worker}
+# server ENV['STAGING_HOST'], user: ENV['STAGING_USER'], roles: %w{web app db worker}
 
-set :ssh_options, {
-  forward_agent: true,
-  keys: ENV['STAGING_USER_KEY']
-}
+server ENV['STAGING_HOST'], primary: true, roles: ['app', 'worker', 'db', 'web']
+
+# set :ssh_options, {
+#   forward_agent: true,
+#   keys: ENV['STAGING_USER_KEY']
+# }
 
 
 # Custom SSH Options

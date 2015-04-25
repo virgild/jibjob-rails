@@ -87,6 +87,11 @@ function main()
       cd /app
       exec gosu jibjob bin/rake db:migrate
       ;;
+    assets)
+      echo "Precompiling assets (RAILS_ENV=$RAILS_ENV)..."
+      cd /app
+      exec gosu jibjob /usr/local/bin/precompile_assets.sh
+      ;;
     *)
       echo
       echo "Unknown mode...doing nothing. (Modes are: console | server | worker)"

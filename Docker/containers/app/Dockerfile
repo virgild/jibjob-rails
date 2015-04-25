@@ -30,5 +30,6 @@ RUN PATH=/opt/ruby/$RUBY_VERSION/bin:$PATH gem install passenger --no-rdoc --no-
 COPY nginx.conf.erb /config/nginx.conf.erb
 
 COPY initializer.sh /usr/local/bin/initializer.sh
-RUN chmod +x /usr/local/bin/initializer.sh
+COPY precompile_assets.sh /usr/local/bin/precompile_assets.sh
+RUN chmod +x /usr/local/bin/initializer.sh /usr/local/bin/precompile_assets.sh
 ENTRYPOINT ["/usr/local/bin/initializer.sh"]
