@@ -22,7 +22,7 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 gem 'capistrano-sidekiq', group: :development
-gem 'capistrano-passenger', '= 0.0.2', group: :development
+gem 'capistrano-passenger', '= 0.0.5', group: :development
 
 gem 'haml-rails'
 gem 'sass'

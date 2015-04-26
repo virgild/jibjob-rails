@@ -1,53 +1,15 @@
-# Simple Role Syntax
-# ==================
-# Supports bulk-adding hosts to roles, the primary server in each group
-# is considered to be the first unless any hosts have the primary
-# property set.  Don't declare `role :all`, it's a meta role.
+set :deploy_to, "/apps/jibjob"
+set :user, 'jibjob'
 
-# role :app, [ENV['STAGING_HOST']]
-# role :web, []
-# role :db,  []
-# role :worker, [ENV['STAGING_HOST']]
-
-
-# Extended Server Syntax
-# ======================
-# This can be used to drop a more detailed server definition into the
-# server list. The second argument is a, or duck-types, Hash and is
-# used to set extended properties on the server.
-
-# server ENV['STAGING_HOST'], user: ENV['STAGING_USER'], roles: %w{web app db worker}
+set :default_env, {
+  'PATH' => "/opt/ruby/2.2.2/bin:$PATH"
+}
 
 server ENV['STAGING_HOST'], primary: true, roles: ['app', 'worker', 'db', 'web']
 
-# set :ssh_options, {
-#   forward_agent: true,
-#   keys: ENV['STAGING_USER_KEY']
-# }
+set :sidekiq_options_per_process, ["-c 10", "--queue default", "--queue mailers", "--queue logging"]
 
-
-# Custom SSH Options
-# ==================
-# You may pass any option but keep in mind that net/ssh understands a
-# limited set of options, consult[net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start).
-#
-# Global options
-# --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-#
-# And/or per server (overrides global)
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+set :ssh_options, {
+  forward_agent: true,
+  user: 'jibjob'
+}

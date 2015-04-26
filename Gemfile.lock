@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/reactjs/react-rails.git
-  revision: ff564e82f6df668d3979b6ba7747a199f6f01a45
+  revision: 0faa0f6f86363493d486fbd9aa2fde3c43966c77
   specs:
     react-rails (1.0.0)
       coffee-script-source (~> 1.8)
@@ -8,6 +8,7 @@ GIT
       execjs
       rails (>= 3.1)
       react-source (~> 0.13)
+      tilt
 
 GEM
   remote: https://rubygems.org/
@@ -80,7 +81,7 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-passenger (0.0.2)
+    capistrano-passenger (0.0.5)
       capistrano (~> 3.0)
     capistrano-rails (1.1.3)
       capistrano (~> 3.1)
@@ -172,7 +173,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.3)
+    mime-types (2.5)
     mini_portile (0.6.2)
     minitest (5.6.0)
     multi_json (1.11.0)
@@ -184,7 +185,7 @@ GEM
     newrelic_rpm (3.11.2.286)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    nokogumbo (1.2.0)
+    nokogumbo (1.4.1)
       nokogiri
     oauth (0.4.7)
     oauth2 (1.0.0)
@@ -193,7 +194,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    oj (2.12.3)
+    oj (2.12.4)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -202,17 +203,15 @@ GEM
     omniauth-google-oauth2 (0.2.6)
       omniauth (> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-oauth (1.0.1)
+    omniauth-oauth (1.1.0)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.2.0)
-      faraday (>= 0.8, < 0.10)
-      multi_json (~> 1.3)
+    omniauth-oauth2 (1.3.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    omniauth-twitter (1.1.0)
-      multi_json (~> 1.3)
-      omniauth-oauth (~> 1.0)
+    omniauth-twitter (1.2.0)
+      json (~> 1.3)
+      omniauth-oauth (~> 1.1)
     paperclip (4.2.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -285,7 +284,7 @@ GEM
       prawn (~> 2.0, >= 2.0.0)
       prawn-table (~> 0.2.1)
       treetop (~> 1.5.3)
-    rspec-activejob (0.3.0)
+    rspec-activejob (0.4.0)
       activejob (>= 4.2)
       rspec-mocks
     rspec-core (3.2.3)
@@ -307,10 +306,10 @@ GEM
     rspec-support (3.2.2)
     ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
-    sanitize (3.1.2)
-      crass (~> 1.0.1)
+    sanitize (4.0.0)
+      crass (~> 1.0.2)
       nokogiri (>= 1.4.4)
-      nokogumbo (= 1.2.0)
+      nokogumbo (= 1.4.1)
     sass (3.4.13)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -322,7 +321,7 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.5.0)
-    sidekiq (3.3.3)
+    sidekiq (3.3.4)
       celluloid (>= 0.16.0)
       connection_pool (>= 2.1.1)
       json
@@ -340,7 +339,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
-    sprockets (3.0.1)
+    sprockets (3.0.2)
       rack (~> 1.0)
     sprockets-rails (2.2.4)
       actionpack (>= 3.0)
@@ -368,7 +367,7 @@ GEM
     ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2015.3)
+    tzinfo-data (1.2015.4)
       tzinfo (>= 1.0.0)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -400,7 +399,7 @@ DEPENDENCIES
   binding_of_caller
   browser
   byebug
-  capistrano-passenger (= 0.0.2)
+  capistrano-passenger (= 0.0.5)
   capistrano-rails
   capistrano-sidekiq
   capybara
