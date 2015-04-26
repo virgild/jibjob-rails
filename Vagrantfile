@@ -24,6 +24,11 @@ Vagrant.configure(2) do |config|
       puppet.module_path = "puppet/modules"
     end
 
+    default.vm.provision "puppet" do |puppet|
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "docker.pp"
+    end
+
     default.vm.boot_timeout = 0
 
     default.vm.provision :shell, inline: "echo \"Box IP address: $(ip addr | grep eth1$ | cut -d ' ' -f 6 | cut -d '/' -f 1)\""
