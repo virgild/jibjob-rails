@@ -23,12 +23,7 @@ set :log_level, :debug
 set :keep_releases, 10
 
 set :linked_files, fetch(:linked_files, []).push('.env', 'config/database.yml', 'config/secrets.yml', 'config/newrelic.yml', 'config/mailer.yml')
-
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/assets')
-
-set :default_path, {
-  path: "/opt/ruby/2.2.2/bin:$PATH"
-}
 
 set :passenger_roles, :web
 set :passenger_restart_command, 'touch'
