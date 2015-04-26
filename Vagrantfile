@@ -18,11 +18,13 @@ Vagrant.configure(2) do |config|
     default.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
     default.vm.provision "puppet" do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.manifest_file = "bare.pp"
+      puppet.facter = {}
+      puppet.manifests_path = "puppet/manifests"
+      puppet.manifest_file = "app.pp"
+      puppet.module_path = "puppet/modules"
     end
 
-    default.vm.boot_timeout = 600
+    default.vm.boot_timeout = 0
 
     default.vm.provision :shell, inline: "echo \"Box IP address: $(ip addr | grep eth1$ | cut -d ' ' -f 6 | cut -d '/' -f 1)\""
   end
