@@ -12,20 +12,34 @@ package { $ruby_packages:
 exec { 'download-ruby-build':
   command => 'git clone https://github.com/sstephenson/ruby-build.git',
   onlyif => [
-    "test ! -d /opt/ruby/${ruby_version}"
+    "test ! -d /opt/ruby/${ruby_version}",
+    "test -d /tmp/ruby-build",
   ],
   cwd => '/tmp',
-} -> exec { 'install-ruby-build':
+}
+
+exec { 'install-ruby-build':
+  require => Exec["download-ruby-build"],
   command => 'bash install.sh',
-  cwd => '/tmp/ruby-build',
+  cwd     => '/tmp/ruby-build',
   creates => '/usr/local/bin/ruby-build',
-} -> exec { "install-ruby-${ruby_version}":
+}
+
+exec { "cleanup-ruby-build":
+  require => Exec["install-ruby-build"],
+  cwd     => "/tmp",
+  command => "rm -rf /tmp/ruby-build",
+  onlyif  => [
+    "test -d /tmp/ruby-build",
+    "test -f /usr/local/bin/ruby-build",
+  ],
+}
+
+exec { "install-ruby-${ruby_version}":
+  require => Exec["install-ruby-build"],
   command => "ruby-build ${ruby_version} /opt/ruby/${ruby_version}",
   creates => "/opt/ruby/${ruby_version}",
   timeout => 0,
-} -> exec { "ruby-install-cleanup":
-  command => "rm -rf /tmp/ruby-build",
-  onlyif => "test -d /tmp/ruby-build",
 }
 
 file { "/etc/apt/sources.list.d/pgdg.list":
@@ -82,19 +96,22 @@ exec { "copy-font-config-file":
 # }
 
 exec { "install-bundler":
-  path => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
+  require => Exec["install-ruby-${ruby_version}"],
+  path    => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
   command => "gem install bundler --no-rdoc --no-ri",
   creates => "/opt/ruby/${ruby_version}/bin/bundle",
 }
 
 exec { "install-passenger":
-  path => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
+  require => Exec["install-bundler"],
+  path    => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
   command => "gem install passenger --no-rdoc --no-ri",
   creates => "/opt/ruby/${ruby_version}/bin/passenger",
 }
 
 exec { "install-passenger-nginx":
-  path => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
+  require => Exec["install-passenger"],
+  path    => "/opt/ruby/${ruby_version}/bin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/usr/local/sbin:/sbin",
   command => "passenger-install-nginx-module --auto --prefix=/opt/nginx --auto-download --languages ruby",
   creates => "/opt/nginx",
   timeout => 0,
