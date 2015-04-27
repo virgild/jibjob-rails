@@ -24,7 +24,7 @@ module JibJob
     config.active_record.raise_in_transactional_callbacks = true
 
     # Set SQL schema dump format
-    config.active_record.schema_format = :sql
+    config.active_record.schema_format = :ruby
 
     # Set ActiveJob queue delimiter
     config.active_job.queue_name_delimiter = '.'
