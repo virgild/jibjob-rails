@@ -1,7 +1,7 @@
 {
   "name": "remarkable-bootstrap-notify",
   "main": "bootstrap-notify.js",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "homepage": "http://bootstrap-notify.remabledesigns.com/",
   "authors": [
     "mouse0270 <rmcintosh@remabledesigns.com>"
@@ -24,14 +24,13 @@
   },
   "license": "MIT",
   "ignore": [],
-  "_release": "3.0.0",
+  "_release": "3.0.2",
   "_resolution": {
     "type": "version",
-    "tag": "3.0.0",
-    "commit": "0301fc9b6a6ec8f5fa2b61feefe53ec6046d5a5c"
+    "tag": "3.0.2",
+    "commit": "b3b8e22f3995dc5521a79846211da265fab1d947"
   },
   "_source": "git://github.com/mouse0270/bootstrap-notify.git",
   "_target": "~3.0.0",
-  "_originalSource": "remarkable-bootstrap-notify",
-  "_direct": true
+  "_originalSource": "remarkable-bootstrap-notify"
 }
