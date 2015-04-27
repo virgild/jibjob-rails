@@ -19,14 +19,14 @@
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.3.3",
-    "moment": "~2.9.0",
+    "moment": "~2.10.0",
     "d3": "~3.5.5",
     "jstimezonedetect": "~1.0.5",
     "rails-timezone": "https://raw.githubusercontent.com/davidwood/rails-timezone-js/master/rails-timezone.js",
     "remarkable-bootstrap-notify": "~3.0.0",
     "animate.css": "~3.2.3",
-    "classnames": "~1.1.4",
-    "bootstrap-social": "~4.8.0",
+    "classnames": "~1.2.0",
+    "bootstrap-social": "~4.9.0",
     "gridforms": ""
   }
 }
