@@ -65,7 +65,7 @@ package { $app_packages:
 
 exec { "download-wkhtmltopdf":
   cwd => "/tmp",
-  command => "wget http://iweb.dl.sourceforge.net/project/wkhtmltopdf/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb",
+  command => "wget http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-trusty-amd64.deb",
   onlyif => "test ! -f /usr/local/bin/wkhtmltopdf",
 }
 
