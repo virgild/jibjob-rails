@@ -1,6 +1,0 @@
-rails:
-  image: jibjob/app:1.0.0
-  volumes:
-    - /vagrant_data:/app
-    - /var/local/jibjob/bundle:/vendor/bundle
-    - /var/local/jibjob/attachments:/app/public/system
