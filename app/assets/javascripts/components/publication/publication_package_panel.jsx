@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 (function(global){
   global.JibJob.PublicationPackagePanel = React.createClass({
     propTypes: {

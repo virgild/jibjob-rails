@@ -16,8 +16,6 @@
 //= require components
 //= require signup
 
-React.initializeTouchEvents(true);
-
 var JibJob = {
   Version: "1.0",
   CurrentPage: null,

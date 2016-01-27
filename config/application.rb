@@ -44,10 +44,6 @@ module JibJob
     end
 
     # ReactJS
-    config.react.jsx_transform_options = {
-      harmony: true,
-      strip_types: true
-    }
     config.react.addons = true
 
     # Unauthorized error

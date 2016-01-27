@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 (function(global) {
   "use strict";
   global.JibJob = global.JibJob || {};
