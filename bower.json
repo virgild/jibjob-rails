@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.3.6",
-    "moment": "~2.10.0",
+    "moment": "~2.11.1",
     "d3": "~3.5.14",
     "jstimezonedetect": "~1.0.5",
     "rails-timezone": "https://raw.githubusercontent.com/davidwood/rails-timezone-js/master/rails-timezone.js",
