@@ -1,14 +1,52 @@
 # Bootstrap Notify
-This is a simple pluging that turns standard Bootstrap alerts into "Growl-like" notifications.
+This is a simple plugin that turns standard Bootstrap alerts into "Growl-like" notifications.
 
 ## Bower Officially Supported
 I would like to thank [Błażej Krysiak](https://github.com/IjinPL) for doing this!
 ```
-bower install remarkable-bootstrap-notify 
+bower install remarkable-bootstrap-notify
+```
+
+## Meteor Officially Supported
+Meteor integration by [zimme](https://github.com/zimme).
+
+```sh
+meteor add mouse0270:bootstrap-notify
 ```
 
 ## Changelog
-##### Version 3.0.0
+##### Version 3.1.3
+- Added Meteor Support
+- Fixed issue with Glyphicons Pro
+- Updating version pattern. 
+```
+x.y.z
+x = Main version of the plugin
+y = New features were added to the plugin
+z = Fixes/patches to existing features of the plugin
+```
+
+##### [Version 3.0.2](http://bootstrap-notify.remabledesigns.com/3.0.2/)
+- Fixed update for backwards compatibility
+
+##### [Version 3.0.1](http://bootstrap-notify.remabledesigns.com/3.0.1/)
+- Add the ability to update multiple values in one call
+- Turn off Progress bar
+- Set Progress bar value / Progress bar not shown by default
+``` javascript
+//Update
+var notify = $.notify('<strong>Saving</strong> Do not close this page...', { allow_dismiss: false });
+notify.update({ type: 'success', '<strong>Success</strong> Your page has been saved!' });
+
+// Turn of Progress bar on
+$.notify('I have a progress bar', { showProgressbar: true });
+
+// Update Progress bar
+var notify = $.notify('<strong>Saving</strong> Do not close this page...', { allow_dismiss: false });
+notify.update({ type: 'warning', '<strong>Oops</strong> Something happened. Correcting Now', progress: 20 });
+```
+
+##### [Version 3.0.0](http://bootstrap-notify.remabledesigns.com/3.0.0/)
 - New template structure
 - Better event handling for onShow, onShown, onClose, onClosed
 - updating notification content will reposition growls below it
@@ -17,11 +55,11 @@ bower install remarkable-bootstrap-notify
 - Added the ability to show progress bars
 - Added the ability to pass position in the settings
 - Added *_newest_on_top_* option that allows new growls to push down old growls
-- Added Transition CSS to plugin 
+- Added Transition CSS to plugin
 ```css
-transition: all 0.5 ease-in-out;
+tranition: all 0.5 ease-in-out;
 ```
-- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own. 
+- Remember to read to documenation. I use custom css style's for the progress bar that you can find there. This was left out of the plugin so you could choose to use the default progressbar styles provided for bootstrap or write your own.
 
 ##### [Version 2.0.1](http://bootstrap-growl.remabledesigns.com/2.0.1/)
 - Added the ability to set an X and Y value within the offset option
