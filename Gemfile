@@ -86,7 +86,7 @@ end
 group :test do
   gem 'capybara'
   gem 'poltergeist'
-  gem 'database_cleaner', '~> 1.3.0' # Version 1.4.0 has bug where 'except' tables do not work.
+  gem 'database_cleaner'
   gem 'codeclimate-test-reporter', require: false
   gem 'timecop'
   gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1', require: false
