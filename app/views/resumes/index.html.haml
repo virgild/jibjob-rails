@@ -4,4 +4,4 @@
       %span.glyphicon.glyphicon-file
       = t("my_resumes").titleize
 
-  = react_component('JibJob.ResumeGallery', { resumes: JSON.parse(@resumes_data), createPage: new_user_resume_url(current_user), showCreateButton: current_user.has_available_resume_slot?, pdfStatusURL: pdf_status_user_resumes_path(current_user) }, { prerender: true })
+  = react_component('JibJob.ResumeGallery', { resumes: JSON.parse(@resumes_data), createPage: new_user_resume_url(current_user), showCreateButton: current_user.has_available_resume_slot?, pdfStatusURL: pdf_status_user_resumes_path(current_user) }, { prerender: false })

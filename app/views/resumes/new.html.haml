@@ -7,4 +7,4 @@
     %li New Resume
   .container
     %h3 New Resume
-    ~ react_component('JibJob.ResumeForm', { resume: JSON.parse(@resume_data), themes: Themes.list, saveURL: user_resumes_url(current_user), saveMethod: 'POST', sampleURL: asset_url('sample-resume.txt'), nameMaxLength: Resume::NAME_MAX_LENGTH, slugMaxLength: Resume::SLUG_MAX_LENGTH, getStartedURL: get_started_url, showExampleLoader: true, tabletView: @tablet_view }, { prerender: true })
+    ~ react_component('JibJob.ResumeForm', { resume: JSON.parse(@resume_data), themes: Themes.list, saveURL: user_resumes_url(current_user), saveMethod: 'POST', sampleURL: asset_url('sample-resume.txt'), nameMaxLength: Resume::NAME_MAX_LENGTH, slugMaxLength: Resume::SLUG_MAX_LENGTH, getStartedURL: get_started_url, showExampleLoader: true, tabletView: @tablet_view }, { prerender: false })
